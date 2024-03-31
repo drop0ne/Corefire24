@@ -23,17 +23,29 @@ public:
 	int selectMenuOption() {
 		int returnValue{ 0 };
 
-		std::cout << "Enter Command: ";
+		cout("\nEnter Command: ");
 		if (std::cin >> returnValue) {
 			return returnValue;
 		}
 		else {
-			std::cout << "Invalid Input: Must enter a whole number!" << std::endl;
+			clearInputStream();
 		}
-
 	}
 	void cout(std::string output) {
 		std::cout << output;
+	}
+
+	void errorInvalidInput() {
+		cout("\nERROR: INVALID SELECTION\n");
+		clearInputStream();
+	}
+
+	void clearInputStream() {
+		std::cin.clear();
+		if (std::cin.rdbuf()->in_avail() > 0) {
+			// If there are characters in the input buffer, discard them up to the next newline
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
 	}
 
 private:
@@ -45,11 +57,21 @@ private:
 			return;
 			}
 		else {
-			std::cout << "Error: Failed to update manProgramLoopCondition bool private method" << std::endl;
+			cout("Error: Failed to update manProgramLoopCondition bool private method\n");
 			return;
 		}
 	}
 
+	void extractInputStream() {
+		std::cout << "Contents of input stream: ";
+		char c;
+		while (std::cin.peek() != EOF) {
+			std::cin.get(c);
+			std::cout << c;
+		}
+		std::cout << std::endl;
+		return;
+	}
 };
 
 FN::FN() :mainProgramLoopCondition(true)

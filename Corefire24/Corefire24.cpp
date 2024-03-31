@@ -8,9 +8,9 @@ void option1();
 int main()
 {
     FN fn;
-	fn.clearScreen();
 
  	do {
+		fn.clearScreen();
 		fn.cout("CoreFireCode 2024 editioin\n");
 		fn.cout("\n\nMain Menu\n");
 		fn.cout("Option 1\nOption 2\nOption 3\nOption 9 to Exit\n");
@@ -21,11 +21,9 @@ int main()
 		case 2: fn.cout("Option 2 was slected\n"); break;
 		case 3: fn.cout("Option 3 was slected\n"); break;
 		case 9: fn.setMainLoopCondition(false); break;
-		default:
-			break;
+		default: fn.errorInvalidInput(); system("pause"); break;
 		}
 
-		system("pause");
 	} while (fn.getMainLoopCondition());
 
 	return 0;
