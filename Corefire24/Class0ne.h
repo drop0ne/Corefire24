@@ -32,6 +32,9 @@ public:
 		}
 
 	}
+	void cout(std::string output) {
+		std::cout << output;
+	}
 
 private:
 	void updateMainProgramLoopCondition(bool data) {
