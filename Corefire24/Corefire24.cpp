@@ -3,6 +3,8 @@
 
 #include "Class0ne.h"
 
+void option1();
+
 int main()
 {
     FN fn;
@@ -15,7 +17,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: std::cout << "Option 1 was slected\n"; break;
+		case 1: option1(); break;
 		case 2: std::cout << "Option 2 was slected\n"; break;
 		case 3: std::cout << "Option 3 was slected\n"; break;
 		case 9: fn.setMainLoopCondition(false); break;
@@ -27,4 +29,11 @@ int main()
 	} while (fn.getMainLoopCondition());
 
 	return 0;
+}
+
+void option1() {
+	FN fn;
+	fn.clearScreen();
+	std::cout << "Option 1\n";
+	return;
 }
