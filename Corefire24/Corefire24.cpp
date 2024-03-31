@@ -11,12 +11,19 @@ int main()
  	do {
 		std::cout << "CoreFireCode 2024 editioin" << std::endl;
 		std::cout << "\n\nMain Menu\n";
-		std::cout << "Option 1\nOption 2\nOption 3\n";
+		std::cout << "Option 1\nOption 2\nOption 3\nOption 9 to Exit\n";
 
-		fn.evaluateInput(fn.selectMenuOption());
+		switch (fn.selectMenuOption())
+		{
+		case 1: std::cout << "Option 1 was slected\n"; break;
+		case 2: std::cout << "Option 2 was slected\n"; break;
+		case 3: std::cout << "Option 3 was slected\n"; break;
+		case 9: fn.setMainLoopCondition(false); break;
+		default:
+			break;
+		}
 
 		system("pause");
-		fn.setMainLoopCondition(false);
 	} while (fn.getMainLoopCondition());
 
 	return 0;

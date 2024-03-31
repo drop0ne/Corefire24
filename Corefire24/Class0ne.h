@@ -24,23 +24,13 @@ public:
 		int returnValue{ 0 };
 
 		std::cout << "Enter Command: ";
-		std::cin >> returnValue;
-
-		return returnValue;
-	}
-	void evaluateInput(int choice) {
-		if (choice != 0) {
-			switch (choice)
-			{
-			case 1: std::cout << "option 1"; break;
-			default:
-				break;
-			}
-
+		if (std::cin >> returnValue) {
+			return returnValue;
 		}
 		else {
-			std::cout << "Invalid Choice" << std::endl;
+			std::cout << "Invalid Input: Must enter a whole number!" << std::endl;
 		}
+
 	}
 
 private:
