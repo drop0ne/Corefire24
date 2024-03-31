@@ -5,6 +5,11 @@ class FN
 {
 private:
 	bool mainProgramLoopCondition{};
+	HANDLE consoleHandle;
+	enum colorINT
+	{
+		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11, white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
+	};
 //////
 public:
 	FN();
@@ -17,6 +22,9 @@ public:
 	void cout(std::string output);
 	void errorInvalidInput();
 	void clearInputStream();
+	void setScreenColor(const char* cCode);
+	void set_text_color(int color_choice);//
+
 ////// 
 private:
 	void updateMainProgramLoopCondition(bool data);
@@ -73,6 +81,16 @@ void FN::clearInputStream() {
 		// If there are characters in the input buffer, discard them up to the next newline
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
+}
+
+void FN::setScreenColor(const char* cCode) {
+	system(cCode);
+	return;
+}
+
+void FN::set_text_color(int colorDATA) {
+	SetConsoleTextAttribute(this->consoleHandle, colorDATA);
+	return;
 }
 
 // PRIVATE METHODS  ******
