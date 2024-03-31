@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
+    <ClCompile Include="NumberGuessingGame\main_NumGuesGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class0ne.h" />

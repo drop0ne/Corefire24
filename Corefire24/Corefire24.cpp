@@ -13,7 +13,7 @@ int main()
 		fn.clearScreen();
 		fn.cout("CoreFireCode 2024 editioin\n");
 		fn.cout("\n\nMain Menu\n");
-		fn.cout("Option 1\nOption 2\nOption 3\nOption 9 to Exit\n");
+		fn.cout("Option 1 - Number Gussing Game\nOption 2\nOption 3\nOption 9 to Exit\n");
 
 		switch (fn.selectMenuOption())
 		{
@@ -30,8 +30,6 @@ int main()
 }
 
 void option1() {
-	FN fn;
-	fn.clearScreen();
-	std::cout << "Option 1\n";
+	
 	return;
 }
