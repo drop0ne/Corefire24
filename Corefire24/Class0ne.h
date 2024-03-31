@@ -14,9 +14,33 @@ public:
 		updateMainProgramLoopCondition(newCondition);
 		return;
 	}
-
 	bool getMainLoopCondition() {
 		return mainProgramLoopCondition;
+	}
+	void clearScreen() {
+		system("cls");
+	}
+	int selectMenuOption() {
+		int returnValue{ 0 };
+
+		std::cout << "Enter Command: ";
+		std::cin >> returnValue;
+
+		return returnValue;
+	}
+	void evaluateInput(int choice) {
+		if (choice != 0) {
+			switch (choice)
+			{
+			case 1: std::cout << "option 1"; break;
+			default:
+				break;
+			}
+
+		}
+		else {
+			std::cout << "Invalid Choice" << std::endl;
+		}
 	}
 
 private:
