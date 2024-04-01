@@ -1,11 +1,17 @@
 #pragma once
 #include <iostream>
+#include <Windows.h>
+#include <algorithm> // For std::max
+
+#undef max() // Undefine the existing macro
+
+//#define max()(a, b) (a > b ? a : b) // Redefine max macro
 
 class FN
 {
 private:
 	bool mainProgramLoopCondition{};
-	HANDLE consoleHandle;
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	enum colorINT
 	{
 		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11, white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27

@@ -23,7 +23,7 @@
     <ClInclude Include="Class0ne.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NumberGuessingGame\numberGame.h">
+    <ClInclude Include="NumberGuessingGame\NumberGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
