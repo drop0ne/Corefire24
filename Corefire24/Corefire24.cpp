@@ -45,7 +45,7 @@ void run_NumberGuessingGame() {
 
     // ******* ////// Game Loop \\\\\\ *******
 
-    while (winner) {
+    do {
         std::cout << "\nGuess a number between 0 and 100";
         if (std::cin >> attempt) {
             ++attemptCount;
@@ -71,6 +71,5 @@ void run_NumberGuessingGame() {
         if (attempt >= MAX_GUESSES) {
             break;
         }
-    }
-    return;
+    } while (!winner);
 }// end of game // return to main //
