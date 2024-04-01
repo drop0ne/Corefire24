@@ -61,7 +61,7 @@ void run_NumberGuessingGame() {
         if (attempt < 0) {
             break;
         }
-        if (guess < randomNumber) {
+        if (attempt < randomNumber) {
             std::cout << "No! My number is bigger!\n";
         }
         else {

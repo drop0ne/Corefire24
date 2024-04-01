@@ -18,18 +18,12 @@
     <ClCompile Include="Corefire24.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NumberGuessingGame\main_NumGuesGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class0ne.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NumberGuessingGame\numberGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NumberGuessingGame\delete.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
