@@ -1,44 +1,126 @@
 #pragma once
 #include <iostream>
+#include <Windows.h>
+#include <algorithm> // For std::max
+
+#undef max() // Undefine the existing macro
+
+//#define max()(a, b) (a > b ? a : b) // Redefine max macro
 
 class FN
 {
 private:
 	bool mainProgramLoopCondition{};
-
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	enum colorINT
+	{
+		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11, white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
+	};
+//////
 public:
 	FN();
 	~FN();
 
-	void setMainLoopCondition(bool newCondition) {
-		updateMainProgramLoopCondition(newCondition);
-		return;
-	}
+	void setMainLoopCondition(bool newCondition);
+	bool getMainLoopCondition();
+	void clearScreen();
+	int selectMenuOption();
+	void cout(std::string output);
+	void errorInvalidInput();
+	void clearInputStream();
+	void setScreenColor(const char* cCode);
+	void set_text_color(int color_choice);//
 
-	bool getMainLoopCondition() {
-		return mainProgramLoopCondition;
-	}
-
+////// 
 private:
-	void updateMainProgramLoopCondition(bool data) {
-		
-		this->mainProgramLoopCondition = data;
-		
-		if (mainProgramLoopCondition == data) {
-			return;
-			}
-		else {
-			std::cout << "Error: Failed to update manProgramLoopCondition bool private method" << std::endl;
-			return;
-		}
-	}
-
+	void updateMainProgramLoopCondition(bool data);
+	void extractInputStream();
 };
+/////////////////////////////////////////////////////
 
+// PUBLIC METHODS ******
 FN::FN() :mainProgramLoopCondition(true)
 {
 }
-
 FN::~FN()
 {
+}
+
+void FN::setMainLoopCondition(bool newCondition) {
+	updateMainProgramLoopCondition(newCondition);
+	return;
+}
+
+bool FN::getMainLoopCondition() {
+	return mainProgramLoopCondition;
+}
+void FN::clearScreen() {
+	system("cls");
+}
+int FN::selectMenuOption() {
+	int returnValue{ 0 };
+
+	cout("\nEnter Command: ");
+	if (std::cin >> returnValue) {
+		return returnValue;
+	}
+	else {
+		clearInputStream();
+	}
+}
+
+
+void FN::cout(std::string output) {
+	std::cout << output;
+}
+
+
+void FN::errorInvalidInput() {
+	cout("\nERROR: INVALID SELECTION\n");
+	clearInputStream();
+}
+
+
+void FN::clearInputStream() {
+	std::cin.clear();
+	if (std::cin.rdbuf()->in_avail() > 0) {
+		// If there are characters in the input buffer, discard them up to the next newline
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+}
+
+void FN::setScreenColor(const char* cCode) {
+	system(cCode);
+	return;
+}
+
+void FN::set_text_color(int colorDATA) {
+	SetConsoleTextAttribute(this->consoleHandle, colorDATA);
+	return;
+}
+
+// PRIVATE METHODS  ******
+
+void FN::updateMainProgramLoopCondition(bool data) {
+
+	this->mainProgramLoopCondition = data;
+
+	if (mainProgramLoopCondition == data) {
+		return;
+	}
+	else {
+		cout("Error: Failed to update manProgramLoopCondition bool private method\n");
+		return;
+	}
+}
+
+void FN::extractInputStream() {  //Unused code
+	std::cout << "Contents of input stream: ";
+	char c;
+	while (std::cin.peek() != EOF) {
+		std::cin.get(c);
+		std::cout << c;
+	}
+	std::cout << std::endl;
+	return;
 }

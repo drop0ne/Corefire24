@@ -134,6 +134,10 @@
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Class0ne.h" />
+    <ClInclude Include="NumberGuessingGame\NumberGenerator.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
