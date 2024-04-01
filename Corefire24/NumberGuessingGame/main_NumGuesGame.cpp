@@ -1,23 +1,58 @@
 #include "numberGame.h"
 #include "../Class0ne.h"
 void run_NumberGuessingGame();
-
+//
+// *******//////start of program \\\\\\*******
+//
 void run_NumberGuessingGame() {
-    // Constants
     const int rng_minimum{ 0 };// The new minimum value for the random number range
     const int rng_maximum{ 100 };// The new maximum value for the random number range
     const int MAX_GUESSES{ 10 };// Set the guess limit
-    int guessCount{ 0 };
+    int attempt{ 0 };
+    int attemptCount{ 0 };
+    bool player_won = false;
 
     // Get the handle to the console output
     HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    // Create the random number generator thread and start it
     auto numberGenerator = NumberGenerator(rng_minimum, rng_maximum);
-    std::thread numberGeneratorThread(&NumberGenerator::GenerateRandomNumbers, &numberGenerator);
-    std::this_thread::sleep_for(250ms);//Required!  This allows for the RNG thread time to spool up
+    int randomNumber = numberGenerator.getRNG();
 
+    // ******* ////// Game Loop \\\\\\ *******
 
+    while (true) {
+        std::cout << "\nGuess a number between 0 and 100";
+        if (std::cin >> attempt) {
+            ++attemptCount;
+        }
+        
+        std::cout << "You have " << (MAX_GUESSES - attemptCount) << " attempts remaining.\n";
+
+        if (attempt == rng) {
+            player_won = true;
+            break;
+        }
+        //Escape code to end game
+        if (guess == -1) {
+            break;
+        }
+        if (guess < rng) {
+            si.set_text_color(blue);
+            si.print("The Securet Number is higher!\n");
+            si.set_text_color(default_color);
+        }
+        else {
+            si.set_text_color(blue);
+            si.print("The Securet Number is lower!\n");
+            si.set_text_color(default_color);
+        }
+        // If the player ran out of guesses, stop the game
+        if (++number_of_guesses == MAX_guesses) {
+            break;
+        }
+    }
+    return player_won;
+}
 
     return;  // end of game // return to main //
 }
