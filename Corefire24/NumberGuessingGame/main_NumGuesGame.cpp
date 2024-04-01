@@ -28,26 +28,22 @@ void run_NumberGuessingGame() {
         
         std::cout << "You have " << (MAX_GUESSES - attemptCount) << " attempts remaining.\n";
 
-        if (attempt == rng) {
+        if (attempt == randomNumber) {
             player_won = true;
             break;
         }
         //Escape code to end game
-        if (guess == -1) {
+        if (attempt < 0) {
             break;
         }
-        if (guess < rng) {
-            si.set_text_color(blue);
-            si.print("The Securet Number is higher!\n");
-            si.set_text_color(default_color);
+        if (guess < randomNumber) {
+            std::cout << "No! My number is bigger!\n";
         }
         else {
-            si.set_text_color(blue);
-            si.print("The Securet Number is lower!\n");
-            si.set_text_color(default_color);
+            std::cout << "No.  My number is smaller\n";
         }
         // If the player ran out of guesses, stop the game
-        if (++number_of_guesses == MAX_guesses) {
+        if (attempt >= MAX_GUESSES) {
             break;
         }
     }
@@ -55,4 +51,3 @@ void run_NumberGuessingGame() {
 }
 
     return;  // end of game // return to main //
-}
