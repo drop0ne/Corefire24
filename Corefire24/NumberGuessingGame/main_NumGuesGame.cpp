@@ -1,5 +1,4 @@
 #include "numberGame.h"
-#include "../Class0ne.h"
 void run_NumberGuessingGame();
 //
 // *******//////start of program \\\\\\*******
@@ -10,7 +9,7 @@ void run_NumberGuessingGame() {
     const int MAX_GUESSES{ 10 };// Set the guess limit
     int attempt{ 0 };
     int attemptCount{ 0 };
-    bool player_won = false;
+    bool winner = false;
 
     // Get the handle to the console output
     HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -20,7 +19,7 @@ void run_NumberGuessingGame() {
 
     // ******* ////// Game Loop \\\\\\ *******
 
-    while (true) {
+    while (winner) {
         std::cout << "\nGuess a number between 0 and 100";
         if (std::cin >> attempt) {
             ++attemptCount;
@@ -29,7 +28,7 @@ void run_NumberGuessingGame() {
         std::cout << "You have " << (MAX_GUESSES - attemptCount) << " attempts remaining.\n";
 
         if (attempt == randomNumber) {
-            player_won = true;
+            winner = true;
             break;
         }
         //Escape code to end game
@@ -47,7 +46,5 @@ void run_NumberGuessingGame() {
             break;
         }
     }
-    return player_won;
-}
-
-    return;  // end of game // return to main //
+    return;
+}// end of game // return to main //
