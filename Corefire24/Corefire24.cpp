@@ -3,11 +3,34 @@
 #include "Class0ne.h"
 #include "NumberGuessingGame/NumberGuessingGame.h"
 
+class Loader
+{
+public:
+	Loader();
+	~Loader();
+	auto loadGame() {
+		auto game = new Game;
+		return game;
+	}
+
+private:
+
+};
+
+Loader::Loader()
+{
+}
+
+Loader::~Loader()
+{
+}
+
+
 int main()
 {
     HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     FN fn;
-	auto game = new Game;
+	Loader ld;
 
  	do {
 		fn.clearScreen();
@@ -17,7 +40,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: game->run(); break;
+		case 1: auto game = ld.loadGame(); game->run(); delete game; break; // Need ***  Class::method || void create() { auto game = new Game; }
 		case 2: fn.cout("Option 2 was slected\n"); break;
 		case 3: fn.cout("Option 3 was slected\n"); break;
 		case 9: fn.setMainLoopCondition(false); break;

@@ -11,6 +11,7 @@ private:
     int attemptCount{ 0 };
     int randomNumber{ 0 };
     bool winner = false;
+    
 
 public:
 	Game();
@@ -68,3 +69,5 @@ void Game::gameLoop() {
         }
     } while (!winner);
 }
+
+
