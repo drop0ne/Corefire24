@@ -7,6 +7,7 @@ int main()
 {
     HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     FN fn;
+	auto game = new Game;
 
  	do {
 		fn.clearScreen();
@@ -16,7 +17,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: auto game = new Game; game->run(); break;
+		case 1: game->run(); break;
 		case 2: fn.cout("Option 2 was slected\n"); break;
 		case 3: fn.cout("Option 3 was slected\n"); break;
 		case 9: fn.setMainLoopCondition(false); break;
