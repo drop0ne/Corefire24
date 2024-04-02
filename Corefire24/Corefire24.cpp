@@ -1,12 +1,12 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 #include "Class0ne.h"
-#include "NumberGuessingGame/NumberGenerator.h"
 
 void run_NumberGuessingGame();
 
 int main()
 {
+    HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     FN fn;
 
  	do {

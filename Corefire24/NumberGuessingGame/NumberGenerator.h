@@ -31,8 +31,6 @@ public:
 
     void GenerateRandomNumbers();
     int getRNG();
-    void splash_Screen(int rng, HANDLE color);
-    bool playGuessingGame(int rng, int MIN_rng, int MAX_rng, int MAX_G, HANDLE hwnd_color);
 
 
 private:
