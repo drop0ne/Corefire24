@@ -2,7 +2,7 @@
 #include <iostream>
 #include "NumberGenerator.h"
 
-class Game {
+class NumberGuessingGame {
 private:
     const int rng_minimum{ 0 };// The new minimum value for the random number range
     const int rng_maximum{ 100 };// The new maximum value for the random number range
@@ -14,33 +14,33 @@ private:
     
 
 public:
-	Game();
-	~Game();
+    NumberGuessingGame();
+	~NumberGuessingGame();
     void run();
 private:
     void initializeRNG();
     void gameLoop();
 };
 
-Game::Game()
+NumberGuessingGame::NumberGuessingGame()
 {
 }
 
-Game::~Game()
+NumberGuessingGame::~NumberGuessingGame()
 {
 }
 
-void Game::run() {
+void NumberGuessingGame::run() {
     initializeRNG();
     gameLoop();
 }
 
-void Game::initializeRNG() {
+void NumberGuessingGame::initializeRNG() {
     auto numberGenerator = NumberGenerator(rng_minimum, rng_maximum);
     this->randomNumber = numberGenerator.getRNG();
 }
 
-void Game::gameLoop() {
+void NumberGuessingGame::gameLoop() {
     do {
         std::cout << "\nGuess a number between 0 and 100";
         if (std::cin >> attempt) {
