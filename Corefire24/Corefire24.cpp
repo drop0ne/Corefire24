@@ -5,8 +5,8 @@
 
 int main()
 {
-    //HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     FN fn;
+	fn.receiveConsoleHWND(GetStdHandle(STD_OUTPUT_HANDLE));
 
 	// Number Guessing Game START
 	auto RNG = new NumberGenerator(0, 100);
