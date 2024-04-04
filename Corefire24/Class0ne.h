@@ -6,6 +6,9 @@
 #undef max() // Undefine the existing macro
 
 //#define max()(a, b) (a > b ? a : b) // Redefine max macro
+//#define interface_type_data HANDLE color
+//#define interface_data color
+
 
 class FN
 {
