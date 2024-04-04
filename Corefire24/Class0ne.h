@@ -6,12 +6,15 @@
 #undef max() // Undefine the existing macro
 
 //#define max()(a, b) (a > b ? a : b) // Redefine max macro
+//#define interface_type_data HANDLE color
+//#define interface_data color
+
 
 class FN
 {
 private:
 	bool mainProgramLoopCondition{};
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE console_HWND{};
 	enum colorINT
 	{
 		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11, white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
@@ -30,6 +33,7 @@ public:
 	void clearInputStream();
 	void setScreenColor(const char* cCode);
 	void set_text_color(int color_choice);//
+	void receiveConsoleHWND(HANDLE data);
 
 ////// 
 private:
@@ -95,8 +99,12 @@ void FN::setScreenColor(const char* cCode) {
 }
 
 void FN::set_text_color(int colorDATA) {
-	SetConsoleTextAttribute(this->consoleHandle, colorDATA);
+	SetConsoleTextAttribute(this->console_HWND, colorDATA);
 	return;
+}
+
+inline void FN::receiveConsoleHWND(HANDLE data) {
+	this->console_HWND = data;
 }
 
 // PRIVATE METHODS  ******

@@ -26,5 +26,8 @@
     <ClInclude Include="NumberGuessingGame\NumberGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NumberGuessingGame\NumberGuessingGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
