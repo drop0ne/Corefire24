@@ -5,10 +5,13 @@
 
 int main()
 {
-    HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
+    //HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     FN fn;
-	auto numberGuessingGame = new NumberGuessingGame;
 
+	// Number Guessing Game START
+	auto RNG = new NumberGenerator(0, 100);
+	auto numberGuessingGame = new NumberGuessingGame(RNG->getRNG());
+	// END ****************
 
  	do {
 		fn.clearScreen();
@@ -28,6 +31,7 @@ int main()
 	} while (fn.getMainLoopCondition());
 
 	delete numberGuessingGame;
+	delete RNG;
 
 	return 0;
 }

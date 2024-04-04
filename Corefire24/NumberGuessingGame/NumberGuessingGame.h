@@ -4,17 +4,17 @@
 
 class NumberGuessingGame {
 private:
-    const int rng_minimum{ 0 };// The new minimum value for the random number range
-    const int rng_maximum{ 100 };// The new maximum value for the random number range
+    //int rng_minimum{ 0 };// The new minimum value for the random number range
+    //int rng_maximum{ 0 };// The new maximum value for the random number range
+    int randomNumber {0};
     const int MAX_GUESSES{ 10 };// Set the guess limit
     int attempt{ 0 };
     int attemptCount{ 0 };
-    int randomNumber{ 0 };
     bool winner = false;
     
 
 public:
-    NumberGuessingGame();
+    NumberGuessingGame(int rng);
 	~NumberGuessingGame();
     void run();
 private:
@@ -22,7 +22,7 @@ private:
     void gameLoop();
 };
 
-NumberGuessingGame::NumberGuessingGame()
+NumberGuessingGame::NumberGuessingGame(int rng) : randomNumber(rng)
 {
 }
 
@@ -36,8 +36,8 @@ void NumberGuessingGame::run() {
 }
 
 void NumberGuessingGame::initializeRNG() {
-    auto numberGenerator = NumberGenerator(rng_minimum, rng_maximum);
-    this->randomNumber = numberGenerator.getRNG();
+    //auto numberGenerator = NumberGenerator(rng_minimum, rng_maximum);
+    //this->randomNumber = numberGenerator.getRNG();
 }
 
 void NumberGuessingGame::gameLoop() {
