@@ -10,7 +10,7 @@ int main()
 
 	// Number Guessing Game START
 	auto RNG = new NumberGenerator(0, 100);
-	auto numberGuessingGame = new NumberGuessingGame(RNG->getRNG());
+	auto numberGuessingGame = new NumberGuessingGame(RNG->getNewRandomNumber());
 	// END ****************
 
  	do {
