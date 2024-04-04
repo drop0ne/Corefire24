@@ -9,7 +9,7 @@ private:
     int randomNumber {0};
     const int MAX_GUESSES{ 10 };// Set the guess limit
     int attempt{ 0 };
-    int attemptCount{ 0 };
+    int attemptCount{ 1 };
     bool winner = false;
     
 
@@ -18,7 +18,6 @@ public:
 	~NumberGuessingGame();
     void run();
 private:
-    void initializeRNG();
     void gameLoop();
 };
 
@@ -31,43 +30,33 @@ NumberGuessingGame::~NumberGuessingGame()
 }
 
 void NumberGuessingGame::run() {
-    initializeRNG();
     gameLoop();
 }
 
-void NumberGuessingGame::initializeRNG() {
-    //auto numberGenerator = NumberGenerator(rng_minimum, rng_maximum);
-    //this->randomNumber = numberGenerator.getRNG();
-}
-
 void NumberGuessingGame::gameLoop() {
-    do {
-        std::cout << "\nGuess a number between 0 and 100";
-        if (std::cin >> attempt) {
-            ++attemptCount;
-        }
-
-        std::cout << "You have " << (MAX_GUESSES - attemptCount) << " attempts remaining.\n";
-
-        if (attempt == randomNumber) {
-            winner = true;
+    do 
+    {
+        std::cout << "\nGuess a number between 0 and 100\n";
+        if (attemptCount > MAX_GUESSES) {
+            // failed  out of guessess
+            std::cout << "\nFAIL: You are out of guesses\n";
             break;
-        }
-        //Escape code to end game
-        if (attempt < 0) {
-            break;
-        }
-        if (attempt < randomNumber) {
-            std::cout << "No! My number is bigger!\n";
         }
         else {
-            std::cout << "No.  My number is smaller\n";
+            if (attempt == randomNumber) {
+                // winner winner chicken dinner
+                break;
+            }
+
+            if (attempt < randomNumber) {
+                // print rng is higher
+            }
+            else {
+                // print rng is lower
+            }
         }
-        // If the player ran out of guesses, stop the game
-        if (attempt >= MAX_GUESSES) {
-            break;
-        }
-    } while (!winner);
+        attemptCount++;
+    } while (true);
 }
 
 
