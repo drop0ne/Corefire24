@@ -12,6 +12,7 @@ private:
     // The minimum and maximum values for the random number range
     int rng_minimum{0};
     int rng_maximum{0};
+    int newNumber{ 0 };
 
 public:
 	NumberGenerator(int min, int max);
@@ -35,7 +36,6 @@ int NumberGenerator::getNewRandomNumber() {
 }
 
 int NumberGenerator::numberGenerator() {
-    int newNumber{ 0 };
     std::mt19937 generator;
     std::uniform_int_distribution<int> distribution(rng_minimum, rng_maximum);
     newNumber = distribution(generator);

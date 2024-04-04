@@ -14,14 +14,14 @@ private:
     
 
 public:
-    NumberGuessingGame(int rng);
+    NumberGuessingGame();
 	~NumberGuessingGame();
-    void run();
+    void run(int newRandomNumber);
 private:
     void gameLoop();
 };
 
-NumberGuessingGame::NumberGuessingGame(int rng) : randomNumber(rng)
+NumberGuessingGame::NumberGuessingGame()
 {
 }
 
@@ -29,7 +29,8 @@ NumberGuessingGame::~NumberGuessingGame()
 {
 }
 
-void NumberGuessingGame::run() {
+void NumberGuessingGame::run(int newRandomNumber) {
+    this->randomNumber = newRandomNumber;
     gameLoop();
 }
 
@@ -51,6 +52,7 @@ void NumberGuessingGame::gameLoop() {
                 // winner winner chicken dinner
                 std::cout << "Winner!\n";
                 loop = false;
+                system("pause");
                 break;
             }
 
