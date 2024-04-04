@@ -30,6 +30,7 @@ NumberGuessingGame::~NumberGuessingGame()
 void NumberGuessingGame::run(int newRandomNumber) {
     this->randomNumber = newRandomNumber;
     gameLoop();
+    // private method here to reset memory
 }
 
 void NumberGuessingGame::gameLoop() {
