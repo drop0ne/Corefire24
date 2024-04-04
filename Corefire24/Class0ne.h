@@ -65,12 +65,14 @@ int FN::selectMenuOption() {
 	int returnValue{ 0 };
 
 	cout("\nEnter Command: ");
+	set_text_color(light_blue);
 	if (std::cin >> returnValue) {
 		return returnValue;
 	}
 	else {
 		clearInputStream();
 	}
+	set_text_color(default_color);
 }
 
 

@@ -6,8 +6,8 @@ class NumberGuessingGame {
 private:
     int randomNumber {0};
     const int MAX_GUESSES{ 5 };// Set the guess limit
-    int attempt{ 0 };
-    int attemptCount{ 0 };
+    int attempt{ 0 };// number guessed
+    int attemptCount{ 0 };//number of guessess
     bool loop = true;
     
 
@@ -41,7 +41,7 @@ void NumberGuessingGame::gameLoop() {
         std::cout << "Enter Guess: ";
         std::cin >> attempt;
 
-        if (attemptCount = MAX_GUESSES | attemptCount > MAX_GUESSES) {
+        if (attemptCount = MAX_GUESSES) {
             // failed  out of guessess
             std::cout << "\nFAIL: You are out of guesses\n";
             loop = false;
