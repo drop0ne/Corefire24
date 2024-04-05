@@ -34,7 +34,7 @@ void NumberGuessingGame::gameLoop() {
         this->attemptCount++;
         if (this->attemptCount >= this->MAX_GUESSES) {
             std::cout << "\nFAIL: You are out of guesses\n";
-            std::cin.get();
+            std::cout << "The number was: " << randomNumber << "\n\n";
             system("pause");
             return;
         }
