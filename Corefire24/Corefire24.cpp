@@ -15,10 +15,9 @@ int main()
 {
     FN fn;
 	fn.receiveConsoleHWND(GetStdHandle(STD_OUTPUT_HANDLE));
-
 	// Number Guessing Game START
-	auto RNG = NumberGenerator();
-	auto numberGuessingGame = NumberGuessingGame();
+	NumberGenerator RNG;
+	NumberGuessingGame numberGuessingGame;
 	// END ****************
 
  	do {
