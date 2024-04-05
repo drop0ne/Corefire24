@@ -41,39 +41,32 @@ void NumberGuessingGame::gameLoop() {
         std::cout << "\nGuess a number between 0 and 100\n";
         std::cout << "Enter Guess: ";
 
-        // Error handling for invalid input
         if (!(std::cin >> this->attempt)) {
             std::cout << "Invalid input. Please enter a valid number.\n";
 
             // Clear the input stream and reset error flags
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            continue; // Skip the rest of the loop and prompt for input again
+            continue;
         }
         if (this->attempt < 0 || this->attempt > 100) {
             std::cout << "Input out of range. Please enter a number between 0 and 100.\n";
-            continue; // Skip the rest of the loop and prompt for input again
+            continue;
         }
-        else {
-            if (this->attempt == this->randomNumber) {
-                // Winner winner chicken dinner
-                std::cout << "Winner!\n";
-                system("pause"); // Consider using platform-independent methods for pausing
-                return; // Exit the function since the correct number has been guessed
-            }
-            else {
+        if (this->attempt == this->randomNumber) {
+            // Winner winner chicken dinner
+            std::cout << "Winner!\n";
+            system("pause");
+            return;
+        } else {
                 if (this->attempt < this->randomNumber) {
-                    // Print that the random number is higher
                     std::cout << "Higher\n";
                 }
                 else {
-                    // Print that the random number is lower
                     std::cout << "Lower\n";
                 }
-            }
         }
-    } while (true); // Removed the unnecessary loop variable
-
+    } while (true);
     clearMemory();
 }
 
