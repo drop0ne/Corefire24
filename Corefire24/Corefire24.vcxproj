@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class0ne.h" />
+    <ClInclude Include="include.h" />
     <ClInclude Include="NumberGuessingGame\NumberGenerator.h" />
     <ClInclude Include="NumberGuessingGame\NumberGuessingGame.h" />
   </ItemGroup>

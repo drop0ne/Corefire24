@@ -1,7 +1,4 @@
-#pragma once
-
-#include <iostream>
-#include <random>
+#include "..\include.h"
 
 class NumberGenerator {
 private:

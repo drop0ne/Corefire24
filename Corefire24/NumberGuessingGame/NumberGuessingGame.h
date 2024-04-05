@@ -1,5 +1,4 @@
-#pragma once
-#include <iostream>
+#include "..\include.h"
 
 class NumberGuessingGame {
 private:

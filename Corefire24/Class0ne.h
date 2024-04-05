@@ -1,14 +1,8 @@
-#pragma once
-#include <iostream>
-#include <Windows.h>
-#include <algorithm> // For std::max
-
+#include "include.h"
 #undef max() // Undefine the existing macro
-
 //#define max()(a, b) (a > b ? a : b) // Redefine max macro
 //#define interface_type_data HANDLE color
 //#define interface_data color
-
 
 class FN
 {

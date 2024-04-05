@@ -1,7 +1,6 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#pragma once
-#include <iostream>
+#include "include.h"
 #include "Class0ne.h"
 #include "NumberGuessingGame/NumberGenerator.h"
 #include "NumberGuessingGame/NumberGuessingGame.h"
