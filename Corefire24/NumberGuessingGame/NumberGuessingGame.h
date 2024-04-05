@@ -41,7 +41,7 @@ void NumberGuessingGame::gameLoop() {
         std::cout << "Enter Guess: ";
         std::cin >> this->attempt;
 
-        if (this->attemptCount > this->MAX_GUESSES) {
+        if (this->attemptCount >= this->MAX_GUESSES) {
             // failed  out of guessess
             std::cout << "\nFAIL: You are out of guesses\n";
             this->loop = false;
