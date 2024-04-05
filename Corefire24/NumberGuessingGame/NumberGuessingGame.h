@@ -74,4 +74,3 @@ inline void NumberGuessingGame::clearMemory() {
     this->attemptCount = 0;
     this->attempt = 0;
 }
-
