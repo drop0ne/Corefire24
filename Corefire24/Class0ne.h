@@ -63,31 +63,33 @@ void FN::clearScreen() {
 }
 int FN::selectMenuOption() {
 	int returnValue{ 0 };
+	clearInputStream();
 
 	cout("\nEnter Command: ");
 	set_text_color(light_blue);
 	if (std::cin >> returnValue) {
+		set_text_color(default_color);
 		return returnValue;
 	}
 	else {
 		clearInputStream();
+		set_text_color(default_color);
 	}
-	set_text_color(default_color);
 }
 
 
-void FN::cout(std::string output) {
+inline void FN::cout(std::string output) {
 	std::cout << output;
 }
 
 
-void FN::errorInvalidInput() {
-	cout("\nERROR: INVALID SELECTION\n");
+inline void FN::errorInvalidInput() {
+	cout("\nERROR: INVALID INPUT\n");
 	clearInputStream();
 }
 
 
-void FN::clearInputStream() {
+inline void FN::clearInputStream() {
 	std::cin.clear();
 	if (std::cin.rdbuf()->in_avail() > 0) {
 		// If there are characters in the input buffer, discard them up to the next newline
@@ -105,13 +107,13 @@ void FN::set_text_color(int colorDATA) {
 	return;
 }
 
-inline void FN::receiveConsoleHWND(HANDLE data) {
+void FN::receiveConsoleHWND(HANDLE data) {
 	this->console_HWND = data;
 }
 
 // PRIVATE METHODS  ******
 
-void FN::updateMainProgramLoopCondition(bool data) {
+inline void FN::updateMainProgramLoopCondition(bool data) {
 
 	this->mainProgramLoopCondition = data;
 
@@ -124,7 +126,7 @@ void FN::updateMainProgramLoopCondition(bool data) {
 	}
 }
 
-void FN::extractInputStream() {  //Unused code
+inline void FN::extractInputStream() {  //Unused code
 	std::cout << "Contents of input stream: ";
 	char c;
 	while (std::cin.peek() != EOF) {

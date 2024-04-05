@@ -4,12 +4,12 @@
 
 class NumberGuessingGame {
 private:
+    // Game state working memory
     int randomNumber {0};
-    const int MAX_GUESSES{ 5 };// Set the guess limit
+    const int MAX_GUESSES = 5;// Set the guess limit
     int attempt{ 0 };// number guessed
     int attemptCount{ 0 };//number of guessess
     bool loop = true;
-    
 
 public:
     NumberGuessingGame();
@@ -17,6 +17,7 @@ public:
     void run(int newRandomNumber);
 private:
     void gameLoop();
+    void clearMemory();
 };
 
 NumberGuessingGame::NumberGuessingGame()
@@ -30,13 +31,12 @@ NumberGuessingGame::~NumberGuessingGame()
 void NumberGuessingGame::run(int newRandomNumber) {
     this->randomNumber = newRandomNumber;
     gameLoop();
-    // private method here to reset memory
 }
 
 void NumberGuessingGame::gameLoop() {
     do 
     {
-        ++attemptCount;
+        attemptCount++;
         std::cout << "\nGuess a number between 0 and 100\n";
         std::cout << "Enter Guess: ";
         std::cin >> attempt;
@@ -66,5 +66,12 @@ void NumberGuessingGame::gameLoop() {
             }
         }
     } while (loop);
-    // RESET MEMORY **************************
+    clearMemory();
 }
+
+inline void NumberGuessingGame::clearMemory() {
+    this->randomNumber = 0;
+    this->attemptCount = 0;
+    this->attempt = 0;
+}
+
