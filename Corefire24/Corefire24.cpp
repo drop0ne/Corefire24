@@ -1,6 +1,9 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#pragma once
+#include <iostream>
 #include "Class0ne.h"
+#include "NumberGuessingGame/NumberGenerator.h"
 #include "NumberGuessingGame/NumberGuessingGame.h"
 
 enum colorINT
@@ -28,7 +31,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: numberGuessingGame->run(RNG->getNewRandomNumber()); break;
+		case 1: numberGuessingGame->run(RNG->returnRandomNumber()); break;
 		case 2: fn.cout("Option 2 was slected\n"); system("pause"); break;
 		case 3: fn.cout("Option 3 was slected\n"); system("pause"); break;
 		case 9: fn.setMainLoopCondition(false); break;
@@ -42,3 +45,5 @@ int main()
 
 	return 0;
 }
+
+

@@ -13,13 +13,13 @@ public:
     NumberGenerator();
     ~NumberGenerator();
 
-    int getNewRandomNumber();
+    int returnRandomNumber();
 };
 
 NumberGenerator::NumberGenerator() : generator(rd()), distribution(0, 100) {}
 
 NumberGenerator::~NumberGenerator() {}
 
-int NumberGenerator::getNewRandomNumber() {
+int NumberGenerator::returnRandomNumber() {
     return distribution(generator);
 }
