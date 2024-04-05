@@ -17,8 +17,8 @@ int main()
 	fn.receiveConsoleHWND(GetStdHandle(STD_OUTPUT_HANDLE));
 
 	// Number Guessing Game START
-	auto RNG = new NumberGenerator();
-	auto numberGuessingGame = new NumberGuessingGame();
+	auto RNG = NumberGenerator();
+	auto numberGuessingGame = NumberGuessingGame();
 	// END ****************
 
  	do {
@@ -31,7 +31,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: numberGuessingGame->run(RNG->returnRandomNumber()); break;
+		case 1: numberGuessingGame.run(RNG.returnRandomNumber()); break;
 		case 2: fn.cout("Option 2 was slected\n"); system("pause"); break;
 		case 3: fn.cout("Option 3 was slected\n"); system("pause"); break;
 		case 9: fn.setMainLoopCondition(false); break;
@@ -40,8 +40,6 @@ int main()
 
 	} while (fn.getMainLoopCondition());
 
-	delete numberGuessingGame;
-	delete RNG;
 
 	return 0;
 }
