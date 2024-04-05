@@ -1,43 +1,25 @@
 #pragma once
+
 #include <iostream>
-#include <string>
-#include <thread>
 #include <random>
-#include <Windows.h>
-#include <chrono>
-using namespace std::chrono_literals;
 
 class NumberGenerator {
 private:
-    // The minimum and maximum values for the random number range
-    int rng_minimum{0};
-    int rng_maximum{0};
-    int newNumber{ 0 };
+    std::random_device rd;
+    std::mt19937 generator;
+    std::uniform_int_distribution<int> distribution;
 
 public:
-	NumberGenerator(int min, int max);
-	~NumberGenerator();
+    NumberGenerator();
+    ~NumberGenerator();
 
-    int getNewRandomNumber();
-
-private:
-    int numberGenerator();
+    int returnRandomNumber();
 };
 
-NumberGenerator::NumberGenerator(int min, int max) : rng_minimum(min), rng_maximum(max) {
-}
+NumberGenerator::NumberGenerator() : generator(rd()), distribution(0, 100) {}
 
-NumberGenerator::~NumberGenerator()
-{
-}
+NumberGenerator::~NumberGenerator() {}
 
-int NumberGenerator::getNewRandomNumber() {
-    return numberGenerator();
-}
-
-int NumberGenerator::numberGenerator() {
-    std::mt19937 generator;
-    std::uniform_int_distribution<int> distribution(rng_minimum, rng_maximum);
-    newNumber = distribution(generator);
-    return newNumber;
+int NumberGenerator::returnRandomNumber() {
+    return distribution(generator);
 }
