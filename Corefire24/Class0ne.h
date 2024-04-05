@@ -1,8 +1,5 @@
 #include "include.h"
-#undef max() // Undefine the existing macro
-//#define max()(a, b) (a > b ? a : b) // Redefine max macro
-//#define interface_type_data HANDLE color
-//#define interface_data color
+#undef max() // this resolves some conflict involving the flush buff algarithum
 
 class FN
 {
@@ -13,7 +10,7 @@ private:
 	{
 		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11, white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
 	};
-//////
+	/////////////////////////////////////////////////////
 public:
 	FN();
 	~FN();
@@ -26,29 +23,26 @@ public:
 	void errorInvalidInput();
 	void clearInputStream();
 	void setScreenColor(const char* cCode);
-	void set_text_color(int color_choice);//
+	void set_text_color(int color_choice);
 	void receiveConsoleHWND(HANDLE data);
-
-////// 
+///////////////////////////////////////////////////// 
 private:
 	void updateMainProgramLoopCondition(bool data);
 	void extractInputStream();
 };
 /////////////////////////////////////////////////////
 
-// PUBLIC METHODS ******
+// PUBLIC METHODS /////////////////////////////////////////////////////
 FN::FN() :mainProgramLoopCondition(true)
 {
 }
 FN::~FN()
 {
 }
-
 void FN::setMainLoopCondition(bool newCondition) {
 	updateMainProgramLoopCondition(newCondition);
 	return;
 }
-
 bool FN::getMainLoopCondition() {
 	return mainProgramLoopCondition;
 }
@@ -70,19 +64,13 @@ int FN::selectMenuOption() {
 		set_text_color(default_color);
 	}
 }
-
-
 inline void FN::cout(std::string output) {
 	std::cout << output;
 }
-
-
 inline void FN::errorInvalidInput() {
 	cout("\nERROR: INVALID INPUT\n");
 	clearInputStream();
 }
-
-
 inline void FN::clearInputStream() {
 	std::cin.clear();
 	if (std::cin.rdbuf()->in_avail() > 0) {
@@ -90,22 +78,19 @@ inline void FN::clearInputStream() {
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 }
-
 void FN::setScreenColor(const char* cCode) {
 	system(cCode);
 	return;
 }
-
 void FN::set_text_color(int colorDATA) {
 	SetConsoleTextAttribute(this->console_HWND, colorDATA);
 	return;
 }
-
 void FN::receiveConsoleHWND(HANDLE data) {
 	this->console_HWND = data;
 }
 
-// PRIVATE METHODS  ******
+// PRIVATE METHODS  /////////////////////////////////////////////////////
 
 inline void FN::updateMainProgramLoopCondition(bool data) {
 
