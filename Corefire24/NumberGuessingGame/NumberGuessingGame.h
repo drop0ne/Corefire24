@@ -1,24 +1,37 @@
 #include "..\include.h"
 
+// ready for start screen with menu options
+// options: set rng range; set number of guess; have default avalible - thats 3 options
+
 class NumberGuessingGame {
 private:
+    struct NumberRangeLimit {
+        int min;
+        int max;
+    };
+
     // Game state working memory
-    int randomNumber{ 0 };
-    const int MAX_GUESSES = 5; // Set the guess limit
-    int attempt{ 0 }; // Number guessed
-    int attemptCount{ 0 }; // Number of guesses
+    int randomNumber;
+    int MAX_GUESSES;
+    int attempt;
+    int attemptCount;
+    NumberRangeLimit rangeLimit;
 
 public:
     NumberGuessingGame();
     ~NumberGuessingGame();
     void run(int rng);
+    auto rngRangeLimt();
 
 private:
     void gameLoop();
     void clearMemory();
 };
 
-NumberGuessingGame::NumberGuessingGame() {}
+NumberGuessingGame::NumberGuessingGame() : randomNumber(0), MAX_GUESSES(5), attempt(0), attemptCount(0) {
+    this->rangeLimit.min = 0;
+    this->rangeLimit.max = 20;
+}
 
 NumberGuessingGame::~NumberGuessingGame() {}
 
@@ -26,6 +39,10 @@ void NumberGuessingGame::run(int rng) {
     this->randomNumber = rng;
     gameLoop();
     clearMemory();
+}
+
+inline auto NumberGuessingGame::rngRangeLimt() {
+    return rangeLimit;
 }
 
 void NumberGuessingGame::gameLoop() {

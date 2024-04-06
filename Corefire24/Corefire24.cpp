@@ -29,7 +29,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: numberGuessingGame.run(RNG.returnRandomNumber()); break;
+		case 1: numberGuessingGame.run(RNG.returnRandomNumber(numberGuessingGame.rngRangeLimt().min, numberGuessingGame.rngRangeLimt().max)); break;
 		case 2: fn.cout("Option 2 was slected\n"); system("pause"); break;
 		case 3: fn.cout("Option 3 was slected\n"); system("pause"); break;
 		case 9: fn.setMainLoopCondition(false); break;

@@ -3,3 +3,4 @@
 #include <Windows.h>
 #include <algorithm>
 #include <random>
+#include <vector>
