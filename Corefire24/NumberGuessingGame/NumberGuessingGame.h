@@ -55,7 +55,7 @@ void NumberGuessingGame::gameLoop() {
             return;
         }
 
-        std::cout << "\nGuess a number between 0 and 100\n";
+        std::cout << "\nGuess a number between " << this->rangeLimit.min << " and "<< this->rangeLimit.max <<"\n";
         std::cout << "Enter Guess: ";
 
         if (!(std::cin >> this->attempt)) {
@@ -66,7 +66,7 @@ void NumberGuessingGame::gameLoop() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-        if (this->attempt < 0 || this->attempt > 100) {
+        if (this->attempt < this->rangeLimit.min || this->attempt > this->rangeLimit.max) {
             std::cout << "Input out of range. Please enter a number between 0 and 100.\n";
             continue;
         }
