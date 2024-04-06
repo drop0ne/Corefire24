@@ -2,12 +2,6 @@
 
 class CannaCalculator {
 private:
-    double percentage_THCa{ 0 };
-    double grams_flower{ 0 };
-    double mg_THC{ 0 };
-    double customLoss{ 0 };
-    double inputValue{ 0 };
-    std::string inputString{};
 
 public:
     CannaCalculator() {};
@@ -185,6 +179,14 @@ void CannaCalculator::run() {
     //  PRIVATE ///////////////////////////////////////////////////////////////////
 
 void CannaCalculator::programLoop() {
+    double customLoss{ 0 };
+    double inputValue{ 0 };
+    std::string inputString{};
+    double percentage_THCa{ 0 };
+    double grams_flower{ 0 };
+    double mg_THC{ 0 };
+
+
     std::cout << "CannaCalculator\n\n";
     std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
         << "Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n";
@@ -192,7 +194,7 @@ void CannaCalculator::programLoop() {
     do
     {
         cout << "Would you like me to account for loss of THC during the infusing process? (y/n): ";
-        getline(cin, this->inputString);
+        getline(cin, inputString);
         if (!inputString.empty()) {
             if (inputString.at(0) == 'y' || 'Y') {
                 cout << "The default loss is 20%\nWould you like enter a custom loss % ?\nPrompt: ";
@@ -200,24 +202,13 @@ void CannaCalculator::programLoop() {
                     if (inputString.at(0) == 'y' || 'Y') {
                         cout >> "Enter a whole number 0 to 100 for your custom %\nPrompt: ";
                         if (cin >> inputValue) {
-                            //input saved
-                        
+                            break;
                         }
+                    }
 
-                }
-                do {
-                    cout << "Enter Custom Loss as a decimal number. For example, 0.8 is 20%: ";
-                    if (cin >> this->inputValue) {
-                        //inputsaved
-                    }
-                    else {
-                        cout << "Fail\n";
-                    }
                 }
             }
         }
-
-    
     } while (true);
 
 
