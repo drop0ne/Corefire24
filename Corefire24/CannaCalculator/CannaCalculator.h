@@ -6,88 +6,45 @@ private:
     double grams_flower{ 0 };
     double mg_THC{ 0 };
     double customLoss{ 0 };
-    bool enableLoss = false;
-    char response{ };
+    double inputValue{ 0 };
+    std::string inputString{};
 
 public:
     CannaCalculator() {};
     ~CannaCalculator() {};
 
     void run();
-
+private:
+    void programLoop();
+    void cin();
 };
 
 CannaCalculator::CannaCalculator() {};
 CannaCalculator::~CannaCalculator() {};
 
 
+void CannaCalculator::run() {
+    // NEW code start
 
-    double getDoubleInput(const std::string& prompt, double minValue, double maxValue) {
-        double value{ 0 };
-        while (true) {
-
-            std::cout << prompt;
-            try {
+    // NEW coe end
 
 
 
-                if (std::cin.fail()) {
-                    throw std::runtime_error("Invalid input. Please enter a numeric value.");
-                }
 
 
 
-                if (value >= minValue && value <= maxValue) {
-                    return value;
-                }
-            }
-            catch (const std::exception& e) {
-                std::cout << e.what() << "\n";
-            }
-        }
-    }
 
-    std::string_view getStringInput(const std::string& prompt) {
-        std::string_view response;
 
-        while (true) {
-            std::cout << prompt;
 
-            std::string tempResponse;
-            std::cin >> tempResponse;
-
-            response = tempResponse;
-
-            if (response == "y" || response == "Y" || response == "n" || response == "N") {
-                return response;
-            }
-            else {
-                std::cout << "Invalid input. Please enter 'y' or 'n'.\n";
-            }
-        }
-    }
-
-    void check_cin_failSate() {
-        if (std::cin.fail()) {
-            std::cout << "Invalid input. Please enter a numeric value.\n";
-        }
-    }
-
-    void CannaCalculator::run() {
-        while (true) {
-            std::cout << "CannaCalculator\n\n";
-            std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
-                << "Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n";
+    while (true) {
+    std::cout << "CannaCalculator\n\n";
+    std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
+    << "Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n";
 
 
             // START User Input
-            while (true) {
-                std::cout << "Would you like me to account for loss of THC during the infusing process? (y/n): ";
+    while (true) {
 
-                if (std::cin >> response) {
-                    if (response == 'y' || response == 'Y') {
-                        enableLoss = true;
-                        std::cout << "\nThe default loss is 20% THC\n";
 
                         std::cout << "Would you like to use a custom percentage? (y/n): ";
                         std::cin >> response;
@@ -222,4 +179,49 @@ CannaCalculator::~CannaCalculator() {};
         }
 
         return ;
+    }
+}
+
+    //  PRIVATE ///////////////////////////////////////////////////////////////////
+
+void CannaCalculator::programLoop() {
+    std::cout << "CannaCalculator\n\n";
+    std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
+        << "Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n";
+
+    do
+    {
+        cout << "Would you like me to account for loss of THC during the infusing process? (y/n): ";
+        getline(cin, this->inputString);
+        if (!inputString.empty()) {
+            if (inputString.at(0) == 'y' || 'Y') {
+                cout << "The default loss is 20%\nWould you like enter a custom loss % ?\nPrompt: ";
+                if ()
+                do {
+                    cout << "Enter Custom Loss as a decimal number. For example, 0.8 is 20%: ";
+                    if (cin >> this->inputValue) {
+                        //inputsaved
+                    }
+                    else {
+                        cout << "Fail\n";
+                    }
+                }
+            }
+        }
+
+    
+    } while (true);
+
+
+                   
+                        
+                
+            
+        
+    
+
+   
+
+    void CannaCalculator::cin() {
+
     }
