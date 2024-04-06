@@ -135,6 +135,7 @@
     <ClCompile Include="Corefire24.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CannaCalculator\CannaCalculator.h" />
     <ClInclude Include="Class0ne.h" />
     <ClInclude Include="include.h" />
     <ClInclude Include="NumberGuessingGame\NumberGenerator.h" />

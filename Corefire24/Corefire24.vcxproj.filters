@@ -32,5 +32,8 @@
     <ClInclude Include="include.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CannaCalculator\CannaCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
