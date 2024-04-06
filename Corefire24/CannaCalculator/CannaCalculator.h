@@ -10,7 +10,6 @@ public:
     void run();
 private:
     void programLoop();
-    void cin();
 };
 
 CannaCalculator::CannaCalculator() {};
@@ -18,111 +17,14 @@ CannaCalculator::~CannaCalculator() {};
 
 
 void CannaCalculator::run() {
-    // NEW code start
-
-    // NEW coe end
-
+    programLoop();
+};
 
 
 
-
-
-
-
-
-    while (true) {
-    std::cout << "CannaCalculator\n\n";
-    std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
-    << "Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n";
-
-
-            // START User Input
-    while (true) {
-
-
-                        std::cout << "Would you like to use a custom percentage? (y/n): ";
-                        std::cin >> response;
-                        if (response == 'y' || response == 'Y') {
-                            customLoss = 0;
-
-                            while (true) {
-                                std::cout << "Enter Custom Loss as a decimal number. For example, 0.8 is 20%: ";
-                                try {
-                                    if (std::cin >> customLoss) {
-                                        if (customLoss >= 0 && customLoss <= 1) {
-                                            break;
-                                        }
-                                        else {
-                                            throw std::out_of_range("Invalid input. Please enter a decimal number between 0 and 1.");
-                                        }
-                                    }
-                                    else {
-                                        throw std::runtime_error("Invalid input. Please enter a numeric value.");
-                                    }
-                                }
-                                catch (const std::exception& e) {
-                                    std::cout << e.what() << "\n";
-                                }
-                            }
-                        }
-                        break;
-                    }
-                    else if (response == 'n' || response == 'N') {
-                        break;
-                    }
-                    else {
-                        std::cout << "Invalid input. Please enter 'y' or 'n'.\n";
-                    }
-                }
-                else {
-                    std::cout << "Invalid input. Please enter 'y' or 'n'.\n";
-                }
-            }
-
-            while (true) {
-                std::cout << "\nWhat percentage of THCa is the cannabis flower you are using? ";
-                try {
-                    double tempPercentage;
-                    if (std::cin >> tempPercentage) {
-                        if (tempPercentage >= 0 && tempPercentage <= 100) {
-                            percentage_THCa = tempPercentage;
-                            break;
-                        }
-                        else {
-                            throw std::out_of_range("Invalid input. Please enter a percentage between 0 and 100.");
-                        }
-                    }
-                    else {
-                        throw std::runtime_error("Invalid input. Please enter a numeric value.");
-                    }
-                }
-                catch (const std::exception& e) {
-                    std::cout << e.what() << "\n";
-                }
-            }
-
-            while (true) {
-                std::cout << "How many grams of flower are you using? ";
-                try {
-                    double tempGrams;
-                    if (std::cin >> tempGrams) {
-                        if (tempGrams > 0) {
-                            grams_flower = tempGrams;
-                            break;
-                        }
-                        else {
-                            throw std::out_of_range("Invalid input. Please enter a positive value.");
-                        }
-                    }
-                    else {
-                        throw std::runtime_error("Invalid input. Please enter a numeric value.");
-                    }
-                }
-                catch (const std::exception& e) {
-                    std::cout << e.what() << "\n";
-                }
-            }
-            // END User Input
+/*
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+           // END User Input
             // 
             // Perform calculations
             double percentLoss = 0.8;
@@ -171,11 +73,10 @@ void CannaCalculator::run() {
                 }
             }
         }
-
-        return ;
-    }
 }
-
+} return ;
+       
+*/
     //  PRIVATE ///////////////////////////////////////////////////////////////////
 
 void CannaCalculator::programLoop() {
@@ -200,7 +101,7 @@ void CannaCalculator::programLoop() {
                 cout << "The default loss is 20%\nWould you like enter a custom loss % ?\nPrompt: ";
                 if (cin >> inputString) {
                     if (inputString.at(0) == 'y' || 'Y') {
-                        cout >> "Enter a whole number 0 to 100 for your custom %\nPrompt: ";
+                        cout << "Enter a whole number 0 to 100 for your custom %\nPrompt: ";
                         if (cin >> inputValue) {
                             break;
                         }
@@ -211,16 +112,9 @@ void CannaCalculator::programLoop() {
         }
     } while (true);
 
+    // next percent thc in flower
 
-                   
-                        
-                
-            
-        
-    
+    // next how many grams flower
 
-   
-
-    void CannaCalculator::cin() {
-
-    }
+    //next math
+};
