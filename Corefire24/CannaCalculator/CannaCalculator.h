@@ -170,7 +170,6 @@ CannaCalculator::~CannaCalculator() {};
                 catch (const std::exception& e) {
                     std::cout << e.what() << "\n";
                 }
-                ioHandler.check_cin_failSate();
             }
             // END User Input
             // 
@@ -214,8 +213,7 @@ CannaCalculator::~CannaCalculator() {};
                     break;
                 }
                 else if (response == "exit") {
-                    SetConsoleTextAttribute(hConsole, originalConsoleAttributes);
-                    return 0;
+                    return ;
                 }
                 else {
                     std::cout << "Invalid input. Please enter 'reset' or 'exit'.\n";
@@ -223,6 +221,5 @@ CannaCalculator::~CannaCalculator() {};
             }
         }
 
-        return 0;
+        return ;
     }
-};
