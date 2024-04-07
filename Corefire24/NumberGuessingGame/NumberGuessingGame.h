@@ -37,6 +37,7 @@ NumberGuessingGame::~NumberGuessingGame() {}
 
 void NumberGuessingGame::run(int rng) {
     this->randomNumber = rng;
+    system("cls");
     gameLoop();
     clearMemory();
 }
