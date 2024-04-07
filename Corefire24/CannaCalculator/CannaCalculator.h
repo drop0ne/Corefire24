@@ -34,10 +34,10 @@ void CannaCalculator::programLoop() {
     {
         cout << "Would you like me to account for loss of THC during the infusing process? (y/n): ";
         if (cin >> inputChar) {
-            if (inputChar == 'y' || 'Y') {
+            if (inputChar == 'y') {
                 cout << "\nThe default loss is 20%\nWould you like enter a custom loss percenage? (y/n): ";
                 if (cin >> inputChar) {
-                    if (inputChar == 'y' || 'Y') {
+                    if (inputChar == 'y') {
                         cout << "\nEnter a whole number 0 to 100 for your custom %: ";
                         if (cin >> percentTHCloss) {
                             break; // Set custom THC loss %
