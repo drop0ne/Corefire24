@@ -19,7 +19,7 @@ void CannaCalculator::run() {
 
 void CannaCalculator::programLoop() {
     double inputValue{};
-    std::string inputString{};
+    char inputChar{};
     double percentTHCloss = 20;
     double percentTHCflower{};
     double gramsFlower{};
@@ -33,21 +33,19 @@ void CannaCalculator::programLoop() {
     do // Handle THC % loss logic
     {
         cout << "Would you like me to account for loss of THC during the infusing process? (y/n): ";
-        getline(cin, inputString);
-        if (!inputString.empty()) {
-            if (inputString.at(0) == 'y' | 'Y') {
-                cout << "The default loss is 20%\nWould you like enter a custom loss % ?\nPrompt: ";
-                if (cin >> inputString) {
-                    if (inputString.at(0) == 'y' || 'Y') {
-                        cout << "Enter a whole number 0 to 100 for your custom %\nPrompt: ";
+        if (cin >> inputChar) {
+            if (inputChar == 'y' || 'Y') {
+                cout << "\nThe default loss is 20%\nWould you like enter a custom loss percenage? (y/n): ";
+                if (cin >> inputChar) {
+                    if (inputChar == 'y' || 'Y') {
+                        cout << "\nEnter a whole number 0 to 100 for your custom %: ";
                         if (cin >> percentTHCloss) {
                             break; // Set custom THC loss %
                         }
                     }
                     else {
-                        break; // Use default value 20%
+                        break; // Use default loss %
                     }
-
                 }
             }
             else {
@@ -58,23 +56,23 @@ void CannaCalculator::programLoop() {
     } while (true);
 
     do { // Handle THC in flower
-        cout << "I need to know a couple more things!\n\nFirst: What is the listed THC% of your flower?\nPrompt: ";
+        cout << "\n\nI need to know a couple more things!\n\First: What is the listed THC% of your flower?: ";
         if (cin >> percentTHCflower) {
             break;  // Value is set
         }
         else {
-            cout << "Invalid";
+            cout << "\nInvalid";
             continue; // Loop
         }
     } while (true);
 
     do { // Handle Grams of Flower
-        cout << "\nNow I need to know how much flower you are using\nAt the prompts, enter the total wieght of flower is grams\nprompt: ";
+        cout << "Secound: How many grams of flower will you be using?: ";
         if (cin >> gramsFlower) {
             break; // Value is set
         }
         else {
-            cout << "Invalid";
+            cout << "\nInvalid";
             continue;
         }
     } while (true);
@@ -94,4 +92,5 @@ void CannaCalculator::programLoop() {
     for (int i = 2; i <= 27; i += 2) {
         std::cout << static_cast<int>(mgTHC / i) << "mg per " << i << " servings\n";
     }
+    system("pause");
 };
