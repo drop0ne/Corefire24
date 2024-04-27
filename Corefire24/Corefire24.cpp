@@ -19,7 +19,7 @@ int main()
 	NumberGenerator RNG;
 	NumberGuessingGame numberGuessingGame;
 	// END ****************
-	// CannabisCalculator
+	// More programs
 	CannaCalculator cannaCalcultor;
 
  	do {
@@ -35,10 +35,10 @@ int main()
 		case 1: numberGuessingGame.run(RNG.returnRandomNumber(numberGuessingGame.rngRangeLimt().min, numberGuessingGame.rngRangeLimt().max)); break;
 		case 2: cannaCalcultor.run(); break;
 		case 3: system("cls"); fn.cout("Option 3 was slected\n"); system("pause"); break;
-		case 9: fn.setMainLoopCondition(false); break;
+		case 9: return 0;
 		default: fn.errorInvalidInput(); system("pause"); break;
 		}
 
-	} while (fn.getMainLoopCondition());
-	return 0;
+	} while (true);
+	return -1;
 }

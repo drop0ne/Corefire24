@@ -22,10 +22,11 @@ void CannaCalculator::run() {
 void CannaCalculator::programLoop() {
     double inputValue{};
     char inputChar{};
-    double percentTHCloss = 20;
+    double percentTHCloss{};
     double percentTHCflower{};
     double gramsFlower{};
-    double mgTHC{};
+    double mgTHC_Gross{};
+    double mgTHC_Net{};
 
     std::cout << "CannaCalculator\n\n";
     std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
@@ -33,43 +34,47 @@ void CannaCalculator::programLoop() {
 
     do // Handle THC % loss logic
     {
-        cout << "Would you like me to account for loss of THC during the infusing process? (y/n): ";
+        cout << "\nThe default loss is 20%\nWould you like enter a custom loss percenage? (y/n): ";
         if (cin >> inputChar) {
             if (inputChar == 'y') {
                 clearInputStream();
-                cout << "\nThe default loss is 20%\nWould you like enter a custom loss percenage? (y/n): ";
-                if (cin >> inputChar) {
-                    if (inputChar == 'y') {
-                        clearInputStream();
-                        cout << "\nEnter a whole number 0 to 100 for your custom %: ";
-                        if (cin >> percentTHCloss) {
+                cout << "\nEnter a whole number 0 to 100 for your custom %: ";
+                if (cin >> percentTHCloss) {
                             break; // Set custom THC loss %
-                        }
-                    }
-                    else {
-                        break; // Use default loss %
-                    }
+                }
+                else {
+                    clearInputStream();
+                    continue;
                 }
             }
             else {
-                percentTHCloss = 0;
-                break; // Do not account for THC loss
+                percentTHCloss = 20;
+                break; // Use default loss %
             }
         }
+        else {
+            clearInputStream();
+            continue;
+        }
     } while (true);
+    
     clearInputStream();
+    
     do { // Handle THC in flower
-        cout << "\n\nI need to know a couple more things!\n\First: What is the listed THC% of your flower?: ";
+        cout << "\n\n";
+        cout << "I need to know a couple more things!\nFirst: What is the listed THC% of your flower?: ";
         if (cin >> percentTHCflower) {
             break;  // Value is set
         }
         else {
-            cout << "\nInvalid";
+            cout << "\nInvalid" << endl;
             clearInputStream();
             continue; // Loop
         }
     } while (true);
+    
     clearInputStream();
+   
     do { // Handle Grams of Flower
         cout << "Secound: How many grams of flower will you be using?: ";
         if (cin >> gramsFlower) {
@@ -81,22 +86,32 @@ void CannaCalculator::programLoop() {
             continue;
         }
     } while (true);
+    
     clearInputStream();
 
    // Perform Calculations
-
+    
+    mgTHC_Gross = (percentTHCflower / 100) * gramsFlower;
+    mgTHC_Net = mgTHC_Gross * (1 - percentTHCloss);
+   
+   
+   
+   
+   /*
     if (percentTHCloss > 0) {
-        mgTHC = (percentTHCflower * 10) * percentTHCloss * gramsFlower;
+        mgTHC = ((percentTHCflower * 10) * percentTHCloss) * gramsFlower;
     }
     else {
         mgTHC = (percentTHCflower * 10) * gramsFlower;
     }
+    */
+
     // OUTPUT RESULT
     std::cout << "\n" << percentTHCflower << "% THCa converts to "
-        << static_cast<int>(mgTHC) << "mg THC per " << gramsFlower << "g of flower.\n\n";
+        << static_cast<int>(mgTHC_Gross) << "mg THC per " << gramsFlower << "g of flower Before decarboxylation.\nand " << static_cast<int>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
 
     for (int i = 2; i <= 27; i += 2) {
-        std::cout << static_cast<int>(mgTHC / i) << "mg per " << i << " servings\n";
+        std::cout << static_cast<int>(mgTHC_Net / i) << "mg per " << i << " servings\n";
     }
     system("pause");
 };

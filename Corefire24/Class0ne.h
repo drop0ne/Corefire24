@@ -1,5 +1,6 @@
 #include "include.h"
-#undef max() // this resolves some conflict involving the flush buff algarithum
+// this resolves conflit of two definitions
+#undef max()
 
 class FN
 {
@@ -15,8 +16,6 @@ public:
 	FN();
 	~FN();
 
-	void setMainLoopCondition(bool newCondition);
-	bool getMainLoopCondition();
 	void clearScreen();
 	int selectMenuOption();
 	void cout(std::string output);
@@ -28,7 +27,7 @@ public:
 ///////////////////////////////////////////////////// 
 private:
 	void updateMainProgramLoopCondition(bool data);
-	void extractInputStream();
+	//void extractInputStream();
 };
 /////////////////////////////////////////////////////
 
@@ -39,14 +38,7 @@ FN::FN() :mainProgramLoopCondition(true)
 FN::~FN()
 {
 }
-void FN::setMainLoopCondition(bool newCondition) {
-	updateMainProgramLoopCondition(newCondition);
-	return;
-}
-bool FN::getMainLoopCondition() {
-	return mainProgramLoopCondition;
-}
-void FN::clearScreen() {
+inline void FN::clearScreen() {
 	system("cls");
 }
 int FN::selectMenuOption() {
@@ -62,6 +54,7 @@ int FN::selectMenuOption() {
 	else {
 		clearInputStream();
 		set_text_color(default_color);
+		return 0;
 	}
 }
 inline void FN::cout(std::string output) {
@@ -104,7 +97,7 @@ inline void FN::updateMainProgramLoopCondition(bool data) {
 		return;
 	}
 }
-
+/*
 inline void FN::extractInputStream() {  //Unused code
 	std::cout << "Contents of input stream: ";
 	char c;
@@ -115,3 +108,4 @@ inline void FN::extractInputStream() {  //Unused code
 	std::cout << std::endl;
 	return;
 }
+*/
