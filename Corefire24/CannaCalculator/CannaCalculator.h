@@ -22,8 +22,9 @@ void CannaCalculator::run() {
 void CannaCalculator::programLoop() {
     double inputValue{};
     char inputChar{};
-    double percentTHCloss{};
-    double percentTHCflower{};
+    double percent_THC{};
+    double mg_THC{};
+    double THC_loss{};
     double gramsFlower{};
     double mgTHC_Gross{};
     double mgTHC_Net{};
@@ -39,8 +40,9 @@ void CannaCalculator::programLoop() {
             if (inputChar == 'y') {
                 clearInputStream();
                 cout << "\nEnter a whole number 0 to 100 for your custom %: ";
-                if (cin >> percentTHCloss) {
-                            break; // Set custom THC loss %
+                if (cin >> THC_loss) {
+                    THC_loss /= 100;
+                    break; // Set custom THC loss %
                 }
                 else {
                     clearInputStream();
@@ -48,7 +50,7 @@ void CannaCalculator::programLoop() {
                 }
             }
             else {
-                percentTHCloss = 20;
+                THC_loss = 0.20;
                 break; // Use default loss %
             }
         }
@@ -63,7 +65,8 @@ void CannaCalculator::programLoop() {
     do { // Handle THC in flower
         cout << "\n\n";
         cout << "I need to know a couple more things!\nFirst: What is the listed THC% of your flower?: ";
-        if (cin >> percentTHCflower) {
+        if (cin >> percent_THC) {
+            //percent_THC /= 100; //convert to decimal
             break;  // Value is set
         }
         else {
@@ -90,28 +93,22 @@ void CannaCalculator::programLoop() {
     clearInputStream();
 
    // Perform Calculations
-    
-    mgTHC_Gross = (percentTHCflower / 100) * gramsFlower;
-    mgTHC_Net = mgTHC_Gross * (1 - percentTHCloss);
+     
+    mgTHC_Gross = (percent_THC * 10) * gramsFlower;
+    mgTHC_Net = mgTHC_Gross * (1 - THC_loss);
    
-   
-   
-   
-   /*
-    if (percentTHCloss > 0) {
-        mgTHC = ((percentTHCflower * 10) * percentTHCloss) * gramsFlower;
-    }
-    else {
-        mgTHC = (percentTHCflower * 10) * gramsFlower;
-    }
-    */
 
     // OUTPUT RESULT
-    std::cout << "\n" << percentTHCflower << "% THCa converts to "
-        << static_cast<int>(mgTHC_Gross) << "mg THC per " << gramsFlower << "g of flower Before decarboxylation.\nand " << static_cast<int>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
-
-    for (int i = 2; i <= 27; i += 2) {
-        std::cout << static_cast<int>(mgTHC_Net / i) << "mg per " << i << " servings\n";
+    system("cls");
+    std::cout << "\n" << percent_THC << "% THCa converts to "
+        << static_cast<int>(mgTHC_Gross) << "mg THC per " << static_cast<int>(gramsFlower) << "g of flower Before decarboxylation.\nand " << static_cast<int>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
+    cout << "\nGross THC\n";
+    for (int i = 2; i <= 13; i += 2) {
+        std::cout << static_cast<int>(mgTHC_Gross) / i << "mg per " << i << " servings\n";
+    }
+    cout << "\nNET THC\n";
+    for (int i = 2; i <= 13; i += 2) {
+        std::cout << static_cast<int>(mgTHC_Net) / i << "mg per " << i << " servings\n";
     }
     system("pause");
 };
