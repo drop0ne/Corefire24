@@ -20,10 +20,8 @@ void CannaCalculator::run() {
     //  PRIVATE ///////////////////////////////////////////////////////////////////
 
 void CannaCalculator::programLoop() {
-    double inputValue{};
     char inputChar{};
     double percent_THC{};
-    double mg_THC{};
     double THC_loss{};
     double gramsFlower{};
     double mgTHC_Gross{};
