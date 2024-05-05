@@ -5,6 +5,7 @@
 #include "NumberGuessingGame/NumberGenerator.h"
 #include "NumberGuessingGame/NumberGuessingGame.h"
 #include "CannaCalculator/CannaCalculator.h"
+#include "Quize.h"
 
 enum colorINT
 {
@@ -21,6 +22,7 @@ int main()
 	// END ****************
 	// More programs
 	CannaCalculator cannaCalcultor;
+	Quize quize;
 
  	do {
 		fn.clearScreen();
@@ -28,13 +30,13 @@ int main()
 		fn.cout("CoreFireCode 2024 editioin\n");
 		fn.set_text_color(default_color);
 		fn.cout("\n\nMain Menu\n");
-		fn.cout("Option 1 - Number Gussing Game\nOption 2 - CannabisCalculator\nOption 3\nOption 9 to Exit\n");
+		fn.cout("Option 1 - Number Gussing Game\nOption 2 - CannabisCalculator\nOption 3 - Quize\nOption 9 to Exit\n");
 
 		switch (fn.selectMenuOption())
 		{
 		case 1: numberGuessingGame.run(RNG.returnRandomNumber(numberGuessingGame.rngRangeLimt().min, numberGuessingGame.rngRangeLimt().max)); break;
 		case 2: cannaCalcultor.run(); break;
-		case 3: system("cls"); fn.cout("Option 3 was slected\n"); system("pause"); break;
+		case 3: quize.run(); break;
 		case 9: return 0;
 		default: fn.errorInvalidInput(); system("pause"); break;
 		}

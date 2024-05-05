@@ -108,8 +108,11 @@ void CannaCalculator::programLoop() {
     for (int i = 2; i <= 13; i += 2) {
         std::cout << static_cast<int>(mgTHC_Net) / i << "mg per " << i << " servings\n";
     }
+
+    cout << endl;
     system("pause");
 };
+
 inline void CannaCalculator::clearInputStream() {
     std::cin.clear();
     if (std::cin.rdbuf()->in_avail() > 0) {

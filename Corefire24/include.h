@@ -6,4 +6,10 @@
 #include <vector>
 #include <any>
 #include <string>
-using std::cin, std::cout, std::endl, std::getline;
+#include <limits>
+#include <stdexcept>
+
+// this resolves conflit of two definitions
+#undef max()
+
+using std::cin, std::cout, std::endl, std::getline, std::string;
