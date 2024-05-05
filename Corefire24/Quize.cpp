@@ -3,18 +3,21 @@
 
 
 void Quize::run() {
+	system("cls");
 	gameLoop();
 }
 void Quize::gameLoop() {
-	do
-	{
-		setupEnviorment();
-
-	} while (true);
+	setupEnviorment();
+	do {
+		this->iteration++;
+		question(this->iteration);
+	} while (this->iteration < 3);
+	cout << "\n\nGAME OVER\n\n";
+	system("pause");
 }
 void Quize::setupEnviorment() {
-	system("cls");
 	if (this->guess != 0) { this->guess = 0; }
+	if (this->iteration != 0) { this->iteration = 0; }
 }
 int Quize::requestInput() {
 	try
@@ -29,20 +32,17 @@ int Quize::requestInput() {
 	return -1;
 }
 
-void Quize::question(int answer, int questionNumber) {
-	do
+void Quize::question(int questionNumber) {
+	switch (questionNumber)
 	{
-		switch (questionNumber)
-		{
-		case 1: askFirstQuestion(); break;
-		case 2: askSecondQuestion(); break;
-		case 3: askThirdQuestion(); break;
-		case 0:
-		case -1:
-		default:
-			break;
-		}
-	} while (true);
+	case 1: askFirstQuestion(); break;
+	case 2: askSecondQuestion(); break;
+	case 3: askThirdQuestion(); break;
+	case 0:
+	case -1:
+	default:
+		break;
+	}
 }
 
 void Quize::askFirstQuestion() {
