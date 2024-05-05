@@ -3,6 +3,7 @@ class Quize
 {
 private:
 	int iteration{0};
+	bool flag{};
 
 public:
 	void run();
