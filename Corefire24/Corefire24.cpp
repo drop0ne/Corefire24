@@ -5,6 +5,7 @@
 #include "NumberGuessingGame/NumberGenerator.h"
 #include "NumberGuessingGame/NumberGuessingGame.h"
 #include "CannaCalculator/CannaCalculator.h"
+#include "Quize.h"
 
 enum colorINT
 {

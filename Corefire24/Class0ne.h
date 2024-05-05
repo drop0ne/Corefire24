@@ -1,6 +1,4 @@
 #include "include.h"
-// this resolves conflit of two definitions
-#undef max()
 
 class FN
 {
