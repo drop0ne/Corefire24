@@ -14,6 +14,7 @@ void Quize::gameLoop() {
 	system("pause");
 }
 void Quize::setupEnviorment() {
+	clearInputStream();
 	if (this->iteration != 0) { this->iteration = 0; }
 }
 int Quize::requestInput() {
