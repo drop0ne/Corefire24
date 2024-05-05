@@ -7,8 +7,9 @@
 #include <any>
 #include <string>
 #include <limits>
+#include <stdexcept>
 
 // this resolves conflit of two definitions
 #undef max()
 
-using std::cin, std::cout, std::endl, std::getline;
+using std::cin, std::cout, std::endl, std::getline, std::string;

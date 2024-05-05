@@ -2,7 +2,6 @@
 class Quize
 {
 private:
-	int guess{0};
 	int iteration{0};
 
 public:
@@ -16,4 +15,5 @@ private:
 	void askFirstQuestion();
 	void askSecondQuestion();
 	void askThirdQuestion();
+	void clearInputStream();
 };
