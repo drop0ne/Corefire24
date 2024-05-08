@@ -8,3 +8,13 @@ inline void Utility::clearInputStream() {
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 }
+inline void Utility::extractInputStream() {
+	std::cout << "Contents of input stream: ";
+	char c;
+	while (std::cin.peek() != EOF) {
+		std::cin.get(c);
+		std::cout << c;
+	}
+	std::cout << std::endl;
+	return;
+}

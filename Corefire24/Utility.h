@@ -5,6 +5,7 @@ private:
 
 public:
 	void clearInputStream();
+	void extractInputStream();
 
 private:
 
