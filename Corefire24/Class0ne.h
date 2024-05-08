@@ -5,10 +5,13 @@ class FN
 private:
 	bool mainProgramLoopCondition{};
 	HANDLE console_HWND{};
+	/*
 	enum colorINT
 	{
-		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11, white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
+		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11,
+		white = 7, bright_white = 15, gray = 8,	purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
 	};
+	*/
 	/////////////////////////////////////////////////////
 public:
 	FN();
@@ -25,7 +28,7 @@ public:
 ///////////////////////////////////////////////////// 
 private:
 	void updateMainProgramLoopCondition(bool data);
-	//void extractInputStream();
+	void extractInputStream();
 };
 /////////////////////////////////////////////////////
 
@@ -39,7 +42,7 @@ FN::~FN()
 inline void FN::clearScreen() {
 	system("cls");
 }
-int FN::selectMenuOption() {
+inline int FN::selectMenuOption() {
 	int returnValue{ 0 };
 	clearInputStream();
 
@@ -69,20 +72,19 @@ inline void FN::clearInputStream() {
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 }
-void FN::setScreenColor(const char* cCode) {
+inline void FN::setScreenColor(const char* cCode) {
 	system(cCode);
 	return;
 }
-void FN::set_text_color(int colorDATA) {
+inline void FN::set_text_color(int colorDATA) {
 	SetConsoleTextAttribute(this->console_HWND, colorDATA);
 	return;
 }
-void FN::receiveConsoleHWND(HANDLE data) {
+inline void FN::receiveConsoleHWND(HANDLE data) {
 	this->console_HWND = data;
 }
-
-// PRIVATE METHODS  /////////////////////////////////////////////////////
-
+// END PUBLIC METHODS //////////////////////////////////////////////////
+// PRIVATE METHODS /////////////////////////////////////////////////////
 inline void FN::updateMainProgramLoopCondition(bool data) {
 
 	this->mainProgramLoopCondition = data;
@@ -95,8 +97,7 @@ inline void FN::updateMainProgramLoopCondition(bool data) {
 		return;
 	}
 }
-/*
-inline void FN::extractInputStream() {  //Unused code
+inline void FN::extractInputStream() {
 	std::cout << "Contents of input stream: ";
 	char c;
 	while (std::cin.peek() != EOF) {
@@ -106,4 +107,3 @@ inline void FN::extractInputStream() {  //Unused code
 	std::cout << std::endl;
 	return;
 }
-*/

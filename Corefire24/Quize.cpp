@@ -70,7 +70,7 @@ void Quize::askSecondQuestion() {
 	this->flag = false;
 }
 void Quize::askThirdQuestion() {
-	cout << "How many elements are there in the periodic table?\n1. 118\n2. 115\n3.120\nchoose 1-3: ";
+	cout << "How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ";
 	if (requestInput() == 1) { cout << "\nCorrect!\n" << endl;}
 	else { cout << "\nIncorrect\n" << endl; }
 	this->flag = false;
