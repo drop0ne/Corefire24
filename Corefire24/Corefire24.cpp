@@ -27,7 +27,7 @@ int main()
  	do {
 		fn.clearScreen();
 		fn.set_text_color(green);
-		fn.cout("CoreFireCode 2024 editioin\n");
+		fn.cout("CoreFireCode 2024 edition\n");
 		fn.set_text_color(default_color);
 		fn.cout("\n\nMain Menu\n");
 		fn.cout("Option 1 - Number Gussing Game\nOption 2 - CannabisCalculator\nOption 3 - Quize\nOption 9 to Exit\n");
