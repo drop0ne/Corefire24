@@ -1,6 +1,7 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 /////////////////////////////////////////////////////
 #include "Utility.h"
+#include "MyConsoleAPI.h"
 
 #include "include.h"
 #include "Class0ne.h"

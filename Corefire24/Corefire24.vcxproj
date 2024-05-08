@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
+    <ClCompile Include="MyConsoleAPI.cpp" />
     <ClCompile Include="Quize.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="CannaCalculator\CannaCalculator.h" />
     <ClInclude Include="Class0ne.h" />
     <ClInclude Include="include.h" />
+    <ClInclude Include="MyConsoleAPI.h" />
     <ClInclude Include="NumberGuessingGame\NumberGenerator.h" />
     <ClInclude Include="NumberGuessingGame\NumberGuessingGame.h" />
     <ClInclude Include="Quize.h" />

@@ -5,13 +5,11 @@ class FN
 private:
 	bool mainProgramLoopCondition{};
 	HANDLE console_HWND{};
-	/*
 	enum colorINT
 	{
 		default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1, bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11,
 		white = 7, bright_white = 15, gray = 8,	purple = 5, yellow = 6, highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25, highlight_blue_white = 23, check = 27
 	};
-	*/
 	/////////////////////////////////////////////////////
 public:
 	FN();
@@ -39,9 +37,6 @@ FN::FN() :mainProgramLoopCondition(true)
 FN::~FN()
 {
 }
-inline void FN::clearScreen() {
-	system("cls");
-}
 inline int FN::selectMenuOption() {
 	int returnValue{ 0 };
 	clearInputStream();
@@ -58,30 +53,9 @@ inline int FN::selectMenuOption() {
 		return 0;
 	}
 }
-inline void FN::cout(std::string output) {
-	std::cout << output;
-}
 inline void FN::errorInvalidInput() {
 	cout("\nERROR: INVALID INPUT\n");
 	clearInputStream();
-}
-inline void FN::clearInputStream() {
-	std::cin.clear();
-	if (std::cin.rdbuf()->in_avail() > 0) {
-		// If there are characters in the input buffer, discard them up to the next newline
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	}
-}
-inline void FN::setScreenColor(const char* cCode) {
-	system(cCode);
-	return;
-}
-inline void FN::set_text_color(int colorDATA) {
-	SetConsoleTextAttribute(this->console_HWND, colorDATA);
-	return;
-}
-inline void FN::receiveConsoleHWND(HANDLE data) {
-	this->console_HWND = data;
 }
 // END PUBLIC METHODS //////////////////////////////////////////////////
 // PRIVATE METHODS /////////////////////////////////////////////////////
