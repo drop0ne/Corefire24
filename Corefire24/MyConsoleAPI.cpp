@@ -1,6 +1,10 @@
 #include "MyConsoleAPI.h"
 #include "include.h"
 
+MyConsoleAPI::MyConsoleAPI() : console_HWND(NULL)
+{
+}
+
 inline void MyConsoleAPI::clearScreen() {system("cls");}
 
 inline void MyConsoleAPI::cout(std::string data) {std::cout << data;}

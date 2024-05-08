@@ -9,6 +9,11 @@
 #include <limits>
 #include <stdexcept>
 
+#include "Utility.h"
+#include "MyConsoleAPI.h"
+#include "MyFunctions.h"
+
+
 // this resolves conflit of two definitions
 #undef max()
 

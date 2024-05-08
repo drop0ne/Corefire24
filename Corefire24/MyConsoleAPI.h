@@ -2,7 +2,7 @@
 class MyConsoleAPI
 {
 private:
-	HANDLE console_HWND{};
+	HANDLE console_HWND;
 public:
 	void clearScreen();
 	void cout(std::string output);
@@ -13,6 +13,5 @@ public:
 private:
 
 protected:
-
 };
 

@@ -1,10 +1,6 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 /////////////////////////////////////////////////////
-#include "Utility.h"
-#include "MyConsoleAPI.h"
-
 #include "include.h"
-#include "Class0ne.h"
 #include "NumberGuessingGame/NumberGenerator.h"
 #include "NumberGuessingGame/NumberGuessingGame.h"
 #include "CannaCalculator/CannaCalculator.h"
@@ -18,7 +14,7 @@ enum colorINT
 
 int main()
 {
-    FN fn;
+    MyFunctions fn;
 	fn.receiveConsoleHWND(GetStdHandle(STD_OUTPUT_HANDLE));
 	// Number Guessing Game START
 	NumberGenerator RNG;
