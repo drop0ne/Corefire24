@@ -10,7 +10,7 @@ void Quize::gameLoop() {
 		this->iteration++;
 		question(this->iteration);
 	} while (this->iteration < 3);
-	cout << "\nGAME OVER\n\n";
+	std::cout << "\nGAME OVER\n\n";
 	system("pause");
 }
 void Quize::setupEnviorment() {
@@ -18,16 +18,16 @@ void Quize::setupEnviorment() {
 	if (this->iteration != 0) { this->iteration = 0; }
 }
 int Quize::requestInput() {
-	string guess{};
+	std::string guess{};
 	int convertedGuess{};
 	size_t pos{};
 	do {
-		getline(cin, guess);
+		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { cout << "Invalid Number::Out of Range\nTry Again: "; clearInputStream();continue; }
+				if (convertedGuess > 3) { std::cout << "Invalid Number::Out of Range\nTry Again: "; clearInputStream();continue; }
 				break;
 			}
 			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); clearInputStream();}
@@ -58,21 +58,21 @@ inline void Quize::question(int questionNumber) {
 	} while (this->flag);
 }
 void Quize::askFirstQuestion() {
-	cout << "What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ";
-	if (requestInput() == 3) { cout << "\nCorrect!\n" << endl;}
-	else {cout << "\nIncorrect\n" << endl;}
+	std::cout << "What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ";
+	if (requestInput() == 3) { std::cout << "\nCorrect!\n" << std::endl;}
+	else { std::cout << "\nIncorrect\n" << std::endl;}
 	this->flag = false;
 }
 void Quize::askSecondQuestion() {
-	cout << "What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ";
-	if (requestInput() == 2) { cout << "\nCorrect!\n" << endl;}
-	else { cout << "\nIncorrect\n" << endl; }
+	std::cout << "What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ";
+	if (requestInput() == 2) { std::cout << "\nCorrect!\n" << std::endl;}
+	else { std::cout << "\nIncorrect\n" << std::endl; }
 	this->flag = false;
 }
 void Quize::askThirdQuestion() {
-	cout << "How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ";
-	if (requestInput() == 1) { cout << "\nCorrect!\n" << endl;}
-	else { cout << "\nIncorrect\n" << endl; }
+	std::cout << "How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ";
+	if (requestInput() == 1) { std::cout << "\nCorrect!\n" << std::endl;}
+	else { std::cout << "\nIncorrect\n" << std::endl; }
 	this->flag = false;
 }
 inline void Quize::clearInputStream() {

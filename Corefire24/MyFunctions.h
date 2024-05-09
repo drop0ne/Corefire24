@@ -12,7 +12,6 @@ private:
 	};
 	/////////////////////////////////////////////////////
 public:
-	void set_text_color();
 	void errorInvalidInput();
 	void updateMainProgramLoopCondition(bool data);
 	int selectMenuOption();

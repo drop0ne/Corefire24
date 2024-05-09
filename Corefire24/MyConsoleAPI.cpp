@@ -1,7 +1,7 @@
 #include "MyConsoleAPI.h"
 #include "include.h"
 
-MyConsoleAPI::MyConsoleAPI() : console_HWND(NULL)
+MyConsoleAPI::MyConsoleAPI() : console_HWND()
 {
 }
 
