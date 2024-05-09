@@ -38,6 +38,10 @@ void MyConsoleAPI::clearScreen() {
 void MyConsoleAPI::cout(const std::string& data) {
     std::cout << data;
 }
+void MyConsoleAPI::cout(const std::string& data, int set_Tx_color) {
+    set_text_color(set_Tx_color);
+    std::cout << data;
+}
 
 // Set the console screen color (background and text) using a system call
 void MyConsoleAPI::setScreenColor(const char* data) {

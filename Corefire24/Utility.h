@@ -1,16 +1,9 @@
 #pragma once
-class Utility
-{
-private:
+#include <iostream>
+#include <limits>
 
+class Utility {
 public:
-	void clearInputStream();
-	void extractInputStream();
-
-private:
-
-protected:
-
-
+    void clearInputStream();
+    void extractInputStream();
 };
-
