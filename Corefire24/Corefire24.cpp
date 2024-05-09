@@ -15,7 +15,6 @@ enum colorINT
 int main()
 {
     MyFunctions fn;
-	fn.receiveConsoleHWND(GetStdHandle(STD_OUTPUT_HANDLE));
 	// Number Guessing Game START
 	NumberGenerator RNG;
 	NumberGuessingGame numberGuessingGame;
