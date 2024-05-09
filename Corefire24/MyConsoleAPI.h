@@ -1,17 +1,21 @@
 #pragma once
-class MyConsoleAPI
-{
+#ifndef MYCONSOLEAPI_H
+#define MYCONSOLEAPI_H
+
+#include <iostream>
+#include <stdexcept>
+#include <windows.h> // Ensure this is included in your project for console functions
+
+class MyConsoleAPI {
 private:
-	HANDLE console_HWND;
+    HANDLE console_HWND; // Handle to the console window
 
 public:
-	void clearScreen();
-	void cout(std::string data);
-	void setScreenColor(const char* color_choice);
-	virtual void set_text_color(int color_choice);
-	virtual void receiveConsoleHWND(HANDLE data);
-private:
-
-protected:
+    MyConsoleAPI(); // Constructor
+    void clearScreen(); // Clear the console screen
+    void cout(const std::string& data); // Print text to the console
+    void setScreenColor(const char* data); // Set the full screen color
+    void set_text_color(int data); // Set the text color in the console
 };
 
+#endif // MYCONSOLEAPI_H
