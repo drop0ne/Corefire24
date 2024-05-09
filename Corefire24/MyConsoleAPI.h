@@ -1,6 +1,7 @@
 #pragma once
 #ifndef MYCONSOLEAPI_H
 #define MYCONSOLEAPI_H
+#define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
 
 #include <iostream>
 #include <stdexcept>

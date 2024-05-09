@@ -158,8 +158,8 @@
     <ClInclude Include="include.h" />
     <ClInclude Include="MyConsoleAPI.h" />
     <ClInclude Include="MyFunctions.h" />
-    <ClInclude Include="NumberGuessingGame\NumberGenerator.h" />
-    <ClInclude Include="NumberGuessingGame\NumberGuessingGame.h" />
+    <ClInclude Include="NumberGenerator.h" />
+    <ClInclude Include="NumberGuessingGame.h" />
     <ClInclude Include="Quize.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
