@@ -75,10 +75,3 @@ void Quize::askThirdQuestion() {
 	else { std::cout << "\nIncorrect\n" << std::endl; }
 	this->flag = false;
 }
-inline void Quize::clearInputStream() {
-	std::cin.clear();
-	if (std::cin.rdbuf()->in_avail() > 0) {
-		// If there are characters in the input buffer, discard them up to the next newline
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	}
-}

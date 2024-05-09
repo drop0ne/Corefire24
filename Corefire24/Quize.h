@@ -1,5 +1,5 @@
 #pragma once
-class Quize
+class Quize : public Utility, public MyConsoleAPI
 {
 private:
 	int iteration{0};
@@ -16,5 +16,4 @@ private:
 	void askFirstQuestion();
 	void askSecondQuestion();
 	void askThirdQuestion();
-	void clearInputStream();
 };
