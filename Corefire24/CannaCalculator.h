@@ -1,6 +1,6 @@
-#include"..\include.h"
+#include "include.h"
 
-class CannaCalculator {
+class CannaCalculator : public Utility, public MyConsoleAPI {
 private:
 
 public:
@@ -10,7 +10,6 @@ public:
     void run();
 private:
     void programLoop();
-    void clearInputStream();
 };
 
 void CannaCalculator::run() {
@@ -111,12 +110,4 @@ void CannaCalculator::programLoop() {
 
     std::cout << std::endl;
     system("pause");
-};
-
-inline void CannaCalculator::clearInputStream() {
-    std::cin.clear();
-    if (std::cin.rdbuf()->in_avail() > 0) {
-        // If there are characters in the input buffer, discard them up to the next newline
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
 };

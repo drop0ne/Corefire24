@@ -35,10 +35,10 @@ void MyConsoleAPI::clearScreen() {
 }
 
 // Print to console using std::cout
-void MyConsoleAPI::cout(const std::string& data) {
+void MyConsoleAPI::cout(const std::string data) {
     std::cout << data;
 }
-void MyConsoleAPI::cout(const std::string& data, int set_Tx_color) {
+void MyConsoleAPI::cout(const std::string data, int set_Tx_color) {
     set_text_color(set_Tx_color);
     std::cout << data;
 }

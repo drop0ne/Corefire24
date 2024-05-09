@@ -155,7 +155,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CannaCalculator\CannaCalculator.h" />
+    <ClInclude Include="CannaCalculator.h" />
     <ClInclude Include="color_enum.h" />
     <ClInclude Include="include.h" />
     <ClInclude Include="MyConsoleAPI.h" />
