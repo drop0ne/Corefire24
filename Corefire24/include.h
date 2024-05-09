@@ -1,7 +1,6 @@
 #pragma once
-#undef max()
 //#define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
-#include <windows.h> // Ensure this is included in your project for console functions
+#include <windows.h>
 #include <algorithm>
 #include <iostream>
 #include <random>
@@ -11,11 +10,14 @@
 #include <limits>
 #include <stdexcept>
 
-#include "Utility.h"
-#include "MyConsoleAPI.h"
-#include "MyFunctions.h"
+#include "MyHeaders.h" // Path: Corefire24/MyHeaders.h
 
 
-// this resolves conflit of two definitions
-
+// Path: Corefire24/color_enum.h
 // Path: Corefire24/include.cpp
+// Path: Corefire24/MyConsoleAPI.cpp
+// Path: Corefire24/MyFunctions.cpp
+// Path: Corefire24/NumberGenerator.cpp
+// Path: Corefire24/Utility.cpp
+
+//#undef max() // This is a macro that prevents the max macro from being defined

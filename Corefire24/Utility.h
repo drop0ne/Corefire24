@@ -1,9 +1,5 @@
-#pragma once
-#include <iostream>
-#include <limits>
-
 class Utility {
 public:
-    void clearInputStream();
-    void extractInputStream();
+    virtual void clearInputStream();
+    virtual void extractInputStream();
 };

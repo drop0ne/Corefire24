@@ -3,7 +3,7 @@
 // ready for start screen with menu options
 // options: set rng range; set number of guess; have default avalible - thats 3 options
 
-class NumberGuessingGame {
+class NumberGuessingGame : public Utility, public MyConsoleAPI {
 private:
     struct NumberRangeLimit {
         int min;
@@ -61,10 +61,8 @@ void NumberGuessingGame::gameLoop() {
 
         if (!(std::cin >> this->attempt)) {
             std::cout << "Invalid input. Please enter a valid number.\n";
-
             // Clear the input stream and reset error flags
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        	clearInputStream();
             continue;
         }
         if (this->attempt < this->rangeLimit.min || this->attempt > this->rangeLimit.max) {

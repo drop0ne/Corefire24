@@ -1,12 +1,10 @@
-#pragma once
-class Quize : public Utility, public MyConsoleAPI
-{
+class Quize : public Utility, public MyConsoleAPI {
 private:
-	int iteration{0};
-	bool flag{};
+	int iteration;
 
 public:
 	void run();
+	Quize();
 
 private:
 	void gameLoop();
