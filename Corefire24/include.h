@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <Windows.h>
+#define NOMAXMIN // This is a macro that prevents the min and max macros from being defined	
 #include <algorithm>
 #include <random>
 #include <vector>
@@ -15,5 +15,6 @@
 
 
 // this resolves conflit of two definitions
-#undef max()
+//#undef max()
 
+// Path: Corefire24/include.cpp

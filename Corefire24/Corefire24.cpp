@@ -25,10 +25,8 @@ int main()
 
  	do {
 		fn.clearScreen();
-		fn.set_text_color(green);
 		fn.cout("CoreFireCode 2024 edition\n", green);
-		fn.set_text_color(default_color);
-		fn.cout("\n\nMain Menu\n");
+		fn.cout("\n\nMain Menu\n", default_color);
 		fn.cout("Option 1 - Number Gussing Game\nOption 2 - CannabisCalculator\nOption 3 - Quize\nOption 9 to Exit\n");
 
 		switch (fn.selectMenuOption())
