@@ -1,4 +1,4 @@
-#include "include.h"
+#include "MyHeaders.h"
 
 // ready for start screen with menu options
 // options: set rng range; set number of guess; have default avalible - thats 3 options

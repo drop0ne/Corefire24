@@ -1,3 +1,5 @@
+#pragma once
+
 class Quize : public Utility, public MyConsoleAPI {
 private:
 	int iteration;

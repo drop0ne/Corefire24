@@ -1,5 +1,6 @@
 #include "Utility.h"
-#include "include.h"
+#include "MyHeaders.h"
+
 #undef max() // This is a macro that prevents the max macro from being defined
 
 void Utility::clearInputStream() {
@@ -17,5 +18,5 @@ void Utility::extractInputStream() {
         std::cin.get(c);
         std::cout << c;
     }
-    std::cout << std::endl;
 }
+// Path: Corefire24/Quize.h

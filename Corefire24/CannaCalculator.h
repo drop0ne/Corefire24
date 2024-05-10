@@ -1,4 +1,4 @@
-#include "include.h"
+#include "MyHeaders.h"
 
 class CannaCalculator : public Utility, public MyConsoleAPI {
 private:
@@ -98,7 +98,7 @@ void CannaCalculator::programLoop() {
     // OUTPUT RESULT
     system("cls");
     std::cout << "\n" << percent_THC << "% THCa converts to "
-        << static_cast<int>(mgTHC_Gross) << "mg THC per " << static_cast<int>(gramsFlower) << "g of flower Before decarboxylation.\nand " << static_cast<int>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
+        << static_cast<int>(mgTHC_Gross) << "mg THC per " << static_cast<int>(gramsFlower) << "g of flower Before decarboxylation.\nand " << static_cast<float>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
     std::cout << "\nGross THC\n";
     for (int i = 2; i <= 13; i += 2) {
         std::cout << static_cast<int>(mgTHC_Gross) / i << "mg per " << i << " servings\n";

@@ -1,27 +1,27 @@
 #include "Quize.h"
-#include "include.h"
+#include "MyHeaders.h"
 
-
-void Quize::run() {
-	system("cls");
+void Quize::run() { // Entry point
 	gameLoop();
 }
 
-Quize::Quize() : iteration(0) {}
+Quize::Quize() : iteration(0) {} // Constructor
+
 // Start Private Functions
 void Quize::gameLoop() {
 	setupEnviorment();
 	do {
-		this->iteration++;
-		question(this->iteration);
-	} while (this->iteration < 3);
+		iteration++;
+		question(iteration);
+	} while (iteration < 3);
 	std::cout << "\nGAME OVER\n\n";
-	system("pause");
+	system("pause"); // Last Instruction before returning to main menu
 }
 
 void Quize::setupEnviorment() {
+	system("cls");
 	clearInputStream();
-	if (this->iteration != 0) { this->iteration = 0; }
+	if (iteration != 0) { iteration = 0; }
 }
 
 int Quize::requestInput() {

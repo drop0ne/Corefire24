@@ -1,6 +1,6 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 /////////////////////////////////////////////////////
-#include "include.h"
+#include "MyHeaders.h"
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
 		case 2: cannaCalcultor.run(); break;
 		case 3: quize.run(); break;
 		case 9: return 0;
-		default: fn.errorInvalidInput(); system("pause"); break;
+		default: fn.cout("Invalid :: Try Again", red); system("pause"); break;
 		}
 
 	} while (true);

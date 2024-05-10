@@ -1,16 +1,9 @@
 #include "MyFunctions.h"
-#include "include.h"
+#include "MyHeaders.h"
 
 void MyFunctions::errorInvalidInput() {
     cout("\nERROR: INVALID INPUT\n", red);
     clearInputStream();
-}
-
-void MyFunctions::updateMainProgramLoopCondition(bool data) {
-    if (mainProgramLoopCondition == data) {
-        this->mainProgramLoopCondition = data;
-        return;
-    }
 }
 
 int MyFunctions::selectMenuOption() {
