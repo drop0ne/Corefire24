@@ -1,6 +1,5 @@
+#pragma once
 #include "MyHeaders.h"
-
-MyConsoleAPI fn;
 
 class CannaCalculator : public MyConsoleAPI {
 private:
@@ -15,7 +14,6 @@ private:
 };
 
 void CannaCalculator::run() {
-    fn.clearScreen();
     programLoop();
 };
     //  PRIVATE ///////////////////////////////////////////////////////////////////
@@ -28,6 +26,9 @@ void CannaCalculator::programLoop() {
     double mgTHC_Gross{};
     double mgTHC_Net{};
 
+    MyConsoleAPI fn;
+
+	fn.clearScreen();
     std::cout << "CannaCalculator\n\n";
     std::cout << "First, enter the percentage of THCa in your cannabis flower.\n"
         << "Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n";
@@ -98,7 +99,7 @@ void CannaCalculator::programLoop() {
    
 
     // OUTPUT RESULT
-    fn;
+    fn.clearScreen();
     std::cout << "\n" << percent_THC << "% THCa converts to "
         << static_cast<int>(mgTHC_Gross) << "mg THC per " << static_cast<int>(gramsFlower) << "g of flower Before decarboxylation.\nand " << static_cast<float>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
     std::cout << "\nGross THC\n";

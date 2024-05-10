@@ -44,12 +44,12 @@ int Quize::requestInput() {
 		}
 		catch (const std::invalid_argument& e)
 		{
-			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ";
+			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ", e;
 			fn.clearInputStream();
 		}
 		catch (const std::out_of_range& e)
 		{
-			std::cerr << "Out of range\nTry Again: ";
+			std::cerr << "Out of range\nTry Again: ", e;
 			fn.clearInputStream();
 		}
 	} while (true);

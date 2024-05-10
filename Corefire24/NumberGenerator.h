@@ -1,3 +1,4 @@
+#pragma once    
 #include "MyHeaders.h"
 
 class NumberGenerator {
