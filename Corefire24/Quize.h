@@ -1,6 +1,6 @@
 #pragma once
 
-class Quize : public Utility, public MyConsoleAPI {
+class Quize : public Inheritance {
 private:
 	int iteration;
 
@@ -16,4 +16,5 @@ private:
 	void askFirstQuestion();
 	void askSecondQuestion();
 	void askThirdQuestion();
+
 };

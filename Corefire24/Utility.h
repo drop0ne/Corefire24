@@ -2,6 +2,8 @@
 
 class Utility {
 public:
-    virtual void clearInputStream();
-    virtual void extractInputStream();
+    Utility(){} // Constructor
+
+    virtual void clearInputStream() const;
+    virtual void extractInputStream() const;
 };

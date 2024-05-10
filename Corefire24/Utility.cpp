@@ -3,7 +3,7 @@
 
 #undef max() // This is a macro that prevents the max macro from being defined
 
-void Utility::clearInputStream() {
+void Utility::clearInputStream() const {
     std::cin.clear();
     if (std::cin.rdbuf()->in_avail() > 0) {
         // If there are characters in the input buffer, discard them up to the next newline
@@ -11,7 +11,7 @@ void Utility::clearInputStream() {
     }
 }
 
-void Utility::extractInputStream() {
+void Utility::extractInputStream() const {
     std::cout << "Contents of input stream: ";
     char c;
     while (std::cin.peek() != EOF) {

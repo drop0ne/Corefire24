@@ -4,7 +4,8 @@
 
 int main()
 {
-    MyFunctions fn;
+	MyFunctions fn;
+
 	// Number Guessing Game START
 	NumberGenerator RNG;
 	NumberGuessingGame numberGuessingGame;
