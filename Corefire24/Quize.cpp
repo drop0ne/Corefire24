@@ -1,7 +1,6 @@
 #include "Quize.h"
-#include "MyHeaders.h"
 
-Inheritance fn; // Global Object of Inheritance Class
+MyConsoleAPI fn; // Global Object of Inheritance Class
 
 void Quize::run() { // Entry point *************
 	gameLoop();

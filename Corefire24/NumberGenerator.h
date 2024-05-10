@@ -9,7 +9,7 @@ public:
     NumberGenerator();
     ~NumberGenerator();
 
-    int returnRandomNumber(int min, int max);
+    virtual int returnRandomNumber(int min, int max);
 };
 
 NumberGenerator::NumberGenerator() : generator(rd()) {}

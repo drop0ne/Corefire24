@@ -7,9 +7,8 @@
 #include "color_enum.h"
 
 // Classes
-#include "Utility.h"
 #include "MyConsoleAPI.h"
-#include "MyFunctions.h"
+#include "MyConsoleAPI_extended.h"
 
 // Program Exstentions
 #include "Quize.h"

@@ -1,6 +1,7 @@
 #pragma once
+#include "MyHeaders.h"
 
-class Quize : public Inheritance {
+class Quize : public MyConsoleAPI {
 private:
 	int iteration;
 

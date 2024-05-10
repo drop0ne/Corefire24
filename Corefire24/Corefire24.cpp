@@ -4,7 +4,7 @@
 
 int main()
 {
-	MyFunctions fn;
+	MyConsoleAPI_extended fn;
 
 	// Number Guessing Game START
 	NumberGenerator RNG;
@@ -22,7 +22,7 @@ int main()
 
 		switch (fn.selectMenuOption())
 		{
-		case 1: numberGuessingGame.run(RNG.returnRandomNumber(numberGuessingGame.rngRangeLimt().min, numberGuessingGame.rngRangeLimt().max)); break;
+		case 1: numberGuessingGame.run(); break;
 		case 2: cannaCalcultor.run(); break;
 		case 3: quize.run(); break;
 		case 9: return 0;

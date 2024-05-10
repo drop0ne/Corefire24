@@ -150,21 +150,20 @@
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
     <ClCompile Include="MyConsoleAPI.cpp" />
-    <ClCompile Include="MyFunctions.cpp" />
+    <ClCompile Include="MyConsoleAPI_extended.cpp" />
+    <ClCompile Include="NumberGuessingGame.cpp" />
     <ClCompile Include="Quize.cpp" />
-    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CannaCalculator.h" />
     <ClInclude Include="color_enum.h" />
     <ClInclude Include="include.h" />
     <ClInclude Include="MyConsoleAPI.h" />
-    <ClInclude Include="MyFunctions.h" />
+    <ClInclude Include="MyConsoleAPI_extended.h" />
     <ClInclude Include="MyHeaders.h" />
     <ClInclude Include="NumberGenerator.h" />
     <ClInclude Include="NumberGuessingGame.h" />
     <ClInclude Include="Quize.h" />
-    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

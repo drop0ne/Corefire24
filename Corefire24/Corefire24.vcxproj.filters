@@ -21,40 +21,46 @@
     <ClCompile Include="Quize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MyConsoleAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyFunctions.cpp">
+    <ClCompile Include="MyConsoleAPI_extended.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberGuessingGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NumberGuessingGame\NumberGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NumberGuessingGame\NumberGuessingGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CannaCalculator\CannaCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Quize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MyConsoleAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyFunctions.h">
+    <ClInclude Include="MyConsoleAPI_extended.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CannaCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="color_enum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyHeaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberGuessingGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

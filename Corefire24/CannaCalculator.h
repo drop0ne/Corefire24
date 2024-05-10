@@ -1,6 +1,8 @@
 #include "MyHeaders.h"
 
-class CannaCalculator : public Utility, public MyConsoleAPI {
+MyConsoleAPI fn;
+
+class CannaCalculator : public MyConsoleAPI {
 private:
 
 public:
@@ -13,7 +15,7 @@ private:
 };
 
 void CannaCalculator::run() {
-    system("cls");
+    fn.clearScreen();
     programLoop();
 };
     //  PRIVATE ///////////////////////////////////////////////////////////////////
@@ -35,14 +37,14 @@ void CannaCalculator::programLoop() {
         std::cout << "\nThe default loss is 20%\nWould you like enter a custom loss percenage? (y/n): ";
         if (std::cin >> inputChar) {
             if (inputChar == 'y') {
-                clearInputStream();
+                fn.clearInputStream();
                 std::cout << "\nEnter a whole number 0 to 100 for your custom %: ";
                 if (std::cin >> THC_loss) {
                     THC_loss /= 100;
                     break; // Set custom THC loss %
                 }
                 else {
-                    clearInputStream();
+                    fn.clearInputStream();
                     continue;
                 }
             }
@@ -52,12 +54,12 @@ void CannaCalculator::programLoop() {
             }
         }
         else {
-            clearInputStream();
+            fn.clearInputStream();
             continue;
         }
     } while (true);
     
-    clearInputStream();
+    fn.clearInputStream();
     
     do { // Handle THC in flower
         std::cout << "\n\n";
@@ -68,12 +70,12 @@ void CannaCalculator::programLoop() {
         }
         else {
             std::cout << "\nInvalidstd::" << std::endl;
-            clearInputStream();
+            fn.clearInputStream();
             continue; // Loop
         }
     } while (true);
     
-    clearInputStream();
+    fn.clearInputStream();
    
     do { // Handle Grams of Flower
         std::cout << "Secound: How many grams of flower will you be using?: ";
@@ -82,12 +84,12 @@ void CannaCalculator::programLoop() {
         }
         else {
             std::cout << "\nInvalid";
-            clearInputStream();
+            fn.clearInputStream();
             continue;
         }
     } while (true);
     
-    clearInputStream();
+    fn.clearInputStream();
 
    // Perform Calculations
      
@@ -96,7 +98,7 @@ void CannaCalculator::programLoop() {
    
 
     // OUTPUT RESULT
-    system("cls");
+    fn;
     std::cout << "\n" << percent_THC << "% THCa converts to "
         << static_cast<int>(mgTHC_Gross) << "mg THC per " << static_cast<int>(gramsFlower) << "g of flower Before decarboxylation.\nand " << static_cast<float>(mgTHC_Net) << "mg THC after decarboxylation\n\n";
     std::cout << "\nGross THC\n";
