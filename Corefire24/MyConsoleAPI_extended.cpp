@@ -21,5 +21,3 @@ int MyConsoleAPI_extended::selectMenuOption() {
         return 0;
     }
 }
-
-// Path: Corefire24/MyHeaders.h

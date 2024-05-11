@@ -30,6 +30,9 @@
     <ClCompile Include="NumberGuessingGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="programExtensions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NumberGuessingGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="programExtensions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
