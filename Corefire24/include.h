@@ -1,15 +1,21 @@
 #pragma once
+
+// #define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
 #include <iostream>
-#include <Windows.h>
-#include <algorithm>
-#include <random>
-#include <vector>
-#include <any>
 #include <string>
+#include <vector>
+#include <algorithm>
 #include <limits>
+#include <random>
+#include <any>
+#include <windows.h>
 #include <stdexcept>
 
-// this resolves conflit of two definitions
-#undef max()
+// Classes
+#include "programExtensions.h"
 
-using std::cin, std::cout, std::endl, std::getline, std::string;
+// Enums
+#include "color_enum.h"
+
+
+//#undef max() // This is a macro that prevents the max macro from being defined

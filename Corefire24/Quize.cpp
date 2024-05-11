@@ -1,84 +1,84 @@
 #include "Quize.h"
-#include "include.h"
-void Quize::run() {
-	system("cls");
+
+MyConsoleAPI fn; // Global Object of Inheritance Class
+
+void Quize::run() { // Entry point *************
 	gameLoop();
 }
+
+Quize::Quize() : iteration(0) {
+} // Constructor
+
+// Start Private Functions
 void Quize::gameLoop() {
 	setupEnviorment();
 	do {
-		this->iteration++;
-		question(this->iteration);
-	} while (this->iteration < 3);
-	cout << "\nGAME OVER\n\n";
-	system("pause");
+		iteration++;
+		question(iteration);
+	} while (iteration < 3);
+	std::cout << "\nGAME OVER\n\n";
+	system("pause"); // Last Instruction before returning to main menu
 }
+
 void Quize::setupEnviorment() {
-	clearInputStream();
-	if (this->iteration != 0) { this->iteration = 0; }
+	fn.clearScreen();
+	fn.clearInputStream();
+	if (iteration != 0) { iteration = 0; }
 }
+
 int Quize::requestInput() {
-	string guess{};
+	std::string guess{};
 	int convertedGuess{};
 	size_t pos{};
 	do {
-		getline(cin, guess);
+		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { cout << "Invalid Number::Out of Range\nTry Again: "; clearInputStream();continue; }
+				if (convertedGuess > 3) { std::cout << "Invalid Number::Out of Range\nTry Again: "; fn.clearInputStream(); continue; }
 				break;
 			}
-			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); clearInputStream();}
+			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); fn.clearInputStream();}
 			break;
 		}
 		catch (const std::invalid_argument& e)
 		{
-			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ";
-			clearInputStream();
+			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ", e;
+			fn.clearInputStream();
 		}
 		catch (const std::out_of_range& e)
 		{
-			std::cerr << "Out of range\nTry Again: ";
-			clearInputStream();
+			std::cerr << "Out of range\nTry Again: ", e;
+			fn.clearInputStream();
 		}
 	} while (true);
 	return convertedGuess;
 }
+
 inline void Quize::question(int questionNumber) {
-	this->flag = true;
-	do {
 	switch (questionNumber)
 	{
 	case 1: askFirstQuestion(); break;
 	case 2: askSecondQuestion(); break;
 	case 3: askThirdQuestion(); break;
 	}
-	} while (this->flag);
 }
+
 void Quize::askFirstQuestion() {
-	cout << "What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ";
-	if (requestInput() == 3) { cout << "\nCorrect!\n" << endl;}
-	else {cout << "\nIncorrect\n" << endl;}
-	this->flag = false;
+	fn.cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", default_color);
+	if (requestInput() == 3) { std::cout << "\nCorrect!\n" << std::endl;}
+	else { std::cout << "\nIncorrect\n" << std::endl;}
 }
+
 void Quize::askSecondQuestion() {
-	cout << "What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ";
-	if (requestInput() == 2) { cout << "\nCorrect!\n" << endl;}
-	else { cout << "\nIncorrect\n" << endl; }
-	this->flag = false;
+	fn.cout ("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ");
+	if (requestInput() == 2) { std::cout << "\nCorrect!\n" << std::endl;}
+	else { std::cout << "\nIncorrect\n" << std::endl; }
 }
+
 void Quize::askThirdQuestion() {
-	cout << "How many elements are there in the periodic table?\n1. 118\n2. 115\n3.120\nchoose 1-3: ";
-	if (requestInput() == 1) { cout << "\nCorrect!\n" << endl;}
-	else { cout << "\nIncorrect\n" << endl; }
-	this->flag = false;
-}
-inline void Quize::clearInputStream() {
-	std::cin.clear();
-	if (std::cin.rdbuf()->in_avail() > 0) {
-		// If there are characters in the input buffer, discard them up to the next newline
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	}
+	fn.cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ");
+	if (requestInput() == 1) { std::cout << "\nCorrect!\n" << std::endl;}
+	else { std::cout << "\nIncorrect\n" << std::endl; }
 }

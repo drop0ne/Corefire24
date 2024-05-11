@@ -1,12 +1,13 @@
 #pragma once
-class Quize
-{
+#include "MyHeaders.h"
+
+class Quize : public MyConsoleAPI {
 private:
-	int iteration{0};
-	bool flag{};
+	int iteration;
 
 public:
 	void run();
+	Quize();
 
 private:
 	void gameLoop();
@@ -16,5 +17,5 @@ private:
 	void askFirstQuestion();
 	void askSecondQuestion();
 	void askThirdQuestion();
-	void clearInputStream();
+
 };
