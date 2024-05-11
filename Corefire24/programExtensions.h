@@ -2,10 +2,35 @@
 #include "include.h"
 
 
+#ifndef PROGRAM_EXTENSIONS
+#define PROGRAM_EXTENSIONS
 
-class programExtensions
-{
+#include <string>
+
+class programExtensions {
+ /*
+public:
+    static void setConsoleTitle(const std::string& title);
+    static void setConsoleSize(int width, int height);
+    static void setConsoleFont(int width, int height, const std::string& fontName);
+
+    // Simplified setConsoleIcon with basic use cases
+    static void setConsoleIcon(int iconID);
+    static void setConsoleIcon(const std::string& iconPath);
+
+    // Example of a more flexible function using a settings structure
+    struct IconSettings {
+        std::string path;
+        int id = -1; // Default ID
+        // Add more properties as needed
+    };
+    static void setConsoleIcon(const IconSettings& settings);
+ */
 };
+
+#endif // PROGRAM_EXTENSIONS
+
+//////////////////////////////////////////
 
 #ifndef MY_CONSOLE_API_H
 #define MY_CONSOLE_API_H
@@ -27,6 +52,12 @@ public:
 };
 #endif // MY_CONSOLE_API_H
 
+//////////////////////////////////////////
+
+#ifndef MY_CONSOLE_API_EXTENDED
+#define MY_CONSOLE_API_EXTENDED
+
+
 class MyConsoleAPI_extended : public MyConsoleAPI
 {
 private:
@@ -38,7 +69,12 @@ public:
     void errorInvalidInput();
     int selectMenuOption();
 };
+#endif // !MY_CONSOLE_API_EXTENDED
 
+//////////////////////////////////////////
+
+#ifndef Quize_H
+#define Quize_H
 
 class Quize {
 private:
@@ -58,7 +94,9 @@ private:
     void askThirdQuestion();
 
 };
+#endif // Quize_H
 
+//////////////////////////////////////////
 
 #ifndef NUMBER_GENERATOR_H
 #define NUMBER_GENERATOR_H
@@ -77,11 +115,14 @@ public:
 
 #endif // NUMBER_GENERATOR_H
 
+//////////////////////////////////////////
 
+#ifndef NUMBER_GUESSING_GAME_H
+#define NUMBER_GUESSING_GAME_H
 // ready for start screen with menu options
 // options: set rng range; set number of guess; have default avalible - thats 3 options
 
-class NumberGuessingGame : public NumberGenerator, public MyConsoleAPI {
+class NumberGuessingGame : public NumberGenerator {
 private:
     struct NumberRangeLimit {
         int min;
@@ -106,7 +147,7 @@ private:
 };
 
 
-class CannaCalculator : public MyConsoleAPI {
+class CannaCalculator {
 public:
     CannaCalculator();
     ~CannaCalculator();
@@ -116,3 +157,4 @@ public:
 private:
     void programLoop();
 };
+#endif // NUMBER_GUESSING_GAME_H

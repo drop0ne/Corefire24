@@ -153,23 +153,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
-    <ClCompile Include="MyConsoleAPI.cpp" />
-    <ClCompile Include="MyConsoleAPI_extended.cpp" />
-    <ClCompile Include="NumberGuessingGame.cpp" />
     <ClCompile Include="programExtensions.cpp" />
-    <ClCompile Include="Quize.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CannaCalculator.h" />
-    <ClInclude Include="color_enum.h" />
     <ClInclude Include="include.h" />
-    <ClInclude Include="MyConsoleAPI.h" />
-    <ClInclude Include="MyConsoleAPI_extended.h" />
-    <ClInclude Include="MyHeaders.h" />
-    <ClInclude Include="NumberGenerator.h" />
-    <ClInclude Include="NumberGuessingGame.h" />
     <ClInclude Include="programExtensions.h" />
-    <ClInclude Include="Quize.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

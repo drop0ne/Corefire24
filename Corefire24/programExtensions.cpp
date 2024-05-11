@@ -5,7 +5,6 @@
 // Init Global Object
 MyConsoleAPI_extended fn;
 
-
 // Constructor
 MyConsoleAPI::MyConsoleAPI() {
     console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -80,8 +79,6 @@ void MyConsoleAPI::extractInputStream() {
 }
 
 
-#include "MyConsoleAPI_extended.h"
-
 MyConsoleAPI_extended::MyConsoleAPI_extended() : MyConsoleAPI() {
     // Constructor
 }
@@ -104,12 +101,8 @@ int MyConsoleAPI_extended::selectMenuOption() {
     }
 }
 
-
-#include "Quize.h"
-
-MyConsoleAPI fn; // Global Object of Inheritance Class
-
-void Quize::run() { // Entry point *************
+// QUIZ GAME  ////////////////////////////////////////////////////////
+void Quize::run() {
 	gameLoop();
 }
 
@@ -190,7 +183,11 @@ void Quize::askThirdQuestion() {
 	else { std::cout << "\nIncorrect\n" << std::endl; }
 }
 
+// END QUIZ GAME  ////////////////////////////////////////////////////////
 
+
+// Number Guessing Game  ////////////////////////////////////////////////////////   
+//  
 // Constructor
 NumberGenerator::NumberGenerator() : generator(rd()) {}
 
@@ -203,9 +200,10 @@ int NumberGenerator::returnRandomNumber(int min, int max) {
 	return distribution(generator);
 }
 
-
-#include "NumberGuessingGame.h"
-
+// End Number Generator
+//
+// Start Number Guessing Game  //////////////////////////////////////////////////////
+//
 NumberGuessingGame::NumberGuessingGame() : randomNumber(0), MAX_GUESSES(5), attempt(0), attemptCount(0) {
     rangeLimit.min = 0;
     rangeLimit.max = 20;
@@ -265,8 +263,12 @@ void NumberGuessingGame::setGameState() {
     attemptCount = 0;
     attempt = 0;
 }
-
-
+//
+// End Number Guessing Game  ////////////////////////////////////////////////////////
+//
+// Start CannaCalculator  ////////////////////////////////////////////////////////
+//
+//
 // Constructor
 CannaCalculator::CannaCalculator() {}
 
@@ -286,8 +288,6 @@ void CannaCalculator::programLoop() {
     double gramsFlower{};
     double mgTHC_Gross{};
     double mgTHC_Net{};
-
-    MyConsoleAPI fn;
 
     fn.clearScreen();
     std::cout << "CannaCalculator\n\n"
