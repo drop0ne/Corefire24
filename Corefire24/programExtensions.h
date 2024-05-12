@@ -40,6 +40,8 @@ protected:
     HANDLE console_HWND; // Handle to the console window
 
 public:
+
+    // Methods
     MyConsoleAPI(); // Constructor
     virtual void clearScreen(); // Clear the console screen
     virtual void cout(const std::string& data); // Print text to the console
@@ -60,16 +62,22 @@ private:
 #define MY_CONSOLE_API_EXTENDED
 
 
-class MyConsoleAPI_extended : public MyConsoleAPI
-{
+class MyConsoleAPI_extended : public MyConsoleAPI {
 private:
-    //bool mainProgramLoopCondition{};
-
+    int number_of_state_parameters;
+    std::vector<int> mainMenuState;
+        
 public:
+    // Structs
+    // Methods
     MyConsoleAPI_extended(); // Constructor
 
     void errorInvalidInput();
     int selectMenuOption();
+    void setMainMenuState(const std::vector<int>& parameters);
+    const std::vector<int>& getMainMenuState() const;
+    void generateMainMenu(const std::vector<int>& stateData);
+    
 };
 #endif // !MY_CONSOLE_API_EXTENDED
 

@@ -114,8 +114,8 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
         "color 0C", // Light red on black
         "color 0D", // Light purple on black
         "color 0E", // Light yellow on black
-        "color 0F",  // Bright white on black
-        "color 08"   // Gray on black
+        "color 0F", // Bright white on black
+        "color 08"  // Gray on black
     };
 
     // Check if the command is in the list of allowed commands
@@ -131,13 +131,53 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 // End MyConsoleAPI
 
 
-MyConsoleAPI_extended::MyConsoleAPI_extended() : MyConsoleAPI() {
-    // Constructor
+MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(5), mainMenuState({green, purple, default_color, red, red}) {
+    // Set the default state parameters for the main menu text colors
+    // number_of_state_parameters = 5; 
+    // mainMenuState = options; programID; program; exitID; exit;
 }
+    
 
 void MyConsoleAPI_extended::errorInvalidInput() {
     fn.cout("\nERROR: INVALID INPUT\n", red);
     fn.clearInputStream();
+}
+
+void MyConsoleAPI_extended::setMainMenuState(const std::vector<int>& parameters) {
+    for (size_t i = 0; i < getMainMenuState().size(); i++)
+    {
+        try
+        {
+            if (!parameters.empty()) {
+				mainMenuState.at(i) = parameters.at(i);
+			}
+            else {
+                throw std::invalid_argument("Invalid Parameters");
+            }
+        }
+        catch (const std::exception&)
+        {
+
+        }
+    }
+
+}
+
+void MyConsoleAPI_extended::generateMainMenu(const std::vector<int>& stateData) {
+    // stsateData = options(0); programID(1); program(2); exitID(3); exit(4);
+
+    fn.clearScreen();
+    fn.cout("CoreFireCode 2024 edition\n", dark_green);
+    fn.cout("\n\nMain Menu\n\n", bright_white);
+    fn.cout("Option ", stateData.at(0)); fn.cout("1 ", purple); fn.cout("- Number Gussing Game\n", default_color);
+    fn.cout("Option ", stateData.at(0)); fn.cout("2 ", purple); fn.cout("- CannabisCalculator\n", default_color);
+    fn.cout("Option ", stateData.at(0)); fn.cout("3 ", purple); fn.cout("- Quiz\n", default_color);
+    fn.cout("Option ", stateData.at(0)); fn.cout("9", red); fn.cout(" - ", default_color); fn.cout("Exit\n", red);
+
+}
+
+const std::vector<int>& MyConsoleAPI_extended::getMainMenuState() const {
+    return mainMenuState;
 }
 
 int MyConsoleAPI_extended::selectMenuOption() {
@@ -152,6 +192,7 @@ int MyConsoleAPI_extended::selectMenuOption() {
         return 0;
     }
 }
+
 
 // QUIZ GAME  ////////////////////////////////////////////////////////
 void Quize::run() {
