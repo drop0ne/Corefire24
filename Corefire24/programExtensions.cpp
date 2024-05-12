@@ -11,6 +11,8 @@ MyConsoleAPI::MyConsoleAPI() {
     if (console_HWND == INVALID_HANDLE_VALUE) {
         throw std::runtime_error("Failed to get standard output handle");
     }
+    threadID_vector.reserve(8);
+    threadID_vector.at(MainThread) = std::this_thread::get_id();/* Set The ID for the calling thread of exacution -- should be the main thread */
 }
 
 // Clear the console screen using Windows API for better performance and security
@@ -43,6 +45,7 @@ void MyConsoleAPI::cout(const std::string& data, const int textColor) {
 
 void MyConsoleAPI::cout(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
     const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
+    /* Custom cout for -- void generateMainMenu(const std::vector<int>& stateData); */
     set_text_color(textColor1);
     std::cout << string1;
     set_text_color(textColor2);
@@ -51,7 +54,6 @@ void MyConsoleAPI::cout(const std::string& string1, const int& textColor1, const
     std::cout << string3;
     set_text_color(textColor4);
     std::cout << string4;
-    /* Custom cout for main menu generator */
 }
 
 
@@ -115,12 +117,11 @@ void MyConsoleAPI::extractInputStream() {
         std::cout << c;
     }
 }
-void MyConsoleAPI::startNew_THREADED_process() {
-    std::thread t([]() {
-		system("pause");
-	});
-	t.detach();
+std::thread& MyConsoleAPI::passFunction_toThread_new(void (*function)()) {
+    std::thread newThread(function);
+    return newThread;
 }
+
 // END Public Functions // Start Private Functions
 
 bool MyConsoleAPI::isValidCommand(const char* command) {
@@ -178,17 +179,22 @@ void MyConsoleAPI_extension::setMainMenuState(const std::vector<int> newState) {
 }
 
 void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData) {
-    // stateData.at( ) color the text based on the type of data being colored
-    // String, color( ), string, color( )
-    // options(0); programID(1); program(2); exitID(3); exit(4); objects(5); errorMessages(6)
+    /* StateDate.at( recieves and int ) to identify group to apply color state change to */
+    /* Using enum eMainMenu_State_ID Options(0), ProgramID1), Program(2), ExitProgramID(3), ExitProgram(4), Symbols(5), ErrorMessage(6) */
+
+    /* cout has three overloads as of 2024/05/12 */
+    /* cout(string, int, string, int, string, int, string, int) */
+    /* cout(string, int, string, int) */
+    /* cout(string, int) */
+
     cout("CoreFireCode 2024 edition\n", green);
     cout("\n\nMain Menu\n\n", white);
-    cout("Option", stateData.at(0), " 1 ", stateData.at(1), "-", stateData.at(5), " Number Gussing Game\n", stateData.at(2));
-    cout("Option", stateData.at(0), " 2 ", stateData.at(1), "-", stateData.at(5), " CannabisCalculator\n", stateData.at(2));
-    cout("Option", stateData.at(0), " 3 ", stateData.at(1), "-", stateData.at(5), " Quiz\n", stateData.at(2));
-    cout("Option", stateData.at(0), " 4 ", stateData.at(1), "-", stateData.at(5), " Random Menu Theme\n", stateData.at(2));
-    cout("Option", stateData.at(0), " 5 ", stateData.at(1), "-", stateData.at(5), " Default Menu Theme\n", stateData.at(2));
-    cout("Option", stateData.at(0), " 9 ", stateData.at(3), "-", stateData.at(5), " Exit\n", stateData.at(4));
+    cout("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
+    cout("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " CannabisCalculator\n", stateData.at(Program));
+    cout("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Quiz\n", stateData.at(Program));
+    cout("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
+    cout("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n", stateData.at(Program));
+    cout("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
 }
 
 void MyConsoleAPI_extension::setThemeFlag(const int themeFlag_ID) {
@@ -245,7 +251,7 @@ void MyConsoleAPI_extension::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 /*************************************************************/
 
 void MyConsoleAPI_extension::menuTheme_Default() {
-    setThemeFlag(0);
+    setThemeFlag(defaultTheme);
 
     for (size_t i = 0; i < mainMenuParameterState.size(); i++)
     {
@@ -255,16 +261,26 @@ void MyConsoleAPI_extension::menuTheme_Default() {
 
 void MyConsoleAPI_extension::menuTheme_Random() {
     /*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
-    setThemeFlag(1);
+    setThemeFlag(RandomTheme);
 
     for (size_t i = 0; i < mainMenuParameterState.size(); i++)
     {
         mainMenuParameterState[i] = returnRandomNumber(1, 15);
     }
 }
-
+/* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2)
+ */
 void MyConsoleAPI_extension::menuTheme_Rainbow() {
-    setThemeFlag(2);
+    setThemeFlag(RainbowTheme);
+    try
+    {
+        passFunction_toThread_new(menuTheme_Random);
+    }
+    catch (const std::exception&)
+    {
+
+    }
+
 }
 
 const std::vector<int>& MyConsoleAPI_extension::getMainMenuState() const {

@@ -54,7 +54,7 @@ public:
 class MyConsoleAPI {
 protected:
     HANDLE console_HWND; // Handle to the console window
-
+    std::vector<std::thread::id> threadID_vector;
 public:
 
     // Methods
@@ -70,7 +70,7 @@ public:
     virtual void set_text_color(const int data); // Set the text color in the console
     virtual void clearInputStream();
     virtual void extractInputStream();
-    virtual void startNew_THREADED_process();
+    virtual std::thread& passFunction_toThread_new/*Pass a Function pointer*/(void (*function)());
 private:
     bool isValidCommand(const char* command);
 };
