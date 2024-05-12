@@ -8,7 +8,7 @@ int main()
 	MyConsoleAPI_extended fn;
 	NumberGuessingGame numberGuessingGame;
 	CannaCalculator cannaCalcultor;
-	Quize quize;
+	Quiz quiz;
 
  	do {
 		fn.generateMainMenu(fn.getMainMenuState());
@@ -17,9 +17,9 @@ int main()
 		{
 		case 1: numberGuessingGame.run(); break;
 		case 2: cannaCalcultor.run(); break;
-		case 3: quize.run(); break;
+		case 3: quiz.run(); break;
 		case 9: return 0;
-		default: fn.cout("Invalid :: Try Again", red); system("pause"); break;
+		default: fn.cout("Invalid :: Try Again", fn.getMainMenuState().at(6)); system("pause"); break;
 		}
 
 	} while (true);

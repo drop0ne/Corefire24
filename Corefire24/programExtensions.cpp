@@ -131,9 +131,9 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 // End MyConsoleAPI
 
 
-MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(6), mainMenuState({green, purple, default_color, red, red, white}) {
+MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(7), mainMenuState({green, purple, default_color, red, red, white, red}) {
     // Set the default state parameters for the main menu text colors
-    // mainMenuState = options; programID; program; exitID; exit; objects;
+    // mainMenuState = options(0); programID(1); program(2); exitID(3); exit(4); objects(5); errorMessages(6);
 }
     
 
@@ -194,15 +194,15 @@ int MyConsoleAPI_extended::selectMenuOption() {
 
 
 // QUIZ GAME  ////////////////////////////////////////////////////////
-void Quize::run() {
+void Quiz::run() {
 	gameLoop();
 }
 
-Quize::Quize() : iteration(0) {
+Quiz::Quiz() : iteration(0) {
 } // Constructor
 
 // Start Private Functions
-void Quize::gameLoop() {
+void Quiz::gameLoop() {
 	setupEnviorment();
 	do {
 		iteration++;
@@ -214,13 +214,13 @@ void Quize::gameLoop() {
 	system("pause"); // Last Instruction before returning to main menu
 }
 
-void Quize::setupEnviorment() {
+void Quiz::setupEnviorment() {
 	fn.clearScreen();
 	fn.clearInputStream();
 	if (iteration != 0) { iteration = 0; }
 }
 
-int Quize::requestInput() {
+int Quiz::requestInput() {
 	std::string guess{};
 	int convertedGuess{};
 	size_t pos{};
@@ -251,7 +251,7 @@ int Quize::requestInput() {
 	return convertedGuess;
 }
 
-inline void Quize::question(int questionNumber) {
+inline void Quiz::question(int questionNumber) {
 	switch (questionNumber)
 	{
 	case 1: askFirstQuestion(); break;
@@ -260,7 +260,7 @@ inline void Quize::question(int questionNumber) {
 	}
 }
 
-void Quize::askFirstQuestion() {
+void Quiz::askFirstQuestion() {
 	fn.cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", ice_blue);
     if (requestInput() == 3) {
         fn.setScreenColor("color 08"); // Gray on black
@@ -272,7 +272,7 @@ void Quize::askFirstQuestion() {
     }
 }
 
-void Quize::askSecondQuestion() {
+void Quiz::askSecondQuestion() {
 	fn.cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", ice_blue);
 	if (requestInput() == 2) {
         fn.setScreenColor("color 08"); // Gray on black
@@ -284,7 +284,7 @@ void Quize::askSecondQuestion() {
     }
 }
 
-void Quize::askThirdQuestion() {
+void Quiz::askThirdQuestion() {
 	fn.cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", ice_blue);
 	if (requestInput() == 1) {
         fn.setScreenColor("color 08"); // Gray on black
