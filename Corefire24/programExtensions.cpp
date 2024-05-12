@@ -6,13 +6,14 @@
 static MyConsoleAPI_extension fn;
 
 // Constructor
-MyConsoleAPI::MyConsoleAPI() {
+MyConsoleAPI::MyConsoleAPI() : threadLimit(8) {
     console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     if (console_HWND == INVALID_HANDLE_VALUE) {
         throw std::runtime_error("Failed to get standard output handle");
     }
-    threadID_vector.reserve(8);
+    threadID_vector.reserve(threadLimit + 1);/* plus one to account for the main thread plus the reservasion */
     threadID_vector.at(MainThread) = std::this_thread::get_id();/* Set The ID for the calling thread of exacution -- should be the main thread */
+    thread_vector.reserve(threadLimit);
 }
 
 // Clear the console screen using Windows API for better performance and security
@@ -117,9 +118,9 @@ void MyConsoleAPI::extractInputStream() {
         std::cout << c;
     }
 }
-std::thread& MyConsoleAPI::passFunction_toThread_new(void (*function)()) {
-    std::thread newThread(function);
-    return newThread;
+void MyConsoleAPI::passFunction_toThread_new(void (function)()) {
+    thread_vector.push_back(std::thread(function));
+    //  todo: save thread ID to threadID_vector
 }
 
 // END Public Functions // Start Private Functions
@@ -272,15 +273,8 @@ void MyConsoleAPI_extension::menuTheme_Random() {
  */
 void MyConsoleAPI_extension::menuTheme_Rainbow() {
     setThemeFlag(RainbowTheme);
-    try
-    {
-        passFunction_toThread_new(menuTheme_Random);
-    }
-    catch (const std::exception&)
-    {
-
-    }
-
+    thread_vector.at(ThemeThread) = std::thread(&menuTheme_Random);
+    /* not finished */
 }
 
 const std::vector<int>& MyConsoleAPI_extension::getMainMenuState() const {

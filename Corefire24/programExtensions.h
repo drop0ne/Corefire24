@@ -52,9 +52,12 @@ public:
 #define MY_CONSOLE_API_H
 
 class MyConsoleAPI {
+private:
+    int threadLimit;
 protected:
     HANDLE console_HWND; // Handle to the console window
     std::vector<std::thread::id> threadID_vector;
+    std::vector<std::thread> thread_vector;
 public:
 
     // Methods
@@ -70,7 +73,7 @@ public:
     virtual void set_text_color(const int data); // Set the text color in the console
     virtual void clearInputStream();
     virtual void extractInputStream();
-    virtual std::thread& passFunction_toThread_new/*Pass a Function pointer*/(void (*function)());
+    virtual void passFunction_toThread_new/*copy a Function to new thread*/(void (function)());
 private:
     bool isValidCommand(const char* command);
 };
