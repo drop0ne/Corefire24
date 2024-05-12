@@ -83,16 +83,16 @@ public:
 
 //////////////////////////////////////////
 
-#ifndef Quize_H
-#define Quize_H
+#ifndef Quiz_H
+#define Quiz_H
 
-class Quize {
+class Quiz {
 private:
     int iteration;
 
 public:
     void run();
-    Quize();
+    Quiz();
 
 private:
     void gameLoop();
@@ -104,7 +104,7 @@ private:
     void askThirdQuestion();
 
 };
-#endif // Quize_H
+#endif // Quiz_H
 
 //////////////////////////////////////////
 
