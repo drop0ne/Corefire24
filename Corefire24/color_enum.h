@@ -7,3 +7,11 @@ enum dosINTcolors {
     highlight_blue_white = 23, check = 27
 };
 
+enum eFLAG_ThemeID {
+	defaultTheme = 0, RandomTheme = 1, RainbowTheme = 2
+};  
+
+// Options(0), ProgramID(1), Program(2), ExitID(3), Exit(4), Objects(5), ErrorMessages(6)
+enum eMainMenu_State_ID {
+	Options = 0, ProgramID = 1, Program = 2, ExitID = 3, Exit = 4, Objects = 5, ErrorMessage = 6
+};
