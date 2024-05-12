@@ -4,6 +4,7 @@
 
 // Init Global Object
 MyConsoleAPI_extended fn;
+NumberGenerator rng;//temp object for testing
 
 // Constructor
 MyConsoleAPI::MyConsoleAPI() {
@@ -131,52 +132,65 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 // End MyConsoleAPI
 
 
-MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(7), mainMenuState({green, purple, default_color, red, red, white, red}) {
-    // Set the default state parameters for the main menu text colors
-    // mainMenuState = options(0); programID(1); program(2); exitID(3); exit(4); objects(5); errorMessages(6);
+MyConsoleAPI_extended::MyConsoleAPI_extended() : defaultTheme_FLAG(true), number_of_state_parameters(7), mainMenuState({/*options(0)*/green,/*programID(1)*/purple,/*program(2)*/light_blue,/*exitID(3)*/red,
+    /*exit(4)*/gray,/*objects(5)*/white,/*errorMessages(6)*/red })
+{
+    /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
+    defaultState = mainMenuState;
+
 }
-    
+ 
 
 void MyConsoleAPI_extended::errorInvalidInput() {
-    fn.cout("\nERROR: INVALID INPUT\n", red);
-    fn.clearInputStream();
+    cout("\nERROR: INVALID INPUT\n", red);
+    clearInputStream();
 }
 
-void MyConsoleAPI_extended::setMainMenuState(const std::vector<int>& parameters) {
-    for (size_t i = 0; i < getMainMenuState().size(); i++)
+void MyConsoleAPI_extended::setMainMenuState(const std::vector<int> newState) {
+    cout("Setting new state\n");
+    for (size_t i = 0; i < mainMenuState.size(); i++)
     {
-        try
-        {
-            if (!parameters.empty()) {
-				mainMenuState.at(i) = parameters.at(i);
-			}
-            else {
-                throw std::invalid_argument("Invalid Parameters");
-            }
-        }
-        catch (const std::exception&)
-        {
-
-        }
+        mainMenuState[i] = newState[i];
     }
-
+    system("pause");
 }
 
 void MyConsoleAPI_extended::generateMainMenu(const std::vector<int>& stateData) {
     // stsateData = options(0); programID(1); program(2); exitID(3); exit(4);
 
-    fn.clearScreen();
-    fn.cout("CoreFireCode 2024 edition\n", dark_green);
-    fn.cout("\n\nMain Menu\n\n", bright_white);
-    fn.cout("Option ", stateData.at(0)); fn.cout("1 ", stateData.at(1)); fn.cout("- Number Gussing Game\n", stateData.at(2));
-    fn.cout("Option ", stateData.at(0)); fn.cout("2 ", stateData.at(1)); fn.cout("- CannabisCalculator\n", stateData.at(2));
-    fn.cout("Option ", stateData.at(0)); fn.cout("3 ", stateData.at(1)); fn.cout("- Quiz\n", stateData.at(2));
-    fn.cout("Option ", stateData.at(0)); fn.cout("9", stateData.at(3)); fn.cout(" - ", stateData.at(5)); fn.cout("Exit\n", stateData.at(4));
+    clearScreen();
+    cout("CoreFireCode 2024 edition\n", dark_green);
+    cout("\n\nMain Menu\n\n", white);
+    cout("Option", stateData.at(0)); cout(" 1 ", stateData.at(1)); cout("-", stateData.at(5)); cout(" Number Gussing Game\n", stateData.at(2));
+    cout("Option", stateData.at(0)); cout(" 2 ", stateData.at(1)); cout("-", stateData.at(5)); cout(" CannabisCalculator\n", stateData.at(2));
+    cout("Option", stateData.at(0)); cout(" 3 ", stateData.at(1)); cout("-", stateData.at(5)); cout(" Quiz\n", stateData.at(2));
+    cout("Option", stateData.at(0)); cout(" 4 ", stateData.at(1)); cout("-", stateData.at(5)); cout(" Random Menu Theme\n", stateData.at(2));
+    cout("Option", stateData.at(0)); cout(" 5 ", stateData.at(1)); cout("-", stateData.at(5)); cout(" Default Menu Theme\n", stateData.at(2));
+    cout("Option", stateData.at(0)); cout(" 9 ", stateData.at(3)); cout("-", stateData.at(5)); cout(" Exit\n", stateData.at(4));
 
+}
+
+void MyConsoleAPI_extended::randomMenuTheme() {
+
+    for (size_t i = 0; i < mainMenuState.size(); i++)
+    {
+        mainMenuState[i] = rng.returnRandomNumber(1, 15);
+    }
+}
+
+void MyConsoleAPI_extended::defaultMenuTheme() {
+    for (size_t i = 0; i < mainMenuState.size(); i++)
+    {
+        mainMenuState[i] = defaultState[i];
+    }
 }
 
 const std::vector<int>& MyConsoleAPI_extended::getMainMenuState() const {
     return mainMenuState;
+}
+
+const std::vector<int>& MyConsoleAPI_extended::getMainMenuDefaultState() const {
+	return defaultState;
 }
 
 int MyConsoleAPI_extended::selectMenuOption() {

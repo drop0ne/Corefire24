@@ -66,6 +66,8 @@ class MyConsoleAPI_extended : public MyConsoleAPI {
 private:
     int number_of_state_parameters;
     std::vector<int> mainMenuState;
+    std::vector<int> defaultState;
+    bool defaultTheme_FLAG;
         
 public:
     // Structs
@@ -74,9 +76,12 @@ public:
 
     void errorInvalidInput();
     int selectMenuOption();
-    void setMainMenuState(const std::vector<int>& parameters);
+    void setMainMenuState(const std::vector<int> newState);
     const std::vector<int>& getMainMenuState() const;
+    const std::vector<int>& getMainMenuDefaultState() const;
     void generateMainMenu(const std::vector<int>& stateData);
+    void randomMenuTheme();
+    void defaultMenuTheme();
     
 };
 #endif // !MY_CONSOLE_API_EXTENDED

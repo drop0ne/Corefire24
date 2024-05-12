@@ -18,6 +18,8 @@ int main()
 		case 1: numberGuessingGame.run(); break;
 		case 2: cannaCalcultor.run(); break;
 		case 3: quiz.run(); break;
+		case 4: fn.randomMenuTheme(); break;
+		case 5: fn.defaultMenuTheme(); break;
 		case 9: return 0;
 		default: fn.cout("Invalid :: Try Again", fn.getMainMenuState().at(6)); system("pause"); break;
 		}
