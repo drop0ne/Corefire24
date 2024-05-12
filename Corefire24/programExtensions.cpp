@@ -131,10 +131,9 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 // End MyConsoleAPI
 
 
-MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(5), mainMenuState({green, purple, default_color, red, red}) {
+MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(6), mainMenuState({green, purple, default_color, red, red, white}) {
     // Set the default state parameters for the main menu text colors
-    // number_of_state_parameters = 5; 
-    // mainMenuState = options; programID; program; exitID; exit;
+    // mainMenuState = options; programID; program; exitID; exit; objects;
 }
     
 
@@ -169,10 +168,10 @@ void MyConsoleAPI_extended::generateMainMenu(const std::vector<int>& stateData) 
     fn.clearScreen();
     fn.cout("CoreFireCode 2024 edition\n", dark_green);
     fn.cout("\n\nMain Menu\n\n", bright_white);
-    fn.cout("Option ", stateData.at(0)); fn.cout("1 ", purple); fn.cout("- Number Gussing Game\n", default_color);
-    fn.cout("Option ", stateData.at(0)); fn.cout("2 ", purple); fn.cout("- CannabisCalculator\n", default_color);
-    fn.cout("Option ", stateData.at(0)); fn.cout("3 ", purple); fn.cout("- Quiz\n", default_color);
-    fn.cout("Option ", stateData.at(0)); fn.cout("9", red); fn.cout(" - ", default_color); fn.cout("Exit\n", red);
+    fn.cout("Option ", stateData.at(0)); fn.cout("1 ", stateData.at(1)); fn.cout("- Number Gussing Game\n", stateData.at(2));
+    fn.cout("Option ", stateData.at(0)); fn.cout("2 ", stateData.at(1)); fn.cout("- CannabisCalculator\n", stateData.at(2));
+    fn.cout("Option ", stateData.at(0)); fn.cout("3 ", stateData.at(1)); fn.cout("- Quiz\n", stateData.at(2));
+    fn.cout("Option ", stateData.at(0)); fn.cout("9", stateData.at(3)); fn.cout(" - ", stateData.at(5)); fn.cout("Exit\n", stateData.at(4));
 
 }
 
