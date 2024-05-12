@@ -41,19 +41,46 @@ void MyConsoleAPI::cout(const std::string& data, const int textColor) {
     std::cout << data;
 }
 
-// Set the console screen color (background and text) using a system call
-void MyConsoleAPI::setScreenColor(int backgroundColor, int textColor) {
-    if (!SetConsoleTextAttribute(console_HWND, backgroundColor | textColor)) {
-        throw std::runtime_error("Failed to set screen color");
-    }
-}
 /*
-void MyConsoleAPI::setScreenColor(const char* data) {
-    if (system(data) != 0) {
+// Set the console screen color (background and text) using a system call
+void setScreenColor(int backgroundColor, int textColor) {
+    // Validate input ranges (assumed range for demonstration)
+    if (backgroundColor < 0 || backgroundColor > 255 || textColor < 0 || textColor > 255) {
+        throw std::invalid_argument("Color values out of range");
+    }
+    HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (console_HWND == INVALID_HANDLE_VALUE) {
+        throw std::runtime_error("Failed to get standard output handle");
+    }
+
+    // Attempt to set the console text attribute
+    BOOL result = SetConsoleTextAttribute(console_HWND, backgroundColor | textColor);
+    if (!result) {
         throw std::runtime_error("Failed to set screen color");
     }
 }
 */
+
+
+void MyConsoleAPI::setScreenColor(const char* data) {
+    try {
+        // Validate the input before executing
+        if (!isValidCommand(data)) {
+            throw std::invalid_argument("Invalid command for screen color.");
+        }
+        // Execute the system command
+        int result = system(data);
+        if (result != 0) { // Check system() return value
+            throw std::runtime_error("Failed to execute system command.");
+        }
+    }
+    catch (const std::exception& e) {
+        // Handle any exceptions that are thrown
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+}
+
+
 // Set text color
 void MyConsoleAPI::set_text_color(int data) {
     if (!SetConsoleTextAttribute(console_HWND, data)) {
@@ -77,29 +104,94 @@ void MyConsoleAPI::extractInputStream() {
         std::cout << c;
     }
 }
+// END Public Functions // Start Private Functions
 
+bool MyConsoleAPI::isValidCommand(const char* command) {
+    // List of allowed commands for setting screen colors, now including gray
+    const std::vector<std::string> allowedCommands = {
+        "color 0A", // Light green on black
+        "color 0B", // Light aqua on black
+        "color 0C", // Light red on black
+        "color 0D", // Light purple on black
+        "color 0E", // Light yellow on black
+        "color 0F", // Bright white on black
+        "color 08"  // Gray on black
+    };
 
-MyConsoleAPI_extended::MyConsoleAPI_extended() : MyConsoleAPI() {
-    // Constructor
+    // Check if the command is in the list of allowed commands
+    for (const auto& cmd : allowedCommands) {
+        if (cmd == command) {
+            return true;
+        }
+    }
+    return false;
 }
 
+// END Private Functions ////////////////////////////////////////////////////////
+// End MyConsoleAPI
+
+
+MyConsoleAPI_extended::MyConsoleAPI_extended() : number_of_state_parameters(6), mainMenuState({green, purple, default_color, red, red, white}) {
+    // Set the default state parameters for the main menu text colors
+    // mainMenuState = options; programID; program; exitID; exit; objects;
+}
+    
+
 void MyConsoleAPI_extended::errorInvalidInput() {
-    MyConsoleAPI_extended::cout("\nERROR: INVALID INPUT\n", red);
-    MyConsoleAPI_extended::clearInputStream();
+    fn.cout("\nERROR: INVALID INPUT\n", red);
+    fn.clearInputStream();
+}
+
+void MyConsoleAPI_extended::setMainMenuState(const std::vector<int>& parameters) {
+    for (size_t i = 0; i < getMainMenuState().size(); i++)
+    {
+        try
+        {
+            if (!parameters.empty()) {
+				mainMenuState.at(i) = parameters.at(i);
+			}
+            else {
+                throw std::invalid_argument("Invalid Parameters");
+            }
+        }
+        catch (const std::exception&)
+        {
+
+        }
+    }
+
+}
+
+void MyConsoleAPI_extended::generateMainMenu(const std::vector<int>& stateData) {
+    // stsateData = options(0); programID(1); program(2); exitID(3); exit(4);
+
+    fn.clearScreen();
+    fn.cout("CoreFireCode 2024 edition\n", dark_green);
+    fn.cout("\n\nMain Menu\n\n", bright_white);
+    fn.cout("Option ", stateData.at(0)); fn.cout("1 ", stateData.at(1)); fn.cout("- Number Gussing Game\n", stateData.at(2));
+    fn.cout("Option ", stateData.at(0)); fn.cout("2 ", stateData.at(1)); fn.cout("- CannabisCalculator\n", stateData.at(2));
+    fn.cout("Option ", stateData.at(0)); fn.cout("3 ", stateData.at(1)); fn.cout("- Quiz\n", stateData.at(2));
+    fn.cout("Option ", stateData.at(0)); fn.cout("9", stateData.at(3)); fn.cout(" - ", stateData.at(5)); fn.cout("Exit\n", stateData.at(4));
+
+}
+
+const std::vector<int>& MyConsoleAPI_extended::getMainMenuState() const {
+    return mainMenuState;
 }
 
 int MyConsoleAPI_extended::selectMenuOption() {
     int returnValue{ 0 };
 
-    MyConsoleAPI_extended::cout("\nEnter Command: ", light_blue);
+    fn.cout("\nEnter Command: ", default_color);
     if (std::cin >> returnValue) {
         return returnValue;
     }
     else {
-        MyConsoleAPI_extended::clearInputStream();
+        fn.clearInputStream();
         return 0;
     }
 }
+
 
 // QUIZ GAME  ////////////////////////////////////////////////////////
 void Quize::run() {
@@ -116,7 +208,9 @@ void Quize::gameLoop() {
 		iteration++;
 		question(iteration);
 	} while (iteration < 3);
-	std::cout << "\nGAME OVER\n\n";
+
+	fn.cout("\nGAME OVER\n\n", red);
+    fn.set_text_color(default_color);
 	system("pause"); // Last Instruction before returning to main menu
 }
 
@@ -131,12 +225,13 @@ int Quize::requestInput() {
 	int convertedGuess{};
 	size_t pos{};
 	do {
+        fn.set_text_color(green);
 		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { std::cout << "Invalid Number::Out of Range\nTry Again: "; fn.clearInputStream(); continue; }
+				if (convertedGuess > 3) { fn.cout("Invalid Number::Out of Range\nTry Again: ", red); fn.clearInputStream(); continue; }
 				break;
 			}
 			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); fn.clearInputStream(); }
@@ -166,21 +261,39 @@ inline void Quize::question(int questionNumber) {
 }
 
 void Quize::askFirstQuestion() {
-	fn.cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", default_color);
-	if (requestInput() == 3) { std::cout << "\nCorrect!\n" << std::endl; }
-	else { std::cout << "\nIncorrect\n" << std::endl; }
+	fn.cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", ice_blue);
+    if (requestInput() == 3) {
+        fn.setScreenColor("color 08"); // Gray on black
+        fn.cout("\nCorrect!\n\n", purple);
+    } 
+    else {
+        fn.setScreenColor("color 08"); // Gray on black
+        fn.cout("\nIncorrect\n\n", red); 
+    }
 }
 
 void Quize::askSecondQuestion() {
-	fn.cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ");
-	if (requestInput() == 2) { std::cout << "\nCorrect!\n" << std::endl; }
-	else { std::cout << "\nIncorrect\n" << std::endl; }
+	fn.cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", ice_blue);
+	if (requestInput() == 2) {
+        fn.setScreenColor("color 08"); // Gray on black
+        fn.cout("\nCorrect!\n\n", purple); 
+    }
+    else {
+        fn.setScreenColor("color 08"); // Gray on black
+        fn.cout("\nIncorrect\n\n", red);
+    }
 }
 
 void Quize::askThirdQuestion() {
-	fn.cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ");
-	if (requestInput() == 1) { std::cout << "\nCorrect!\n" << std::endl; }
-	else { std::cout << "\nIncorrect\n" << std::endl; }
+	fn.cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", ice_blue);
+	if (requestInput() == 1) {
+        fn.setScreenColor("color 08"); // Gray on black
+        fn.cout("\nCorrect!\n\n", purple); 
+    }
+    else {
+        fn.setScreenColor("color 08"); // Gray on black
+        fn.cout("\nIncorrect\n\n", red);
+    }
 }
 
 // END QUIZ GAME  ////////////////////////////////////////////////////////

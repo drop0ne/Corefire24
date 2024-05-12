@@ -40,15 +40,19 @@ protected:
     HANDLE console_HWND; // Handle to the console window
 
 public:
+
+    // Methods
     MyConsoleAPI(); // Constructor
     virtual void clearScreen(); // Clear the console screen
     virtual void cout(const std::string& data); // Print text to the console
     virtual void cout(const std::string& data, const int set_text_color); // Print text to the console & set the text color
-    virtual void setScreenColor(const int backgroundColor, const int textColor); // Set the full screen color
+    //virtual void setScreenColor(const int backgroundColor, const int textColor); // Set the full screen color
+    virtual void setScreenColor(const char* screenTextColor); // Set the full screen color)
     virtual void set_text_color(const int data); // Set the text color in the console
     virtual void clearInputStream();
     virtual void extractInputStream();
-
+private:
+    bool isValidCommand(const char* command);
 };
 #endif // MY_CONSOLE_API_H
 
@@ -58,16 +62,22 @@ public:
 #define MY_CONSOLE_API_EXTENDED
 
 
-class MyConsoleAPI_extended : public MyConsoleAPI
-{
+class MyConsoleAPI_extended : public MyConsoleAPI {
 private:
-    //bool mainProgramLoopCondition{};
-
+    int number_of_state_parameters;
+    std::vector<int> mainMenuState;
+        
 public:
+    // Structs
+    // Methods
     MyConsoleAPI_extended(); // Constructor
 
     void errorInvalidInput();
     int selectMenuOption();
+    void setMainMenuState(const std::vector<int>& parameters);
+    const std::vector<int>& getMainMenuState() const;
+    void generateMainMenu(const std::vector<int>& stateData);
+    
 };
 #endif // !MY_CONSOLE_API_EXTENDED
 

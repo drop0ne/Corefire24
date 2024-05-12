@@ -156,6 +156,7 @@
     <ClCompile Include="programExtensions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="color_enum.h" />
     <ClInclude Include="include.h" />
     <ClInclude Include="programExtensions.h" />
   </ItemGroup>

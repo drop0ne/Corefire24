@@ -3,6 +3,7 @@
 // #define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
 #include <iostream>
 #include <string>
+#include <array>
 #include <vector>
 #include <algorithm>
 #include <limits>
