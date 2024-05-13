@@ -157,8 +157,8 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 /*************************************************************/
 
 MyConsoleAPI_extension::MyConsoleAPI_extension() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
-mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*programID(1)*/purple, /*program(2)*/light_blue,
-    /*exitID(3)*/red, /*exit(4)*/gray, /*objects(5)*/white, /*errorMessages(6)*/red })
+mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/GREEN, /*programID(1)*/DARK_MAGENTA, /*program(2)*/CYAN,
+    /*exitID(3)*/DARK_RED, /*exit(4)*/LIGHT_GRAY, /*objects(5)*/WHITE, /*errorMessages(6)*/RED })
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
@@ -167,7 +167,7 @@ mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*prog
     FLAGS_theme_atomic.emplace_back(std::make_unique<std::atomic<bool>>(true)); // ThemeThread
 }
 void MyConsoleAPI_extension::invalid_Input() {
-    cout("\nERROR: INVALID INPUT\n", red);
+    cout("\nERROR: INVALID INPUT\n", RED);
     clearInputStream();
 }
 
@@ -189,8 +189,8 @@ void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData)
     /* cout(string, int, string, int) */
     /* cout(string, int) */
 
-    cout("CoreFireCode 2024 edition\n", green);
-    cout("\n\nMain Menu\n\n", white);
+    cout("CoreFireCode 2024 edition\n", GREEN);
+    cout("\n\nMain Menu\n\n", WHITE);
     cout("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
     cout("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " CannabisCalculator\n",  stateData.at(Program));
     cout("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Quiz\n",                stateData.at(Program));
@@ -303,7 +303,8 @@ const std::vector<int>& MyConsoleAPI_extension::getMainMenuDefaultState() const 
 int MyConsoleAPI_extension::selectMenuOption() {
     int returnValue{ 0 };
 
-    fn.cout("\nEnter Command: ", default_color);
+    cout("\nEnter Command: ", WHITE);
+    set_text_color(DARK_CYAN);
     if (std::cin >> returnValue) {
         return returnValue;
     }
@@ -330,8 +331,8 @@ void Quiz::gameLoop() {
 		question(iteration);
 	} while (iteration < 3);
 
-	fn.cout("\nGAME OVER\n\n", red);
-    fn.set_text_color(default_color);
+	fn.cout("\nGAME OVER\n\n", RED);
+    fn.set_text_color(WHITE);
 	system("pause"); // Last Instruction before returning to main menu
 }
 
@@ -346,13 +347,13 @@ int Quiz::requestInput() {
 	int convertedGuess{};
 	size_t pos{};
 	do {
-        fn.set_text_color(green);
+        fn.set_text_color(GREEN);
 		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { fn.cout("Invalid Number::Out of Range\nTry Again: ", red); fn.clearInputStream(); continue; }
+				if (convertedGuess > 3) { fn.cout("Invalid Number::Out of Range\nTry Again: ", RED); fn.clearInputStream(); continue; }
 				break;
 			}
 			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); fn.clearInputStream(); }
@@ -382,38 +383,38 @@ inline void Quiz::question(int questionNumber) {
 }
 
 void Quiz::askFirstQuestion() {
-	fn.cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", ice_blue);
+	fn.cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", BLUE);
     if (requestInput() == 3) {
         fn.setScreenColor("color 08"); // Gray on black
-        fn.cout("\nCorrect!\n\n", purple);
+        fn.cout("\nCorrect!\n\n", DARK_MAGENTA);
     } 
     else {
         fn.setScreenColor("color 08"); // Gray on black
-        fn.cout("\nIncorrect\n\n", red); 
+        fn.cout("\nIncorrect\n\n", RED);
     }
 }
 
 void Quiz::askSecondQuestion() {
-	fn.cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", ice_blue);
+	fn.cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", BLUE);
 	if (requestInput() == 2) {
         fn.setScreenColor("color 08"); // Gray on black
-        fn.cout("\nCorrect!\n\n", purple); 
+        fn.cout("\nCorrect!\n\n", DARK_MAGENTA);
     }
     else {
         fn.setScreenColor("color 08"); // Gray on black
-        fn.cout("\nIncorrect\n\n", red);
+        fn.cout("\nIncorrect\n\n", RED);
     }
 }
 
 void Quiz::askThirdQuestion() {
-	fn.cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", ice_blue);
-	if (requestInput() == 1) {
+	fn.cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", BLUE);
+    if (requestInput() == 1) {
         fn.setScreenColor("color 08"); // Gray on black
-        fn.cout("\nCorrect!\n\n", purple); 
+        fn.cout("\nCorrect!\n\n", DARK_MAGENTA);
     }
     else {
         fn.setScreenColor("color 08"); // Gray on black
-        fn.cout("\nIncorrect\n\n", red);
+        fn.cout("\nIncorrect\n\n", RED);
     }
 }
 
@@ -429,7 +430,7 @@ NumberGenerator::NumberGenerator() : generator(rd()) {}
 NumberGenerator::~NumberGenerator() {}
 
 // Member function to return a random number within a range
-int NumberGenerator::returnRandomNumber(const int min, const int max) {
+int const NumberGenerator::returnRandomNumber(const int min, const int max) {
 	std::uniform_int_distribution<int> distribution(min, max);
 	return distribution(generator);
 }
