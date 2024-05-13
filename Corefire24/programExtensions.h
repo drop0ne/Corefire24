@@ -1,5 +1,9 @@
 #pragma once
 #include "include.h"
+#undef max
+
+// This is a macro that prevents the max macro from being defined
+
 
 #ifndef NUMBER_GENERATOR_H
 #define NUMBER_GENERATOR_H
@@ -13,7 +17,7 @@ public:
     NumberGenerator();  // Constructor
     ~NumberGenerator(); // Destructor
 
-    int returnRandomNumber(int min, int max);
+    int returnRandomNumber(const int min,const int max);
 };
 
 #endif // NUMBER_GENERATOR_H
@@ -24,26 +28,19 @@ public:
 #include <string>
 
 class programExtensions {
- /*
 public:
     static void setConsoleTitle(const std::string& title);
     static void setConsoleSize(int width, int height);
     static void setConsoleFont(int width, int height, const std::string& fontName);
-
-    // Simplified setConsoleIcon with basic use cases
     static void setConsoleIcon(int iconID);
     static void setConsoleIcon(const std::string& iconPath);
 
-    // Example of a more flexible function using a settings structure
     struct IconSettings {
         std::string path;
-        int id = -1; // Default ID
-        // Add more properties as needed
+        int id = -1;
     };
     static void setConsoleIcon(const IconSettings& settings);
- */
 };
-
 #endif // PROGRAM_EXTENSIONS
 
 //////////////////////////////////////////

@@ -1,6 +1,5 @@
 #include "programExtensions.h"
 
-#undef max()// This is a macro that prevents the max macro from being defined
 
 // Init Global Object
 static MyConsoleAPI_extension fn;
@@ -11,9 +10,9 @@ MyConsoleAPI::MyConsoleAPI() : threadLimit(8) {
     if (console_HWND == INVALID_HANDLE_VALUE) {
         throw std::runtime_error("Failed to get standard output handle");
     }
-    threadID_vector.reserve(threadLimit + 1);/* plus one to account for the main thread plus the reservasion */
-    threadID_vector.at(MainThread) = std::this_thread::get_id();/* Set The ID for the calling thread of exacution -- should be the main thread */
-    thread_vector.reserve(threadLimit);
+    threadID_vector.resize(threadLimit);/* plus one to account for the main thread plus the reservasion */
+    threadID_vector[MainThread] = std::this_thread::get_id();/* Set The ID for the calling thread of exacution -- should be the main thread */
+    thread_vector.resize(threadLimit);
 }
 
 // Clear the console screen using Windows API for better performance and security
@@ -163,7 +162,7 @@ mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*prog
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
-    FLAGS_theme_atomic.reserve(threadLimit);
+    FLAGS_theme_atomic.resize(threadLimit);
     FLAGS_theme_atomic.emplace_back(std::make_unique<std::atomic<bool>>(true)); // MainThread
     FLAGS_theme_atomic.emplace_back(std::make_unique<std::atomic<bool>>(true)); // ThemeThread
 }
@@ -193,11 +192,11 @@ void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData)
     cout("CoreFireCode 2024 edition\n", green);
     cout("\n\nMain Menu\n\n", white);
     cout("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
-    cout("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " CannabisCalculator\n", stateData.at(Program));
-    cout("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Quiz\n", stateData.at(Program));
-    cout("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
-    cout("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n", stateData.at(Program));
-    cout("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
+    cout("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " CannabisCalculator\n",  stateData.at(Program));
+    cout("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Quiz\n",                stateData.at(Program));
+    cout("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n",   stateData.at(Program));
+    cout("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n",  stateData.at(Program));
+    cout("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n",        stateData.at(ExitProgram));
 }
 
 void MyConsoleAPI_extension::setThemeFlag(const int themeFlag_ID) {
@@ -430,7 +429,7 @@ NumberGenerator::NumberGenerator() : generator(rd()) {}
 NumberGenerator::~NumberGenerator() {}
 
 // Member function to return a random number within a range
-int NumberGenerator::returnRandomNumber(int min, int max) {
+int NumberGenerator::returnRandomNumber(const int min, const int max) {
 	std::uniform_int_distribution<int> distribution(min, max);
 	return distribution(generator);
 }
