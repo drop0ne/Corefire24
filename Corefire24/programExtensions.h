@@ -53,9 +53,9 @@ public:
 
 class MyConsoleAPI {
 private:
-    int threadLimit;
 protected:
     HANDLE console_HWND; // Handle to the console window
+    int threadLimit;
     std::vector<std::thread::id> threadID_vector;
     std::vector<std::thread> thread_vector;
 public:
@@ -91,6 +91,7 @@ private:
     std::vector<int> mainMenuParameterState;
     std::vector<int> mainMenu_defaultParameterState;
     std::vector<bool> FLAGS_theme;
+    std::vector<std::atomic<bool>> FLAGS_theme_atomic;
         
 public:
     // Structs

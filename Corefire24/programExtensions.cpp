@@ -163,6 +163,9 @@ mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*prog
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
+    FLAGS_theme_atomic.reserve(threadLimit);
+    FLAGS_theme_atomic.at(MainThread) = true;
+    FLAGS_theme_atomic.at(ThemeThread) = true;
 }
 
 void MyConsoleAPI_extension::invalid_Input() {
@@ -262,19 +265,33 @@ void MyConsoleAPI_extension::menuTheme_Default() {
 
 void MyConsoleAPI_extension::menuTheme_Random() {
     /*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
-    setThemeFlag(RandomTheme);
+
+    if (FLAGS_theme.at(RainbowTheme)) {
+        do
+        {
+            for (size_t i = 0; i < mainMenuParameterState.size(); i++)
+            {
+                mainMenuParameterState[i] = returnRandomNumber(1, 15);
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        } while (FLAGS_theme_atomic.at(ThemeThread));
+        
+        thread_vector.at(ThemeThread).join();
+        return;
+    }
 
     for (size_t i = 0; i < mainMenuParameterState.size(); i++)
     {
         mainMenuParameterState[i] = returnRandomNumber(1, 15);
     }
 }
-/* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2)
- */
+
+/* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
+
 void MyConsoleAPI_extension::menuTheme_Rainbow() {
     setThemeFlag(RainbowTheme);
-    thread_vector.at(ThemeThread) = std::thread(&menuTheme_Random);
-    /* not finished */
+    thread_vector.at(ThemeThread) = std::thread{ &MyConsoleAPI_extension::menuTheme_Random };
+    thread_vector.at(ThemeThread).detach();
 }
 
 const std::vector<int>& MyConsoleAPI_extension::getMainMenuState() const {

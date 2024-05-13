@@ -12,6 +12,7 @@
 #include <windows.h>
 #include <stdexcept>
 #include <thread>
+#include <chrono>
 
 // Classes
 #include "programExtensions.h"
