@@ -91,7 +91,7 @@ private:
     std::vector<int> mainMenuParameterState;
     std::vector<int> mainMenu_defaultParameterState;
     std::vector<bool> FLAGS_theme;
-    std::vector<std::atomic<bool>> FLAGS_theme_atomic;
+    std::vector<std::unique_ptr<std::atomic<bool>>> FLAGS_theme_atomic;
         
 public:
     // Structs
@@ -112,6 +112,22 @@ private:
     void menuTheme_Random(); // ID (1)
     void menuTheme_Rainbow(); // ID (2)
     
+
+    /*
+    
+        void checkFlag(size_t index) {
+        if (index < flags.size() && flags[index]->load()) {  // Correctly accessing atomic bool
+            // Handle the flag being true
+        }
+    }
+
+    void setFlag(size_t index, bool value) {
+        if (index < flags.size()) {
+            flags[index]->store(value);  // Correctly setting atomic bool
+        }
+    }
+
+    */
 };
 #endif // !MY_CONSOLE_API_EXTENDED
 

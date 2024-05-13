@@ -157,17 +157,16 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 /*                     < Main Menu API >                     */
 /*************************************************************/
 
-MyConsoleAPI_extension::MyConsoleAPI_extension() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false}),
+MyConsoleAPI_extension::MyConsoleAPI_extension() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
 mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*programID(1)*/purple, /*program(2)*/light_blue,
     /*exitID(3)*/red, /*exit(4)*/gray, /*objects(5)*/white, /*errorMessages(6)*/red })
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
     FLAGS_theme_atomic.reserve(threadLimit);
-    FLAGS_theme_atomic.at(MainThread) = true;
-    FLAGS_theme_atomic.at(ThemeThread) = true;
+    FLAGS_theme_atomic.emplace_back(std::make_unique<std::atomic<bool>>(true)); // MainThread
+    FLAGS_theme_atomic.emplace_back(std::make_unique<std::atomic<bool>>(true)); // ThemeThread
 }
-
 void MyConsoleAPI_extension::invalid_Input() {
     cout("\nERROR: INVALID INPUT\n", red);
     clearInputStream();
@@ -241,10 +240,10 @@ void MyConsoleAPI_extension::setThemeFlag(const int themeFlag_ID) {
 void MyConsoleAPI_extension::callTheme_by_Flag_ID(const int& themeFlag_ID) {
     switch (themeFlag_ID)
     {
-	case 0: menuTheme_Default(); break;
-	case 1: menuTheme_Random(); break;
-	case 2: menuTheme_Rainbow(); break;
-	default: menuTheme_Default(); break;
+    case 0:  setThemeFlag(defaultTheme); menuTheme_Default(); break;
+    case 1:  setThemeFlag(RandomTheme);  menuTheme_Random(); break;
+    case 2:  setThemeFlag(RainbowTheme); menuTheme_Rainbow(); break;
+    default: setThemeFlag(defaultTheme); menuTheme_Default(); break;
 	}
 }
 
@@ -274,8 +273,8 @@ void MyConsoleAPI_extension::menuTheme_Random() {
                 mainMenuParameterState[i] = returnRandomNumber(1, 15);
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        } while (FLAGS_theme_atomic.at(ThemeThread));
-        
+        } while (FLAGS_theme_atomic[ThemeThread]->load());
+
         thread_vector.at(ThemeThread).join();
         return;
     }
@@ -290,7 +289,7 @@ void MyConsoleAPI_extension::menuTheme_Random() {
 
 void MyConsoleAPI_extension::menuTheme_Rainbow() {
     setThemeFlag(RainbowTheme);
-    thread_vector.at(ThemeThread) = std::thread{ &MyConsoleAPI_extension::menuTheme_Random };
+    thread_vector.at(ThemeThread) = std::thread(&MyConsoleAPI_extension::menuTheme_Random, this);
     thread_vector.at(ThemeThread).detach();
 }
 
