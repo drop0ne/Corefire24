@@ -20,6 +20,3 @@
 
 // Enums
 #include "color_enum.h"
-
-
-//#undef max() // This is a macro that prevents the max macro from being defined

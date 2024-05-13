@@ -56,28 +56,6 @@ void MyConsoleAPI::cout(const std::string& string1, const int& textColor1, const
     std::cout << string4;
 }
 
-
-/*
-// Set the console screen color (background and text) using a system call
-void setScreenColor(int backgroundColor, int textColor) {
-    // Validate input ranges (assumed range for demonstration)
-    if (backgroundColor < 0 || backgroundColor > 255 || textColor < 0 || textColor > 255) {
-        throw std::invalid_argument("Color values out of range");
-    }
-    HANDLE console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
-    if (console_HWND == INVALID_HANDLE_VALUE) {
-        throw std::runtime_error("Failed to get standard output handle");
-    }
-
-    // Attempt to set the console text attribute
-    BOOL result = SetConsoleTextAttribute(console_HWND, backgroundColor | textColor);
-    if (!result) {
-        throw std::runtime_error("Failed to set screen color");
-    }
-}
-*/
-
-
 void MyConsoleAPI::setScreenColor(const char* data) {
     try {
         // Validate the input before executing
