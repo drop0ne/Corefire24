@@ -157,8 +157,8 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 /*************************************************************/
 
 MyConsoleAPI_extension::MyConsoleAPI_extension() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
-mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/GREEN, /*programID(1)*/DARK_MAGENTA, /*program(2)*/CYAN,
-    /*exitID(3)*/DARK_RED, /*exit(4)*/LIGHT_GRAY, /*objects(5)*/WHITE, /*errorMessages(6)*/RED })
+mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/DARK_GREEN, /*programID(1)*/MAGENTA, /*program(2)*/BLUE,
+    /*exitID(3)*/DARK_RED, /*exit(4)*/DARK_GRAY, /*objects(5)*/LIGHT_GRAY, /*errorMessages(6)*/RED })
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
