@@ -11,6 +11,9 @@
 #include <any>
 #include <windows.h>
 #include <stdexcept>
+#include <thread>
+#include <chrono>
+#include <memory>
 
 // Classes
 #include "programExtensions.h"

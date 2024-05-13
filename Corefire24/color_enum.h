@@ -1,4 +1,3 @@
-// Last update: 2024/05/09 by jake
 enum dosINTcolors {
     default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1,
     bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11,
@@ -7,3 +6,14 @@ enum dosINTcolors {
     highlight_blue_white = 23, check = 27
 };
 
+enum eFLAG_ThemeID {
+	defaultTheme = 0, RandomTheme = 1, RainbowTheme = 2
+};  
+
+enum eMainMenu_State_ID {
+	Options = 0, ProgramID = 1, Program = 2, ExitProgramID = 3, ExitProgram = 4, Symbols = 5, ErrorMessage = 6
+};
+
+enum eThread_ID {
+	MainThread = 0, ThemeThread = 1
+};
