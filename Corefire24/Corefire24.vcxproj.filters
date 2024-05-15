@@ -21,12 +21,21 @@
     <ClCompile Include="programExtensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Games.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="programExtensions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="color_enum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Games.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

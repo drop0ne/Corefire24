@@ -153,10 +153,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
+    <ClCompile Include="Games.cpp" />
     <ClCompile Include="programExtensions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color_enum.h" />
+    <ClInclude Include="Games.h" />
     <ClInclude Include="include.h" />
     <ClInclude Include="programExtensions.h" />
   </ItemGroup>

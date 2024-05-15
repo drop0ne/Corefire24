@@ -17,6 +17,7 @@
 
 // Classes
 #include "programExtensions.h"
+#include "Games.h"
 
 // Enums
 #include "color_enum.h"
