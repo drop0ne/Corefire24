@@ -17,7 +17,7 @@ public:
     NumberGenerator();  // Constructor
     ~NumberGenerator(); // Destructor
 
-    int const returnRandomNumber(const int min,const int max);
+    int returnRandomNumber(const int min,const int max);
 };
 
 #endif // NUMBER_GENERATOR_H
