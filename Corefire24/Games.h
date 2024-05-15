@@ -1,6 +1,10 @@
 #pragma once
 #include "include.h"
 
+#ifndef GAMES
+#define GAMES
+
+
 class Hangman : public MyConsoleAPI
 {
 public:
@@ -11,7 +15,7 @@ public:
 	void run(); // Main entry point for the game
 
 private:
-	std::vector<std::string> Alphabet;
+	std::vector<std::string> alphabet;
 	std::vector<bool> guessedLetters;
 	std::vector<bool> answer;
 	std::string guess;
@@ -24,5 +28,7 @@ private:
 	void update_draw(bool state_DATA);
 
 
+
 };
 
+#endif // GAMES
