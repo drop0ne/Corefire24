@@ -1,6 +1,7 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 /////////////////////////////////////////////////////
-#include "include.h"
+#include "My Standard Includes.h"
+#include "My Codebase.h"
 
 
 int main()

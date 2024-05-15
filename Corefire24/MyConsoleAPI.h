@@ -1,5 +1,5 @@
 #pragma once
-#include "include.h"
+#include "My Standard Includes.h"
 #undef max
 
 // This is a macro that prevents the max macro from being defined
@@ -127,75 +127,3 @@ private:
     */
 };
 #endif // !MY_CONSOLE_API_EXTENDED
-
-//////////////////////////////////////////
-
-#ifndef Quiz_H
-#define Quiz_H
-
-class Quiz {
-private:
-    int iteration;
-
-public:
-    void run();
-    Quiz();
-
-private:
-    void gameLoop();
-    void setupEnviorment();
-    int requestInput();
-    void question(int questionNumber);
-    void askFirstQuestion();
-    void askSecondQuestion();
-    void askThirdQuestion();
-
-};
-#endif // Quiz_H
-
-//////////////////////////////////////////
-
-
-//////////////////////////////////////////
-
-#ifndef NUMBER_GUESSING_GAME_H
-#define NUMBER_GUESSING_GAME_H
-// ready for start screen with menu options
-// options: set rng range; set number of guess; have default avalible - thats 3 options
-
-class NumberGuessingGame : public NumberGenerator {
-private:
-    struct NumberRangeLimit {
-        int min;
-        int max;
-    };
-
-    // Game state working memory
-    int randomNumber;
-    int MAX_GUESSES;
-    int attempt;
-    int attemptCount;
-    NumberRangeLimit rangeLimit;
-
-public:
-    NumberGuessingGame();
-    ~NumberGuessingGame();
-    void run();
-
-private:
-    void gameLoop();
-    void setGameState();
-};
-
-
-class CannaCalculator {
-public:
-    CannaCalculator();
-    ~CannaCalculator();
-
-    void run();
-
-private:
-    void programLoop();
-};
-#endif // NUMBER_GUESSING_GAME_H
