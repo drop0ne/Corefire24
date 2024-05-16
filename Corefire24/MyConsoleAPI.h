@@ -1,4 +1,4 @@
-#pragma once
+#include  "MyEnum.h"
 #include "My Standard Includes.h"
 #undef max
 

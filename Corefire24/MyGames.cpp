@@ -1,4 +1,4 @@
-#include "Games.h"
+#include "MyGames.h"
 
 Hangman::Hangman() : alphabet({ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
 		"U", "V", "W", "X", "Y", "Z" }), guessedLetters(std::size(alphabet), false), answer(std::size(answer), false), guess(" "), iteration(0)
@@ -61,8 +61,7 @@ bool Hangman::checkGuess(std::string guess) {
 	return false;
 }
 
-void drawScreen(bool& state_DATA, size_t& i) {
-
+void Hangman::drawScreen(bool state_DATA) {
 
 }
 

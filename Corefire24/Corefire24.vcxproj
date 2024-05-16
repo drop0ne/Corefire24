@@ -157,7 +157,7 @@
     <ClCompile Include="MyGames.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="color_enum.h" />
+    <ClInclude Include="MyEnum.h" />
     <ClInclude Include="My Codebase.h" />
     <ClInclude Include="MyConsoleAPI.h" />
     <ClInclude Include="MyGames.h" />
