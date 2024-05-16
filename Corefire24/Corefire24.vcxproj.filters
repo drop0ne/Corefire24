@@ -18,15 +18,30 @@
     <ClCompile Include="Corefire24.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="programExtensions.cpp">
+    <ClCompile Include="MyConsoleAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGames.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include.h">
+    <ClInclude Include="color_enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="programExtensions.h">
+    <ClInclude Include="ProgramExstentions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyConsoleAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="My Codebase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="My Standard Includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
