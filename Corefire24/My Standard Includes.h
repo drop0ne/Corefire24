@@ -1,6 +1,5 @@
 #pragma once
 
-// #define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
 #include <iostream>
 #include <string>
 #include <array>
@@ -9,14 +8,9 @@
 #include <limits>
 #include <random>
 #include <any>
+// #define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
 #include <windows.h>
 #include <stdexcept>
 #include <thread>
 #include <chrono>
 #include <memory>
-
-// Classes
-#include "programExtensions.h"
-
-// Enums
-#include "color_enum.h"

@@ -1,6 +1,7 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 /////////////////////////////////////////////////////
-#include "include.h"
+#include "MyConsoleAPI.h"
+#include "MyGames.h"
 
 
 int main()
@@ -21,7 +22,6 @@ int main()
 		case 3: quiz.run(); break;
 		case 4: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 5: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
-		case 6: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
 		default: fn.cout("Invalid :: Try Again", fn.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
