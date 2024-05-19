@@ -23,6 +23,7 @@ int main()
 			std::jthread workerThread([&quiz]() {
 				fn.threadFunction(quiz);
 				});
+			//workerThread.detach(); /* BREAKs the program */
 			break;
 		}
 		case 4: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;

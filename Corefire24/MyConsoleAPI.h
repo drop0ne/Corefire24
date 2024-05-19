@@ -77,21 +77,11 @@ public:
 
 
 public:
-    
-    template <typename T>
-    void createNewConsoleWindow() {
-        if (AllocConsole()) {
-            FILE* file;
-            freopen_s(&file, "CONOUT$", "w", stdout);
-        }
-        else {
-            std::cerr << "Failed to create new console window." << std::endl;
-        }
-    }
+    virtual void createNewConsoleWindow();
 
-    template <typename T>
-    void threadFunction(T& obj) {
-        createNewConsoleWindow<T>();
+    template <typename MY_OBJ>
+    void threadFunction(MY_OBJ& obj) {
+        createNewConsoleWindow();
         obj.run();
     }
 

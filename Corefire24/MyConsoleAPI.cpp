@@ -122,6 +122,18 @@ void MyConsoleAPI::passFunction_toThread_new(void (function)()) {
     //  todo: save thread ID to threadID_vector
 }
 
+void MyConsoleAPI::createNewConsoleWindow() {
+    if (AllocConsole()) {
+        FILE* file;
+        freopen_s(&file, "CONOUT$", "w", stdout);
+        freopen_s(&file, "CONOUT$", "w", stderr);
+        freopen_s(&file, "CONIN$", "r", stdin);
+    }
+    else {
+        std::cerr << "Failed to create new console window." << std::endl;
+    }
+}
+
 
 // END Public Functions // Start Private Functions
 
