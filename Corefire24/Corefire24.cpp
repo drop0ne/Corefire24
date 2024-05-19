@@ -19,7 +19,12 @@ int main()
 		{
 		case 1: numberGuessingGame.run(); break;
 		case 2: cannaCalcultor.run(); break;
-		case 3: quiz.run(); break;
+		case 3: {
+			std::jthread workerThread([&quiz]() {
+				fn.threadFunction(quiz);
+				});
+			break;
+		}
 		case 4: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 5: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/

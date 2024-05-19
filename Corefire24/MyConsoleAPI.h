@@ -22,12 +22,12 @@ public:
 
 #endif // NUMBER_GENERATOR_H
 
-#ifndef PROGRAM_EXTENSIONS
-#define PROGRAM_EXTENSIONS
+#ifndef PROGRAM_ATTRIBUTES_H
+#define PROGRAM_ATTRIBUTES_H
 
 #include <string>
 
-class programExtensions {
+class programAttributes {
 public:
     static void setConsoleTitle(const std::string& title);
     static void setConsoleSize(int width, int height);
@@ -41,7 +41,7 @@ public:
     };
     static void setConsoleIcon(const IconSettings& settings);
 };
-#endif // PROGRAM_EXTENSIONS
+#endif // PROGRAM_ATTRIBUTES_H
 
 //////////////////////////////////////////
 
@@ -71,6 +71,30 @@ public:
     virtual void clearInputStream();
     virtual void extractInputStream();
     virtual void passFunction_toThread_new/*copy a Function to new thread*/(void (function)());
+
+    /* FILE IO && Multithreading && Console Windows */
+
+
+
+public:
+    
+    template <typename T>
+    void createNewConsoleWindow() {
+        if (AllocConsole()) {
+            FILE* file;
+            freopen_s(&file, "CONOUT$", "w", stdout);
+        }
+        else {
+            std::cerr << "Failed to create new console window." << std::endl;
+        }
+    }
+
+    template <typename T>
+    void threadFunction(T& obj) {
+        createNewConsoleWindow<T>();
+        obj.run();
+    }
+
 private:
     bool isValidCommand(const char* command);
 };
