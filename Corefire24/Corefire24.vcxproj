@@ -161,7 +161,6 @@
     <ClInclude Include="MyConsoleAPI.h" />
     <ClInclude Include="MyGames.h" />
     <ClInclude Include="My Standard Includes.h" />
-    <ClInclude Include="ProgramExstentions.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

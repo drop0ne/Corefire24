@@ -1,9 +1,5 @@
 #include "MyConsoleAPI.h"
 
-
-// Init Global Object
-static MyConsoleAPI_extension fn;
-
 // Constructor
 MyConsoleAPI::MyConsoleAPI() : threadLimit(8) {
     console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -303,12 +299,12 @@ const std::vector<int>& MyConsoleAPI_extension::getMainMenuDefaultState() const 
 int MyConsoleAPI_extension::selectMenuOption() {
     int returnValue{ 0 };
 
-    fn.cout("\nEnter Command: ", default_color);
+    MyConsoleAPI::cout("\nEnter Command: ", default_color);
     if (std::cin >> returnValue) {
         return returnValue;
     }
     else {
-        fn.clearInputStream();
+        MyConsoleAPI::clearInputStream();
         return 0;
     }
 }
