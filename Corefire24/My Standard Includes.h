@@ -12,5 +12,8 @@
 #include <windows.h>
 #include <stdexcept>
 #include <thread>
+#include <mutex>
 #include <chrono>
 #include <memory>
+#include <cstdio>
+#include <functional>
