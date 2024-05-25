@@ -53,8 +53,8 @@ private:
 protected:
     HANDLE console_HWND; // Handle to the console window
     int threadLimit;
-    std::vector<std::thread::id> threadID_vector;
-    std::vector<std::thread> thread_vector;
+    std::vector<std::jthread::id> threadID_vector;
+    std::vector<std::jthread> thread_vector;
 public:
 
     // Methods
