@@ -1,18 +1,15 @@
 #include "MyConsoleAPI.h"
 
 
-// Init Global Object
-static MyConsoleAPI_extension fn;
-
+//************************************************************************************************************************************************************/
 // Constructor
+/************************************************************************************************************************************************************/
 MyConsoleAPI::MyConsoleAPI() : threadLimit(8) {
     console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     if (console_HWND == INVALID_HANDLE_VALUE) {
         throw std::runtime_error("Failed to get standard output handle");
     }
-    threadID_vector.resize(threadLimit);/* plus one to account for the main thread plus the reservasion */
-    threadID_vector[MainThread] = std::this_thread::get_id();/* Set The ID for the calling thread of exacution -- should be the main thread */
-    thread_vector.resize(threadLimit);
+    jthreadPool_concurrent.resize(threadLimit);
 }
 
 // Clear the console screen using Windows API for better performance and security
@@ -117,9 +114,9 @@ void MyConsoleAPI::extractInputStream() {
         std::cout << c;
     }
 }
-void MyConsoleAPI::passFunction_toThread_new(void (function)()) {
-    thread_vector.push_back(std::thread(function));
-    //  todo: save thread ID to threadID_vector
+
+void MyConsoleAPI::launchThread(const std::function<void()>& func) {
+    jthreadPool_concurrent.emplace_back(std::ref(func));
 }
 
 void MyConsoleAPI::createNewConsoleWindow() {
@@ -286,8 +283,6 @@ void MyConsoleAPI_extension::menuTheme_Random() {
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
         } while (FLAGS_theme_atomic[ThemeThread]->load());
-
-        thread_vector.at(ThemeThread).join();
         return;
     }
 
@@ -300,9 +295,6 @@ void MyConsoleAPI_extension::menuTheme_Random() {
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
 
 void MyConsoleAPI_extension::menuTheme_Rainbow() {
-    setThemeFlag(RainbowTheme);
-    thread_vector.at(ThemeThread) = std::thread(&MyConsoleAPI_extension::menuTheme_Random, this);
-    thread_vector.at(ThemeThread).detach();
 }
 
 const std::vector<int>& MyConsoleAPI_extension::getMainMenuState() const {
@@ -316,12 +308,12 @@ const std::vector<int>& MyConsoleAPI_extension::getMainMenuDefaultState() const 
 int MyConsoleAPI_extension::selectMenuOption() {
     int returnValue{ 0 };
 
-    fn.cout("\nEnter Command: ", default_color);
+    cout("\nEnter Command: ", default_color);
     if (std::cin >> returnValue) {
         return returnValue;
     }
     else {
-        fn.clearInputStream();
+        clearInputStream();
         return 0;
     }
 }

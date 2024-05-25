@@ -53,8 +53,8 @@ private:
 protected:
     HANDLE console_HWND; // Handle to the console window
     int threadLimit;
-    std::vector<std::thread::id> threadID_vector;
-    std::vector<std::thread> thread_vector;
+    std::vector<std::jthread> jthreadPool_concurrent;
+    mutable std::mutex mutex_;
 public:
 
     // Methods
@@ -70,14 +70,15 @@ public:
     virtual void set_text_color(const int data); // Set the text color in the console
     virtual void clearInputStream();
     virtual void extractInputStream();
-    virtual void passFunction_toThread_new/*copy a Function to new thread*/(void (function)());
 
     /* FILE IO && Multithreading && Console Windows */
+
+    virtual void launchThread(const std::function<void()>& func);
 
 
 
 public:
-    virtual void createNewConsoleWindow();
+    virtual void createNewConsoleWindow(); // not working
 
     template <typename MY_OBJ>
     void threadFunction(MY_OBJ& obj) {
