@@ -1,7 +1,9 @@
 #include "MyConsoleAPI.h"
 
 
+
 //************************************************************************************************************************************************************/
+
 // Constructor
 /************************************************************************************************************************************************************/
 MyConsoleAPI::MyConsoleAPI() : threadLimit(8) {
@@ -308,12 +310,16 @@ const std::vector<int>& MyConsoleAPI_extension::getMainMenuDefaultState() const 
 int MyConsoleAPI_extension::selectMenuOption() {
     int returnValue{ 0 };
 
+
     cout("\nEnter Command: ", default_color);
+
     if (std::cin >> returnValue) {
         return returnValue;
     }
     else {
-        clearInputStream();
+
+      clearInputStream();
+
         return 0;
     }
 }

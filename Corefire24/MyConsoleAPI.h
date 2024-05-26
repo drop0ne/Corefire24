@@ -53,6 +53,7 @@ private:
 protected:
     HANDLE console_HWND; // Handle to the console window
     int threadLimit;
+
     std::vector<std::jthread> jthreadPool_concurrent;
     mutable std::mutex mutex_;
 public:
