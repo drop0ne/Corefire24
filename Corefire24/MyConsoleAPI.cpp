@@ -100,6 +100,13 @@ void MyConsoleAPI::set_text_color(int data) {
     }
 }
 
+void MyConsoleAPI::setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background) {
+    WORD color = (static_cast<WORD>(background) << 4) | static_cast<WORD>(foreground);
+    if (!SetConsoleTextAttribute(console_HWND, color)) {
+		throw std::runtime_error("Failed to set text attributes");
+	}
+}
+
 void MyConsoleAPI::clearInputStream() {
     std::cin.clear();
     if (std::cin.rdbuf()->in_avail() > 0) {
@@ -297,6 +304,21 @@ void MyConsoleAPI_extension::menuTheme_Random() {
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
 
 void MyConsoleAPI_extension::menuTheme_Rainbow() {
+    for (int bg = 0; bg <= 15; ++bg) {
+        for (int fg = 0; fg <= 15; ++fg) {
+            setConsoleColor_FGtext_BG(static_cast<ConsoleColor>(fg), static_cast<ConsoleColor>(bg));
+            std::cout << "Foreground: " << fg << ", Background: " << bg << std::endl;
+        }
+    }
+}
+
+void MyConsoleAPI_extension::menuTheme_autoRainbow() {
+    for (int bg = 0; bg <= 15; ++bg) {
+        for (int fg = 0; fg <= 15; ++fg) {
+            setConsoleColor_FGtext_BG(static_cast<ConsoleColor>(fg), static_cast<ConsoleColor>(bg));
+            std::cout << "Foreground: " << fg << ", Background: " << bg << std::endl;
+        }
+    }
 }
 
 const std::vector<int>& MyConsoleAPI_extension::getMainMenuState() const {

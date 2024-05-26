@@ -8,8 +8,27 @@ enum dosINTcolors {
     highlight_blue_white = 23, check = 27
 };
 
+enum class ConsoleColor {
+    Black = 0,
+    Blue = 1,
+    Green = 2,
+    Cyan = 3,
+    Red = 4,
+    Magenta = 5,
+    Brown = 6,
+    LightGray = 7,
+    DarkGray = 8,
+    LightBlue = 9,
+    LightGreen = 10,
+    LightCyan = 11,
+    LightRed = 12,
+    LightMagenta = 13,
+    Yellow = 14,
+    White = 15
+};
+
 enum eFLAG_ThemeID {
-	defaultTheme = 0, RandomTheme = 1, RainbowTheme = 2
+	defaultTheme = 0, RandomTheme = 1, RainbowTheme = 2, autoRainbowTheme = 3
 };  
 
 enum eMainMenu_State_ID {

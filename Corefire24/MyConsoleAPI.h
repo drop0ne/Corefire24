@@ -69,6 +69,7 @@ public:
     //virtual void setScreenColor(const int backgroundColor, const int textColor); // Set the full screen color
     virtual void setScreenColor(const char* screenTextColor); // Set the full screen color)
     virtual void set_text_color(const int data); // Set the text color in the console
+    virtual void setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background); // Set the text color in the console
     virtual void clearInputStream();
     virtual void extractInputStream();
 
@@ -124,6 +125,7 @@ private:
     void menuTheme_Default(); // ID (0)
     void menuTheme_Random(); // ID (1)
     void menuTheme_Rainbow(); // ID (2)
+    void menuTheme_autoRainbow(); // ID (3)
     
 
     /*
