@@ -53,32 +53,22 @@ private:
 protected:
     HANDLE console_HWND; // Handle to the console window
     int threadLimit;
-
     std::vector<std::jthread> jthreadPool_concurrent;
     mutable std::mutex mutex_;
 public:
-
-    // Methods
     MyConsoleAPI(); // Constructor
-    virtual void clearScreen(); // Clear the console screen
-    virtual void cout(const std::string& data); // Print text to the console
-    virtual void cout(const std::string& data, const int set_text_color); // Print text to the console & set the text color
-    virtual void cout(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
+    virtual void clearScreen(); 
+    virtual void print(const std::string& data);
+    virtual void print(const std::string& data, const int set_text_color);
+    virtual void print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
         const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4);
 
-    //virtual void setScreenColor(const int backgroundColor, const int textColor); // Set the full screen color
-    virtual void setScreenColor(const char* screenTextColor); // Set the full screen color)
-    virtual void set_text_color(const int data); // Set the text color in the console
-    virtual void setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background); // Set the text color in the console
+    virtual void setScreenColor(const char* screenTextColor);
+    virtual void set_text_color(const int data);
+    virtual void setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background); // Needs testing the verify funcionality
     virtual void clearInputStream();
     virtual void extractInputStream();
-
-    /* FILE IO && Multithreading && Console Windows */
-
     virtual void launchThread(const std::function<void()>& func);
-
-
-
 public:
     virtual void createNewConsoleWindow(); // not working
 
@@ -87,17 +77,15 @@ public:
         createNewConsoleWindow();
         obj.run();
     }
-
 private:
     bool isValidCommand(const char* command);
 };
 #endif // MY_CONSOLE_API_H
 
 //////////////////////////////////////////
-
+//////////////////////////////////////////
 #ifndef MY_CONSOLE_API_EXTENDED
 #define MY_CONSOLE_API_EXTENDED
-
 
 class MyConsoleAPI_extension : public MyConsoleAPI, public NumberGenerator {
 private:
@@ -105,15 +93,12 @@ private:
     std::vector<int> mainMenuParameterState;
     std::vector<int> mainMenu_defaultParameterState;
     std::vector<bool> FLAGS_theme;
-    std::vector<std::unique_ptr<std::atomic<bool>>> FLAGS_theme_atomic;
-        
+       
 public:
-    // Structs
-    // Methods
     MyConsoleAPI_extension(); // Constructor
 
-    void invalid_Input();
-    int selectMenuOption();
+    void errorMessage();
+    int mainMenuLogic();
     void setMainMenuState(const std::vector<int> newState);
     const std::vector<int>& getMainMenuState() const;
     const std::vector<int>& getMainMenuDefaultState() const;
@@ -122,25 +107,8 @@ public:
     void callTheme_by_Flag_ID(const int& themeFlag_ID);
     
 private:
-    void menuTheme_Default(); // ID (0)
-    void menuTheme_Random(); // ID (1)
+    void menuTheme_Default();      // ID (0)
+    void menuTheme_Random();       // ID (1)
     void menuTheme_betterRandom(); // ID (2)
-    
-
-    /*
-    
-        void checkFlag(size_t index) {
-        if (index < flags.size() && flags[index]->load()) {  // Correctly accessing atomic bool
-            // Handle the flag being true
-        }
-    }
-
-    void setFlag(size_t index, bool value) {
-        if (index < flags.size()) {
-            flags[index]->store(value);  // Correctly setting atomic bool
-        }
-    }
-
-    */
-};
+    };
 #endif // !MY_CONSOLE_API_EXTENDED
