@@ -22,12 +22,12 @@ public:
 
 #endif // NUMBER_GENERATOR_H
 
-#ifndef PROGRAM_EXTENSIONS
-#define PROGRAM_EXTENSIONS
+#ifndef PROGRAM_ATTRIBUTES_H
+#define PROGRAM_ATTRIBUTES_H
 
 #include <string>
 
-class programExtensions {
+class programAttributes {
 public:
     static void setConsoleTitle(const std::string& title);
     static void setConsoleSize(int width, int height);
@@ -41,7 +41,7 @@ public:
     };
     static void setConsoleIcon(const IconSettings& settings);
 };
-#endif // PROGRAM_EXTENSIONS
+#endif // PROGRAM_ATTRIBUTES_H
 
 //////////////////////////////////////////
 
@@ -53,8 +53,9 @@ private:
 protected:
     HANDLE console_HWND; // Handle to the console window
     int threadLimit;
-    std::vector<std::jthread::id> threadID_vector;
-    std::vector<std::jthread> thread_vector;
+
+    std::vector<std::jthread> jthreadPool_concurrent;
+    mutable std::mutex mutex_;
 public:
 
     // Methods
@@ -70,7 +71,22 @@ public:
     virtual void set_text_color(const int data); // Set the text color in the console
     virtual void clearInputStream();
     virtual void extractInputStream();
-    virtual void passFunction_toThread_new/*copy a Function to new thread*/(void (function)());
+
+    /* FILE IO && Multithreading && Console Windows */
+
+    virtual void launchThread(const std::function<void()>& func);
+
+
+
+public:
+    virtual void createNewConsoleWindow(); // not working
+
+    template <typename MY_OBJ>
+    void threadFunction(MY_OBJ& obj) {
+        createNewConsoleWindow();
+        obj.run();
+    }
+
 private:
     bool isValidCommand(const char* command);
 };
