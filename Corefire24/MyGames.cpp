@@ -198,7 +198,7 @@ NumberGenerator::NumberGenerator() : generator(rd()) {}
 NumberGenerator::~NumberGenerator() {}
 
 // Member function to return a random number within a range
-int NumberGenerator::returnRandomNumber(const int min, const int max) {
+int NumberGenerator::getRandomNumber(const int min, const int max) {
     std::uniform_int_distribution<int> distribution(min, max);
     return distribution(generator);
 }
@@ -262,7 +262,7 @@ void NumberGuessingGame::gameLoop() {
 }
 
 void NumberGuessingGame::setGameState() {
-    randomNumber = returnRandomNumber(rangeLimit.min, rangeLimit.max);
+    randomNumber = getRandomNumber(rangeLimit.min, rangeLimit.max);
     attemptCount = 0;
     attempt = 0;
 }

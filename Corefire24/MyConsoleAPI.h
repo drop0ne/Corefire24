@@ -17,7 +17,7 @@ public:
     NumberGenerator();  // Constructor
     ~NumberGenerator(); // Destructor
 
-    int returnRandomNumber(const int min,const int max);
+    int getRandomNumber(const int min,const int max);
 };
 
 #endif // NUMBER_GENERATOR_H
@@ -125,7 +125,6 @@ private:
     void menuTheme_Default(); // ID (0)
     void menuTheme_Random(); // ID (1)
     void menuTheme_Rainbow(); // ID (2)
-    void menuTheme_autoRainbow(); // ID (3)
     
 
     /*
