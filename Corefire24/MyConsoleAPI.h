@@ -124,7 +124,7 @@ public:
 private:
     void menuTheme_Default(); // ID (0)
     void menuTheme_Random(); // ID (1)
-    void menuTheme_Rainbow(); // ID (2)
+    void menuTheme_betterRandom(); // ID (2)
     
 
     /*

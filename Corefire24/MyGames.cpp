@@ -63,7 +63,7 @@ bool Hangman::checkGuess(std::string guess) {
 
 void Hangman::drawScreen(bool state_DATA) {
     MyConsoleAPI::clearScreen();
-	MyConsoleAPI::cout("Hangman\n\n", purple);
+	MyConsoleAPI::cout("Hangman\n\n", Magenta);
     MyConsoleAPI::cout("Guess a letter of the Alphabet");
     /*
     switch (switch_on) {
@@ -99,8 +99,8 @@ void Quiz::gameLoop() {
         question(iteration);
     } while (iteration < 3);
 
-    MyConsoleAPI::cout("\nGAME OVER\n\n", red);
-    MyConsoleAPI::set_text_color(default_color);
+    MyConsoleAPI::cout("\nGAME OVER\n\n", Red);
+    MyConsoleAPI::set_text_color(LightGray);
     system("pause"); // Last Instruction before returning to main menu
 }
 
@@ -115,13 +115,13 @@ int Quiz::requestInput() {
     int convertedGuess{};
     size_t pos{};
     do {
-        MyConsoleAPI::set_text_color(green);
+        MyConsoleAPI::set_text_color(Green);
         std::getline(std::cin, guess);
         try
         {
             convertedGuess = std::stoi(guess, &pos);
             if (pos == guess.length()) {
-                if (convertedGuess > 3) { MyConsoleAPI::cout("Invalid Number::Out of Range\nTry Again: ", red); MyConsoleAPI::clearInputStream(); continue; }
+                if (convertedGuess > 3) { MyConsoleAPI::cout("Invalid Number::Out of Range\nTry Again: ", Red); MyConsoleAPI::clearInputStream(); continue; }
                 break;
             }
             else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); MyConsoleAPI::clearInputStream(); }
@@ -151,38 +151,38 @@ inline void Quiz::question(int questionNumber) {
 }
 
 void Quiz::askFirstQuestion() {
-    MyConsoleAPI::cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", ice_blue);
+    MyConsoleAPI::cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", LightBlue);
     if (requestInput() == 3) {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nCorrect!\n\n", purple);
+        MyConsoleAPI::cout("\nCorrect!\n\n", Magenta);
     }
     else {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nIncorrect\n\n", red);
+        MyConsoleAPI::cout("\nIncorrect\n\n", Red);
     }
 }
 
 void Quiz::askSecondQuestion() {
-    MyConsoleAPI::cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", ice_blue);
+    MyConsoleAPI::cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", LightBlue);
     if (requestInput() == 2) {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nCorrect!\n\n", purple);
+        MyConsoleAPI::cout("\nCorrect!\n\n", Magenta);
     }
     else {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nIncorrect\n\n", red);
+        MyConsoleAPI::cout("\nIncorrect\n\n", Red);
     }
 }
 
 void Quiz::askThirdQuestion() {
-    MyConsoleAPI::cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", ice_blue);
+    MyConsoleAPI::cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", LightBlue);
     if (requestInput() == 1) {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nCorrect!\n\n", purple);
+        MyConsoleAPI::cout("\nCorrect!\n\n", Magenta);
     }
     else {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nIncorrect\n\n", red);
+        MyConsoleAPI::cout("\nIncorrect\n\n", Red);
     }
 }
 

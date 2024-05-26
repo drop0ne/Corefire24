@@ -176,8 +176,8 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 /*************************************************************/
 
 MyConsoleAPI_extension::MyConsoleAPI_extension() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
-mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*programID(1)*/purple, /*program(2)*/light_blue,
-    /*exitID(3)*/red, /*exit(4)*/gray, /*objects(5)*/white, /*errorMessages(6)*/red })
+mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
+    /*exitID(3)*/Red, /*exit(4)*/DarkGray, /*objects(5)*/LightGray, /*errorMessages(6)*/Red })
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
@@ -186,7 +186,7 @@ mainMenu_totalParameters(7), mainMenuParameterState({/*options(0)*/green, /*prog
     FLAGS_theme_atomic.emplace_back(std::make_unique<std::atomic<bool>>(true)); // ThemeThread
 }
 void MyConsoleAPI_extension::invalid_Input() {
-    cout("\nERROR: INVALID INPUT\n", red);
+    cout("\nERROR: INVALID INPUT\n", Red);
     clearInputStream();
 }
 
@@ -208,14 +208,14 @@ void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData)
     /* cout(string, int, string, int) */
     /* cout(string, int) */
 
-    cout("CoreFireCode 2024 edition\n", green);
-    cout("\n\nMain Menu\n\n", white);
+    cout("CoreFireCode 2024 edition\n", Green);
+    cout("\n\nMain Menu\n\n", LightGray);
     cout("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
     cout("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " CannabisCalculator\n",  stateData.at(Program));
     cout("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Quiz\n",                stateData.at(Program));
     cout("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Random Menu Theme\n",   stateData.at(Program));
     cout("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Default Menu Theme\n",  stateData.at(Program));
-    cout("Option", stateData.at(Options), " 6 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Auto Rainbow\n",        stateData.at(Program));
+    cout("Option", stateData.at(Options), " 6 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Better Random Theme\n", stateData.at(Program));
     cout("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n",            stateData.at(ExitProgram));
 }
 
@@ -261,7 +261,7 @@ void MyConsoleAPI_extension::callTheme_by_Flag_ID(const int& themeFlag_ID) {
     {
     case 0:  setThemeFlag(defaultTheme); menuTheme_Default(); break;
     case 1:  setThemeFlag(RandomTheme);  menuTheme_Random(); break;
-    case 2:  setThemeFlag(RainbowTheme); menuTheme_Rainbow(); break;
+    case 2:  setThemeFlag(RainbowTheme); menuTheme_betterRandom(); break;
     default: setThemeFlag(defaultTheme); menuTheme_Default(); break;
 	}
 }
@@ -281,22 +281,42 @@ void MyConsoleAPI_extension::menuTheme_Default() {
     }
 }
 
+void MyConsoleAPI_extension::menuTheme_Random() {
+    /*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
+
+    if (FLAGS_theme.at(RainbowTheme)) {
+        do
+        {
+            for (size_t i = 0; i < mainMenuParameterState.size(); i++)
+            {
+                mainMenuParameterState[i] = getRandomNumber(1, 15);
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        } while (FLAGS_theme_atomic[ThemeThread]->load());
+        return;
+    }
+
+    for (size_t i = 0; i < mainMenuParameterState.size(); i++)
+    {
+        mainMenuParameterState[i] = getRandomNumber(1, 15);
+    }
+}
 
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
 
-void MyConsoleAPI_extension::menuTheme_Rainbow() {
+void MyConsoleAPI_extension::menuTheme_betterRandom() {
     using namespace std::chrono_literals;
 
     for (size_t i = 0; i < 60; i++)
     {
         for (size_t j = 0; j < mainMenuParameterState.size(); j++)
         {
-        mainMenuParameterState[i] = getRandomNumber(1, 15);
+        mainMenuParameterState[j] = getRandomNumber(1, 15);
         }
-        setConsoleColor_FGtext_BG(static_cast<ConsoleColor>(/*Text Color*/NULL), static_cast<ConsoleColor>(/*Background Color*/getRandomNumber(0, 15)));
         clearScreen();
         generateMainMenu(mainMenuParameterState);
-        std::this_thread::sleep_for(0.005s);
+        cout("\nWAIT!", 12);
+        std::this_thread::sleep_for(0.025s);
     }
 }
 
@@ -312,7 +332,7 @@ int MyConsoleAPI_extension::selectMenuOption() {
     int returnValue{ 0 };
 
 
-    cout("\nEnter Command: ", default_color);
+    cout("\nEnter Command: ", LightGray);
 
     if (std::cin >> returnValue) {
         return returnValue;
