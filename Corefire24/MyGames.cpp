@@ -347,3 +347,24 @@ void CannaCalculator::programLoop() {
     std::cout << std::endl;
     system("pause");
 }
+
+CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters() {}
+
+CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
+
+void CalculatePowerLoss_Watts_x_Meters::run()
+{
+}
+
+void CalculatePowerLoss_Watts_x_Meters::programLoop()
+{
+}
+
+long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(long double resistivity, long double current, long double length, long double crossSectionArea)
+{
+    return 0;
+}
+
+void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss)
+{
+}

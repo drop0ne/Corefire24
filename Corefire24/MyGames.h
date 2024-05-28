@@ -89,6 +89,19 @@ public:
 private:
     void programLoop();
 };
+
+class CalculatePowerLoss_Watts_x_Meters {
+public:
+    CalculatePowerLoss_Watts_x_Meters();
+    ~CalculatePowerLoss_Watts_x_Meters();
+
+    void run();
+private:
+    void programLoop();
+    long double calculatePowerLoss(long double resistivity, long double current, long double length, long double crossSectionArea);
+    void printResults(const long double powerLoss);
+};
+
 /***************/
 /* END OF FILE */
 /***************/
