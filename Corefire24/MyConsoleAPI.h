@@ -60,6 +60,8 @@ public:
     virtual void clearScreen(); 
     virtual void print(const std::string& data);
     virtual void print(const std::string& data, const int set_text_color);
+    virtual void print(const double& data, int numberColor);
+    virtual void print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor);
     virtual void print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
         const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4);
 
