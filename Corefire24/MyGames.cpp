@@ -352,19 +352,33 @@ CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters() {}
 
 CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
 
-void CalculatePowerLoss_Watts_x_Meters::run()
-{
+void CalculatePowerLoss_Watts_x_Meters::run() {
+    clearInputStream();
+    programLoop();
+}
+/* Start Private */
+void CalculatePowerLoss_Watts_x_Meters::programLoop() {
+    Properties_m properties_m;
+    printResults(calculatePowerLoss(properties_m.resistivity, properties_m.current, properties_m.length, properties_m.crossSectionArea));
+    clearInputStream();
 }
 
-void CalculatePowerLoss_Watts_x_Meters::programLoop()
-{
+long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(long double resistivity, long double current, long double length, long double crossSectionArea) {
+    // Calculate resistance
+    long double resistance = resistivity * length / crossSectionArea;
+
+    // Calculate power loss
+    long double powerLoss = std::powl(current, 2) * resistance;
+    return powerLoss;
 }
 
-long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(long double resistivity, long double current, long double length, long double crossSectionArea)
-{
-    return 0;
-}
-
-void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss)
-{
+void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss) {
+    clearScreen();
+    std::cout << "Calculate Power Loss in Watts per Meter\n\n"
+		<< "Resistivity: 1.68e-8 ohm*meter\n"
+		<< "Current: 10.0 amperes\n"
+		<< "Length: 1000.0 meters\n"
+		<< "Cross-sectional Area: 1.0e-6 square meters\n\n"
+		<< "Power Loss: " << powerLoss << " Watts per meter\n\n";
+    system("pause");
 }

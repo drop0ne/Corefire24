@@ -185,13 +185,14 @@ void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData)
 
     print("CoreFireCode 2024 edition\n", Green);
     print("\n\nMain Menu\n\n", LightGray);
-    print("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
-    print("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " CannabisCalculator\n",  stateData.at(Program));
-    print("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Quiz\n",                stateData.at(Program));
-    print("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Random Menu Theme\n",   stateData.at(Program));
-    print("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Default Menu Theme\n",  stateData.at(Program));
-    print("Option", stateData.at(Options), " 6 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Better Random Theme\n", stateData.at(Program));
-    print("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n",            stateData.at(ExitProgram));
+    print("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Number Gussing Game\n",       stateData.at(Program));
+    print("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " CannabisCalculator\n",        stateData.at(Program));
+    print("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Quiz\n",                      stateData.at(Program));
+    print("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Random Menu Theme\n",         stateData.at(Program));
+    print("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Default Menu Theme\n",        stateData.at(Program));
+    print("Option", stateData.at(Options), " 6 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Better Random Theme\n",       stateData.at(Program));
+    print("Option", stateData.at(Options), " 7 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Calculation of Power Loss\n", stateData.at(Program));
+    print("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n",                  stateData.at(ExitProgram));
 }
 
 void MyConsoleAPI_extension::setThemeFlag(const int themeFlag_ID) {
@@ -293,10 +294,8 @@ const std::vector<int>& MyConsoleAPI_extension::getMainMenuDefaultState() const 
 int MyConsoleAPI_extension::mainMenuLogic() {
     int returnValue{ 0 };
 
-    do
-    {        clearScreen();
-        generateMainMenu(mainMenuParameterState);
-        print("\nEnter Command: ", LightGray);
+    do {
+        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nEnter Command: ", LightGray);
         std::cin >> returnValue;
         if (std::cin.fail())
         {
