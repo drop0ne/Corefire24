@@ -357,64 +357,35 @@ void CalculatePowerLoss_Watts_x_Meters::run() {
 }
 /* Start Private */
 
-auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
+inline auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
     Properties_m properties_m;
     clearScreen();
     print("Set Properties\n\n", Green);
+    // Resistivity input
+    properties_m.resistivity = requestInput("Enter the resistivity of the wire in ohm: ",  /*Text Prompt Color*/ LightGray,  /*Input Number Color*/ LightBlue);
+    // Current input
+    properties_m.voltage = requestInput("Enter the current in voltage: ", LightGray, LightBlue);
+    // Length input
+    properties_m.length = requestInput("Enter the length of the wire in meters: ", LightGray, LightBlue);
+    // Cross-sectional area input
+    properties_m.crossSectionArea = requestInput("Enter the cross-sectional area of the wire in square meters: ", LightGray, LightBlue);
+    return properties_m;
+}
+long double CalculatePowerLoss_Watts_x_Meters::requestInput(std::string stringMessagePrompt, int promptColor,int inputColor) {
+    long double input{};
     while (true) {
-        // Resistivity input
-        while (true) {
-            print("Enter the resistivity of the wire in ohm: ", LightBlue);
-            std::cin >> properties_m.resistivity;
-            if (std::cin.fail() || properties_m.resistivity <= 0) {
-                print("Invalid input. Please enter a positive number for resistivity.\n", Red);
-                clearInputStream();
-            }
-            else {
-                break;
-            }
+        print(stringMessagePrompt, promptColor);
+        set_text_color(inputColor);
+        std::cin >> input;
+        if (std::cin.fail() || input <= 0) {
+            print("Invalid input. Please enter a positive number for resistivity.\n", Red);
+            clearInputStream();
         }
-        // Current input
-        while (true) {
-            print("Enter the current in voltage: ", LightBlue);
-            std::cin >> properties_m.voltage;
-            if (std::cin.fail() || properties_m.voltage <= 0) {
-                print("Invalid input. Please enter a positive number for current.\n", Red);
-                clearInputStream();
-            }
-            else {
-                break;
-            }
+        else {
+            break;
         }
-
-        // Length input
-        while (true) {
-            print("Enter the length of the wire in meters: ", LightBlue);
-            std::cin >> properties_m.length;
-            if (std::cin.fail() || properties_m.length <= 0) {
-                print("Invalid input. Please enter a positive number for length.\n", Red);
-                clearInputStream();
-            }
-            else {
-                break;
-            }
-        }
-
-        // Cross-sectional area input
-        while (true) {
-            print("Enter the cross-sectional area of the wire in square meters: ", LightBlue);
-            std::cin >> properties_m.crossSectionArea;
-            if (std::cin.fail() || properties_m.crossSectionArea <= 0) {
-                print("Invalid input. Please enter a positive number for cross-sectional area.\n", Red);
-                clearInputStream();
-            }
-            else {
-                break;
-            }
-        }
-        clearInputStream();
-        return properties_m;
     }
+    return input;
 }
 void CalculatePowerLoss_Watts_x_Meters::performCalculation(Properties_m& properties_m) {
     printResults(calculatePowerLoss(properties_m), properties_m);
@@ -440,7 +411,7 @@ void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss
     system("pause");
 }
 
-void CalculatePowerLoss_Watts_x_Meters::information() {
+inline void CalculatePowerLoss_Watts_x_Meters::information() {
     clearScreen();
 	print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
 	print("This program calculates the power loss in watts per meter of a wire given the resistivity, current, length, and cross-sectional area.\n\n", LightBlue);
@@ -455,7 +426,7 @@ void CalculatePowerLoss_Watts_x_Meters::information() {
     set_text_color(LightGray);	system("pause");
 }
 
-int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
+inline int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
     std::string input{};
     int convertedInput{};
     int inputLenghtLimit{ 1 };
@@ -495,7 +466,7 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 }
 
 
-void CalculatePowerLoss_Watts_x_Meters::menu() {
+inline void CalculatePowerLoss_Watts_x_Meters::menu() {
     Properties_m properties_m;
     do
     {

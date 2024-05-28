@@ -105,13 +105,14 @@ public:
 
     void run();
 private:
-    auto setProperties() -> Properties_m;
+    inline auto setProperties() -> Properties_m;
+    long double requestInput(std::string stringMessagePrompt, int promptColor, int inputColor);
     void performCalculation(Properties_m& properties_m);
     long double calculatePowerLoss(Properties_m& properties_m);
     void printResults(const long double powerLoss, Properties_m& sourceData);
-    void information();
-    int returnMenuOption();
-    void menu();
+    inline void information();
+    inline int returnMenuOption();
+    inline void menu();
 };
 
 /***************/
