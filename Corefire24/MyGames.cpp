@@ -357,10 +357,10 @@ void CalculatePowerLoss_Watts_x_Meters::run() {
 }
 /* Start Private */
 
-inline auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
+auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
     Properties_m properties_m;
     clearScreen();
-    print("Set Properties\n\n", Green);
+    print("Set Properties!\n\n", Green);
     // Resistivity input
     properties_m.resistivity = requestInput("Enter the resistivity of the wire in ohm: ",  /*Text Prompt Color*/ LightGray,  /*Input Number Color*/ LightBlue);
     // Current input
@@ -369,6 +369,7 @@ inline auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
     properties_m.length = requestInput("Enter the length of the wire in meters: ", LightGray, LightBlue);
     // Cross-sectional area input
     properties_m.crossSectionArea = requestInput("Enter the cross-sectional area of the wire in square meters: ", LightGray, LightBlue);
+    clearInputStream();
     return properties_m;
 }
 long double CalculatePowerLoss_Watts_x_Meters::requestInput(std::string stringMessagePrompt, int promptColor,int inputColor) {
@@ -403,7 +404,7 @@ long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& 
 void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, Properties_m& properties_m) {
     clearScreen();
     print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
-    print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meter\n", Brown);
+    print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meters\n", Brown);
     print("Current                ", DarkGray); print(properties_m.voltage, Brown); print("   voltage\n", LightBlue);
     print("Length                 ", DarkGray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
     print("Cross-sectional Area   ", DarkGray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
@@ -413,7 +414,7 @@ void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss
 
 inline void CalculatePowerLoss_Watts_x_Meters::information() {
     clearScreen();
-	print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
+	print("Information!\n\n", Green);
 	print("This program calculates the power loss in watts per meter of a wire given the resistivity, current, length, and cross-sectional area.\n\n", LightBlue);
 	print("The formula used is:\n", LightBlue);
 	print("Power Loss = I^2 * R\n\n", Brown);

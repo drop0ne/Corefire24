@@ -93,8 +93,8 @@ private:
 class CalculatePowerLoss_Watts_x_Meters : public MyConsoleAPI {
 private:
    struct Properties_m {
-        long double resistivity = 1.68e-8L; // resistivity of copper in ohm
-        long double voltage = 10.0L; // current
+        long double resistivity = 1.68e-8L; // resistivity of copper in ohms
+        long double voltage = 10.0L; // current in volts
         long double length = 1000.0L; // length of the wire in meters
         long double crossSectionArea = 1e-3L; // cross-sectional area of the wire in square meters
     };
@@ -105,7 +105,7 @@ public:
 
     void run();
 private:
-    inline auto setProperties() -> Properties_m;
+    auto setProperties() -> Properties_m;
     long double requestInput(std::string stringMessagePrompt, int promptColor, int inputColor);
     void performCalculation(Properties_m& properties_m);
     long double calculatePowerLoss(Properties_m& properties_m);
