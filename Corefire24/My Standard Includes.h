@@ -17,3 +17,5 @@
 #include <memory>
 #include <cstdio>
 #include <functional>
+#include <cmath>
+#include <cstdint>

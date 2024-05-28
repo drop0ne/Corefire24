@@ -89,6 +89,31 @@ public:
 private:
     void programLoop();
 };
+
+class CalculatePowerLoss_Watts_x_Meters : public MyConsoleAPI {
+private:
+    struct Properties_m {
+        double resistivity = 1.68e-8; // resistivity of copper in ohm*meter
+        double current = 25.0; // current in amperes
+        double length = 10000.0; // length of the wire in meters
+        double crossSectionArea = 1.0e-6; // cross-sectional area of the wire in square meters
+    };
+
+public:
+    CalculatePowerLoss_Watts_x_Meters();
+    ~CalculatePowerLoss_Watts_x_Meters();
+
+    void run();
+private:
+    auto setProperties() -> Properties_m;
+    void performCalculation(Properties_m& properties_m);
+    double calculatePowerLoss(Properties_m& properties_m);
+    void printResults(const double powerLoss, Properties_m& sourceData);
+    void information();
+    int returnMenuOption();
+    void menu();
+};
+
 /***************/
 /* END OF FILE */
 /***************/

@@ -10,22 +10,20 @@ int main()
 	NumberGuessingGame numberGuessingGame;
 	CannaCalculator cannaCalcultor;
 	Quiz quiz;
+	CalculatePowerLoss_Watts_x_Meters powerLossCalculator;
 
  	do {
-		fn.clearScreen();
-		fn.generateMainMenu(fn.getMainMenuState());
-
-		switch (fn.selectMenuOption())
+		switch (fn.mainMenuLogic())
 		{
 		case 1: numberGuessingGame.run(); break;
 		case 2: cannaCalcultor.run(); break;
-		case 3: {//fn.launchThread();
-			break;
-		}
+		case 3: quiz.run(); break;
 		case 4: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 5: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
+		case 6: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
+		case 7: powerLossCalculator.run(); break;
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
-		default: fn.cout("Invalid :: Try Again", fn.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
+		default: fn.print("\nCommand must be intager from 1 - 6\n", fn.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
 
 	} while (true);

@@ -63,23 +63,8 @@ bool Hangman::checkGuess(std::string guess) {
 
 void Hangman::drawScreen(bool state_DATA) {
     MyConsoleAPI::clearScreen();
-	MyConsoleAPI::cout("Hangman\n\n", purple);
-    MyConsoleAPI::cout("Guess a letter of the Alphabet");
-    /*
-    switch (switch_on) {
-        case 1: ;
-        case 2: ;
-        case 3: ;
-            /*
-            switch (iteration) start at bottom of switch(Hight Number) and print to screen line1 of hangman starting to get hung
-            every iteration will add a new line to the screen during to loop if use gives wrong answer or bad input
-            do not use breaks in the switch statement.  I want all call to print from the entry point of the switch
-			
-			*//*
-    default:
-        break;
-    }
-    */
+	MyConsoleAPI::print("Hangman\n\n", Magenta);
+    MyConsoleAPI::print("Guess a letter of the Alphabet");
 
 }
 
@@ -99,8 +84,8 @@ void Quiz::gameLoop() {
         question(iteration);
     } while (iteration < 3);
 
-    MyConsoleAPI::cout("\nGAME OVER\n\n", red);
-    MyConsoleAPI::set_text_color(default_color);
+    MyConsoleAPI::print("\nGAME OVER\n\n", Red);
+    MyConsoleAPI::set_text_color(LightGray);
     system("pause"); // Last Instruction before returning to main menu
 }
 
@@ -115,13 +100,13 @@ int Quiz::requestInput() {
     int convertedGuess{};
     size_t pos{};
     do {
-        MyConsoleAPI::set_text_color(green);
+        MyConsoleAPI::set_text_color(Green);
         std::getline(std::cin, guess);
         try
         {
             convertedGuess = std::stoi(guess, &pos);
             if (pos == guess.length()) {
-                if (convertedGuess > 3) { MyConsoleAPI::cout("Invalid Number::Out of Range\nTry Again: ", red); MyConsoleAPI::clearInputStream(); continue; }
+                if (convertedGuess > 3) { MyConsoleAPI::print("Invalid Number::Out of Range\nTry Again: ", Red); MyConsoleAPI::clearInputStream(); continue; }
                 break;
             }
             else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); MyConsoleAPI::clearInputStream(); }
@@ -151,38 +136,38 @@ inline void Quiz::question(int questionNumber) {
 }
 
 void Quiz::askFirstQuestion() {
-    MyConsoleAPI::cout("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", ice_blue);
+    MyConsoleAPI::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
     if (requestInput() == 3) {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nCorrect!\n\n", purple);
+        MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
     }
     else {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nIncorrect\n\n", red);
+        MyConsoleAPI::print("\nIncorrect\n\n", Red);
     }
 }
 
 void Quiz::askSecondQuestion() {
-    MyConsoleAPI::cout("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", ice_blue);
+    MyConsoleAPI::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
     if (requestInput() == 2) {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nCorrect!\n\n", purple);
+        MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
     }
     else {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nIncorrect\n\n", red);
+        MyConsoleAPI::print("\nIncorrect\n\n", Red);
     }
 }
 
 void Quiz::askThirdQuestion() {
-    MyConsoleAPI::cout("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", ice_blue);
+    MyConsoleAPI::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
     if (requestInput() == 1) {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nCorrect!\n\n", purple);
+        MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
     }
     else {
         MyConsoleAPI::setScreenColor("color 08"); // Gray on black
-        MyConsoleAPI::cout("\nIncorrect\n\n", red);
+        MyConsoleAPI::print("\nIncorrect\n\n", Red);
     }
 }
 
@@ -198,7 +183,7 @@ NumberGenerator::NumberGenerator() : generator(rd()) {}
 NumberGenerator::~NumberGenerator() {}
 
 // Member function to return a random number within a range
-int NumberGenerator::returnRandomNumber(const int min, const int max) {
+int NumberGenerator::getRandomNumber(const int min, const int max) {
     std::uniform_int_distribution<int> distribution(min, max);
     return distribution(generator);
 }
@@ -262,7 +247,7 @@ void NumberGuessingGame::gameLoop() {
 }
 
 void NumberGuessingGame::setGameState() {
-    randomNumber = returnRandomNumber(rangeLimit.min, rangeLimit.max);
+    randomNumber = getRandomNumber(rangeLimit.min, rangeLimit.max);
     attemptCount = 0;
     attempt = 0;
 }
@@ -362,25 +347,175 @@ void CannaCalculator::programLoop() {
     std::cout << std::endl;
     system("pause");
 }
-#pragma once
 
-enum dosINTcolors {
-    default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1,
-    bright_red = 12, red = 4, light_blue = 3, ice_blue = 9, teal_blue = 11,
-    white = 7, bright_white = 15, gray = 8, purple = 5, yellow = 6,
-    highlight_with_blue_blue = 19, highlight_with_blue_blue2 = 25,
-    highlight_blue_white = 23, check = 27
-};
+CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters() {}
 
-enum eFLAG_ThemeID {
-    defaultTheme = 0, RandomTheme = 1, RainbowTheme = 2
-};
+CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
 
-enum eMainMenu_State_ID {
-    Options = 0, ProgramID = 1, Program = 2, ExitProgramID = 3, ExitProgram = 4, Symbols = 5, ErrorMessage = 6
-};
+void CalculatePowerLoss_Watts_x_Meters::run() {
+    menu();
+}
+/* Start Private */
 
-enum eThread_ID {
-    MainThread = 0, ThemeThread = 1
-};
+auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
+    Properties_m properties_m;
+    clearScreen();
+    print("Set Properties\n\n", Green);
+    while (true) {
+        // Resistivity input
+        while (true) {
+            print("Enter the resistivity of the wire in ohm*meter: ", LightBlue);
+            std::cin >> properties_m.resistivity;
+            if (std::cin.fail() || properties_m.resistivity <= 0) {
+                print("Invalid input. Please enter a positive number for resistivity.\n", Red);
+                clearInputStream();
+            }
+            else {
+                break;
+            }
+        }
+        // Current input
+        while (true) {
+            print("Enter the current in amperes: ", LightBlue);
+            std::cin >> properties_m.current;
+            if (std::cin.fail() || properties_m.current <= 0) {
+                print("Invalid input. Please enter a positive number for current.\n", Red);
+                clearInputStream();
+            }
+            else {
+                break;
+            }
+        }
 
+        // Length input
+        while (true) {
+            print("Enter the length of the wire in meters: ", LightBlue);
+            std::cin >> properties_m.length;
+            if (std::cin.fail() || properties_m.length <= 0) {
+                print("Invalid input. Please enter a positive number for length.\n", Red);
+                clearInputStream();
+            }
+            else {
+                break;
+            }
+        }
+
+        // Cross-sectional area input
+        while (true) {
+            print("Enter the cross-sectional area of the wire in square meters: ", LightBlue);
+            std::cin >> properties_m.crossSectionArea;
+            if (std::cin.fail() || properties_m.crossSectionArea <= 0) {
+                print("Invalid input. Please enter a positive number for cross-sectional area.\n", Red);
+                clearInputStream();
+            }
+            else {
+                break;
+            }
+        }
+        clearInputStream();
+        return properties_m;
+    }
+}
+void CalculatePowerLoss_Watts_x_Meters::performCalculation(Properties_m& properties_m) {
+    printResults(calculatePowerLoss(properties_m), properties_m);
+    clearInputStream();
+}
+
+double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& properties_m) {
+    // Calculate resistance
+    double resistance = properties_m.resistivity * properties_m.length / properties_m.crossSectionArea;
+
+    // Calculate power loss
+    double powerLoss = std::powl(properties_m.current, 2) * resistance;
+    return powerLoss;
+}
+
+void CalculatePowerLoss_Watts_x_Meters::printResults(const double powerLoss, Properties_m& properties_m) {
+    clearScreen();
+    print("Calculate Power Loss in Watts per Meter\n\n", Green);
+    print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meter\n", Brown);
+    print("Current                ", DarkGray); print(properties_m.current, Brown); print("   amperes\n", LightBlue);
+    print("Length                 ", DarkGray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
+    print("Cross-sectional Area   ", DarkGray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
+    print("Power Loss: ", LightGray); print(powerLoss, LightBlue); print(" Watts per meter\n\n", LightGray);
+    system("pause");
+}
+
+void CalculatePowerLoss_Watts_x_Meters::information() {
+    clearScreen();
+	print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
+	print("This program calculates the power loss in watts per meter of a wire given the resistivity, current, length, and cross-sectional area.\n\n", LightBlue);
+	print("The formula used is:\n", LightBlue);
+	print("Power Loss = I^2 * R\n\n", Brown);
+	print("Where:\n", LightBlue);
+	print("I = Current in amperes\n", Brown);
+	print("R = Resistance in ohms\n\n", Brown);
+	print("The resistance is calculated using the formula:\n", LightBlue);
+	print("R = resistivity * length / cross-sectional area\n\n", Brown);
+	print("The resistivity of copper is 1.68e-8 ohm*meter.\n\n", Brown);
+    set_text_color(LightGray);	system("pause");
+}
+
+int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
+    std::string input{};
+    int convertedInput{};
+    int inputLenghtLimit{ 1 };
+
+    do {
+        print("Enter a number: ", LightGray);
+        set_text_color(LightBlue);
+        if (std::getline(std::cin, input)) {
+            if (input.length() > inputLenghtLimit) {
+                print("Invalid input. Please enter a number from 1 to 4.\n", LightGreen);
+                clearInputStream();
+                continue;
+            }
+            try
+            {
+                convertedInput = std::stoi(input);
+                break;
+            }
+            catch (const std::invalid_argument& e)
+            {
+                std::cerr << "Invalid input. Please enter a number.\n";
+                clearInputStream();
+            }
+            catch (const std::out_of_range& e) // need to build a logging system
+            {
+                std::cerr << "Out of range. Please enter a number.\n";
+                clearInputStream();
+            }
+        }
+        else {
+            std::cerr << "Invalid input. Please enter a number.\n";
+            clearInputStream();
+        }
+    } while (true);
+
+    return convertedInput;
+}
+
+
+void CalculatePowerLoss_Watts_x_Meters::menu() {
+    Properties_m properties_m;
+    do
+    {
+        clearInputStream();
+        clearScreen();
+        print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
+        print("1. ", LightBlue); print("Set Properties\n", LightGray);
+        print("2. ", LightBlue); print("Calculate Power Loss\n", LightGray);
+        print("3. ", LightBlue); print("Information\n", LightGray);
+        print("4. ", LightBlue); print("Return to Main Menu\n\n", LightGray);
+
+        switch (returnMenuOption())
+        {
+        case 1: properties_m = setProperties();
+        case 2: performCalculation(properties_m); break;
+        case 3: information(); break;
+        case 4: clearInputStream(); return;
+        default: print("Invalid input. Please enter a number from 1 to 4.\n", LightGreen); system("pause");
+            break;
+        }
+    } while (true);
+}
