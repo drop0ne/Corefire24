@@ -105,13 +105,13 @@ public:
 
     void run();
 private:
-    void performCalculation();
-    void menu();
-    int returnMenuOption();
-    void setProperties();
-    void information();
-    double calculatePowerLoss(double resistivity, double current, double length, double crossSectionArea);
+    auto setProperties() -> Properties_m;
+    void performCalculation(Properties_m& properties_m);
+    double calculatePowerLoss(Properties_m& properties_m);
     void printResults(const double powerLoss, Properties_m& sourceData);
+    void information();
+    int returnMenuOption();
+    void menu();
 };
 
 /***************/
