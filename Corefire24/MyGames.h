@@ -114,7 +114,7 @@ private:
     auto setProperties() -> BaseLongDoubles;
     void performCalculation(BaseLongDoubles& baseNumber);
     long double calculatePowerLoss(BaseLongDoubles& baseNumbers);
-    void printResults(const long double powerLoss, BaseLongDoubles& baseNumbers);
+    void printResults(const BaseLongDoubles& baseNumbers, const ConvertionsLongDoubles& convertions);
     inline void information();
     inline int returnMenuOption();
     inline void menu();

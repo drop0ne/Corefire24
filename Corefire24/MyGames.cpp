@@ -405,40 +405,38 @@ void CalculatePowerLoss_Watts_x_Meters::performCalculation(BaseLongDoubles& base
     convertions.powerLossPerInch = convertions.powerLossPerMeter / 39.3701L; // watts per inch
     convertions.powerLossMilliwattsPerMeter = convertions.powerLossPerMeter * 1000.0L; // milliwatts per meter
 
+    // Control Variable; Set the number of parameter types to be calculated
+    const int controlVariable = 3;
+
     // Total Power Loss for Different Lengths of Wire
-    long double lengths[] = { 500.0L, 1000.0L, 2000.0L }; // meters
-    long double powerLossForLengths[3];
-    for (int i = 0; i < 3; ++i) {
+    long double lengths[controlVariable] = { 500.0L, 1000.0L, 2000.0L }; // meters
+    long double powerLossForLengths[controlVariable];
+    for (int i = 0; i < controlVariable; ++i) {
         powerLossForLengths[i] = std::powl(baseNumbers.current_amps, 2) * baseNumbers.resistivity_ohm * lengths[i] / baseNumbers.crossSectionalArea_sqr_meter; // watts
     }
 
     // Effect of Different Currents on Power Loss
-    long double currents[] = { 5.0L, 10.0L, 20.0L }; // amperes
-    long double powerLossForCurrents[3];
-    for (int i = 0; i < 3; ++i) {
+    long double currents[controlVariable] = { 5.0L, 10.0L, 20.0L }; // amperes
+    long double powerLossForCurrents[controlVariable];
+    for (int i = 0; i < controlVariable; ++i) {
         powerLossForCurrents[i] = std::powl(currents[i], 2) * convertions.resistance; // watts
     }
 
     // Effect of Different Cross-sectional Areas on Power Loss
-    long double crossSections[] = { 0.002L, 0.001L, 0.0005L }; // square meters
-    long double powerLossForCrossSections[3];
-    for (int i = 0; i < 3; ++i) {
+    long double crossSections[controlVariable] = { 0.002L, 0.001L, 0.0005L }; // square meters
+    long double powerLossForCrossSections[controlVariable];
+    for (int i = 0; i < controlVariable; ++i) {
         powerLossForCrossSections[i] = std::powl(baseNumbers.current_amps, 2) * baseNumbers.resistivity_ohm * baseNumbers.length_meters / crossSections[i]; // watts
     }
 
     // Effect of Different Resistivities on Power Loss
-    long double resistivities[] = { 1.68e-8L, 2.82e-8L, 1.59e-8L }; // ohm meters for copper, aluminum, silver
-    long double powerLossForResistivities[3];
-    for (int i = 0; i < 3; ++i) {
+    long double resistivities[controlVariable] = { 1.68e-8L, 2.82e-8L, 1.59e-8L }; // ohm meters for copper, aluminum, silver
+    long double powerLossForResistivities[controlVariable];
+    for (int i = 0; i < controlVariable; ++i) {
         powerLossForResistivities[i] = std::powl(baseNumbers.current_amps, 2) * resistivities[i] * baseNumbers.length_meters / baseNumbers.crossSectionalArea_sqr_meter; // watts
     }
 
-
-
-
-
-
-    printResults(convertions.powerLossTotal, baseNumbers);
+    printResults(baseNumbers, convertions);
     clearInputStream();
 }
 
@@ -450,15 +448,20 @@ long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(BaseLongDouble
     return powerLoss;
 }
 
-void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, BaseLongDoubles& baseNumbers) {
+void CalculatePowerLoss_Watts_x_Meters::printResults(const BaseLongDoubles& baseNumbers, const ConvertionsLongDoubles& convertions) {
     clearScreen();
     print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
     print("Resistivity            ", DarkGray); print(baseNumbers.resistivity_ohm, Brown); print(" * meters\n", Brown);
     print("Current                ", DarkGray); print(baseNumbers.current_amps, Brown); print("   voltage\n", LightBlue);
     print("Length                 ", DarkGray); print(baseNumbers.length_meters, Brown); print("   meters\n", LightBlue);
     print("Cross-sectional Area   ", DarkGray); print(baseNumbers.crossSectionalArea_sqr_meter, Brown); print("   square meters\n\n", LightBlue);
-    print("Power Loss as heat: ", LightGray); print(powerLoss, LightBlue); print(" Watts\n\n", LightGray);
-    system("pause");
+    print("Power Loss as heat: ", convertions.powerLossTotal," Watts\n\n", LightGray, LightBlue);
+
+    print("Power Loss per Meter in Various Units\n", LightGray);
+    print("Watts per Centimeter: ", convertions.powerLossPerCentimeter, " watts/cm\n", LightBlue, LightMagenta);
+    print("Watts per Inch: ", convertions.powerLossPerInch, " watts/inch\n", LightBlue, LightMagenta);
+    print("Milliwatts per Meter: ", convertions.powerLossMilliwattsPerMeter, " milliwatts/m\n\n", LightBlue, LightMagenta);
+    pauseConsole();
 }
 
 inline void CalculatePowerLoss_Watts_x_Meters::information() {
@@ -473,7 +476,7 @@ inline void CalculatePowerLoss_Watts_x_Meters::information() {
 	print("The resistance is calculated using the formula:\n", LightBlue);
 	print("R = resistivity * length / cross-sectional area\n\n", Brown);
 	print("The resistivity of copper is 1.68e-8 ohm.\n\n", Brown);
-    set_text_color(LightGray);	system("pause");
+    pauseConsole();
 }
 
 inline int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {

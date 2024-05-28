@@ -30,6 +30,11 @@ void MyConsoleAPI::clearScreen() {
     SetConsoleCursorPosition(console_HWND, topLeft);
 }
 
+inline void MyConsoleAPI::pauseConsole() {
+    set_text_color(LightGray);
+    system("pause");
+}
+
 void MyConsoleAPI::print(const std::string& data) {
     std::cout << data;
     // Legacy code
@@ -45,16 +50,15 @@ void MyConsoleAPI::print(const double& data, int numberColor) {
     std::cout << data;
 }
 
-void MyConsoleAPI::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
-    set_text_color(textColor);
-    std::cout << string1;
-    set_text_color(numberColor);
-    std::cout << data1;
-    set_text_color(textColor);
-    std::cout << string2;
-    // Used by CalculatePowerLoss_Watts_x_Meters
+void MyConsoleAPI::print(const std::string string1, const double num1, const std::string string2, int stringColor, int doubleColor) {
+	set_text_color(stringColor);
+	std::cout << string1;
+	set_text_color(doubleColor);
+	std::cout << num1;
+	set_text_color(stringColor);
+	std::cout << string2;
+	// Used by CalculatePowerLoss_Watts_x_Meters
 }
-
 
 void MyConsoleAPI::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
     const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
