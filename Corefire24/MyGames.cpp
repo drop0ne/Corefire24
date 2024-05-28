@@ -364,7 +364,7 @@ auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
     while (true) {
         // Resistivity input
         while (true) {
-            print("Enter the resistivity of the wire in ohm*meter: ", LightBlue);
+            print("Enter the resistivity of the wire in ohm: ", LightBlue);
             std::cin >> properties_m.resistivity;
             if (std::cin.fail() || properties_m.resistivity <= 0) {
                 print("Invalid input. Please enter a positive number for resistivity.\n", Red);
@@ -376,7 +376,7 @@ auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
         }
         // Current input
         while (true) {
-            print("Enter the current in amperes: ", LightBlue);
+            print("Enter the current in voltage: ", LightBlue);
             std::cin >> properties_m.voltage;
             if (std::cin.fail() || properties_m.voltage <= 0) {
                 print("Invalid input. Please enter a positive number for current.\n", Red);
@@ -431,9 +431,9 @@ long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& 
 
 void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, Properties_m& properties_m) {
     clearScreen();
-    print("Calculate Power Loss in Watts per Meter\n\n", Green);
+    print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
     print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meter\n", Brown);
-    print("Current                ", DarkGray); print(properties_m.voltage, Brown); print("   amperes\n", LightBlue);
+    print("Current                ", DarkGray); print(properties_m.voltage, Brown); print("   voltage\n", LightBlue);
     print("Length                 ", DarkGray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
     print("Cross-sectional Area   ", DarkGray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
     print("Power Loss: ", LightGray); print(powerLoss, LightBlue); print(" Watts per meter\n\n", LightGray);
@@ -447,11 +447,11 @@ void CalculatePowerLoss_Watts_x_Meters::information() {
 	print("The formula used is:\n", LightBlue);
 	print("Power Loss = I^2 * R\n\n", Brown);
 	print("Where:\n", LightBlue);
-	print("I = Current in amperes\n", Brown);
+	print("I = Current in voltage\n", Brown);
 	print("R = Resistance in ohms\n\n", Brown);
 	print("The resistance is calculated using the formula:\n", LightBlue);
 	print("R = resistivity * length / cross-sectional area\n\n", Brown);
-	print("The resistivity of copper is 1.68e-8 ohm*meter.\n\n", Brown);
+	print("The resistivity of copper is 1.68e-8 ohm.\n\n", Brown);
     set_text_color(LightGray);	system("pause");
 }
 
