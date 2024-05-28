@@ -377,8 +377,8 @@ auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
         // Current input
         while (true) {
             print("Enter the current in amperes: ", LightBlue);
-            std::cin >> properties_m.current;
-            if (std::cin.fail() || properties_m.current <= 0) {
+            std::cin >> properties_m.voltage;
+            if (std::cin.fail() || properties_m.voltage <= 0) {
                 print("Invalid input. Please enter a positive number for current.\n", Red);
                 clearInputStream();
             }
@@ -421,20 +421,19 @@ void CalculatePowerLoss_Watts_x_Meters::performCalculation(Properties_m& propert
     clearInputStream();
 }
 
-double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& properties_m) {
+long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& properties_m) {
     // Calculate resistance
-    double resistance = properties_m.resistivity * properties_m.length / properties_m.crossSectionArea;
-
+    long double resistance = properties_m.resistivity * properties_m.length / properties_m.crossSectionArea;
     // Calculate power loss
-    double powerLoss = std::powl(properties_m.current, 2) * resistance;
+    long double powerLoss = std::powl(properties_m.voltage, 2) * resistance;
     return powerLoss;
 }
 
-void CalculatePowerLoss_Watts_x_Meters::printResults(const double powerLoss, Properties_m& properties_m) {
+void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, Properties_m& properties_m) {
     clearScreen();
     print("Calculate Power Loss in Watts per Meter\n\n", Green);
     print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meter\n", Brown);
-    print("Current                ", DarkGray); print(properties_m.current, Brown); print("   amperes\n", LightBlue);
+    print("Current                ", DarkGray); print(properties_m.voltage, Brown); print("   amperes\n", LightBlue);
     print("Length                 ", DarkGray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
     print("Cross-sectional Area   ", DarkGray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
     print("Power Loss: ", LightGray); print(powerLoss, LightBlue); print(" Watts per meter\n\n", LightGray);
