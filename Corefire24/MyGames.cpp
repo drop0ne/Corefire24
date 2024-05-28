@@ -206,7 +206,7 @@ void NumberGuessingGame::run() {
     gameLoop();
 }
 
-void NumberGuessingGame::gameLoop() {
+inline void NumberGuessingGame::gameLoop() {
     do {
         attemptCount++;
         if (attemptCount >= MAX_GUESSES) {
@@ -246,7 +246,7 @@ void NumberGuessingGame::gameLoop() {
     } while (true);
 }
 
-void NumberGuessingGame::setGameState() {
+inline void NumberGuessingGame::setGameState() {
     randomNumber = getRandomNumber(rangeLimit.min, rangeLimit.max);
     attemptCount = 0;
     attempt = 0;
@@ -258,7 +258,10 @@ void NumberGuessingGame::setGameState() {
 //
 //
 // Constructor
-CannaCalculator::CannaCalculator() {}
+CannaCalculator::CannaCalculator()
+{
+
+}
 
 // Destructor
 CannaCalculator::~CannaCalculator() {}
@@ -355,23 +358,8 @@ CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
 void CalculatePowerLoss_Watts_x_Meters::run() {
     menu();
 }
-/* Start Private */
 
-auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> Properties_m {
-    Properties_m properties_m;
-    clearScreen();
-    print("Set Properties!\n\n", Green);
-    // Resistivity input
-    properties_m.resistivity = requestInput("Enter the resistivity of the wire in ohm: ",  /*Text Prompt Color*/ LightGray,  /*Input Number Color*/ LightBlue);
-    // Current input
-    properties_m.voltage = requestInput("Enter the current in voltage: ", LightGray, LightBlue);
-    // Length input
-    properties_m.length = requestInput("Enter the length of the wire in meters: ", LightGray, LightBlue);
-    // Cross-sectional area input
-    properties_m.crossSectionArea = requestInput("Enter the cross-sectional area of the wire in square meters: ", LightGray, LightBlue);
-    clearInputStream();
-    return properties_m;
-}
+/* Start Private Methods */
 long double CalculatePowerLoss_Watts_x_Meters::requestInput(std::string stringMessagePrompt, int promptColor,int inputColor) {
     long double input{};
     while (true) {
@@ -388,27 +376,88 @@ long double CalculatePowerLoss_Watts_x_Meters::requestInput(std::string stringMe
     }
     return input;
 }
-void CalculatePowerLoss_Watts_x_Meters::performCalculation(Properties_m& properties_m) {
-    printResults(calculatePowerLoss(properties_m), properties_m);
+
+auto CalculatePowerLoss_Watts_x_Meters::setProperties() -> BaseLongDoubles {
+    BaseLongDoubles properties_m;
+    clearScreen();
+    print("Set Properties!\n\n", Green);
+    // Resistivity input
+    properties_m.resistivity_ohm = requestInput("Enter the resistivity of the wire in ohm: ",  /*Text Prompt Color*/ LightGray,  /*Input Number Color*/ LightBlue);
+    // Current input
+    properties_m.current_amps = requestInput("Enter the current in voltage: ", LightGray, LightBlue);
+    // Length input
+    properties_m.length_meters = requestInput("Enter the length of the wire in meters: ", LightGray, LightBlue);
+    // Cross-sectional area input
+    properties_m.crossSectionalArea_sqr_meter = requestInput("Enter the cross-sectional area of the wire in square meters: ", LightGray, LightBlue);
+    clearInputStream();
+    return properties_m;
+}
+
+void CalculatePowerLoss_Watts_x_Meters::performCalculation(BaseLongDoubles& baseNumbers) {
+    ConvertionsLongDoubles convertions;
+    // Calculations
+    convertions.resistance = baseNumbers.resistivity_ohm * baseNumbers.length_meters / baseNumbers.crossSectionalArea_sqr_meter; // ohms
+    convertions.powerLossTotal = std::powl(baseNumbers.current_amps, 2) * convertions.resistance; // watts
+    convertions.powerLossPerMeter = convertions.powerLossTotal / baseNumbers.length_meters; // watts per meter
+
+    // Conversion of Power Loss per meter to different units
+    convertions.powerLossPerCentimeter = convertions.powerLossPerMeter / 100.0L; // watts per cm
+    convertions.powerLossPerInch = convertions.powerLossPerMeter / 39.3701L; // watts per inch
+    convertions.powerLossMilliwattsPerMeter = convertions.powerLossPerMeter * 1000.0L; // milliwatts per meter
+
+    // Total Power Loss for Different Lengths of Wire
+    long double lengths[] = { 500.0L, 1000.0L, 2000.0L }; // meters
+    long double powerLossForLengths[3];
+    for (int i = 0; i < 3; ++i) {
+        powerLossForLengths[i] = std::powl(baseNumbers.current_amps, 2) * baseNumbers.resistivity_ohm * lengths[i] / baseNumbers.crossSectionalArea_sqr_meter; // watts
+    }
+
+    // Effect of Different Currents on Power Loss
+    long double currents[] = { 5.0L, 10.0L, 20.0L }; // amperes
+    long double powerLossForCurrents[3];
+    for (int i = 0; i < 3; ++i) {
+        powerLossForCurrents[i] = std::powl(currents[i], 2) * convertions.resistance; // watts
+    }
+
+    // Effect of Different Cross-sectional Areas on Power Loss
+    long double crossSections[] = { 0.002L, 0.001L, 0.0005L }; // square meters
+    long double powerLossForCrossSections[3];
+    for (int i = 0; i < 3; ++i) {
+        powerLossForCrossSections[i] = std::powl(baseNumbers.current_amps, 2) * baseNumbers.resistivity_ohm * baseNumbers.length_meters / crossSections[i]; // watts
+    }
+
+    // Effect of Different Resistivities on Power Loss
+    long double resistivities[] = { 1.68e-8L, 2.82e-8L, 1.59e-8L }; // ohm meters for copper, aluminum, silver
+    long double powerLossForResistivities[3];
+    for (int i = 0; i < 3; ++i) {
+        powerLossForResistivities[i] = std::powl(baseNumbers.current_amps, 2) * resistivities[i] * baseNumbers.length_meters / baseNumbers.crossSectionalArea_sqr_meter; // watts
+    }
+
+
+
+
+
+
+    printResults(convertions.powerLossTotal, baseNumbers);
     clearInputStream();
 }
 
-long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& properties_m) {
+long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(BaseLongDoubles& baseNumbers) {
     // Calculate resistance
-    long double resistance = properties_m.resistivity * properties_m.length / properties_m.crossSectionArea;
+    long double resistance = baseNumbers.resistivity_ohm * baseNumbers.length_meters / baseNumbers.crossSectionalArea_sqr_meter;
     // Calculate power loss
-    long double powerLoss = std::powl(properties_m.voltage, 2) * resistance;
+    long double powerLoss = std::powl(baseNumbers.current_amps, 2) * resistance;
     return powerLoss;
 }
 
-void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, Properties_m& properties_m) {
+void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, BaseLongDoubles& baseNumbers) {
     clearScreen();
     print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
-    print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meters\n", Brown);
-    print("Current                ", DarkGray); print(properties_m.voltage, Brown); print("   voltage\n", LightBlue);
-    print("Length                 ", DarkGray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
-    print("Cross-sectional Area   ", DarkGray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
-    print("Power Loss: ", LightGray); print(powerLoss, LightBlue); print(" Watts per meter\n\n", LightGray);
+    print("Resistivity            ", DarkGray); print(baseNumbers.resistivity_ohm, Brown); print(" * meters\n", Brown);
+    print("Current                ", DarkGray); print(baseNumbers.current_amps, Brown); print("   voltage\n", LightBlue);
+    print("Length                 ", DarkGray); print(baseNumbers.length_meters, Brown); print("   meters\n", LightBlue);
+    print("Cross-sectional Area   ", DarkGray); print(baseNumbers.crossSectionalArea_sqr_meter, Brown); print("   square meters\n\n", LightBlue);
+    print("Power Loss as heat: ", LightGray); print(powerLoss, LightBlue); print(" Watts\n\n", LightGray);
     system("pause");
 }
 
@@ -468,7 +517,7 @@ inline int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 
 
 inline void CalculatePowerLoss_Watts_x_Meters::menu() {
-    Properties_m properties_m;
+    BaseLongDoubles properties_m;
     do
     {
         clearInputStream();

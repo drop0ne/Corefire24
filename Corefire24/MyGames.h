@@ -45,16 +45,13 @@ private:
     void setupEnviorment();
     int requestInput();
     void question(int questionNumber);
-    void askFirstQuestion();
+    void askFirstQuestion(); //todo: consolidate askQuestion to a single generic function; Load questions from a file; then optomize the code
     void askSecondQuestion();
     void askThirdQuestion();
 
 };
 
-// ready for start screen with menu options
-// options: set rng range; set number of guess; have default avalible - thats 3 options
-
-class NumberGuessingGame : public NumberGenerator, public MyConsoleAPI {
+class NumberGuessingGame : public NumberGenerator, public MyConsoleAPI { //todo: Create a Start Screen with options to set the range of the random number, and the number of guesses
 private:
     struct NumberRangeLimit {
         int min;
@@ -74,8 +71,8 @@ public:
     void run();
 
 private:
-    void gameLoop();
-    void setGameState();
+    inline void gameLoop();
+    inline void setGameState();
 };
 
 
@@ -92,12 +89,20 @@ private:
 
 class CalculatePowerLoss_Watts_x_Meters : public MyConsoleAPI {
 private:
-   struct Properties_m {
-        long double resistivity = 1.68e-8L; // resistivity of copper in ohms
-        long double voltage = 10.0L; // current in volts
-        long double length = 1000.0L; // length of the wire in meters
-        long double crossSectionArea = 1e-3L; // cross-sectional area of the wire in square meters
+   struct BaseLongDoubles {
+       long double resistivity_ohm = 1.68e-8L;
+       long double current_amps = 10.0L;
+       long double length_meters = 1000.0L;
+       long double crossSectionalArea_sqr_meter = 1e-3L;
     };
+   struct ConvertionsLongDoubles {
+       long double resistance{};
+       long double powerLossTotal{};
+       long double powerLossPerMeter{};
+       long double powerLossPerCentimeter{};
+       long double powerLossPerInch{};
+       long double powerLossMilliwattsPerMeter{};
+   };
 
 public:
     CalculatePowerLoss_Watts_x_Meters();
@@ -105,11 +110,11 @@ public:
 
     void run();
 private:
-    auto setProperties() -> Properties_m;
     long double requestInput(std::string stringMessagePrompt, int promptColor, int inputColor);
-    void performCalculation(Properties_m& properties_m);
-    long double calculatePowerLoss(Properties_m& properties_m);
-    void printResults(const long double powerLoss, Properties_m& sourceData);
+    auto setProperties() -> BaseLongDoubles;
+    void performCalculation(BaseLongDoubles& baseNumber);
+    long double calculatePowerLoss(BaseLongDoubles& baseNumbers);
+    void printResults(const long double powerLoss, BaseLongDoubles& baseNumbers);
     inline void information();
     inline int returnMenuOption();
     inline void menu();
