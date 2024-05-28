@@ -105,7 +105,7 @@ public:
 
     void run();
 private:
-    void programLoop();
+    void performCalculation();
     void menu();
     int returnMenuOption();
     void setProperties();

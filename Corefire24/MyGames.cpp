@@ -353,35 +353,37 @@ CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters() {}
 CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
 
 void CalculatePowerLoss_Watts_x_Meters::run() {
-    clearInputStream();
     menu();
 }
 /* Start Private */
-void CalculatePowerLoss_Watts_x_Meters::programLoop() {
+void CalculatePowerLoss_Watts_x_Meters::performCalculation() {
     Properties_m properties_m;
     printResults(calculatePowerLoss(properties_m.resistivity, properties_m.current, properties_m.length, properties_m.crossSectionArea), properties_m);
     clearInputStream();
 }
 
 void CalculatePowerLoss_Watts_x_Meters::menu() {
-    clearScreen();
-    print("Calculate Power Loss in Watts per Meter\n\n", Green);
-    print("1. Set Properties\n", LightGray);
-    print("2. Calculate Power Loss\n", LightGray);
-    print("3. Information\n", LightGray);
-    print("4. Return to Main Menu\n\n", LightGray);
-
-
-    switch (returnMenuOption())
+    do
     {
+        clearInputStream();
+        clearScreen();
+        print("Calculate Power Loss in Watts per Meter\n\n", Green);
+        print("1. Set Properties\n", LightGray);
+        print("2. Calculate Power Loss\n", LightGray);
+        print("3. Information\n", LightGray);
+        print("4. Return to Main Menu\n\n", LightGray);
+
+        
+        switch (returnMenuOption())
+        {
         case 1: setProperties(); break;
-        case 2: programLoop(); break;
+        case 2: performCalculation(); break;
         case 3: information(); break;
-        case 4: return;
+        case 4: clearInputStream(); return;
     default: print("Invalid input. Please enter a number from 1 to 4.\n", LightGreen); system("pause");
         break;
-    }
-
+        }
+    } while (true);
 }
 
 int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
@@ -401,7 +403,7 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 				std::cerr << "Invalid input. Please enter a number.\n";
 				clearInputStream();
 			}
-            catch (const std::out_of_range& e)
+            catch (const std::out_of_range& e) // need to build a logging system
             {
 				std::cerr << "Out of range. Please enter a number.\n";
 				clearInputStream();
