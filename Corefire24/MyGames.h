@@ -103,6 +103,7 @@ private:
        long double powerLossPerInch{};
        long double powerLossMilliwattsPerMeter{};
    };
+   std::vector<std::vector<long double>> package;
 
 public:
     CalculatePowerLoss_Watts_x_Meters();
@@ -114,7 +115,7 @@ private:
     auto setProperties() -> BaseLongDoubles;
     void performCalculation(BaseLongDoubles& baseNumber);
     long double calculatePowerLoss(BaseLongDoubles& baseNumbers);
-    void printResults(const BaseLongDoubles& baseNumbers, const ConvertionsLongDoubles& convertions);
+    void printResults(const BaseLongDoubles& baseNumbers, const ConvertionsLongDoubles& convertions, std::vector<std::vector<long double>> &package);
     inline void information();
     inline int returnMenuOption();
     inline void menu();

@@ -351,7 +351,16 @@ void CannaCalculator::programLoop() {
     system("pause");
 }
 
-CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters() {}
+CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters()
+{
+    for (auto& element : package)
+	{
+		for (auto& subElement : element)
+		{
+			subElement = 0.0L;
+		}
+	}
+}
 
 CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
 
@@ -435,8 +444,20 @@ void CalculatePowerLoss_Watts_x_Meters::performCalculation(BaseLongDoubles& base
     for (int i = 0; i < controlVariable; ++i) {
         powerLossForResistivities[i] = std::powl(baseNumbers.current_amps, 2) * resistivities[i] * baseNumbers.length_meters / baseNumbers.crossSectionalArea_sqr_meter; // watts
     }
-
-    printResults(baseNumbers, convertions);
+    
+    for (size_t i = 0; i < package.size(); i++)
+    {
+        package[eLengths][i]                   = lengths[i];
+        package[ePowerLossForLengths][i]       = powerLossForLengths[i];
+        package[eCurrents][i]                  = currents[i];
+        package[ePowerlossForCurrents][i]      = powerLossForCurrents[i];
+        package[eCrossSections][i]             = crossSections[i];
+        package[ePowerLossForCrossSections][i] = powerLossForCrossSections[i];
+        package[eResistances][i]               = resistivities[i];
+        package[ePowerLossForResistances][i]   = powerLossForResistivities[i];
+    }
+	
+    printResults(baseNumbers, convertions, package);
     clearInputStream();
 }
 
@@ -448,7 +469,7 @@ long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(BaseLongDouble
     return powerLoss;
 }
 
-void CalculatePowerLoss_Watts_x_Meters::printResults(const BaseLongDoubles& baseNumbers, const ConvertionsLongDoubles& convertions) {
+void CalculatePowerLoss_Watts_x_Meters::printResults(const BaseLongDoubles& baseNumbers, const ConvertionsLongDoubles& convertions, std::vector<std::vector<long double>>& package) {
     clearScreen();
     print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
     print("Resistivity            ", DarkGray); print(baseNumbers.resistivity_ohm, Brown); print(" * meters\n", Brown);
@@ -461,6 +482,13 @@ void CalculatePowerLoss_Watts_x_Meters::printResults(const BaseLongDoubles& base
     print("Watts per Centimeter: ", convertions.powerLossPerCentimeter, " watts/cm\n", LightBlue, LightMagenta);
     print("Watts per Inch: ", convertions.powerLossPerInch, " watts/inch\n", LightBlue, LightMagenta);
     print("Milliwatts per Meter: ", convertions.powerLossMilliwattsPerMeter, " milliwatts/m\n\n", LightBlue, LightMagenta);
+
+    print("Total Power Loss for Different Lengths\n", LightGray);
+    for (int i = 0; i < 3; ++i) {
+        std::cout << package[eLengths][i] << " meters: " << package[ePowerLossForLengths][i] << " W\n";
+    }
+    std::cout << '\n';
+
     pauseConsole();
 }
 
