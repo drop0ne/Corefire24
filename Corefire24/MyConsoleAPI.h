@@ -61,6 +61,7 @@ public:
     inline virtual void pauseConsole();
     virtual void print(const std::string& data);
     virtual void print(const std::string& data, const int set_text_color);
+    virtual void print(const std::string, const std::string, int set_text_color);
     virtual void print(const double& data, int numberColor);
     virtual void print(const std::string string1, const double num1, const std::string string2, int stringColor, int doubleColor);
     virtual void print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
@@ -100,7 +101,7 @@ private:
 public:
     MyConsoleAPI_extension(); // Constructor
 
-    void errorMessage();
+    void errorMessage(std::string msgData);
     int mainMenuLogic();
     void setMainMenuState(const std::vector<int> newState);
     const std::vector<int>& getMainMenuState() const;

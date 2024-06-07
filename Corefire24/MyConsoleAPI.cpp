@@ -45,6 +45,11 @@ void MyConsoleAPI::print(const std::string& data, const int textColor) {
 	// Set text color and print data
 }
 
+void MyConsoleAPI::print(const std::string string1, const std::string string2, int textColor) {
+	set_text_color(textColor);
+	std::cout << string1 + string2;
+}
+
 void MyConsoleAPI::print(const double& data, int numberColor) {
 	set_text_color(numberColor);
 	std::cout << data;
@@ -180,9 +185,9 @@ mainMenu_totalParameters(8), mainMenuParameterState({/*options(0)*/Green, /*prog
 /*************************************************************/
 
 
-void MyConsoleAPI_extension::errorMessage() {
+void MyConsoleAPI_extension::errorMessage(std::string msgData) {
 	clearInputStream();
-	print("\nERROR: INVALID INPUT\n", getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
+	print(msgData, " is an invald command\n\n", getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
 }
 
 void MyConsoleAPI_extension::setMainMenuState(const std::vector<int> newState) {
@@ -320,7 +325,7 @@ int MyConsoleAPI_extension::mainMenuLogic() {
 	do {
 		clearScreen();
 		generateMainMenu(getMainMenuState());
-		std::cout << "\nEnter Command: ";
+		print("\nEnter Command: ", LightGray);
 
 		std::getline(std::cin, input);
 
@@ -339,15 +344,14 @@ int MyConsoleAPI_extension::mainMenuLogic() {
 					return 99; // Indicate exit with 99
 				}
 				else {
-					throw std::invalid_argument("Invalid input");
+					throw std::invalid_argument(input);
 				}
 			}
 		}
-		catch (const std::exception& e) {
-			errorMessage();
-			std::cout << "Press Enter to continue...";
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cin.get(); // Wait for Enter key
+		catch (const std::exception&) {
+			errorMessage(input);
+			clearInputStream();
+			pauseConsole();
 		}
 	} while (true);
 }
