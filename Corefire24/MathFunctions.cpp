@@ -1,10 +1,4 @@
 ﻿#include "MathFunctions.h"
-#include <cmath>
-#include <iostream>
-#include <functional>
-#include <unordered_map>
-#include <stdexcept>
-
 // MathematicalComputationalLogic Implementation
 
 double MathematicalComputationalLogic::add(double a, double b) {
@@ -95,6 +89,7 @@ void MathProofs::showProofs() {
     int choice;
     std::cin >> choice;
     printProof(choice);
+    system("pause");
 }
 
 void MathProofs::printProof(int choice) {
@@ -107,45 +102,23 @@ void MathProofs::printProof(int choice) {
     }
 }
 
-// Implementation of the performArithmetic function
-void performArithmetic(MathematicalComputationalLogic& mcl) {
-    double a, b;
-    int choice;
 
-    // Function to get a single input
-    auto getInput = [](const std::string& prompt) -> double {
-        double value;
-        std::cout << prompt;
-        std::cin >> value;
-        return value;
-        };
+ArithmeticProcessor::ArithmeticProcessor(MathematicalComputationalLogic& mcl)
+    : mcl_(mcl) {}
 
-    // Function to print the result of an operation
-    auto printResult = [](const std::string& operation, double result) {
-        std::cout << operation << ": " << result << std::endl;
-        };
+double ArithmeticProcessor::getInput(const std::string& prompt) {
+    double value;
+    std::cout << prompt;
+    std::cin >> value;
+    return value;
+}
 
-    // Get the first number
-    a = getInput("Enter first number: ");
+void ArithmeticProcessor::printResult(const std::string& operation, double result) {
+    std::cout << operation << ": " << result << std::endl;
+    
+}
 
-    // Map user choices to functions
-    std::unordered_map<int, std::function<double()>> operations = {
-        {1, [&]() { b = getInput("Enter second number: "); return mcl.add(a, b); }},
-        {2, [&]() { b = getInput("Enter second number: "); return mcl.subtract(a, b); }},
-        {3, [&]() { b = getInput("Enter second number: "); return mcl.multiply(a, b); }},
-        {4, [&]() { b = getInput("Enter second number: "); return mcl.divide(a, b); }},
-        {5, [&]() { b = getInput("Enter exponent: "); return mcl.power(a, b); }},
-        {6, [&]() { return mcl.squareRoot(a); }},
-        {7, [&]() { return mcl.logarithm(a); }},
-        {8, [&]() { return mcl.sine(a); }},
-        {9, [&]() { return mcl.cosine(a); }},
-        {10, [&]() { return mcl.tangent(a); }},
-        {11, [&]() { return mcl.arcsine(a); }},
-        {12, [&]() { return mcl.arccosine(a); }},
-        {13, [&]() { return mcl.arctangent(a); }}
-    };
-
-    // Display the menu
+int ArithmeticProcessor::getChoice() {
     std::cout << "Choose an operation:\n";
     std::cout << "1. Add\n";
     std::cout << "2. Subtract\n";
@@ -161,9 +134,28 @@ void performArithmetic(MathematicalComputationalLogic& mcl) {
     std::cout << "12. Arccosine (first number)\n";
     std::cout << "13. Arctangent (first number)\n";
     std::cout << "Enter your choice: ";
+    int choice;
     std::cin >> choice;
+    return choice;
+}
 
-    // Perform the selected operation
+void ArithmeticProcessor::executeOperation(int choice, double a) {
+    std::unordered_map<int, std::function<double()>> operations = {
+        {1, [&]() { double b = getInput("Enter second number: "); return mcl_.add(a, b); }},
+        {2, [&]() { double b = getInput("Enter second number: "); return mcl_.subtract(a, b); }},
+        {3, [&]() { double b = getInput("Enter second number: "); return mcl_.multiply(a, b); }},
+        {4, [&]() { double b = getInput("Enter second number: "); return mcl_.divide(a, b); }},
+        {5, [&]() { double b = getInput("Enter exponent: "); return mcl_.power(a, b); }},
+        {6, [&]() { return mcl_.squareRoot(a); }},
+        {7, [&]() { return mcl_.logarithm(a); }},
+        {8, [&]() { return mcl_.sine(a); }},
+        {9, [&]() { return mcl_.cosine(a); }},
+        {10, [&]() { return mcl_.tangent(a); }},
+        {11, [&]() { return mcl_.arcsine(a); }},
+        {12, [&]() { return mcl_.arccosine(a); }},
+        {13, [&]() { return mcl_.arctangent(a); }}
+    };
+
     try {
         if (operations.find(choice) != operations.end()) {
             double result = operations[choice]();
@@ -176,4 +168,10 @@ void performArithmetic(MathematicalComputationalLogic& mcl) {
     catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+}
+
+void ArithmeticProcessor::performArithmetic() {
+    double a = getInput("Enter first number: ");
+    int choice = getChoice();
+    executeOperation(choice, a);
 }

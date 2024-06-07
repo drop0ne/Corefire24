@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////
 #include "MyConsoleAPI.h"
 #include "MyGames.h"
-
+#include "MathFunctions.h"
 
 int main()
 {
@@ -11,8 +11,11 @@ int main()
 	CannaCalculator cannaCalcultor;
 	Quiz quiz;
 	CalculatePowerLoss_Watts_x_Meters powerLossCalculator;
+	MathProofs mathProofs;
+	MathematicalComputationalLogic mcl;
+	auto arithmeticProcessor = ArithmeticProcessor(mcl);
 
- 	do {
+	do {
 		switch (fn.mainMenuLogic())
 		{
 		case 1: numberGuessingGame.run(); break;
@@ -22,7 +25,9 @@ int main()
 		case 5: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
 		case 6: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
 		case 7: powerLossCalculator.run(); break;
-		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
+		case 8: mathProofs.showProofs(); break;
+		case 9: arithmeticProcessor.performArithmetic(); break;
+		case 99: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
 		default: fn.print("\nCommand must be intager from 1 - 6\n", fn.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
 

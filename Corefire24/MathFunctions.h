@@ -1,8 +1,10 @@
-﻿#ifndef MATHFUNCTIONS_H
+﻿#pragma once
+#include "My Standard Includes.h"
+#include "MyConsoleAPI.h"
+
+#ifndef MATHFUNCTIONS_H
 #define MATHFUNCTIONS_H
 
-#include <string>
-#include <map>
 
 // Class for basic arithmetic and algebraic operations
 class MathematicalComputationalLogic {
@@ -23,7 +25,7 @@ public:
 };
 
 // Class for displaying mathematical proofs
-class MathProofs {
+class MathProofs : public MyConsoleAPI{
 public:
     MathProofs();  // Constructor declaration
     void showProofs();
@@ -38,3 +40,33 @@ private:
 };
 
 #endif // MATHFUNCTIONS_H
+
+#ifndef ARITHMETICPROCESSOR_H
+#define ARITHMETICPROCESSOR_H
+
+class ArithmeticProcessor : public MyConsoleAPI{
+public:
+    // Constructor that takes an instance of MathematicalComputationalLogic
+    ArithmeticProcessor(MathematicalComputationalLogic& mcl);
+
+    // Method to perform arithmetic operations
+    void performArithmetic();
+
+private:
+    // Member variable to hold reference to MathematicalComputationalLogic
+    MathematicalComputationalLogic& mcl_;
+
+    // Helper method to get input from the user
+    double getInput(const std::string& prompt);
+
+    // Helper method to print the result of an operation
+    void printResult(const std::string& operation, double result);
+
+    // Method to display the menu and get the user's choice
+    int getChoice();
+
+    // Method to map user choice to functions and perform the operation
+    void executeOperation(int choice, double a);
+};
+
+#endif // ARITHMETICPROCESSOR_H
