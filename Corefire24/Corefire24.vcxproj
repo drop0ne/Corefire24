@@ -153,10 +153,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Corefire24.cpp" />
+    <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="MyConsoleAPI.cpp" />
     <ClCompile Include="MyGames.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="MyEnum.h" />
     <ClInclude Include="MyConsoleAPI.h" />
     <ClInclude Include="MyGames.h" />

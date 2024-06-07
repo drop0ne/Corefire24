@@ -24,24 +24,24 @@
     <ClCompile Include="MyGames.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MathFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="color_enum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProgramExstentions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MyConsoleAPI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="My Codebase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MyGames.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="My Standard Includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

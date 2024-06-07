@@ -294,12 +294,12 @@ void MyConsoleAPI_extension::menuTheme_betterRandom() {
     {
         for (size_t j = 0; j < mainMenuParameterState.size(); j++)
         {
-        mainMenuParameterState[j] = getRandomNumber(1, 16);
+        mainMenuParameterState[j] = getRandomNumber(1, 15);
         }
         clearScreen();
         generateMainMenu(mainMenuParameterState);
         print("\nWAIT!", WAIT_);
-        std::this_thread::sleep_for(0.025s);
+        std::this_thread::sleep_for(0.035s);
     }
 }
 
