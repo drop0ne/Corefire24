@@ -3,21 +3,20 @@
 #include "MyConsoleAPI.h"
 #include "MyGames.h"
 
+void games(int option);
 
 int main()
 {
 	static MyConsoleAPI_extension fn;
-	NumberGuessingGame numberGuessingGame;
 	CannaCalculator cannaCalcultor;
-	Quiz quiz;
 	CalculatePowerLoss_Watts_x_Meters powerLossCalculator;
 
  	do {
 		switch (fn.mainMenuLogic())
 		{
-		case 1: numberGuessingGame.run(); break;
+		case 1: games(numberGame); break;
 		case 2: cannaCalcultor.run(); break;
-		case 3: quiz.run(); break;
+		case 3: games(quiz); break;
 		case 4: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 5: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
 		case 6: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
@@ -28,4 +27,17 @@ int main()
 
 	} while (true);
 	return -1;
+}
+
+void games(int option) {
+	Quiz quiz;
+	NumberGuessingGame ngg;
+
+	switch (option)
+	{
+	case 1: quiz.run(); break;
+	case 2: ngg.run(); break;
+	default:
+		break;
+	}
 }
