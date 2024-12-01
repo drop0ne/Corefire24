@@ -45,7 +45,7 @@ public:
         const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4);
 
     virtual void setScreenColor(const char* screenTextColor);
-    virtual void set_text_color(const int data);
+    virtual void setConsoleTextColorAttribute(const int intConsolColorDOS);
     virtual void setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background); // Needs testing the verify funcionality
     virtual void clearInputStream();
     virtual void extractInputStream();

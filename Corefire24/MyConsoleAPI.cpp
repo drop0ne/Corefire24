@@ -35,22 +35,22 @@ void MyConsoleAPI::print(const std::string& data) {
     // Legacy code
 }
 void MyConsoleAPI::print(const std::string& data, const int textColor) {
-    set_text_color(textColor);
+    setConsoleTextColorAttribute(textColor);
     std::cout << data;
     // Set text color and print data
 }
 
 void MyConsoleAPI::print(const double& data, int numberColor) {
-    set_text_color(numberColor);
+    setConsoleTextColorAttribute(numberColor);
     std::cout << data;
 }
 
 void MyConsoleAPI::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
-    set_text_color(textColor);
+    setConsoleTextColorAttribute(textColor);
     std::cout << string1;
-    set_text_color(numberColor);
+    setConsoleTextColorAttribute(numberColor);
     std::cout << data1;
-    set_text_color(textColor);
+    setConsoleTextColorAttribute(textColor);
     std::cout << string2;
     // Used by CalculatePowerLoss_Watts_x_Meters
 }
@@ -58,13 +58,13 @@ void MyConsoleAPI::print(const std::string& string1, const double& data1, const 
 
 void MyConsoleAPI::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
     const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
-    set_text_color(textColor1);
+    setConsoleTextColorAttribute(textColor1);
     std::cout << string1;
-    set_text_color(textColor2);
+    setConsoleTextColorAttribute(textColor2);
     std::cout << string2;
-    set_text_color(textColor3);
+    setConsoleTextColorAttribute(textColor3);
     std::cout << string3;
-    set_text_color(textColor4);
+    setConsoleTextColorAttribute(textColor4);
     std::cout << string4;
     // Used to generate Main Menu
 }
@@ -86,7 +86,7 @@ void MyConsoleAPI::setScreenColor(const char* data) {
     }
 }
 
-void MyConsoleAPI::set_text_color(int data) {
+void MyConsoleAPI::setConsoleTextColorAttribute(int data) {
     if (!SetConsoleTextAttribute(console_HWND, data)) {
         throw std::runtime_error("Failed to set text attributes");
     }
@@ -308,7 +308,7 @@ int ToolSet_MainMenu::mainMenuLogic() {
     int returnValue{ 0 };
 
     do {
-        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); set_text_color(LightGray);
+        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); setConsoleTextColorAttribute(LightGray);
         std::cin >> returnValue;
         if (std::cin.fail())
         {

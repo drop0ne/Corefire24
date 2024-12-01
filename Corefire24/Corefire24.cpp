@@ -29,13 +29,13 @@ int main()
 
 void games(int option) {
 	static Quiz quiz_1;
-	static NumberGuessingGame ngg_2;
+	static NumberGuessingGame numberGame_2;
 	static Hangman hangman;
 
 	switch (option)
 	{
 	case 1: quiz_1.run(); break;
-	case 2: ngg_2.run(); break;
+	case 2: numberGame_2.run(); break;
 	case 3: /*hangman.run();*/break;
 	default:
 		break;

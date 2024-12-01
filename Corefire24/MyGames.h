@@ -80,14 +80,25 @@ private:
 
 
 class CannaCalculator : public MyConsoleAPI {
+private:
+    enum MyEnum
+    {
+        flowerG = 0, THCp = 1, THCl = 2, grossMG = 3, netMG = 4 
+    };
+
 public:
-    CannaCalculator();
+     CannaCalculator();
     ~CannaCalculator();
 
     void run();
 
 private:
-    void programLoop();
+    void entrypoint();
+    char yesNOquestion(std::string promptMessage, int messageColor);
+    double getDoubleFromUser(std::string promptMessage, int messageColor);
+    const std::vector<double> mathProccessor(std::vector<double> userDATA);
+    void printResults(std::vector<double> results);
+    
 };
 
 class CalculatePowerLoss_Watts_x_Meters : public MyConsoleAPI {
