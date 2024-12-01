@@ -32,7 +32,7 @@ enum eThread_ID {
 };
 
 enum gameOption {
-    quiz = 1, numberGame = 2
+    quiz = 1, numberGame = 2, hangman = 3
 };
 
 enum appsOption {

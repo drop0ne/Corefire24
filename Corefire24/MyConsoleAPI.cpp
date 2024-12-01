@@ -116,10 +116,6 @@ void MyConsoleAPI::extractInputStream() {
     }
 }
 
-void MyConsoleAPI::launchThread(const std::function<void()>& func) {
-    jthreadPool_concurrent.emplace_back(std::ref(func));
-}
-
 void MyConsoleAPI::createNewConsoleWindow() {
     if (AllocConsole()) {
         FILE* file;
@@ -163,7 +159,7 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 /*                     < Main Menu API >                     */
 /*************************************************************/
 
-MyConsoleAPI_extension::MyConsoleAPI_extension() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
+ToolSet_MainMenu::ToolSet_MainMenu() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
 mainMenu_totalParameters(8), mainMenuParameterState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
     /*exitID(3)*/Red, /*exit(4)*/DarkGray, /*objects(5)*/LightGray, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue})
 {
@@ -176,12 +172,12 @@ mainMenu_totalParameters(8), mainMenuParameterState({/*options(0)*/Green, /*prog
 /*************************************************************/
 
 
-void MyConsoleAPI_extension::errorMessage() {
+void ToolSet_MainMenu::errorMessage() {
     clearInputStream();
     print("\nERROR: INVALID INPUT\n", getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
 }
 
-void MyConsoleAPI_extension::setMainMenuState(const std::vector<int> newState) {
+void ToolSet_MainMenu::setMainMenuState(const std::vector<int> newState) {
     print("Setting new state\n");
     for (size_t i = 0; i < mainMenuParameterState.size(); i++)
     {
@@ -190,7 +186,7 @@ void MyConsoleAPI_extension::setMainMenuState(const std::vector<int> newState) {
     system("pause");
 }
 
-void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData) {
+void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
     /* StateDate.at( recieves and int ) to identify group to apply color state change to */
     /* Using enum eMainMenu_State_ID Options(0), ProgramID1), Program(2), ExitProgramID(3), ExitProgram(4), Symbols(5), ErrorMessage(6) */
 
@@ -211,7 +207,7 @@ void MyConsoleAPI_extension::generateMainMenu(const std::vector<int>& stateData)
     print("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n",                  stateData.at(ExitProgram));
 }
 
-void MyConsoleAPI_extension::setThemeFlag(const int themeFlag_ID) {
+void ToolSet_MainMenu::setThemeFlag(const int themeFlag_ID) {
     try
     {
         if (!FLAGS_theme.empty())
@@ -247,7 +243,7 @@ void MyConsoleAPI_extension::setThemeFlag(const int themeFlag_ID) {
     }
 }
 
-void MyConsoleAPI_extension::callTheme_by_Flag_ID(const int& themeFlag_ID) {
+void ToolSet_MainMenu::callTheme_by_Flag_ID(const int& themeFlag_ID) {
     switch (themeFlag_ID)
     {
     case 0:  setThemeFlag(defaultTheme); menuTheme_Default(); break;
@@ -263,7 +259,7 @@ void MyConsoleAPI_extension::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 /*     START OF PRIVATE METHODS FOR MyConsoleAPI_Exstension  */
 /*************************************************************/
 
-void MyConsoleAPI_extension::menuTheme_Default() {
+void ToolSet_MainMenu::menuTheme_Default() {
     setThemeFlag(defaultTheme);
 
     for (size_t i = 0; i < mainMenuParameterState.size(); i++)
@@ -272,7 +268,7 @@ void MyConsoleAPI_extension::menuTheme_Default() {
     }
 }
 
-void MyConsoleAPI_extension::menuTheme_Random() {
+void ToolSet_MainMenu::menuTheme_Random() {
     /*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
 
     for (size_t i = 0; i < mainMenuParameterState.size(); i++)
@@ -283,7 +279,7 @@ void MyConsoleAPI_extension::menuTheme_Random() {
 
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
 
-void MyConsoleAPI_extension::menuTheme_betterRandom() {
+void ToolSet_MainMenu::menuTheme_betterRandom() {
     using namespace std::chrono_literals;
 
     for (size_t i = 0; i < 60; i++)
@@ -299,15 +295,15 @@ void MyConsoleAPI_extension::menuTheme_betterRandom() {
     }
 }
 
-const std::vector<int>& MyConsoleAPI_extension::getMainMenuState() const {
+const std::vector<int>& ToolSet_MainMenu::getMainMenuState() const {
     return mainMenuParameterState;
 }
 
-const std::vector<int>& MyConsoleAPI_extension::getMainMenuDefaultState() const {
+const std::vector<int>& ToolSet_MainMenu::getMainMenuDefaultState() const {
 	return mainMenu_defaultParameterState;
 }
 
-int MyConsoleAPI_extension::mainMenuLogic() {
+int ToolSet_MainMenu::mainMenuLogic() {
     int returnValue{ 0 };
 
     do {

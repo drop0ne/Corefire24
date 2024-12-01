@@ -22,27 +22,6 @@ public:
 
 #endif // NUMBER_GENERATOR_H
 
-#ifndef PROGRAM_ATTRIBUTES_H
-#define PROGRAM_ATTRIBUTES_H
-
-#include <string>
-
-class programAttributes {
-public:
-    static void setConsoleTitle(const std::string& title);
-    static void setConsoleSize(int width, int height);
-    static void setConsoleFont(int width, int height, const std::string& fontName);
-    static void setConsoleIcon(int iconID);
-    static void setConsoleIcon(const std::string& iconPath);
-
-    struct IconSettings {
-        std::string path;
-        int id = -1;
-    };
-    static void setConsoleIcon(const IconSettings& settings);
-};
-#endif // PROGRAM_ATTRIBUTES_H
-
 //////////////////////////////////////////
 
 #ifndef MY_CONSOLE_API_H
@@ -70,15 +49,8 @@ public:
     virtual void setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background); // Needs testing the verify funcionality
     virtual void clearInputStream();
     virtual void extractInputStream();
-    virtual void launchThread(const std::function<void()>& func);
-public:
     virtual void createNewConsoleWindow(); // not working
 
-    template <typename MY_OBJ>
-    void threadFunction(MY_OBJ& obj) {
-        createNewConsoleWindow();
-        obj.run();
-    }
 private:
     bool isValidCommand(const char* command);
 };
@@ -89,7 +61,7 @@ private:
 #ifndef MY_CONSOLE_API_EXTENDED
 #define MY_CONSOLE_API_EXTENDED
 
-class MyConsoleAPI_extension : public MyConsoleAPI, public NumberGenerator {
+class ToolSet_MainMenu : public MyConsoleAPI, public NumberGenerator {
 private:
     int mainMenu_totalParameters;
     std::vector<int> mainMenuParameterState;
@@ -97,7 +69,7 @@ private:
     std::vector<bool> FLAGS_theme;
        
 public:
-    MyConsoleAPI_extension(); // Constructor
+    ToolSet_MainMenu(); // Constructor
 
     void errorMessage();
     int mainMenuLogic();
