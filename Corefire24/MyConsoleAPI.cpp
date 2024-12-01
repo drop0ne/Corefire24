@@ -35,22 +35,22 @@ void MyConsoleAPI::print(const std::string& data) {
     // Legacy code
 }
 void MyConsoleAPI::print(const std::string& data, const int textColor) {
-    setConsoleTextColorAttribute(textColor);
+    setMyTextColor(textColor);
     std::cout << data;
     // Set text color and print data
 }
 
 void MyConsoleAPI::print(const double& data, int numberColor) {
-    setConsoleTextColorAttribute(numberColor);
+    setMyTextColor(numberColor);
     std::cout << data;
 }
 
 void MyConsoleAPI::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
-    setConsoleTextColorAttribute(textColor);
+    setMyTextColor(textColor);
     std::cout << string1;
-    setConsoleTextColorAttribute(numberColor);
+    setMyTextColor(numberColor);
     std::cout << data1;
-    setConsoleTextColorAttribute(textColor);
+    setMyTextColor(textColor);
     std::cout << string2;
     // Used by CalculatePowerLoss_Watts_x_Meters
 }
@@ -58,18 +58,18 @@ void MyConsoleAPI::print(const std::string& string1, const double& data1, const 
 
 void MyConsoleAPI::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
     const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
-    setConsoleTextColorAttribute(textColor1);
+    setMyTextColor(textColor1);
     std::cout << string1;
-    setConsoleTextColorAttribute(textColor2);
+    setMyTextColor(textColor2);
     std::cout << string2;
-    setConsoleTextColorAttribute(textColor3);
+    setMyTextColor(textColor3);
     std::cout << string3;
-    setConsoleTextColorAttribute(textColor4);
+    setMyTextColor(textColor4);
     std::cout << string4;
     // Used to generate Main Menu
 }
 
-void MyConsoleAPI::setScreenColor(const char* data) {
+void MyConsoleAPI::setScreenColors(const char* data) {
     try {
         // Validate the input before executing
         if (!isValidCommand(data)) {
@@ -86,7 +86,7 @@ void MyConsoleAPI::setScreenColor(const char* data) {
     }
 }
 
-void MyConsoleAPI::setConsoleTextColorAttribute(int data) {
+void MyConsoleAPI::setMyTextColor(int data) {
     if (!SetConsoleTextAttribute(console_HWND, data)) {
         throw std::runtime_error("Failed to set text attributes");
     }
@@ -161,7 +161,7 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 
 ToolSet_MainMenu::ToolSet_MainMenu() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
 mainMenu_totalParameters(8), mainMenuParameterState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
-    /*exitID(3)*/Red, /*exit(4)*/DarkGray, /*objects(5)*/LightGray, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue})
+    /*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/WhiteDefault, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue})
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
@@ -196,7 +196,7 @@ void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
     /* cout(string, int) */
 
     print("CoreFireCode 2024 edition\n", Green);
-    print("\n\nMain Menu\n\n", LightGray);
+    print("\n\nMain Menu\n\n", WhiteDefault);
     print("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " CannabisCalculator\n",        stateData.at(Program));
     print("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Calculation of Power Loss\n", stateData.at(Program));
     print("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Number Gussing Game\n",       stateData.at(Program));
@@ -308,7 +308,7 @@ int ToolSet_MainMenu::mainMenuLogic() {
     int returnValue{ 0 };
 
     do {
-        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); setConsoleTextColorAttribute(LightGray);
+        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); setMyTextColor(WhiteDefault);
         std::cin >> returnValue;
         if (std::cin.fail())
         {

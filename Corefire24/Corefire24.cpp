@@ -37,8 +37,7 @@ void games(int option) {
 	case 1: quiz_1.run(); break;
 	case 2: numberGame_2.run(); break;
 	case 3: /*hangman.run();*/break;
-	default:
-		break;
+	default: break;
 	}
 }
 

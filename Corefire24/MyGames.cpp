@@ -85,7 +85,7 @@ void Quiz::gameLoop() {
 	} while (iteration < 3);
 
 	MyConsoleAPI::print("\nGAME OVER\n\n", Red);
-	MyConsoleAPI::setConsoleTextColorAttribute(LightGray);
+	MyConsoleAPI::setMyTextColor(WhiteDefault);
 	system("pause"); // Last Instruction before returning to main menu
 }
 
@@ -100,7 +100,7 @@ int Quiz::requestInput() {
 	int convertedGuess{};
 	size_t pos{};
 	do {
-		MyConsoleAPI::setConsoleTextColorAttribute(Green);
+		MyConsoleAPI::setMyTextColor(Green);
 		std::getline(std::cin, guess);
 		try
 		{
@@ -138,11 +138,11 @@ inline void Quiz::question(int questionNumber) {
 void Quiz::askFirstQuestion() {
 	MyConsoleAPI::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
 	if (requestInput() == 3) {
-		MyConsoleAPI::setScreenColor("color 08"); // Gray on black
+		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
 		MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		MyConsoleAPI::setScreenColor("color 08"); // Gray on black
+		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
 		MyConsoleAPI::print("\nIncorrect\n\n", Red);
 	}
 }
@@ -150,11 +150,11 @@ void Quiz::askFirstQuestion() {
 void Quiz::askSecondQuestion() {
 	MyConsoleAPI::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
 	if (requestInput() == 2) {
-		MyConsoleAPI::setScreenColor("color 08"); // Gray on black
+		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
 		MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		MyConsoleAPI::setScreenColor("color 08"); // Gray on black
+		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
 		MyConsoleAPI::print("\nIncorrect\n\n", Red);
 	}
 }
@@ -162,11 +162,11 @@ void Quiz::askSecondQuestion() {
 void Quiz::askThirdQuestion() {
 	MyConsoleAPI::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
 	if (requestInput() == 1) {
-		MyConsoleAPI::setScreenColor("color 08"); // Gray on black
+		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
 		MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		MyConsoleAPI::setScreenColor("color 08"); // Gray on black
+		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
 		MyConsoleAPI::print("\nIncorrect\n\n", Red);
 	}
 }
@@ -280,17 +280,20 @@ void CannaCalculator::entrypoint() {
 
 	if (yesNOquestion("The default loss is 20%\nWould you like enter a custom loss percentage? (y/n): ", LightCyan) == 'y')
 	{
-		print("\nYour custom decimal numbr must be between 0 & 1: ", LightGray);
-		print("\nThe default is 0.20", LightGray);
-		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", LightGray)) {
+		setScreenColors("color 08");
+		print("\nYour custom decimal numbr must be between 0 & 1: ", LightCyan);
+		print("\nThe default is 0.20");
+		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", WhiteDefault)) {
 		}
 		clearInputStream();
 	}
 	else { userDATA.at(2) = 0.20; } //default
 
-	userDATA.at(THCp) = getDoubleFromUser("How strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightGray);
-	userDATA.at(flowerG) = getDoubleFromUser("How many grams of flower will you be using?: ", LightGray);
-
+	setScreenColors("color 08");
+	userDATA.at(THCp) = getDoubleFromUser("How strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightCyan);
+	setScreenColors("color 08");
+	userDATA.at(flowerG) = getDoubleFromUser("How many grams of flower will you be using?: ", LightCyan);
+	setScreenColors("color 08");
 	printResults(mathProccessor(userDATA));
 }
 
@@ -301,7 +304,7 @@ char CannaCalculator::yesNOquestion(std::string promptMessage, int messageColor)
 	{
 		clearInputStream();
 		print(promptMessage, messageColor);
-		setConsoleTextColorAttribute(LightGray);
+		setMyTextColor(WhiteDefault);
 
 		if (std::getline(std::cin, responce))
 		{
@@ -320,7 +323,7 @@ double CannaCalculator::getDoubleFromUser(std::string promptMessage, int message
 	{
 		clearInputStream();
 		print(promptMessage, messageColor);
-		setConsoleTextColorAttribute(LightGray);
+		setMyTextColor(WhiteDefault);
 
 		if (std::cin >> responce)
 		{
@@ -341,23 +344,27 @@ const std::vector<double> CannaCalculator::mathProccessor(std::vector<double> us
 
 void CannaCalculator::printResults(std::vector<double> results) {
 	clearScreen();
+	setMyTextColor(LightGreen);
 
 	std::cout << "\n" << results.at(THCp) << "% THCa converts to "
 		<< static_cast<int>(results.at(grossMG)) << "mg THC per " << static_cast<int>(results.at(flowerG)) << "g of flower before decarboxylation.\n"
 		<< "and " << static_cast<float>(results.at(netMG)) << "mg THC after decarboxylation\n\n";
 
+	setMyTextColor(LightBlue);
 	std::cout << "Gross THC\n";
 	for (int i = 2; i <= 13; i += 2) {
 		std::cout << static_cast<int>(results.at(grossMG)) / i << "mg per " << i << " servings\n";
 	}
 
-	std::cout << "NET THC\n";
+	setMyTextColor(Blue);
+	std::cout << "\n\nNET THC\n";
 	for (int i = 2; i <= 13; i += 2) {
 		std::cout << static_cast<int>(results.at(netMG)) / i << "mg per " << i << " servings\n";
 	}
 
 	std::cout << std::endl;
 	clearInputStream();
+	setMyTextColor(Gray);
 	system("pause");
 
 }
@@ -461,11 +468,11 @@ long double CalculatePowerLoss_Watts_x_Meters::calculatePowerLoss(Properties_m& 
 void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss, Properties_m& properties_m) {
 	clearScreen();
 	print("Calculate Power Loss in Watts per Meter\n\n", Green);
-	print("Resistivity            ", DarkGray); print(properties_m.resistivity, Brown); print(" * meter\n", Brown);
-	print("Current                ", DarkGray); print(properties_m.voltage, Brown); print("   amperes\n", LightBlue);
-	print("Length                 ", DarkGray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
-	print("Cross-sectional Area   ", DarkGray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
-	print("Power Loss: ", LightGray); print(powerLoss, LightBlue); print(" Watts per meter\n\n", LightGray);
+	print("Resistivity            ", Gray); print(properties_m.resistivity, Brown); print(" * meter\n", Brown);
+	print("Current                ", Gray); print(properties_m.voltage, Brown); print("   amperes\n", LightBlue);
+	print("Length                 ", Gray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
+	print("Cross-sectional Area   ", Gray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
+	print("Power Loss: ", WhiteDefault); print(powerLoss, LightBlue); print(" Watts per meter\n\n", WhiteDefault);
 	system("pause");
 }
 
@@ -481,7 +488,7 @@ void CalculatePowerLoss_Watts_x_Meters::information() {
 	print("The resistance is calculated using the formula:\n", LightBlue);
 	print("R = resistivity * length / cross-sectional area\n\n", Brown);
 	print("The resistivity of copper is 1.68e-8 ohm*meter.\n\n", Brown);
-	setConsoleTextColorAttribute(LightGray); system("pause");
+	setMyTextColor(WhiteDefault); system("pause");
 }
 
 int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
@@ -490,8 +497,8 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 	int inputLenghtLimit{ 1 };
 
 	do {
-		print("Enter a number: ", LightGray);
-		setConsoleTextColorAttribute(LightBlue);
+		print("Enter a number: ", WhiteDefault);
+		setMyTextColor(LightBlue);
 		if (std::getline(std::cin, input)) {
 			if (input.length() > inputLenghtLimit) {
 				print("Invalid input. Please enter a number from 1 to 4.\n", LightGreen);
@@ -531,10 +538,10 @@ void CalculatePowerLoss_Watts_x_Meters::menu() {
 		clearInputStream();
 		clearScreen();
 		print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
-		print("1. ", LightBlue); print("Set Properties\n", LightGray);
-		print("2. ", LightBlue); print("Calculate Power Loss\n", LightGray);
-		print("3. ", LightBlue); print("Information\n", LightGray);
-		print("4. ", LightBlue); print("Return to Main Menu\n\n", LightGray);
+		print("1. ", LightBlue); print("Set Properties\n", WhiteDefault);
+		print("2. ", LightBlue); print("Calculate Power Loss\n", WhiteDefault);
+		print("3. ", LightBlue); print("Information\n", WhiteDefault);
+		print("4. ", LightBlue); print("Return to Main Menu\n\n", WhiteDefault);
 
 		switch (returnMenuOption())
 		{
