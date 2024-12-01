@@ -251,13 +251,13 @@ void NumberGuessingGame::setGameState() {
 	attemptCount = 0;
 	attempt = 0;
 }
-//
+
 // End Number Guessing Game  ////////////////////////////////////////////////////////
-//
+
+
+
 // Start CannaCalculator  ////////////////////////////////////////////////////////
-//
-//
-// Constructor
+
 CannaCalculator::CannaCalculator() {}
 
 // Destructor
@@ -274,17 +274,17 @@ void CannaCalculator::entrypoint() {
 
 	clearScreen();
 	print("CannaCalculator\n\n", Green);
-	print("First, enter the percentage of THCa in your cannabis flower.\n", LightGray);
+	print("First, enter the percentage of THCa in your cannabis flower.\n", LightCyan);
 	print("Then, enter the total number of grams of flower you will use to infuse oil or butter.\n\n");
 
 
-	if (yesNOquestion("The default loss is 20%\nWould you like enter a custom loss percentage? (y/n): ", LightGray) == 'y')
+	if (yesNOquestion("The default loss is 20%\nWould you like enter a custom loss percentage? (y/n): ", LightCyan) == 'y')
 	{
-			print("\nYour custom decimal numbr must be between 0 & 1: ", LightGray);
-			print("\nThe default is 0.20", LightGray);
-			if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", LightGray)) {
-			}
-			clearInputStream();
+		print("\nYour custom decimal numbr must be between 0 & 1: ", LightGray);
+		print("\nThe default is 0.20", LightGray);
+		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", LightGray)) {
+		}
+		clearInputStream();
 	}
 	else { userDATA.at(2) = 0.20; } //default
 
