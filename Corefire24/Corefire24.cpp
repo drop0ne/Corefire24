@@ -4,23 +4,22 @@
 #include "MyGames.h"
 
 void games(int option);
+void apps(int option);
 
 int main()
 {
 	static MyConsoleAPI_extension fn;
-	CannaCalculator cannaCalcultor;
-	CalculatePowerLoss_Watts_x_Meters powerLossCalculator;
 
  	do {
 		switch (fn.mainMenuLogic())
 		{
 		case 1: games(numberGame); break;
-		case 2: cannaCalcultor.run(); break;
+		case 2: apps(CannaCalc); break;
 		case 3: games(quiz); break;
 		case 4: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 5: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
 		case 6: fn.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
-		case 7: powerLossCalculator.run(); break;
+		case 7: apps(PowerLossCalc); break;
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
 		default: fn.print("\nCommand must be intager from 1 - 6\n", fn.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
@@ -37,6 +36,19 @@ void games(int option) {
 	{
 	case 1: quiz.run(); break;
 	case 2: ngg.run(); break;
+	default:
+		break;
+	}
+}
+
+void apps(int option) {
+	CannaCalculator CannaCalc;
+	CalculatePowerLoss_Watts_x_Meters powerLossCalc;
+
+	switch (option)
+	{
+	case 1: CannaCalc.run(); break;
+	case 2: powerLossCalc.run(); break;
 	default:
 		break;
 	}

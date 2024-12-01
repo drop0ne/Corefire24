@@ -35,6 +35,9 @@ enum gameOption {
     quiz = 1, numberGame = 2
 };
 
+enum appsOption {
+    CannaCalc = 1, PowerLossCalc = 2
+};
 /* 
 enum dosINTcolors {
     default_color = 7, black = 0, dark_green = 2, green = 2, bright_green = 10, blue = 1,
