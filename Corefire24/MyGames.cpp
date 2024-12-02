@@ -30,7 +30,7 @@ void Hangman::gameLoop() {
 std::string Hangman::get_userGuess() {
 	do
 	{
-		MyConsoleAPI::clearInputStream();
+		CFC_coreComponents::clearInputStream();
 		try
 		{
 			std::getline(std::cin, guess);
@@ -63,9 +63,9 @@ bool Hangman::checkGuess(std::string guess) {
 }
 
 void Hangman::drawScreen(bool state_DATA) {
-	MyConsoleAPI::clearScreen();
-	MyConsoleAPI::print("Hangman\n\n", Magenta);
-	MyConsoleAPI::print("Guess a letter of the Alphabet");
+	CFC_coreComponents::clearScreen();
+	CFC_coreComponents::print("Hangman\n\n", Magenta);
+	CFC_coreComponents::print("Guess a letter of the Alphabet");
 
 }
 
@@ -86,14 +86,14 @@ void Quiz::gameLoop() {
 		question(iteration);
 	} while (iteration < 3);
 
-	MyConsoleAPI::print("\nGAME OVER\n\n", Red);
-	MyConsoleAPI::setMyTextColor(WhiteDefault);
+	CFC_coreComponents::print("\nGAME OVER\n\n", Red);
+	CFC_coreComponents::setMyTextColor(DefaultWhite);
 	system("pause"); // Last Instruction before returning to main menu
 }
 
 void Quiz::setupEnviorment() {
-	MyConsoleAPI::clearScreen();
-	MyConsoleAPI::clearInputStream();
+	CFC_coreComponents::clearScreen();
+	CFC_coreComponents::clearInputStream();
 	if (iteration != 0) { iteration = 0; }
 }
 
@@ -102,27 +102,27 @@ int Quiz::requestInput() {
 	int convertedGuess{};
 	size_t pos{};
 	do {
-		MyConsoleAPI::setMyTextColor(Green);
+		CFC_coreComponents::setMyTextColor(Green);
 		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { MyConsoleAPI::print("Invalid Number::Out of Range\nTry Again: ", Red); MyConsoleAPI::clearInputStream(); continue; }
+				if (convertedGuess > 3) { CFC_coreComponents::print("Invalid Number::Out of Range\nTry Again: ", Red); CFC_coreComponents::clearInputStream(); continue; }
 				break;
 			}
-			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); MyConsoleAPI::clearInputStream(); }
+			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); CFC_coreComponents::clearInputStream(); }
 			break;
 		}
 		catch (const std::invalid_argument& e)
 		{
 			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ", e;
-			MyConsoleAPI::clearInputStream();
+			CFC_coreComponents::clearInputStream();
 		}
 		catch (const std::out_of_range& e)
 		{
 			std::cerr << "Out of range\nTry Again: ", e;
-			MyConsoleAPI::clearInputStream();
+			CFC_coreComponents::clearInputStream();
 		}
 	} while (true);
 	return convertedGuess;
@@ -138,38 +138,38 @@ inline void Quiz::question(int questionNumber) {
 }
 
 void Quiz::askFirstQuestion() {
-	MyConsoleAPI::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
+	CFC_coreComponents::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
 	if (requestInput() == 3) {
-		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
-		MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
+		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
+		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
-		MyConsoleAPI::print("\nIncorrect\n\n", Red);
+		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
+		CFC_coreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 void Quiz::askSecondQuestion() {
-	MyConsoleAPI::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
+	CFC_coreComponents::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
 	if (requestInput() == 2) {
-		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
-		MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
+		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
+		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
-		MyConsoleAPI::print("\nIncorrect\n\n", Red);
+		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
+		CFC_coreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 void Quiz::askThirdQuestion() {
-	MyConsoleAPI::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
+	CFC_coreComponents::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
 	if (requestInput() == 1) {
-		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
-		MyConsoleAPI::print("\nCorrect!\n\n", Magenta);
+		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
+		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		MyConsoleAPI::setScreenColors("color 08"); // Gray on black
-		MyConsoleAPI::print("\nIncorrect\n\n", Red);
+		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
+		CFC_coreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
@@ -194,8 +194,8 @@ NumberGuessingGame::NumberGuessingGame() : randomNumber(0), MAX_GUESSES(5), atte
 NumberGuessingGame::~NumberGuessingGame() {}
 
 void NumberGuessingGame::run() {
-	MyConsoleAPI::clearScreen();
-	MyConsoleAPI::clearInputStream();
+	CFC_coreComponents::clearScreen();
+	CFC_coreComponents::clearInputStream();
 	setGameState();
 	gameLoop();
 }
@@ -216,7 +216,7 @@ void NumberGuessingGame::gameLoop() {
 		if (!(std::cin >> attempt)) {
 			std::cout << "Invalid input. Please enter a valid number.\n";
 			// Clear the input stream and reset error flags
-			MyConsoleAPI::clearInputStream();
+			CFC_coreComponents::clearInputStream();
 			continue;
 		}
 		if (attempt < rangeLimit.min || attempt > rangeLimit.max) {
@@ -270,7 +270,7 @@ void CannaCalculator::entrypoint() {
 		setScreenColors("color 08");
 		print("\nYour custom decimal numbr must be between 0 & 1: ", LightCyan);
 		print("\nThe default is 0.20");
-		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", WhiteDefault)) {
+		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", DefaultWhite)) {
 		}
 		clearInputStream();
 	}
@@ -290,7 +290,7 @@ char CannaCalculator::yesNOquestion(std::string promptMessage, int messageColor)
 	{
 		clearInputStream();
 		print(promptMessage, messageColor);
-		setMyTextColor(WhiteDefault);
+		setMyTextColor(DefaultWhite);
 
 		if (std::getline(std::cin, responce))
 		{
@@ -309,7 +309,7 @@ double CannaCalculator::getDoubleFromUser(std::string promptMessage, int message
 	{
 		clearInputStream();
 		print(promptMessage, messageColor);
-		setMyTextColor(WhiteDefault);
+		setMyTextColor(DefaultWhite);
 
 		if (std::cin >> responce)
 		{
@@ -445,7 +445,7 @@ void CalculatePowerLoss_Watts_x_Meters::printResults(const long double powerLoss
 	print("Current                ", Gray); print(properties_m.voltage, Brown); print("   amperes\n", LightBlue);
 	print("Length                 ", Gray); print(properties_m.length, Brown); print("   meters\n", LightBlue);
 	print("Cross-sectional Area   ", Gray); print(properties_m.crossSectionArea, Brown); print("   square meters\n\n", LightBlue);
-	print("Power Loss: ", WhiteDefault); print(powerLoss, LightBlue); print(" Watts per meter\n\n", WhiteDefault);
+	print("Power Loss: ", DefaultWhite); print(powerLoss, LightBlue); print(" Watts per meter\n\n", DefaultWhite);
 	system("pause");
 }
 
@@ -461,7 +461,7 @@ void CalculatePowerLoss_Watts_x_Meters::information() {
 	print("The resistance is calculated using the formula:\n", LightBlue);
 	print("R = resistivity * length / cross-sectional area\n\n", Brown);
 	print("The resistivity of copper is 1.68e-8 ohm*meter.\n\n", Brown);
-	setMyTextColor(WhiteDefault); system("pause");
+	setMyTextColor(DefaultWhite); system("pause");
 }
 
 int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
@@ -470,7 +470,7 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 	int inputLenghtLimit{ 1 };
 
 	do {
-		print("Enter a number: ", WhiteDefault);
+		print("Enter a number: ", DefaultWhite);
 		setMyTextColor(LightBlue);
 		if (std::getline(std::cin, input)) {
 			if (input.length() > inputLenghtLimit) {
@@ -510,10 +510,10 @@ void CalculatePowerLoss_Watts_x_Meters::menu() {
 		clearInputStream();
 		clearScreen();
 		print("Calculate Power Loss in a copper wire as heat measured in Watts per Meter\n\n", Green);
-		print("1. ", LightBlue); print("Set Properties\n", WhiteDefault);
-		print("2. ", LightBlue); print("Calculate Power Loss\n", WhiteDefault);
-		print("3. ", LightBlue); print("Information\n", WhiteDefault);
-		print("4. ", LightBlue); print("Return to Main Menu\n\n", WhiteDefault);
+		print("1. ", LightBlue); print("Set Properties\n", DefaultWhite);
+		print("2. ", LightBlue); print("Calculate Power Loss\n", DefaultWhite);
+		print("3. ", LightBlue); print("Information\n", DefaultWhite);
+		print("4. ", LightBlue); print("Return to Main Menu\n\n", DefaultWhite);
 
 		switch (returnMenuOption())
 		{

@@ -8,7 +8,7 @@ enum ConsoleColor {
     Red = 4,
     Magenta = 5,
     Brown = 6,
-    WhiteDefault = 7,
+    DefaultWhite = 7,
     Gray = 8,
     LightBlue = 9,
     LightGreen = 10,

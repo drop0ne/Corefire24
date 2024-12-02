@@ -4,16 +4,15 @@
 // MyConsoleAPI Class
 // Constructor
 /*************************************************************************************************************************************************************/
-MyConsoleAPI::MyConsoleAPI() : threadLimit(8) {
+CFC_coreComponents::CFC_coreComponents() {
     console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
     if (console_HWND == INVALID_HANDLE_VALUE) {
         throw std::runtime_error("Failed to get standard output handle");
     }
-    jthreadPool_concurrent.resize(threadLimit);
 }
 
 // Clear the console screen using Windows API for better performance and security
-void MyConsoleAPI::clearScreen() {
+void CFC_coreComponents::clearScreen() {
     COORD topLeft = { 0, 0 };
     CONSOLE_SCREEN_BUFFER_INFO screen;
     DWORD written;
@@ -30,22 +29,22 @@ void MyConsoleAPI::clearScreen() {
     SetConsoleCursorPosition(console_HWND, topLeft);
 }
 
-void MyConsoleAPI::print(const std::string& data) {
+void CFC_coreComponents::print(const std::string& data) {
     std::cout << data;
     // Legacy code
 }
-void MyConsoleAPI::print(const std::string& data, const int textColor) {
+void CFC_coreComponents::print(const std::string& data, const int textColor) {
     setMyTextColor(textColor);
     std::cout << data;
     // Set text color and print data
 }
 
-void MyConsoleAPI::print(const double& data, int numberColor) {
+void CFC_coreComponents::print(const double& data, int numberColor) {
     setMyTextColor(numberColor);
     std::cout << data;
 }
 
-void MyConsoleAPI::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
+void CFC_coreComponents::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
     setMyTextColor(textColor);
     std::cout << string1;
     setMyTextColor(numberColor);
@@ -56,7 +55,7 @@ void MyConsoleAPI::print(const std::string& string1, const double& data1, const 
 }
 
 
-void MyConsoleAPI::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
+void CFC_coreComponents::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
     const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
     setMyTextColor(textColor1);
     std::cout << string1;
@@ -69,7 +68,7 @@ void MyConsoleAPI::print(const std::string& string1, const int& textColor1, cons
     // Used to generate Main Menu
 }
 
-void MyConsoleAPI::setScreenColors(const char* data) {
+void CFC_coreComponents::setScreenColors(const char* data) {
     try {
         // Validate the input before executing
         if (!isValidCommand(data)) {
@@ -86,20 +85,20 @@ void MyConsoleAPI::setScreenColors(const char* data) {
     }
 }
 
-void MyConsoleAPI::setMyTextColor(int data) {
+void CFC_coreComponents::setMyTextColor(int data) {
     if (!SetConsoleTextAttribute(console_HWND, data)) {
         throw std::runtime_error("Failed to set text attributes");
     }
 }
 
-void MyConsoleAPI::setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background) {
+void CFC_coreComponents::setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background) {
     WORD color = (static_cast<WORD>(background) << 4) | static_cast<WORD>(foreground);
     if (!SetConsoleTextAttribute(console_HWND, color)) {
 		throw std::runtime_error("Failed to set text attributes");
 	}
 }
 
-void MyConsoleAPI::clearInputStream() {
+void CFC_coreComponents::clearInputStream() {
     std::cin.clear();
     if (std::cin.rdbuf()->in_avail() > 0) {
         // If there are characters in the input buffer, discard them up to the next newline
@@ -107,7 +106,7 @@ void MyConsoleAPI::clearInputStream() {
     }
 }
 
-void MyConsoleAPI::extractInputStream() {
+void CFC_coreComponents::extractInputStream() {
     std::cout << "Contents of input stream: ";
     char c;
     while (std::cin.peek() != EOF) {
@@ -116,7 +115,7 @@ void MyConsoleAPI::extractInputStream() {
     }
 }
 
-void MyConsoleAPI::createNewConsoleWindow() {
+void CFC_coreComponents::createNewConsoleWindow() {
     if (AllocConsole()) {
         FILE* file;
         freopen_s(&file, "CONOUT$", "w", stdout);
@@ -130,7 +129,7 @@ void MyConsoleAPI::createNewConsoleWindow() {
 
 // END Public Functions // Start Private Functions
 
-bool MyConsoleAPI::isValidCommand(const char* command) {
+bool CFC_coreComponents::isValidCommand(const char* command) {
     // List of allowed commands for setting screen colors, now including gray
     const std::vector<std::string> allowedCommands = {
         "color 0A", // Light green on black
@@ -161,7 +160,7 @@ bool MyConsoleAPI::isValidCommand(const char* command) {
 
 ToolSet_MainMenu::ToolSet_MainMenu() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
 mainMenu_totalParameters(8), mainMenuParameterState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
-    /*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/WhiteDefault, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue})
+    /*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/DefaultWhite, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue})
 {
     /* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
     mainMenu_defaultParameterState = mainMenuParameterState;
@@ -196,7 +195,7 @@ void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
     /* cout(string, int) */
 
     print("CoreFireCode 2024 edition\n", Green);
-    print("\n\nMain Menu\n\n", WhiteDefault);
+    print("\n\nMain Menu\n\n", DefaultWhite);
     print("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " CannabisCalculator\n",        stateData.at(Program));
     print("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Calculation of Power Loss\n", stateData.at(Program));
     print("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Number Gussing Game\n",       stateData.at(Program));
@@ -205,6 +204,7 @@ void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
     print("Option", stateData.at(Options), " 6 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Default Menu Theme\n",        stateData.at(Program));
     print("Option", stateData.at(Options), " 7 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Random Menu Theme\n",         stateData.at(Program));
     print("Option", stateData.at(Options), " 8 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Rainbow Effect\n",            stateData.at(Program));
+    print("Option", stateData.at(Options), " 10 ", stateData.at(ProgramID),     "-", stateData.at(Symbols), " Solitaire\n",                 stateData.at(Program));
     print("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n",                      stateData.at(ExitProgram));
 }
 
@@ -287,7 +287,7 @@ void ToolSet_MainMenu::menuTheme_betterRandom() {
     {
         for (size_t j = 0; j < mainMenuParameterState.size(); j++)
         {
-        mainMenuParameterState[j] = getRandomNumber(1, 16);
+        mainMenuParameterState[j] = getRandomNumber(1,15);
         }
         clearScreen();
         generateMainMenu(mainMenuParameterState);
@@ -308,7 +308,7 @@ int ToolSet_MainMenu::mainMenuLogic() {
     int returnValue{ 0 };
 
     do {
-        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); setMyTextColor(WhiteDefault);
+        clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); setMyTextColor(DefaultWhite);
         std::cin >> returnValue;
         if (std::cin.fail())
         {

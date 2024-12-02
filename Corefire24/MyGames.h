@@ -5,7 +5,7 @@
 #define GAMES_H
 
 
-class Hangman : public MyConsoleAPI
+class Hangman : public CFC_coreComponents
 {
 public:
 	Hangman();
@@ -32,7 +32,7 @@ private:
 
 };
 
-class Quiz : public MyConsoleAPI {
+class Quiz : public CFC_coreComponents {
 private:
     int iteration;
 
@@ -54,7 +54,7 @@ private:
 // ready for start screen with menu options
 // options: set rng range; set number of guess; have default avalible - thats 3 options
 
-class NumberGuessingGame : public NumberGenerator, public MyConsoleAPI {
+class NumberGuessingGame : public NumberGenerator, public CFC_coreComponents {
 private:
     struct NumberRangeLimit {
         int min;
@@ -79,7 +79,7 @@ private:
 };
 
 
-class CannaCalculator : public MyConsoleAPI {
+class CannaCalculator : public CFC_coreComponents {
 private:
     enum MyEnum
     {
@@ -101,7 +101,7 @@ private:
     
 };
 
-class CalculatePowerLoss_Watts_x_Meters : public MyConsoleAPI {
+class CalculatePowerLoss_Watts_x_Meters : public CFC_coreComponents {
 private:
    struct Properties_m {
         long double resistivity = 1.68e-8L; // resistivity of copper in ohm*meter

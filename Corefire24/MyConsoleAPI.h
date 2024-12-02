@@ -27,15 +27,12 @@ public:
 #ifndef MY_CONSOLE_API_H
 #define MY_CONSOLE_API_H
 
-class MyConsoleAPI {
+class CFC_coreComponents {
 private:
 protected:
     HANDLE console_HWND; // Handle to the console window
-    int threadLimit;
-    std::vector<std::jthread> jthreadPool_concurrent;
-    mutable std::mutex mutex_;
 public:
-    MyConsoleAPI(); // Constructor
+    CFC_coreComponents(); // Constructor
     virtual void clearScreen(); 
     virtual void print(const std::string& data);
     virtual void print(const std::string& data, const int set_text_color);
@@ -61,7 +58,7 @@ private:
 #ifndef MY_CONSOLE_API_EXTENDED
 #define MY_CONSOLE_API_EXTENDED
 
-class ToolSet_MainMenu : public MyConsoleAPI, public NumberGenerator {
+class ToolSet_MainMenu : public CFC_coreComponents, public NumberGenerator {
 private:
     int mainMenu_totalParameters;
     std::vector<int> mainMenuParameterState;

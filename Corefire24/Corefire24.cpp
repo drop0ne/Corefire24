@@ -45,6 +45,7 @@ void games(int option) {
 	}
 	delete quizGame;
 	delete numberGame;
+	delete solitaireGame;
 	//delete hangmanGame;
 }
 
