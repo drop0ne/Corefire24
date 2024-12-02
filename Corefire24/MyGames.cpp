@@ -1,5 +1,6 @@
 #include "MyGames.h"
-
+//  Hangman //////////
+//
 Hangman::Hangman() : alphabet({ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
 		"U", "V", "W", "X", "Y", "Z" }), guessedLetters(std::size(alphabet), false), answer(std::size(answer), false), guess(" "), iteration(0)
 {
@@ -25,7 +26,7 @@ void Hangman::gameLoop() {
 		drawScreen(checkGuess(get_userGuess()));
 	} while (true);
 }
-/* *** ** * ** *** */
+
 std::string Hangman::get_userGuess() {
 	do
 	{
@@ -68,7 +69,8 @@ void Hangman::drawScreen(bool state_DATA) {
 
 }
 
-// QUIZ GAME  ////////////////////////////////////////////////////////
+// QUIZ GAME  //////////
+//
 void Quiz::run() {
 	gameLoop();
 }
@@ -171,26 +173,18 @@ void Quiz::askThirdQuestion() {
 	}
 }
 
-// END QUIZ GAME  ////////////////////////////////////////////////////////
-
-
-// Number Guessing Game  ////////////////////////////////////////////////////////   
+// Random Number Generator  //////////   
 //  
-// Constructor
 NumberGenerator::NumberGenerator() : generator(rd()) {}
 
-// Destructor
 NumberGenerator::~NumberGenerator() {}
 
-// Member function to return a random number within a range
 int NumberGenerator::getRandomNumber(const int min, const int max) {
 	std::uniform_int_distribution<int> distribution(min, max);
 	return distribution(generator);
 }
 
-// End Number Generator
-//
-// Start Number Guessing Game  //////////////////////////////////////////////////////
+// Start Number Guessing Game  //////////
 //
 NumberGuessingGame::NumberGuessingGame() : randomNumber(0), MAX_GUESSES(5), attempt(0), attemptCount(0) {
 	rangeLimit.min = 0;
@@ -252,23 +246,16 @@ void NumberGuessingGame::setGameState() {
 	attempt = 0;
 }
 
-// End Number Guessing Game  ////////////////////////////////////////////////////////
-
-
-
-// Start CannaCalculator  ////////////////////////////////////////////////////////
-
+// Start CannaCalculator  //////////
+//
 CannaCalculator::CannaCalculator() {}
 
-// Destructor
 CannaCalculator::~CannaCalculator() {}
 
-// Public member function to start the program loop
 void CannaCalculator::run() {
 	entrypoint();
 }
 
-// Private member function to handle the core program logic
 void CannaCalculator::entrypoint() {
 	std::vector<double> userDATA(5);
 
@@ -296,7 +283,6 @@ void CannaCalculator::entrypoint() {
 	setScreenColors("color 08");
 	printResults(mathProccessor(userDATA));
 }
-
 
 char CannaCalculator::yesNOquestion(std::string promptMessage, int messageColor) {
 	std::string responce = "empty";
@@ -369,21 +355,8 @@ void CannaCalculator::printResults(std::vector<double> results) {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Power Calculator  //////////
+//
 CalculatePowerLoss_Watts_x_Meters::CalculatePowerLoss_Watts_x_Meters() {}
 
 CalculatePowerLoss_Watts_x_Meters::~CalculatePowerLoss_Watts_x_Meters() {}
@@ -529,7 +502,6 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 
 	return convertedInput;
 }
-
 
 void CalculatePowerLoss_Watts_x_Meters::menu() {
 	Properties_m properties_m;

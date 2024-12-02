@@ -2,6 +2,7 @@
 /////////////////////////////////////////////////////
 #include "MyConsoleAPI.h"
 #include "MyGames.h"
+#include "Solitaire.h"
 
 void games(int option);
 void apps(int option);
@@ -21,6 +22,7 @@ int main()
 		case 6: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
 		case 7: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 8: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
+		case 10: games(solitaire); break;
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
 		default: cf.print("\nCommand must be intager from 1 - 6\n", cf.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
@@ -28,27 +30,30 @@ int main()
 }
 
 void games(int option) {
-	static Quiz quiz_1;
-	static NumberGuessingGame numberGame_2;
-	static Hangman hangman;
+	//static Quiz quiz_1;
+	auto quizGame = new Quiz;
+	auto numberGame = new NumberGuessingGame;
+	auto hangmanGame = new Hangman;
+	//static Solitaire solitaire;
 
 	switch (option)
 	{
-	case 1: quiz_1.run(); break;
-	case 2: numberGame_2.run(); break;
+	case 1: quizGame->run(); delete quizGame; break;
+	case 2: numberGame->run(); delete numberGame; break;
 	case 3: /*hangman.run();*/break;
+	case 4: /*solitaire.run();*/break;
 	default: break;
 	}
 }
 
 void apps(int option) {
-	static CannaCalculator CannaCalc_1;
-	static CalculatePowerLoss_Watts_x_Meters powerLossCalc_2;
+	auto CannabisAPP = new CannaCalculator;
+	auto PowerLossAPP = new CalculatePowerLoss_Watts_x_Meters;
 
 	switch (option)
 	{
-	case 1: CannaCalc_1.run(); break;
-	case 2: powerLossCalc_2.run(); break;
+	case 1: CannabisAPP->run(); delete CannabisAPP; break;
+	case 2: PowerLossAPP->run(); delete PowerLossAPP; break;
 	case 3: break;
 	default:
 		break;
