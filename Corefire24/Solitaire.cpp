@@ -17,6 +17,7 @@ void Solitaire::startScreen() {
 	clearScreen();
 	print(gameTitleSourceString, Red);
 	printLOGO(gameTitleSourceString);
+	system("pause");
 }
 
 void Solitaire::gameLoop() {
@@ -28,19 +29,21 @@ void Solitaire::cardShufflingMachine() {
 }
 
 void Solitaire::printLOGO(std::string string) {
-	gameTitle.resize(string.size());
-	for (auto i : string)
+	this->gameTitle.resize(string.size());
+
+	for (size_t i = 0; i < string.size(); i++)
 	{
-		gameTitle.at(i) = string.at(i);
+		this->gameTitle.at(i) = string.at(i);
+
 	}
-	gameTitle.shrink_to_fit();
-	
+	this->gameTitle.shrink_to_fit();
+
 	int j = {0};
-	for (auto i : logoSplashEffect) {
-		setMyTextColor(logoSplashEffect.at(i));
-		if (j <= gameTitle.size())
+	for (auto i : this->logoSplashEffect) {
+		setMyTextColor(this->logoSplashEffect.at(i));
+		if (j <= this->gameTitle.size())
 		{
-			std::cout << gameTitle.at(j);
+			std::cout << this->gameTitle.at(j);
 		}
 		else
 		{
