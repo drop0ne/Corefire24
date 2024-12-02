@@ -5,8 +5,8 @@
 
 class Solitaire : public CFC_coreComponents, NumberGenerator {
 private:
-	std::vector<int> gameTitle;
-	std::vector<int> logoSplashEffect;
+	std::vector<std::string> gameTitleVector;
+	std::vector<int> storedRandomNumber;
 	std::string gameTitleSourceString;
 
 public:
@@ -17,7 +17,6 @@ private:
 	void startScreen();
 	void gameLoop();
 	void cardShufflingMachine();
-	void printLOGO(std::string stringLitteral);
-
+	void printLOGO(const std::string& title);
 };
 

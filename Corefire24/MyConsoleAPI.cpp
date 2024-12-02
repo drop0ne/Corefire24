@@ -127,7 +127,9 @@ void CFC_coreComponents::createNewConsoleWindow() {
     }
 }
 
-// END Public Functions // Start Private Functions
+void CFC_coreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std::chrono::milliseconds(time)); }
+
+// ********** Start Private Functions **********
 
 bool CFC_coreComponents::isValidCommand(const char* command) {
     // List of allowed commands for setting screen colors, now including gray

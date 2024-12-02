@@ -29,8 +29,10 @@ public:
 
 class CFC_coreComponents {
 private:
+
 protected:
     HANDLE console_HWND; // Handle to the console window
+    COORD topLeft = { 0, 0 };
 public:
     CFC_coreComponents(); // Constructor
     virtual void clearScreen(); 
@@ -47,6 +49,7 @@ public:
     virtual void clearInputStream();
     virtual void extractInputStream();
     virtual void createNewConsoleWindow(); // not working
+    virtual void sleepTimer(int time); // Takes millisecounds 1000:1
 
 private:
     bool isValidCommand(const char* command);

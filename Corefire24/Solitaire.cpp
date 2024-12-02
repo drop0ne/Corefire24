@@ -1,9 +1,9 @@
 #include "Solitaire.h"
 
-Solitaire::Solitaire() : logoSplashEffect(42), gameTitle(14), gameTitleSourceString("Solitaire 2002")
+Solitaire::Solitaire() : storedRandomNumber(42), gameTitleVector(), gameTitleSourceString("Solitaire 2002")
 {
-	for (auto i : logoSplashEffect) {
-		logoSplashEffect.at(i) = getRandomNumber(1, 15);
+	for (auto i : storedRandomNumber) {
+		storedRandomNumber.at(i) = getRandomNumber(1, 15);
 	}
 }
 
@@ -28,27 +28,40 @@ void Solitaire::cardShufflingMachine() {
 
 }
 
-void Solitaire::printLOGO(std::string string) {
-	this->gameTitle.resize(string.size());
+void Solitaire::printLOGO(const std::string& title) {
+    // Resize the gameTitleVector and populate with characters from title
+    this->gameTitleVector.resize(title.size());
+    
+    for (size_t i = 0; i < title.size(); i++) {
+        gameTitleVector.at(i) = std::string(1, title.at(i));
+    }
 
-	for (size_t i = 0; i < string.size(); i++)
-	{
-		this->gameTitle.at(i) = string.at(i);
+    // Initialize cursor position variables
+    int j = 0;
+    int cursorPOS = 0;
 
-	}
-	this->gameTitle.shrink_to_fit();
+    // Loop through storedRandomNumber to display characters
+    for (auto l : this->storedRandomNumber) {
+        // Set text color using the random value
+        setMyTextColor(this->storedRandomNumber.at(l));
 
-	int j = {0};
-	for (auto i : this->logoSplashEffect) {
-		setMyTextColor(this->logoSplashEffect.at(i));
-		if (j <= this->gameTitle.size())
-		{
-			std::cout << this->gameTitle.at(j);
-		}
-		else
-		{
-			j = 0;
-			clearScreen();
-		}
-	}
+        // Display characters from gameTitleVector
+        if (j < gameTitleVector.size()) {
+            // Set cursor position
+            COORD coord = { static_cast<SHORT>(cursorPOS), 0 };
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+            cursorPOS++;
+
+            // Print the character
+            std::cout << gameTitleVector[j];
+            j++;
+            sleepTimer(0250); // 1000:1 Millisecounds
+
+            // Reset loop variables when reaching the end of the title
+            if (j >= gameTitleVector.size()) {
+                j = 0;
+                cursorPOS = 0;
+            }
+        }
+    }
 }
