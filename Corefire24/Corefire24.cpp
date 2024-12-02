@@ -30,20 +30,22 @@ int main()
 }
 
 void games(int option) {
-	//static Quiz quiz_1;
 	auto quizGame = new Quiz;
 	auto numberGame = new NumberGuessingGame;
-	auto hangmanGame = new Hangman;
-	//static Solitaire solitaire;
+	auto solitaireGame = new Solitaire;
+	//auto hangmanGame = new Hangman;
 
 	switch (option)
 	{
-	case 1: quizGame->run(); delete quizGame; break;
-	case 2: numberGame->run(); delete numberGame; break;
+	case 1: quizGame->run(); break;
+	case 2: numberGame->run(); break;
 	case 3: /*hangman.run();*/break;
-	case 4: /*solitaire.run();*/break;
+	case 4: solitaireGame->run(); break;
 	default: break;
 	}
+	delete quizGame;
+	delete numberGame;
+	//delete hangmanGame;
 }
 
 void apps(int option) {
@@ -52,10 +54,14 @@ void apps(int option) {
 
 	switch (option)
 	{
-	case 1: CannabisAPP->run(); delete CannabisAPP; break;
-	case 2: PowerLossAPP->run(); delete PowerLossAPP; break;
+	case 1: CannabisAPP->run(); break;
+	case 2: PowerLossAPP->run(); break;
 	case 3: break;
 	default:
 		break;
 	}
+	delete CannabisAPP;
+	delete PowerLossAPP;
+	//delete hangmanGame;
+	//delete solitaireGame;
 }
