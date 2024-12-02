@@ -1,9 +1,10 @@
 #include "Solitaire.h"
 
-Solitaire::Solitaire() : storedRandomNumber(42), gameTitleVector(), gameTitleSourceString("Solitaire 2002")
+Solitaire::Solitaire() : storedRandomNumber(), gameTitleVector(), gameTitleSourceString("Solitaire 2002")
 {
-	for (auto i : storedRandomNumber) {
-		storedRandomNumber.at(i) = getRandomNumber(1, 15);
+    this->storedRandomNumber.resize(42);
+	for (auto i : this->storedRandomNumber) {
+        this->storedRandomNumber.at(i) = getRandomNumber(1, 15);
 	}
 }
 
@@ -15,8 +16,9 @@ void Solitaire::run() {
 //
 void Solitaire::startScreen() {
 	clearScreen();
-	print(gameTitleSourceString, Red);
-	printLOGO(gameTitleSourceString);
+	print(this->gameTitleSourceString, Red);
+	printLOGO(this->gameTitleSourceString);
+    std::cout << "\n";
 	system("pause");
 }
 
@@ -33,7 +35,7 @@ void Solitaire::printLOGO(const std::string& title) {
     this->gameTitleVector.resize(title.size());
     
     for (size_t i = 0; i < title.size(); i++) {
-        gameTitleVector.at(i) = std::string(1, title.at(i));
+        this->gameTitleVector.at(i) = std::string(1, title.at(i));
     }
 
     // Initialize cursor position variables
@@ -46,19 +48,20 @@ void Solitaire::printLOGO(const std::string& title) {
         setMyTextColor(this->storedRandomNumber.at(l));
 
         // Display characters from gameTitleVector
-        if (j < gameTitleVector.size()) {
+        if (j < this->gameTitleVector.size()) {
             // Set cursor position
             COORD coord = { static_cast<SHORT>(cursorPOS), 0 };
             SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
             cursorPOS++;
 
             // Print the character
-            std::cout << gameTitleVector[j];
+            std::cout << this->gameTitleVector.at(j);
             j++;
-            sleepTimer(0250); // 1000:1 Millisecounds
+            sleepTimer(0100); // 1000:1 Millisecounds
+
 
             // Reset loop variables when reaching the end of the title
-            if (j >= gameTitleVector.size()) {
+            if (j >= this->gameTitleVector.size()) {
                 j = 0;
                 cursorPOS = 0;
             }
