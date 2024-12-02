@@ -19,4 +19,3 @@ private:
 	void cardShufflingMachine();
 	void printLOGO(const std::string& title);
 };
-
