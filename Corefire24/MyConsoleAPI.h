@@ -80,8 +80,8 @@ public:
     void callTheme_by_Flag_ID(const int& themeFlag_ID);
     
 private:
-    void menuTheme_Default();      // ID (0)
-    void menuTheme_Random();       // ID (1)
-    void menuTheme_betterRandom(); // ID (2)
+    void menuTheme_Default();
+    void menuTheme_Random();
+    void menuTheme_betterRandom();
     };
 #endif // !MY_CONSOLE_API_EXTENDED
