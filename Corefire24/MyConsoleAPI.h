@@ -45,7 +45,7 @@ public:
 
     virtual void setScreenColors(const char* screenTextColor);
     virtual void setMyTextColor(const int intConsolColorDOS);
-    virtual void setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background); // Needs testing the verify funcionality
+    virtual void setConsoleColor_FGtext_BG(eConsoleTextColor foreground, eConsoleTextColor background); // Needs testing the verify funcionality
     virtual void clearInputStream();
     virtual void extractInputStream();
     virtual void createNewConsoleWindow(); // not working

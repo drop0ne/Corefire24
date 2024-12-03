@@ -1,6 +1,6 @@
 #pragma once
 
-enum ConsoleColor {
+enum eConsoleTextColor {
     Black = 0,
     Blue = 1,
     Green = 2,
@@ -27,16 +27,12 @@ enum eMainMenu_State_ID {
 	Options = 0, ProgramID = 1, Program = 2, ExitProgramID = 3, ExitProgram = 4, Symbols = 5, ErrorMessage = 6, WAIT_ = 7
 };
 
-enum eThread_ID {
-	MainThread = 0, ThemeThread = 1
+enum eGameOption {
+    quiz = 0, numberGame = 1, hangman = 2, solitaire = 3
 };
 
-enum gameOption {
-    quiz = 1, numberGame = 2, hangman = 3, solitaire = 4
-};
-
-enum appsOption {
-    CannaCalc = 1, PowerLossCalc = 2
+enum eAppsOption {
+    CannaCalc = 0, PowerLossCalc = 1
 };
 /* 
 enum dosINTcolors {

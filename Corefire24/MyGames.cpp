@@ -268,7 +268,7 @@ void CannaCalculator::entrypoint() {
 	if (yesNOquestion("The default loss is 20%\nWould you like enter a custom loss percentage? (y/n): ", LightCyan) == 'y')
 	{
 		setScreenColors("color 08");
-		print("\nYour custom decimal numbr must be between 0 & 1: ", LightCyan);
+		print("\n\nYour custom decimal numbr must be between 0 & 1: ", LightCyan);
 		print("\nThe default is 0.20");
 		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", DefaultWhite)) {
 		}
@@ -277,9 +277,9 @@ void CannaCalculator::entrypoint() {
 	else { userDATA.at(2) = 0.20; } //default
 
 	setScreenColors("color 08");
-	userDATA.at(THCp) = getDoubleFromUser("How strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightCyan);
+	userDATA.at(THCp) = getDoubleFromUser("\n\nHow strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightCyan);
 	setScreenColors("color 08");
-	userDATA.at(flowerG) = getDoubleFromUser("How many grams of flower will you be using?: ", LightCyan);
+	userDATA.at(flowerG) = getDoubleFromUser("\n\nHow many grams of flower will you be using?: ", LightCyan);
 	setScreenColors("color 08");
 	printResults(mathProccessor(userDATA));
 }

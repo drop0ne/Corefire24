@@ -37,10 +37,10 @@ void games(int option) {
 
 	switch (option)
 	{
-	case 1: quizGame->run(); break;
-	case 2: numberGame->run(); break;
-	case 3: /*hangman.run();*/break;
-	case 4: solitaireGame->run(); break;
+	case 0: quizGame->run(); break;
+	case 1: numberGame->run(); break;
+	case 2: /*hangman.run();*/break;
+	case 3: solitaireGame->run(); break;
 	default: break;
 	}
 	delete quizGame;
@@ -55,9 +55,9 @@ void apps(int option) {
 
 	switch (option)
 	{
-	case 1: CannabisAPP->run(); break;
-	case 2: PowerLossAPP->run(); break;
-	case 3: break;
+	case 0: CannabisAPP->run(); break;
+	case 1: PowerLossAPP->run(); break;
+	case 2: break;
 	default:
 		break;
 	}

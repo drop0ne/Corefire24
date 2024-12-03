@@ -91,7 +91,7 @@ void CFC_coreComponents::setMyTextColor(int data) {
     }
 }
 
-void CFC_coreComponents::setConsoleColor_FGtext_BG(ConsoleColor foreground, ConsoleColor background) {
+void CFC_coreComponents::setConsoleColor_FGtext_BG(eConsoleTextColor foreground, eConsoleTextColor background) {
     WORD color = (static_cast<WORD>(background) << 4) | static_cast<WORD>(foreground);
     if (!SetConsoleTextAttribute(console_HWND, color)) {
 		throw std::runtime_error("Failed to set text attributes");
