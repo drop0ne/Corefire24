@@ -91,7 +91,7 @@ void CFC_coreComponents::setMyTextColor(int data) {
     }
 }
 
-void CFC_coreComponents::setConsoleColor_FGtext_BG(eConsoleTextColor foreground, eConsoleTextColor background) {
+void CFC_coreComponents::overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background) {
     WORD color = (static_cast<WORD>(background) << 4) | static_cast<WORD>(foreground);
     if (!SetConsoleTextAttribute(console_HWND, color)) {
 		throw std::runtime_error("Failed to set text attributes");
@@ -112,18 +112,6 @@ void CFC_coreComponents::extractInputStream() {
     while (std::cin.peek() != EOF) {
         std::cin.get(c);
         std::cout << c;
-    }
-}
-
-void CFC_coreComponents::createNewConsoleWindow() {
-    if (AllocConsole()) {
-        FILE* file;
-        freopen_s(&file, "CONOUT$", "w", stdout);
-        freopen_s(&file, "CONOUT$", "w", stderr);
-        freopen_s(&file, "CONIN$", "r", stdin);
-    }
-    else {
-        std::cerr << "Failed to create new console window." << std::endl;
     }
 }
 
