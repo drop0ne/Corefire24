@@ -1,7 +1,7 @@
 #pragma once
 #include "My Standard Includes.h"
 #include "MyEnum.h"
-#include "MyConsoleAPI.h"
+#include "BaseClass.h"
 
 class Solitaire : public CFC_coreComponents, NumberGenerator {
 private:

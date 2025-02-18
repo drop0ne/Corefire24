@@ -18,7 +18,7 @@
     <ClCompile Include="Corefire24.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyConsoleAPI.cpp">
+    <ClCompile Include="BaseClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyGames.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyConsoleAPI.h">
+    <ClInclude Include="BaseClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MyGames.h">

@@ -51,7 +51,7 @@ public:
     virtual void sleepTimer(int time); // Takes millisecounds 1000:1
 
 private:
-    bool isValidCommand(const char* command);
+    bool check_IF_validCommand(const char* command);
 };
 #endif // MY_CONSOLE_API_H
 
@@ -63,7 +63,7 @@ private:
 class ToolSet_MainMenu : public CFC_coreComponents, public NumberGenerator {
 private:
     int mainMenu_totalParameters;
-    std::vector<int> mainMenuParameterState;
+    std::vector<int> mainMenuParameterCurentState;
     std::vector<int> mainMenu_defaultParameterState;
     std::vector<bool> FLAGS_theme;
        

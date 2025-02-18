@@ -1,5 +1,5 @@
 #pragma once
-#include "MyConsoleAPI.h"
+#include "BaseClass.h"
 
 #ifndef GAMES_H
 #define GAMES_H

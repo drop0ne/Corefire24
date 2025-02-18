@@ -1,4 +1,4 @@
-#include "MyConsoleAPI.h"
+#include "BaseClass.h"
 
 //************************************************************************************************************************************************************/
 // MyConsoleAPI Class
@@ -31,7 +31,7 @@ void CFC_coreComponents::clearScreen() {
 
 void CFC_coreComponents::print(const std::string& data) {
 	std::cout << data;
-	// Legacy code
+	// Base
 }
 void CFC_coreComponents::print(const std::string& data, const int textColor) {
 	setMyTextColor(textColor);
@@ -71,7 +71,7 @@ void CFC_coreComponents::print(const std::string& string1, const int& textColor1
 void CFC_coreComponents::setScreenColors(const char* data) {
 	try {
 		// Validate the input before executing
-		if (!isValidCommand(data)) {
+		if (!check_IF_validCommand(data)) {
 			throw std::invalid_argument("Invalid command for screen color.");
 		}
 		// Execute the system command
@@ -119,7 +119,7 @@ void CFC_coreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std:
 
 // ********** Start Private Functions **********
 
-bool CFC_coreComponents::isValidCommand(const char* command) {
+bool CFC_coreComponents::check_IF_validCommand(const char* command) {
 	// List of allowed commands for setting screen colors, now including gray
 	const std::vector<std::string> allowedCommands = {
 		"color 0A", // Light green on black
@@ -149,11 +149,11 @@ bool CFC_coreComponents::isValidCommand(const char* command) {
 /*************************************************************/
 
 ToolSet_MainMenu::ToolSet_MainMenu() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
-mainMenu_totalParameters(8), mainMenuParameterState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
+mainMenu_totalParameters(8), mainMenuParameterCurentState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
 	/*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/DefaultWhite, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue })
 {
 	/* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
-	mainMenu_defaultParameterState = mainMenuParameterState;
+	mainMenu_defaultParameterState = mainMenuParameterCurentState;
 }
 /*************************************************************/
 /*      END OF CONSTRUCTOR FOR MyConsolAPI_Enstension        */
@@ -168,9 +168,9 @@ void ToolSet_MainMenu::errorMessage() {
 
 void ToolSet_MainMenu::setMainMenuState(const std::vector<int> newState) {
 	print("Setting new state\n");
-	for (size_t i = 0; i < mainMenuParameterState.size(); i++)
+	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
 	{
-		mainMenuParameterState[i] = newState[i];
+		mainMenuParameterCurentState[i] = newState[i];
 	}
 	system("pause");
 }
@@ -186,16 +186,16 @@ void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
 
 	print("CoreFireCode 2024 edition\n", Green);
 	print("\n\nMain Menu\n\n", DefaultWhite);
-	print("Option", stateData.at(Options), " 1 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " CannabisCalculator\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 2 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Calculation of Power Loss\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 3 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 4 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Quiz\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 5 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Hangman\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 6 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 7 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 8 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Rainbow Effect\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 10 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
-	print("Option", stateData.at(Options), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
+	print("Option", stateData.at(Option), " 1 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " CannabisCalculator\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 2 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Calculation of Power Loss\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 3 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Number Gussing Game\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 4 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Quiz\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 5 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Hangman\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 6 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 7 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 8 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Rainbow Effect\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 10 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
+	print("Option", stateData.at(Option), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
 }
 
 void ToolSet_MainMenu::setThemeFlag(const int themeFlag_ID) {
@@ -239,18 +239,18 @@ void ToolSet_MainMenu::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 void ToolSet_MainMenu::menuTheme_Default() {
 	setThemeFlag(defaultTheme);
 
-	for (size_t i = 0; i < mainMenuParameterState.size(); i++)
+	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
 	{
-		mainMenuParameterState[i] = mainMenu_defaultParameterState[i];
+		mainMenuParameterCurentState[i] = mainMenu_defaultParameterState[i];
 	}
 }
 
 void ToolSet_MainMenu::menuTheme_Random() {
 	/*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
 
-	for (size_t i = 0; i < mainMenuParameterState.size(); i++)
+	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
 	{
-		mainMenuParameterState[i] = getRandomNumber(1, 15);
+		mainMenuParameterCurentState[i] = getRandomNumber(1, 15);
 	}
 }
 
@@ -261,19 +261,19 @@ void ToolSet_MainMenu::menuTheme_betterRandom() {
 
 	for (size_t i = 0; i < 60; i++)
 	{
-		for (size_t j = 0; j < mainMenuParameterState.size(); j++)
+		for (size_t j = 0; j < mainMenuParameterCurentState.size(); j++)
 		{
-			mainMenuParameterState[j] = getRandomNumber(1, 15);
+			mainMenuParameterCurentState[j] = getRandomNumber(1, 15);
 		}
 		clearScreen();
-		generateMainMenu(mainMenuParameterState);
+		generateMainMenu(mainMenuParameterCurentState);
 		print("\nWAIT!", WAIT_);
 		std::this_thread::sleep_for(0.025s);
 	}
 }
 
 const std::vector<int>& ToolSet_MainMenu::getMainMenuState() const {
-	return mainMenuParameterState;
+	return mainMenuParameterCurentState;
 }
 
 const std::vector<int>& ToolSet_MainMenu::getMainMenuDefaultState() const {
@@ -284,7 +284,7 @@ int ToolSet_MainMenu::mainMenuLogic() {
 	int returnValue{ 0 };
 
 	do {
-		clearScreen(); generateMainMenu(mainMenuParameterState); print("\nSelect option: ", LightGreen); setMyTextColor(DefaultWhite);
+		clearScreen(); generateMainMenu(mainMenuParameterCurentState); print("\nSelect option: ", LightGreen); setMyTextColor(DefaultWhite);
 		std::cin >> returnValue;
 		if (std::cin.fail())
 		{

@@ -24,7 +24,7 @@ enum eFLAG_ThemeID {
 };  
 
 enum eMainMenu_State_ID {
-	Options = 0, ProgramID = 1, Program = 2, ExitProgramID = 3, ExitProgram = 4, Symbols = 5, ErrorMessage = 6, WAIT_ = 7
+	Option = 0, ProgramID = 1, Program = 2, ExitProgramID = 3, ExitProgram = 4, Symbols = 5, ErrorMessage = 6, WAIT_ = 7
 };
 
 enum eGameOption {

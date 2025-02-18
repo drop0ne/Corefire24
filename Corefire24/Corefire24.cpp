@@ -1,6 +1,6 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
 /////////////////////////////////////////////////////
-#include "MyConsoleAPI.h"
+#include "BaseClass.h"
 #include "MyGames.h"
 #include "Solitaire.h"
 
