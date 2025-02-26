@@ -4,8 +4,8 @@
 #include "MyGames.h"
 #include "Solitaire.h"
 
-void games(int option);
-void apps(int option);
+void games(const int &option);
+void apps(const int &option);
 
 int main()
 {
@@ -29,7 +29,7 @@ int main()
 	} while (true);
 }
 
-void games(int option) {
+void games(const int &option) {
 
 	switch (option)
 	{
@@ -58,7 +58,7 @@ void games(int option) {
 	}
 }
 
-void apps(int option) {
+void apps(const int &option) {
 
 	switch (option)
 	{
