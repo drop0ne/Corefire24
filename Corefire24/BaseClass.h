@@ -58,15 +58,16 @@ private:
 class ESCkeyButton
 {
 public:
+    std::atomic<bool> exitRequested;
+
     ESCkeyButton();
     ~ESCkeyButton();
 
-    void isESCkeyPressed(std::stop_token stopToken);
+	void ESCkeyExit_Jthread_start();
 
 private:
-    std::atomic<bool> exitRequested_coreComp;
-
-
+	std::jthread escThread;
+    void isESCkeyPressed(std::stop_token stopToken);
 };
 
 

@@ -300,12 +300,16 @@ int ToolSet_MainMenu::mainMenuLogic() {
 	} while (true);
 }
 
-ESCkeyButton::ESCkeyButton()
+ESCkeyButton::ESCkeyButton() : exitRequested({ false })
 {
 }
 
 ESCkeyButton::~ESCkeyButton()
 {
+}
+
+void ESCkeyButton::ESCkeyExit_Jthread_start() {
+	escThread = std::jthread(&ESCkeyButton::isESCkeyPressed, this);
 }
 
 void ESCkeyButton::isESCkeyPressed(std::stop_token stopToken) {

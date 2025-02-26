@@ -5,21 +5,16 @@
 #include "Solitaire.h"
 #include "Hangman.h"
 
-/* GLOBAL JTHREAD VARIBLE */
-std::atomic<bool> exitRequested{ false };
-/* J THREADS */
-
-
 void games(const int &option);
 void apps(const int &option);
-void ESCkeyEXIT(std::stop_token stopToken);
 
 int main() {
 	/* Main Menu & Program Start*/
+	ESCkeyButton escKey;
+	escKey.ESCkeyExit_Jthread_start();
 	ToolSet_MainMenu cf;
-	std::jthread escThread(ESCkeyEXIT);
 
-	while (!exitRequested.load()) {
+	while (!escKey.exitRequested.load()) {
 		switch (cf.mainMenuLogic())
 		{
 		case 1: apps(CannaCalc); break;
@@ -88,18 +83,5 @@ void apps(const int &option) {
 	default: {
 		break;
 	}
-	}
-}
-
-void ESCkeyEXIT(std::stop_token stopToken) {
-	while (!stopToken.stop_requested() && !exitRequested.load()) {
-		if (_kbhit()) {
-			int ch = _getch();
-			if (ch == 27) { // 27 is the ASCII code for ESC
-				exitRequested.store(true);
-				break;
-			}
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 }
