@@ -1,5 +1,9 @@
 #pragma once
 
+/* GLOBAL JTHREAD VARIBLE */
+std::atomic<bool> exitRequested{ false };
+/* J THREADS */
+
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -21,4 +25,5 @@
 #include <cmath>
 #include <cstdint>
 #include <iomanip>
-#include <cctype>
+#include <conio.h>
+#include <atomic> 
