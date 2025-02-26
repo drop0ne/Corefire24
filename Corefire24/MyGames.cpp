@@ -1,73 +1,4 @@
 #include "MyGames.h"
-//  Hangman //////////
-//
-Hangman::Hangman() : alphabet({ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
-		"U", "V", "W", "X", "Y", "Z" }), guessedLetters(std::size(alphabet), false), answer(std::size(answer), false), guess(" "), iteration(0)
-{
-}
-
-Hangman::~Hangman() {
-	this->alphabet.clear();
-	this->guessedLetters.clear();
-	this->answer.clear();
-	this->guess.clear();
-
-}
-
-void Hangman::run() {
-	gameLoop();
-}
-
-void Hangman::gameLoop() {
-	if (this->iteration != 0) { this->iteration = 0; }
-	do
-	{
-		this->iteration++;
-		drawScreen(checkGuess(get_userGuess()));
-	} while (true);
-}
-
-std::string Hangman::get_userGuess() {
-	do
-	{
-		CFC_coreComponents::clearInputStream();
-		try
-		{
-			std::getline(std::cin, guess);
-			return guess;
-		}
-		catch (const std::exception&)
-		{
-			std::cout << "Invalid input. Please try again." << std::endl;
-			continue;
-		}
-	} while (true);
-
-	return guess;
-}
-
-bool Hangman::checkGuess(std::string guess) {
-	for (size_t i = 0; i < std::size(alphabet);)
-	{
-		if (guess == alphabet.at(i)) {
-			guessedLetters[i] = true;
-			if (guessedLetters[i] == answer[i]) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-	}
-	return false;
-}
-
-void Hangman::drawScreen(bool state_DATA) {
-	CFC_coreComponents::clearScreen();
-	CFC_coreComponents::print("Hangman\n\n", Magenta);
-	CFC_coreComponents::print("Guess a letter of the Alphabet");
-
-}
 
 // QUIZ GAME  //////////
 //
@@ -274,7 +205,7 @@ void CannaCalculator::entrypoint() {
 		}
 		clearInputStream();
 	}
-	else { userDATA.at(2) = 0.20; } //default
+	else { userDATA.at(THCl) = 0.20; } //default
 
 	setScreenColors("color 08");
 	userDATA.at(THCp) = getDoubleFromUser("\n\nHow strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightCyan);
@@ -483,12 +414,12 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 				convertedInput = std::stoi(input);
 				break;
 			}
-			catch (const std::invalid_argument& e)
+			catch (const std::invalid_argument& /*e*/)
 			{
 				std::cerr << "Invalid input. Please enter a number.\n";
 				clearInputStream();
 			}
-			catch (const std::out_of_range& e) // need to build a logging system
+			catch (const std::out_of_range& /*e*/) // need to build a logging system
 			{
 				std::cerr << "Out of range. Please enter a number.\n";
 				clearInputStream();

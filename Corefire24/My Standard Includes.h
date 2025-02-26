@@ -21,3 +21,6 @@
 #include <cmath>
 #include <cstdint>
 #include <iomanip>
+#include <conio.h>
+#include <atomic> 
+#include <cstdlib>

@@ -4,7 +4,7 @@
 // MyConsoleAPI Class
 // Constructor
 /*************************************************************************************************************************************************************/
-CFC_coreComponents::CFC_coreComponents() {
+CFC_coreComponents::CFC_coreComponents() : console_HWND(), topLeft({ 0, 0 }) {
 	console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (console_HWND == INVALID_HANDLE_VALUE) {
 		throw std::runtime_error("Failed to get standard output handle");
@@ -148,7 +148,7 @@ bool CFC_coreComponents::check_IF_validCommand(const char* command) {
 /*                     < Main Menu API >                     */
 /*************************************************************/
 
-ToolSet_MainMenu::ToolSet_MainMenu() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
+CoreFireCode_MainFunction::CoreFireCode_MainFunction() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
 mainMenu_totalParameters(8), mainMenuParameterCurentState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
 	/*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/DefaultWhite, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue })
 {
@@ -161,12 +161,12 @@ mainMenu_totalParameters(8), mainMenuParameterCurentState({/*options(0)*/Green, 
 /*************************************************************/
 
 
-void ToolSet_MainMenu::errorMessage() {
+void CoreFireCode_MainFunction::errorMessage() {
 	clearInputStream();
 	print("\nERROR: INVALID INPUT\n", getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
 }
 
-void ToolSet_MainMenu::setMainMenuState(const std::vector<int> newState) {
+void CoreFireCode_MainFunction::setMainMenuState(const std::vector<int> newState) {
 	print("Setting new state\n");
 	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
 	{
@@ -175,7 +175,7 @@ void ToolSet_MainMenu::setMainMenuState(const std::vector<int> newState) {
 	system("pause");
 }
 
-void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
+void CoreFireCode_MainFunction::generateMainMenu(const std::vector<int>& stateData) {
 	/* StateDate.at( recieves and int ) to identify group to apply color state change to */
 	/* Using enum eMainMenu_State_ID Options(0), ProgramID1), Program(2), ExitProgramID(3), ExitProgram(4), Symbols(5), ErrorMessage(6) */
 
@@ -198,7 +198,7 @@ void ToolSet_MainMenu::generateMainMenu(const std::vector<int>& stateData) {
 	print("Option", stateData.at(Option), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
 }
 
-void ToolSet_MainMenu::setThemeFlag(const int themeFlag_ID) {
+void CoreFireCode_MainFunction::setThemeFlag(const int themeFlag_ID) {
 	if (!FLAGS_theme.empty())
 	{
 		for (size_t i = 0; i < FLAGS_theme.size(); i++)
@@ -220,7 +220,7 @@ void ToolSet_MainMenu::setThemeFlag(const int themeFlag_ID) {
 
 }
 
-void ToolSet_MainMenu::callTheme_by_Flag_ID(const int& themeFlag_ID) {
+void CoreFireCode_MainFunction::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 	switch (themeFlag_ID)
 	{
 	case 0:  setThemeFlag(defaultTheme); menuTheme_Default(); break;
@@ -236,7 +236,7 @@ void ToolSet_MainMenu::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 /*     START OF PRIVATE METHODS FOR ToolSet_MainMenu         */
 /*************************************************************/
 
-void ToolSet_MainMenu::menuTheme_Default() {
+void CoreFireCode_MainFunction::menuTheme_Default() {
 	setThemeFlag(defaultTheme);
 
 	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
@@ -245,7 +245,7 @@ void ToolSet_MainMenu::menuTheme_Default() {
 	}
 }
 
-void ToolSet_MainMenu::menuTheme_Random() {
+void CoreFireCode_MainFunction::menuTheme_Random() {
 	/*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
 
 	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
@@ -256,7 +256,7 @@ void ToolSet_MainMenu::menuTheme_Random() {
 
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
 
-void ToolSet_MainMenu::menuTheme_betterRandom() {
+void CoreFireCode_MainFunction::menuTheme_betterRandom() {
 	using namespace std::chrono_literals;
 
 	for (size_t i = 0; i < 60; i++)
@@ -272,19 +272,20 @@ void ToolSet_MainMenu::menuTheme_betterRandom() {
 	}
 }
 
-const std::vector<int>& ToolSet_MainMenu::getMainMenuState() const {
+const std::vector<int>& CoreFireCode_MainFunction::getMainMenuState() const {
 	return mainMenuParameterCurentState;
 }
 
-const std::vector<int>& ToolSet_MainMenu::getMainMenuDefaultState() const {
+const std::vector<int>& CoreFireCode_MainFunction::getMainMenuDefaultState() const {
 	return mainMenu_defaultParameterState;
 }
 
-int ToolSet_MainMenu::mainMenuLogic() {
+int CoreFireCode_MainFunction::mainMenuLogic() {
 	int returnValue{ 0 };
 
 	do {
 		clearScreen(); generateMainMenu(mainMenuParameterCurentState); print("\nSelect option: ", LightGreen); setMyTextColor(DefaultWhite);
+		
 		std::cin >> returnValue;
 		if (std::cin.fail())
 		{
@@ -297,4 +298,28 @@ int ToolSet_MainMenu::mainMenuLogic() {
 			return returnValue;
 		}
 	} while (true);
+}
+
+
+// ESCkeyButton implementation using the Windows API
+ESCkeyButton::ESCkeyButton() : exitRequested({ false })
+{
+	// Use a lambda wrapper to pass the stop token correctly
+	escThread = std::jthread([this](std::stop_token st) { this->isESCkeyPressed(st); });
+}
+
+ESCkeyButton::~ESCkeyButton() {
+	// std::jthread automatically requests stop and joins on destruction.
+}
+
+void ESCkeyButton::isESCkeyPressed(std::stop_token stopToken) {
+	// Poll for the ESC key using GetAsyncKeyState from the Windows API
+	while (!stopToken.stop_requested() && !exitRequested.load()) {
+		// GetAsyncKeyState returns a SHORT; the high-order bit is set if the key is down.
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+			// Immediately exit the program when ESC is pressed.
+			std::exit(0);
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	}
 }
