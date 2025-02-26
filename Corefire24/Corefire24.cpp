@@ -3,15 +3,16 @@
 #include "BaseClass.h"
 #include "MyGames.h"
 #include "Solitaire.h"
+#include "Hangman.h"
 
 void games(const int &option);
 void apps(const int &option);
 
-int main()
-{
-	static ToolSet_MainMenu cf;
+int main() {
+	/* Main Menu & Program Start*/
+	CoreFireCode_MainFunction cf;
 
-	do {
+	while (!cf.exitRequested.load()) {
 		switch (cf.mainMenuLogic())
 		{
 		case 1: apps(CannaCalc); break;
@@ -26,7 +27,8 @@ int main()
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
 		default: cf.print("\nCommand must be intager from 1 - 6\n", cf.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
-	} while (true);
+	}
+	return 0;
 }
 
 void games(const int &option) {
@@ -34,22 +36,23 @@ void games(const int &option) {
 	switch (option)
 	{
 	case 0: {
-		auto quizGame = std::make_unique<Quiz>();
-		quizGame->run();
+		auto quize_OBJ = std::make_unique<Quiz>();
+		quize_OBJ->run();
 		break; 
 	}
 	case 1: {
-		auto numberGame = std::make_unique<NumberGuessingGame>();
-		numberGame->run();
+		auto numberGuessingGame_OBJ = std::make_unique<NumberGuessingGame>();
+		numberGuessingGame_OBJ->run();
 		break;
 	}
 	case 2: {
-		/*hangman.run();*/
+		auto hangman_OBJ = std::make_unique<Hangman>();
+		hangman_OBJ->run();
 		break;
 	}
 	case 3: {
-		auto solitaireGame = std::make_unique<Solitaire>();
-		solitaireGame->run();
+		auto solitaire_OBJ = std::make_unique<Solitaire>();
+		solitaire_OBJ->run();
 		break;
 	}
 	default: {
@@ -68,8 +71,8 @@ void apps(const int &option) {
 		break;
 	}
 	case 1: {
-		auto PowerLoss_OBJ = std::make_unique<CalculatePowerLoss_Watts_x_Meters>();
-		PowerLoss_OBJ->run();
+		auto calculatePowerLoss_OBJ = std::make_unique<CalculatePowerLoss_Watts_x_Meters>();
+		calculatePowerLoss_OBJ->run();
 		break;
 	}
 	case 2: {

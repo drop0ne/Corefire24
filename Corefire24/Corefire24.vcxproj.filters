@@ -27,6 +27,9 @@
     <ClCompile Include="Solitaire.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hangman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseClass.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Solitaire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hangman.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
