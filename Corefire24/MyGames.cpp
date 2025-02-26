@@ -274,7 +274,7 @@ void CannaCalculator::entrypoint() {
 		}
 		clearInputStream();
 	}
-	else { userDATA.at(2) = 0.20; } //default
+	else { userDATA.at(THCl) = 0.20; } //default
 
 	setScreenColors("color 08");
 	userDATA.at(THCp) = getDoubleFromUser("\n\nHow strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightCyan);

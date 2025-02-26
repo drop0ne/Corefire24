@@ -9,7 +9,7 @@ void apps(const int &option);
 
 int main()
 {
-	static ToolSet_MainMenu cf;
+	ToolSet_MainMenu cf;
 
 	do {
 		switch (cf.mainMenuLogic())
@@ -34,13 +34,13 @@ void games(const int &option) {
 	switch (option)
 	{
 	case 0: {
-		auto quizGame = std::make_unique<Quiz>();
-		quizGame->run();
+		auto quize_OBJ = std::make_unique<Quiz>();
+		quize_OBJ->run();
 		break; 
 	}
 	case 1: {
-		auto numberGame = std::make_unique<NumberGuessingGame>();
-		numberGame->run();
+		auto numberGuessingGame_OBJ = std::make_unique<NumberGuessingGame>();
+		numberGuessingGame_OBJ->run();
 		break;
 	}
 	case 2: {
@@ -48,8 +48,8 @@ void games(const int &option) {
 		break;
 	}
 	case 3: {
-		auto solitaireGame = std::make_unique<Solitaire>();
-		solitaireGame->run();
+		auto solitaire_OBJ = std::make_unique<Solitaire>();
+		solitaire_OBJ->run();
 		break;
 	}
 	default: {
@@ -68,8 +68,8 @@ void apps(const int &option) {
 		break;
 	}
 	case 1: {
-		auto PowerLoss_OBJ = std::make_unique<CalculatePowerLoss_Watts_x_Meters>();
-		PowerLoss_OBJ->run();
+		auto calculatePowerLoss_OBJ = std::make_unique<CalculatePowerLoss_Watts_x_Meters>();
+		calculatePowerLoss_OBJ->run();
 		break;
 	}
 	case 2: {
