@@ -117,18 +117,6 @@ void CFC_coreComponents::extractInputStream() {
 
 void CFC_coreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std::chrono::milliseconds(time)); }
 
-void CFC_coreComponents::ESCkeyEXIT(std::stop_token stopToken) {
-	while (!stopToken.stop_requested() && !exitRequested.load()) {
-		if (_kbhit()) {
-			int ch = _getch();
-			if (ch == 27) {
-				exitRequested.store(true);
-				break;
-			}
-		}
-	}
-}
-
 // ********** Start Private Functions **********
 
 bool CFC_coreComponents::check_IF_validCommand(const char* command) {
@@ -297,13 +285,7 @@ int ToolSet_MainMenu::mainMenuLogic() {
 
 	do {
 		clearScreen(); generateMainMenu(mainMenuParameterCurentState); print("\nSelect option: ", LightGreen); setMyTextColor(DefaultWhite);
-
-		do
-		{
-			ESCkeyEXIT();
-
-		} while (true);
-
+		
 		std::cin >> returnValue;
 		if (std::cin.fail())
 		{

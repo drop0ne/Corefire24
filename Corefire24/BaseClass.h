@@ -49,7 +49,6 @@ public:
     virtual void clearInputStream();
     virtual void extractInputStream();
     virtual void sleepTimer(int time); // Takes millisecounds 1000:1
-	virtual void ESCkeyEXIT(std::stop_token stopToken);
 
 private:
     bool check_IF_validCommand(const char* command);
