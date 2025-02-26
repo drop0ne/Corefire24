@@ -1,9 +1,9 @@
 #include  "MyEnum.h"
 #include "My Standard Includes.h"
-#undef max
+#undef max// This is a macro that prevents the max macro from being defined
 
-// This is a macro that prevents the max macro from being defined
-
+#ifndef BASECLASS_H
+#define BASECLASS_H
 
 #ifndef NUMBER_GENERATOR_H
 #define NUMBER_GENERATOR_H
@@ -27,7 +27,8 @@ public:
 #ifndef MY_CONSOLE_API_H
 #define MY_CONSOLE_API_H
 
-class CFC_coreComponents {
+class CFC_coreComponents
+{
 private:
 
 protected:
@@ -59,14 +60,12 @@ class ESCkeyButton
 {
 public:
     std::atomic<bool> exitRequested;
+	std::jthread escThread;
 
     ESCkeyButton();
     ~ESCkeyButton();
 
-	void ESCkeyExit_Jthread_start();
-
 private:
-	std::jthread escThread;
     void isESCkeyPressed(std::stop_token stopToken);
 };
 
@@ -79,7 +78,7 @@ private:
 #ifndef MY_CONSOLE_API_EXTENDED
 #define MY_CONSOLE_API_EXTENDED
 
-class ToolSet_MainMenu : public CFC_coreComponents, public NumberGenerator {
+class CoreFireCode_MainFunction : public CFC_coreComponents, public NumberGenerator, public ESCkeyButton {
 private:
     int mainMenu_totalParameters;
     std::vector<int> mainMenuParameterCurentState;
@@ -87,7 +86,7 @@ private:
     std::vector<bool> FLAGS_theme;
        
 public:
-    ToolSet_MainMenu(); // Constructor
+    CoreFireCode_MainFunction(); // Constructor
 
     void errorMessage();
     int mainMenuLogic();
@@ -104,3 +103,5 @@ private:
     void menuTheme_betterRandom();
     };
 #endif // !MY_CONSOLE_API_EXTENDED
+
+#endif // !BASECLASS_H

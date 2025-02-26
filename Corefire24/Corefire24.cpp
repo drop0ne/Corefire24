@@ -10,11 +10,9 @@ void apps(const int &option);
 
 int main() {
 	/* Main Menu & Program Start*/
-	ESCkeyButton escKey;
-	escKey.ESCkeyExit_Jthread_start();
-	ToolSet_MainMenu cf;
+	CoreFireCode_MainFunction cf;
 
-	while (!escKey.exitRequested.load()) {
+	while (!cf.exitRequested.load()) {
 		switch (cf.mainMenuLogic())
 		{
 		case 1: apps(CannaCalc); break;
