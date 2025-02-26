@@ -12,7 +12,7 @@ std::atomic<bool> exitRequested{ false };
 
 void games(const int &option);
 void apps(const int &option);
-void ESCkeyEXIT(std::stop_token stopToken)
+void ESCkeyEXIT(std::stop_token stopToken);
 
 int main() {
 	/* Main Menu & Program Start*/
