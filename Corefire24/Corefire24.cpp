@@ -3,6 +3,7 @@
 #include "BaseClass.h"
 #include "MyGames.h"
 #include "Solitaire.h"
+#include "Hangman.h"
 
 void games(const int &option);
 void apps(const int &option);
@@ -44,7 +45,8 @@ void games(const int &option) {
 		break;
 	}
 	case 2: {
-		/*hangman.run();*/
+		auto hangman_OBJ = std::make_unique<Hangman>();
+		hangman_OBJ->run();
 		break;
 	}
 	case 3: {

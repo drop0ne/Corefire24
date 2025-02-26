@@ -4,34 +4,6 @@
 #ifndef GAMES_H
 #define GAMES_H
 
-
-class Hangman : public CFC_coreComponents
-{
-public:
-	Hangman();
-	~Hangman();
-	/* ******* */
-
-	void run(); // Main entry point for the game
-
-private:
-	std::vector<std::string> alphabet;
-	std::vector<bool> guessedLetters;
-	std::vector<bool> answer;
-	std::string guess;
-	size_t iteration;
-
-	/* *** Memory / Private Methods *** */
-
-	void gameLoop();
-	std::string get_userGuess();
-	bool checkGuess(std::string guess);
-	void drawScreen(bool state_DATA);
-
-
-
-};
-
 class Quiz : public CFC_coreComponents {
 private:
     int iteration;
