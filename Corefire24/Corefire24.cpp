@@ -4,14 +4,14 @@
 #include "MyGames.h"
 #include "Solitaire.h"
 
-void games(int option);
-void apps(int option);
+void games(const int &option);
+void apps(const int &option);
 
 int main()
 {
 	static ToolSet_MainMenu cf;
 
- 	do {
+	do {
 		switch (cf.mainMenuLogic())
 		{
 		case 1: apps(CannaCalc); break;
@@ -29,40 +29,54 @@ int main()
 	} while (true);
 }
 
-void games(int option) {
-	auto quizGame = new Quiz;
-	auto numberGame = new NumberGuessingGame;
-	auto solitaireGame = new Solitaire;
-	//auto hangmanGame = new Hangman;
+void games(const int &option) {
 
 	switch (option)
 	{
-	case 0: quizGame->run(); break;
-	case 1: numberGame->run(); break;
-	case 2: /*hangman.run();*/break;
-	case 3: solitaireGame->run(); break;
-	default: break;
+	case 0: {
+		auto quizGame = std::make_unique<Quiz>();
+		quizGame->run();
+		break; 
 	}
-	delete quizGame;
-	delete numberGame;
-	delete solitaireGame;
-	//delete hangmanGame;
-}
-
-void apps(int option) {
-	auto CannabisAPP = new CannaCalculator;
-	auto PowerLossAPP = new CalculatePowerLoss_Watts_x_Meters;
-
-	switch (option)
-	{
-	case 0: CannabisAPP->run(); break;
-	case 1: PowerLossAPP->run(); break;
-	case 2: break;
-	default:
+	case 1: {
+		auto numberGame = std::make_unique<NumberGuessingGame>();
+		numberGame->run();
 		break;
 	}
-	delete CannabisAPP;
-	delete PowerLossAPP;
-	//delete hangmanGame;
-	//delete solitaireGame;
+	case 2: {
+		/*hangman.run();*/
+		break;
+	}
+	case 3: {
+		auto solitaireGame = std::make_unique<Solitaire>();
+		solitaireGame->run();
+		break;
+	}
+	default: {
+		break;
+	}
+	}
+}
+
+void apps(const int &option) {
+
+	switch (option)
+	{
+	case 0: {
+		auto CannaCalc_OBJ = std::make_unique<CannaCalculator>();
+		CannaCalc_OBJ->run();
+		break;
+	}
+	case 1: {
+		auto PowerLoss_OBJ = std::make_unique<CalculatePowerLoss_Watts_x_Meters>();
+		PowerLoss_OBJ->run();
+		break;
+	}
+	case 2: {
+		break;
+	}
+	default: {
+		break;
+	}
+	}
 }
