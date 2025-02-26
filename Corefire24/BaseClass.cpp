@@ -4,7 +4,7 @@
 // MyConsoleAPI Class
 // Constructor
 /*************************************************************************************************************************************************************/
-CFC_coreComponents::CFC_coreComponents() {
+CFC_coreComponents::CFC_coreComponents() : console_HWND(), topLeft({ 0, 0 }) {
 	console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (console_HWND == INVALID_HANDLE_VALUE) {
 		throw std::runtime_error("Failed to get standard output handle");
@@ -298,4 +298,25 @@ int ToolSet_MainMenu::mainMenuLogic() {
 			return returnValue;
 		}
 	} while (true);
+}
+
+ESCkeyButton::ESCkeyButton()
+{
+}
+
+ESCkeyButton::~ESCkeyButton()
+{
+}
+
+void ESCkeyButton::isESCkeyPressed(std::stop_token stopToken) {
+	while (!stopToken.stop_requested() && !exitRequested.load()) {
+		if (_kbhit()) {
+			int ch = _getch();
+			if (ch == 27) { // ESC key
+				exitRequested.store(true);
+				break;
+			}
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	}
 }

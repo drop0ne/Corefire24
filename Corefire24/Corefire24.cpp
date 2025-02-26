@@ -19,7 +19,7 @@ int main() {
 	ToolSet_MainMenu cf;
 	std::jthread escThread(ESCkeyEXIT);
 
-	do {
+	while (!exitRequested.load()) {
 		switch (cf.mainMenuLogic())
 		{
 		case 1: apps(CannaCalc); break;
@@ -34,7 +34,8 @@ int main() {
 		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
 		default: cf.print("\nCommand must be intager from 1 - 6\n", cf.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
-	} while (true);
+	}
+	return 0;
 }
 
 void games(const int &option) {
