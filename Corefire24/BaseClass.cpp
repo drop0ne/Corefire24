@@ -300,23 +300,25 @@ int CoreFireCode_MainFunction::mainMenuLogic() {
 	} while (true);
 }
 
-ESCkeyButton::ESCkeyButton() : exitRequested(false)
+
+// ESCkeyButton implementation using the Windows API
+ESCkeyButton::ESCkeyButton() : exitRequested({ false })
 {
+	// Use a lambda wrapper to pass the stop token correctly
 	escThread = std::jthread([this](std::stop_token st) { this->isESCkeyPressed(st); });
 }
 
-ESCkeyButton::~ESCkeyButton()
-{
+ESCkeyButton::~ESCkeyButton() {
+	// std::jthread automatically requests stop and joins on destruction.
 }
 
 void ESCkeyButton::isESCkeyPressed(std::stop_token stopToken) {
+	// Poll for the ESC key using GetAsyncKeyState from the Windows API
 	while (!stopToken.stop_requested() && !exitRequested.load()) {
-		if (_kbhit()) {
-			int ch = _getch();
-			if (ch == 27) { // ESC key
-				std::exit(0);
-				break;
-			}
+		// GetAsyncKeyState returns a SHORT; the high-order bit is set if the key is down.
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+			// Immediately exit the program when ESC is pressed.
+			std::exit(0);
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}

@@ -414,12 +414,12 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 				convertedInput = std::stoi(input);
 				break;
 			}
-			catch (const std::invalid_argument& e)
+			catch (const std::invalid_argument& /*e*/)
 			{
 				std::cerr << "Invalid input. Please enter a number.\n";
 				clearInputStream();
 			}
-			catch (const std::out_of_range& e) // need to build a logging system
+			catch (const std::out_of_range& /*e*/) // need to build a logging system
 			{
 				std::cerr << "Out of range. Please enter a number.\n";
 				clearInputStream();
