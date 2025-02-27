@@ -194,8 +194,8 @@ void CoreFireCode_MainFunction::generateMainMenu(const std::vector<int>& stateDa
 	print("Option", stateData.at(Option), " 6 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n", stateData.at(Program));
 	print("Option", stateData.at(Option), " 7 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
 	print("Option", stateData.at(Option), " 8 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Rainbow Effect\n", stateData.at(Program));
-	print("Option", stateData.at(Option), " 10 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
-	print("Option", stateData.at(Option), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
+	print("Option", stateData.at(Option), " 9 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
+	print("\nPress ", Gray, "esc", LightRed, " to exit\n\n", Gray, "", Black);
 }
 
 void CoreFireCode_MainFunction::setThemeFlag(const int themeFlag_ID) {

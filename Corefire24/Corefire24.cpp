@@ -23,8 +23,7 @@ int main() {
 		case 6: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
 		case 7: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
 		case 8: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
-		case 10: games(solitaire); break;
-		case 9: return 0;/*EXIT PROGRAM WITHOUT ERROR*/
+		case 9: games(solitaire); break;
 		default: cf.print("\nCommand must be intager from 1 - 6\n", cf.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
 		}
 	}
