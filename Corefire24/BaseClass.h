@@ -17,12 +17,10 @@ public:
     ~NumberGenerator(); // Destructor
     int getRandomNumber(const int min, const int max);
 };
-
 #endif // NUMBER_GENERATOR_H
 
 #ifndef MY_CONSOLE_API_H
 #define MY_CONSOLE_API_H
-
 class CFC_coreComponents {
 protected:
     HANDLE console_HWND;
@@ -45,13 +43,10 @@ public:
 private:
     bool check_IF_validCommand(const char* command);
 };
-
 #endif // MY_CONSOLE_API_H
 
 #ifndef ESCKEYBUTTON_H
 #define ESCKEYBUTTON_H
-
-
 // ESCkeyButton definition using Windows API for key detection
 class ESCkeyButton {
 public:
@@ -62,13 +57,10 @@ public:
     std::jthread escThread;
     void isESCkeyPressed(std::stop_token stopToken);
 };
-
 #endif // !ESCKEYBUTTON_H
-
 
 #ifndef MY_CONSOLE_API_EXTENDED
 #define MY_CONSOLE_API_EXTENDED
-
 class CoreFireCode_MainFunction : public CFC_coreComponents, public NumberGenerator, public ESCkeyButton {
 private:
     int mainMenu_totalParameters;
@@ -90,7 +82,5 @@ private:
     void menuTheme_Random();
     void menuTheme_betterRandom();
 };
-
 #endif // !MY_CONSOLE_API_EXTENDED
-
 #endif // BASECLASS_H

@@ -120,8 +120,9 @@ void CFC_coreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std:
 // ********** Start Private Functions **********
 
 bool CFC_coreComponents::check_IF_validCommand(const char* command) {
-	// List of allowed commands for setting screen colors, now including gray
+	// List of allowed commands for setting screen colors, now including gray, these strings are known to be safe to pass to system()
 	const std::vector<std::string> allowedCommands = {
+		"pause",     // Pause the console
 		"color 0A", // Light green on black
 		"color 0B", // Light aqua on black
 		"color 0C", // Light red on black
@@ -194,8 +195,8 @@ void CoreFireCode_MainFunction::generateMainMenu(const std::vector<int>& stateDa
 	print("Option", stateData.at(Option), " 6 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Default Menu Theme\n", stateData.at(Program));
 	print("Option", stateData.at(Option), " 7 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
 	print("Option", stateData.at(Option), " 8 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Rainbow Effect\n", stateData.at(Program));
-	print("Option", stateData.at(Option), " 10 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
-	print("Option", stateData.at(Option), " 9 ", stateData.at(ExitProgramID), "-", stateData.at(Symbols), " Exit\n", stateData.at(ExitProgram));
+	print("Option", stateData.at(Option), " 9 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
+	print("\nPress ", Gray, "esc", LightRed, " to exit\n\n", Gray, "", Black);
 }
 
 void CoreFireCode_MainFunction::setThemeFlag(const int themeFlag_ID) {
