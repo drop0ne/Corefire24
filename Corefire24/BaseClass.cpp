@@ -120,8 +120,9 @@ void CFC_coreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std:
 // ********** Start Private Functions **********
 
 bool CFC_coreComponents::check_IF_validCommand(const char* command) {
-	// List of allowed commands for setting screen colors, now including gray
+	// List of allowed commands for setting screen colors, now including gray, these strings are known to be safe to pass to system()
 	const std::vector<std::string> allowedCommands = {
+		"pause",     // Pause the console
 		"color 0A", // Light green on black
 		"color 0B", // Light aqua on black
 		"color 0C", // Light red on black
