@@ -9,6 +9,8 @@ int main() {
 	/* Main Menu & Program Start*/
 	CoreFireCode_MainFunction cf;
 
+	
+
 	while (!cf.exitRequested.load()) {
 		switch (cf.mainMenuLogic())
 		{
