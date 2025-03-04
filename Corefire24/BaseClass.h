@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BASECLASS_H
 #define BASECLASS_H
 
