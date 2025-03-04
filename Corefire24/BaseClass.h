@@ -85,5 +85,5 @@ namespace cfc_core {
         void menuTheme_betterRandom();
     };
 
-} // namespace MyNamespace
+} // namespace cfc_core
 #endif // BASECLASS_H
