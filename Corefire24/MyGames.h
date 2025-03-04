@@ -4,7 +4,7 @@
 #ifndef GAMES_H
 #define GAMES_H
 
-class Quiz : public cfc_core::CoreComponents {
+class Quiz : public cfc::CoreComponents {
 private:
     int iteration;
 
@@ -26,7 +26,7 @@ private:
 // ready for start screen with menu options
 // options: set rng range; set number of guess; have default avalible - thats 3 options
 
-class NumberGuessingGame : public cfc_core::NumberGenerator, public cfc_core::CoreComponents {
+class NumberGuessingGame : public cfc::NumberGenerator, public cfc::CoreComponents {
 private:
     struct NumberRangeLimit {
         int min;
@@ -51,7 +51,7 @@ private:
 };
 
 
-class CannaCalculator : public cfc_core::CoreComponents {
+class CannaCalculator : public cfc::CoreComponents {
 private:
     enum MyEnum
     {
@@ -73,7 +73,7 @@ private:
     
 };
 
-class CalculatePowerLoss_Watts_x_Meters : public cfc_core::CoreComponents {
+class CalculatePowerLoss_Watts_x_Meters : public cfc::CoreComponents {
 private:
    struct Properties_m {
         long double resistivity = 1.68e-8L; // resistivity of copper in ohm*meter

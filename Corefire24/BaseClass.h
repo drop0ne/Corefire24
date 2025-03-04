@@ -6,9 +6,8 @@
 #include "My Standard Includes.h"
 
 
-namespace cfc_core {
+namespace cfc {
 #undef max
-
     // NumberGenerator
     class NumberGenerator {
     private:
@@ -27,24 +26,24 @@ namespace cfc_core {
         COORD topLeft;
     public:
         CoreComponents();
-        virtual void clearScreen();
-        virtual void pause();
-        virtual void pause(std::string pauseMessage);
-        virtual void print(const std::string& data);
-        virtual void print(const std::string& data, const int set_text_color);
-        virtual void print(const double& data, int numberColor);
-        virtual void print(const std::string& string1, const double& data1,
+        inline virtual void clearScreen();
+        inline virtual void pause();
+        inline virtual void pause(std::string pauseMessage);
+        inline virtual void print(const std::string& data);
+        inline virtual void print(const std::string& data, const int set_text_color);
+        inline virtual void print(const double& data, int numberColor);
+        inline virtual void print(const std::string& string1, const double& data1,
             const std::string& string2, int& textColor, int& numberColor);
-        virtual void print(const std::string& string1, const int& textColor1,
+        inline virtual void print(const std::string& string1, const int& textColor1,
             const std::string& string2, const int& textColor2,
             const std::string& string3, const int& textColor3,
             const std::string& string4, const int& textColor4);
-        virtual void setScreenColors(const char* screenTextColor);
-        virtual void setMyTextColor(const int intConsolColorDOS);
-        virtual void overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background);
-        virtual void clearInputStream();
-        virtual void extractInputStream();
-        virtual void sleepTimer(int time);
+        inline virtual void setScreenColor(const char* screenTextColor);
+        inline virtual void setTextColor(const int intConsolColorDOS);
+        inline virtual void overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background);
+        inline virtual void clearInputStream();
+        inline virtual void extractInputStream();
+        inline virtual void sleepTimer(int time);
     private:
         bool check_IF_validCommand(const char* command);
     };

@@ -4,7 +4,7 @@
 // MyConsoleAPI Class
 // Constructor
 /*************************************************************************************************************************************************************/
-cfc_core::CoreComponents::CoreComponents() : console_HWND(), topLeft({ 0, 0 }) {
+cfc::CoreComponents::CoreComponents() : console_HWND(), topLeft({ 0, 0 }) {
 	console_HWND = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (console_HWND == INVALID_HANDLE_VALUE) {
 		throw std::runtime_error("Failed to get standard output handle");
@@ -12,7 +12,7 @@ cfc_core::CoreComponents::CoreComponents() : console_HWND(), topLeft({ 0, 0 }) {
 }
 
 // Clear the console screen using Windows API for better performance and security
-void cfc_core::CoreComponents::clearScreen() {
+void cfc::CoreComponents::clearScreen() {
 	COORD topLeft = { 0, 0 };
 	CONSOLE_SCREEN_BUFFER_INFO screen;
 	DWORD written;
@@ -29,62 +29,62 @@ void cfc_core::CoreComponents::clearScreen() {
 	SetConsoleCursorPosition(console_HWND, topLeft);
 }
 
-void cfc_core::CoreComponents::pause() {
-	setMyTextColor(Gray);
+void cfc::CoreComponents::pause() {
+	setTextColor(Gray);
 	std::cout << "Press enter to continue..." << std::endl;
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
 }
 
-void cfc_core::CoreComponents::pause(std::string pauseMessage) {
-	setMyTextColor(Gray);
+void cfc::CoreComponents::pause(std::string pauseMessage) {
+	setTextColor(Gray);
 	std::cout << pauseMessage << std::endl;
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
 }
 
-void cfc_core::CoreComponents::print(const std::string& data) {
+void cfc::CoreComponents::print(const std::string& data) {
 	std::cout << data;
 	// Base
 }
-void cfc_core::CoreComponents::print(const std::string& data, const int textColor) {
-	setMyTextColor(textColor);
+void cfc::CoreComponents::print(const std::string& data, const int textColor) {
+	setTextColor(textColor);
 	std::cout << data;
 	// Set text color and print data
 }
 
-void cfc_core::CoreComponents::print(const double& data, int numberColor) {
-	setMyTextColor(numberColor);
+void cfc::CoreComponents::print(const double& data, int numberColor) {
+	setTextColor(numberColor);
 	std::cout << data;
 }
 
-void cfc_core::CoreComponents::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
-	setMyTextColor(textColor);
+void cfc::CoreComponents::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
+	setTextColor(textColor);
 	std::cout << string1;
-	setMyTextColor(numberColor);
+	setTextColor(numberColor);
 	std::cout << data1;
-	setMyTextColor(textColor);
+	setTextColor(textColor);
 	std::cout << string2;
 	// Used by CalculatePowerLoss_Watts_x_Meters
 }
 
 
-void cfc_core::CoreComponents::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
+void cfc::CoreComponents::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
 	const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
-	setMyTextColor(textColor1);
+	setTextColor(textColor1);
 	std::cout << string1;
-	setMyTextColor(textColor2);
+	setTextColor(textColor2);
 	std::cout << string2;
-	setMyTextColor(textColor3);
+	setTextColor(textColor3);
 	std::cout << string3;
-	setMyTextColor(textColor4);
+	setTextColor(textColor4);
 	std::cout << string4;
 	// Used to generate Main Menu
 }
 
-void cfc_core::CoreComponents::setScreenColors(const char* data) {
+void cfc::CoreComponents::setScreenColor(const char* data) {
 	try {
 		// Validate the input before executing
 		if (!check_IF_validCommand(data)) {
@@ -101,20 +101,20 @@ void cfc_core::CoreComponents::setScreenColors(const char* data) {
 	}
 }
 
-void cfc_core::CoreComponents::setMyTextColor(int data) {
+void cfc::CoreComponents::setTextColor(int data) {
 	if (!SetConsoleTextAttribute(console_HWND, data)) {
 		throw std::runtime_error("Failed to set text attributes");
 	}
 }
 
-void cfc_core::CoreComponents::overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background) {
+void cfc::CoreComponents::overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background) {
 	WORD color = (static_cast<WORD>(background) << 4) | static_cast<WORD>(foreground);
 	if (!SetConsoleTextAttribute(console_HWND, color)) {
 		throw std::runtime_error("Failed to set text attributes");
 	}
 }
 
-void cfc_core::CoreComponents::clearInputStream() {
+void cfc::CoreComponents::clearInputStream() {
 	std::cin.clear();
 	if (std::cin.rdbuf()->in_avail() > 0) {
 		// If there are characters in the input buffer, discard them up to the next newline
@@ -122,7 +122,7 @@ void cfc_core::CoreComponents::clearInputStream() {
 	}
 }
 
-void cfc_core::CoreComponents::extractInputStream() {
+void cfc::CoreComponents::extractInputStream() {
 	std::cout << "Contents of input stream: ";
 	char c;
 	while (std::cin.peek() != EOF) {
@@ -131,11 +131,11 @@ void cfc_core::CoreComponents::extractInputStream() {
 	}
 }
 
-void cfc_core::CoreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std::chrono::milliseconds(time)); }
+void cfc::CoreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std::chrono::milliseconds(time)); }
 
 // ********** Start Private Functions **********
 
-bool cfc_core::CoreComponents::check_IF_validCommand(const char* command) {
+bool cfc::CoreComponents::check_IF_validCommand(const char* command) {
 	// List of allowed commands for setting screen colors, now including gray, these strings are known to be safe to pass to system()
 	const std::vector<std::string> allowedCommands = {
 		"pause",     // Pause the console
@@ -165,7 +165,7 @@ bool cfc_core::CoreComponents::check_IF_validCommand(const char* command) {
 /*                     < Main Menu API >                     */
 /*************************************************************/
 
-cfc_core::Startscreen::Startscreen() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
+cfc::Startscreen::Startscreen() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
 mainMenu_totalParameters(8), mainMenuParameterCurentState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
 	/*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/DefaultWhite, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue })
 {
@@ -178,12 +178,12 @@ mainMenu_totalParameters(8), mainMenuParameterCurentState({/*options(0)*/Green, 
 /*************************************************************/
 
 
-void cfc_core::Startscreen::errorMessage() {
+void cfc::Startscreen::errorMessage() {
 	clearInputStream();
 	print("\nERROR: INVALID INPUT\n", getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
 }
 
-void cfc_core::Startscreen::setMainMenuState(const std::vector<int> newState) {
+void cfc::Startscreen::setMainMenuState(const std::vector<int> newState) {
 	print("Setting new state\n");
 	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
 	{
@@ -192,7 +192,7 @@ void cfc_core::Startscreen::setMainMenuState(const std::vector<int> newState) {
 	system("pause");
 }
 
-void cfc_core::Startscreen::generateMainMenu(const std::vector<int>& stateData) {
+void cfc::Startscreen::generateMainMenu(const std::vector<int>& stateData) {
 	/* StateDate.at( recieves and int ) to identify group to apply color state change to */
 	/* Using enum eMainMenu_State_ID Options(0), ProgramID1), Program(2), ExitProgramID(3), ExitProgram(4), Symbols(5), ErrorMessage(6) */
 
@@ -212,10 +212,10 @@ void cfc_core::Startscreen::generateMainMenu(const std::vector<int>& stateData) 
 	print("Option", stateData.at(Option), " 7 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Random Menu Theme\n", stateData.at(Program));
 	print("Option", stateData.at(Option), " 8 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Rainbow Effect\n", stateData.at(Program));
 	print("Option", stateData.at(Option), " 9 ", stateData.at(ProgramID), "-", stateData.at(Symbols), " Solitaire\n", stateData.at(Program));
-	print("\nPress ", Gray, "esc", LightRed, " to exit\n\n", Gray, "", Black);
+	print("\nHold ", Gray, "esc", LightRed, " to exit\n\n", Gray, "", Black);
 }
 
-void cfc_core::Startscreen::setThemeFlag(const int themeFlag_ID) {
+void cfc::Startscreen::setThemeFlag(const int themeFlag_ID) {
 	if (!FLAGS_theme.empty())
 	{
 		for (size_t i = 0; i < FLAGS_theme.size(); i++)
@@ -237,7 +237,7 @@ void cfc_core::Startscreen::setThemeFlag(const int themeFlag_ID) {
 
 }
 
-void cfc_core::Startscreen::callTheme_by_Flag_ID(const int& themeFlag_ID) {
+void cfc::Startscreen::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 	switch (themeFlag_ID)
 	{
 	case 0:  setThemeFlag(defaultTheme); menuTheme_Default(); break;
@@ -253,7 +253,7 @@ void cfc_core::Startscreen::callTheme_by_Flag_ID(const int& themeFlag_ID) {
 /*     START OF PRIVATE METHODS FOR ToolSet_MainMenu         */
 /*************************************************************/
 
-void cfc_core::Startscreen::menuTheme_Default() {
+void cfc::Startscreen::menuTheme_Default() {
 	setThemeFlag(defaultTheme);
 
 	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
@@ -262,7 +262,7 @@ void cfc_core::Startscreen::menuTheme_Default() {
 	}
 }
 
-void cfc_core::Startscreen::menuTheme_Random() {
+void cfc::Startscreen::menuTheme_Random() {
 	/*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
 
 	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
@@ -273,7 +273,7 @@ void cfc_core::Startscreen::menuTheme_Random() {
 
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
 
-void cfc_core::Startscreen::menuTheme_betterRandom() {
+void cfc::Startscreen::menuTheme_betterRandom() {
 	using namespace std::chrono_literals;
 
 	for (size_t i = 0; i < 60; i++)
@@ -289,19 +289,19 @@ void cfc_core::Startscreen::menuTheme_betterRandom() {
 	}
 }
 
-const std::vector<int>& cfc_core::Startscreen::getMainMenuState() const {
+const std::vector<int>& cfc::Startscreen::getMainMenuState() const {
 	return mainMenuParameterCurentState;
 }
 
-const std::vector<int>& cfc_core::Startscreen::getMainMenuDefaultState() const {
+const std::vector<int>& cfc::Startscreen::getMainMenuDefaultState() const {
 	return mainMenu_defaultParameterState;
 }
 
-int cfc_core::Startscreen::mainMenuLogic() {
+int cfc::Startscreen::mainMenuLogic() {
 	int returnValue{ 0 };
 
 	do {
-		clearScreen(); generateMainMenu(mainMenuParameterCurentState); print("\nSelect option: ", LightGreen); setMyTextColor(DefaultWhite);
+		clearScreen(); generateMainMenu(mainMenuParameterCurentState); print("\nSelect option: ", LightGreen); setTextColor(DefaultWhite);
 		
 		std::cin >> returnValue;
 		if (std::cin.fail())
@@ -319,17 +319,17 @@ int cfc_core::Startscreen::mainMenuLogic() {
 
 
 // ESCkeyButton implementation using the Windows API
-cfc_core::ESCkey_ProgramExit::ESCkey_ProgramExit() : exitRequested({ false })
+cfc::ESCkey_ProgramExit::ESCkey_ProgramExit() : exitRequested({ false })
 {
 	// Use a lambda wrapper to pass the stop token correctly
 	escThread = std::jthread([this](std::stop_token st) { this->isESCkeyPressed(st); });
 }
 
-cfc_core::ESCkey_ProgramExit::~ESCkey_ProgramExit() {
+cfc::ESCkey_ProgramExit::~ESCkey_ProgramExit() {
 	// std::jthread automatically requests stop and joins on destruction.
 }
 
-void cfc_core::ESCkey_ProgramExit::isESCkeyPressed(std::stop_token stopToken) {
+void cfc::ESCkey_ProgramExit::isESCkeyPressed(std::stop_token stopToken) {
 	// Poll for the ESC key using GetAsyncKeyState from the Windows API
 	while (!stopToken.stop_requested() && !exitRequested.load()) {
 		// GetAsyncKeyState returns a SHORT; the high-order bit is set if the key is down.
@@ -337,6 +337,6 @@ void cfc_core::ESCkey_ProgramExit::isESCkeyPressed(std::stop_token stopToken) {
 			// Immediately exit the program when ESC is pressed.
 			std::exit(0);
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
 }

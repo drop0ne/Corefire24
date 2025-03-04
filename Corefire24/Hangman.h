@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseClass.h"
-class Hangman : public cfc_core::CoreComponents
+class Hangman : public cfc::CoreComponents
 {
 public:
 	Hangman(); // Constructor

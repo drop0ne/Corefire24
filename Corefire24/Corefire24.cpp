@@ -7,7 +7,7 @@
 
 int main() {
 	/* Main Menu & Program Start*/
-	cfc_core::Startscreen function;
+	cfc::Startscreen function;
 
 	
 
