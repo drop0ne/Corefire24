@@ -7,7 +7,7 @@
 
 int main() {
 	/* Main Menu & Program Start*/
-	CoreFireCode_MainFunction cf;
+	cfc_core::CoreFireCode_MainFunction cf;
 
 	
 

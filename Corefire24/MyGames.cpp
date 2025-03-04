@@ -106,11 +106,11 @@ void Quiz::askThirdQuestion() {
 
 // Random Number Generator  //////////   
 //  
-NumberGenerator::NumberGenerator() : generator(rd()) {}
+cfc_core::NumberGenerator::NumberGenerator() : generator(rd()) {}
 
-NumberGenerator::~NumberGenerator() {}
+cfc_core::NumberGenerator::~NumberGenerator() {}
 
-int NumberGenerator::getRandomNumber(const int min, const int max) {
+int cfc_core::NumberGenerator::getRandomNumber(const int min, const int max) {
 	std::uniform_int_distribution<int> distribution(min, max);
 	return distribution(generator);
 }
