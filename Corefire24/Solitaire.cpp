@@ -45,7 +45,7 @@ void Solitaire::printLOGO(const std::string& title) {
     // Loop through storedRandomNumber to display characters
     for (auto l : this->storedRandomNumber) {
         // Set text color using the random value
-        setMyTextColor(this->storedRandomNumber.at(l));
+        setTextColor(this->storedRandomNumber.at(l));
 
         // Display characters from gameTitleVector
         if (j < this->gameTitleVector.size()) {

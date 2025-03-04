@@ -17,14 +17,14 @@ void Quiz::gameLoop() {
 		question(iteration);
 	} while (iteration < 3);
 
-	CFC_coreComponents::print("\nGAME OVER\n\n", Red);
-	CFC_coreComponents::setMyTextColor(DefaultWhite);
+	CoreComponents::print("\nGAME OVER\n\n", Red);
+	CoreComponents::setTextColor(DefaultWhite);
 	system("pause"); // Last Instruction before returning to main menu
 }
 
 void Quiz::setupEnviorment() {
-	CFC_coreComponents::clearScreen();
-	CFC_coreComponents::clearInputStream();
+	CoreComponents::clearScreen();
+	CoreComponents::clearInputStream();
 	if (iteration != 0) { iteration = 0; }
 }
 
@@ -33,27 +33,27 @@ int Quiz::requestInput() {
 	int convertedGuess{};
 	size_t pos{};
 	do {
-		CFC_coreComponents::setMyTextColor(Green);
+		CoreComponents::setTextColor(Green);
 		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { CFC_coreComponents::print("Invalid Number::Out of Range\nTry Again: ", Red); CFC_coreComponents::clearInputStream(); continue; }
+				if (convertedGuess > 3) { CoreComponents::print("Invalid Number::Out of Range\nTry Again: ", Red); CoreComponents::clearInputStream(); continue; }
 				break;
 			}
-			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); CFC_coreComponents::clearInputStream(); }
+			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); CoreComponents::clearInputStream(); }
 			break;
 		}
 		catch (const std::invalid_argument& e)
 		{
 			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ", e;
-			CFC_coreComponents::clearInputStream();
+			CoreComponents::clearInputStream();
 		}
 		catch (const std::out_of_range& e)
 		{
 			std::cerr << "Out of range\nTry Again: ", e;
-			CFC_coreComponents::clearInputStream();
+			CoreComponents::clearInputStream();
 		}
 	} while (true);
 	return convertedGuess;
@@ -69,48 +69,48 @@ inline void Quiz::question(int questionNumber) {
 }
 
 void Quiz::askFirstQuestion() {
-	CFC_coreComponents::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
+	CoreComponents::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
 	if (requestInput() == 3) {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
+		CoreComponents::setScreenColor("color 08"); // Gray on black
+		CoreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nIncorrect\n\n", Red);
+		CoreComponents::setScreenColor("color 08"); // Gray on black
+		CoreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 void Quiz::askSecondQuestion() {
-	CFC_coreComponents::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
+	CoreComponents::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
 	if (requestInput() == 2) {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
+		CoreComponents::setScreenColor("color 08"); // Gray on black
+		CoreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nIncorrect\n\n", Red);
+		CoreComponents::setScreenColor("color 08"); // Gray on black
+		CoreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 void Quiz::askThirdQuestion() {
-	CFC_coreComponents::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
+	CoreComponents::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
 	if (requestInput() == 1) {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
+		CoreComponents::setScreenColor("color 08"); // Gray on black
+		CoreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nIncorrect\n\n", Red);
+		CoreComponents::setScreenColor("color 08"); // Gray on black
+		CoreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 // Random Number Generator  //////////   
 //  
-NumberGenerator::NumberGenerator() : generator(rd()) {}
+cfc::NumberGenerator::NumberGenerator() : generator(rd()) {}
 
-NumberGenerator::~NumberGenerator() {}
+cfc::NumberGenerator::~NumberGenerator() {}
 
-int NumberGenerator::getRandomNumber(const int min, const int max) {
+int cfc::NumberGenerator::getRandomNumber(const int min, const int max) {
 	std::uniform_int_distribution<int> distribution(min, max);
 	return distribution(generator);
 }
@@ -125,8 +125,8 @@ NumberGuessingGame::NumberGuessingGame() : randomNumber(0), MAX_GUESSES(5), atte
 NumberGuessingGame::~NumberGuessingGame() {}
 
 void NumberGuessingGame::run() {
-	CFC_coreComponents::clearScreen();
-	CFC_coreComponents::clearInputStream();
+	CoreComponents::clearScreen();
+	CoreComponents::clearInputStream();
 	setGameState();
 	gameLoop();
 }
@@ -147,7 +147,7 @@ void NumberGuessingGame::gameLoop() {
 		if (!(std::cin >> attempt)) {
 			std::cout << "Invalid input. Please enter a valid number.\n";
 			// Clear the input stream and reset error flags
-			CFC_coreComponents::clearInputStream();
+			CoreComponents::clearInputStream();
 			continue;
 		}
 		if (attempt < rangeLimit.min || attempt > rangeLimit.max) {
@@ -198,7 +198,7 @@ void CannaCalculator::entrypoint() {
 
 	if (yesNOquestion("The default loss is 20%\nWould you like enter a custom loss percentage? (y/n): ", LightCyan) == 'y')
 	{
-		setScreenColors("color 08");
+		setScreenColor("color 08");
 		print("\n\nYour custom decimal numbr must be between 0 & 1: ", LightCyan);
 		print("\nThe default is 0.20");
 		if (userDATA.at(THCl) = getDoubleFromUser("\nEnter Number: ", DefaultWhite)) {
@@ -207,11 +207,11 @@ void CannaCalculator::entrypoint() {
 	}
 	else { userDATA.at(THCl) = 0.20; } //default
 
-	setScreenColors("color 08");
+	setScreenColor("color 08");
 	userDATA.at(THCp) = getDoubleFromUser("\n\nHow strong is your flower?  What is the percent THC listed?\nEnter the percent here: ", LightCyan);
-	setScreenColors("color 08");
+	setScreenColor("color 08");
 	userDATA.at(flowerG) = getDoubleFromUser("\n\nHow many grams of flower will you be using?: ", LightCyan);
-	setScreenColors("color 08");
+	setScreenColor("color 08");
 	printResults(mathProccessor(userDATA));
 }
 
@@ -221,7 +221,7 @@ char CannaCalculator::yesNOquestion(std::string promptMessage, int messageColor)
 	{
 		clearInputStream();
 		print(promptMessage, messageColor);
-		setMyTextColor(DefaultWhite);
+		setTextColor(DefaultWhite);
 
 		if (std::getline(std::cin, responce))
 		{
@@ -240,7 +240,7 @@ double CannaCalculator::getDoubleFromUser(std::string promptMessage, int message
 	{
 		clearInputStream();
 		print(promptMessage, messageColor);
-		setMyTextColor(DefaultWhite);
+		setTextColor(DefaultWhite);
 
 		if (std::cin >> responce)
 		{
@@ -261,19 +261,19 @@ const std::vector<double> CannaCalculator::mathProccessor(std::vector<double> us
 
 void CannaCalculator::printResults(std::vector<double> results) {
 	clearScreen();
-	setMyTextColor(LightGreen);
+	setTextColor(LightGreen);
 
 	std::cout << "\n" << results.at(THCp) << "% THCa converts to "
 		<< static_cast<int>(results.at(grossMG)) << "mg THC per " << static_cast<int>(results.at(flowerG)) << "g of flower before decarboxylation.\n"
 		<< "and " << static_cast<float>(results.at(netMG)) << "mg THC after decarboxylation\n\n";
 
-	setMyTextColor(LightBlue);
+	setTextColor(LightBlue);
 	std::cout << "Gross THC\n";
 	for (int i = 2; i <= 13; i += 2) {
 		std::cout << static_cast<int>(results.at(grossMG)) / i << "mg per " << i << " servings\n";
 	}
 
-	setMyTextColor(Blue);
+	setTextColor(Blue);
 	std::cout << "\n\nNET THC\n";
 	for (int i = 2; i <= 13; i += 2) {
 		std::cout << static_cast<int>(results.at(netMG)) / i << "mg per " << i << " servings\n";
@@ -281,7 +281,7 @@ void CannaCalculator::printResults(std::vector<double> results) {
 
 	std::cout << std::endl;
 	clearInputStream();
-	setMyTextColor(Gray);
+	setTextColor(Gray);
 	system("pause");
 
 }
@@ -392,7 +392,7 @@ void CalculatePowerLoss_Watts_x_Meters::information() {
 	print("The resistance is calculated using the formula:\n", LightBlue);
 	print("R = resistivity * length / cross-sectional area\n\n", Brown);
 	print("The resistivity of copper is 1.68e-8 ohm*meter.\n\n", Brown);
-	setMyTextColor(DefaultWhite); system("pause");
+	setTextColor(DefaultWhite); system("pause");
 }
 
 int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
@@ -402,7 +402,7 @@ int CalculatePowerLoss_Watts_x_Meters::returnMenuOption() {
 
 	do {
 		print("Enter a number: ", DefaultWhite);
-		setMyTextColor(LightBlue);
+		setTextColor(LightBlue);
 		if (std::getline(std::cin, input)) {
 			if (input.length() > inputLenghtLimit) {
 				print("Invalid input. Please enter a number from 1 to 4.\n", LightGreen);

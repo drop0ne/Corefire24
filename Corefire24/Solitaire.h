@@ -3,7 +3,7 @@
 #include "MyEnum.h"
 #include "BaseClass.h"
 
-class Solitaire : public CFC_coreComponents, NumberGenerator {
+class Solitaire : public cfc::CoreComponents, cfc::NumberGenerator {
 private:
 	std::vector<std::string> gameTitleVector;
 	std::vector<int> storedRandomNumber;
