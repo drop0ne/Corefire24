@@ -47,7 +47,7 @@ int main() {
 			solitaire_OBJ->run();
 			break;
 		}
-		default: function.print("\nCommand must be intager from 1 - 9\n", function.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
+		default: function.print("\nCommand must be intager from 1 - 9\n", function.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); function.pause(); break;
 		}
 	}
 	return 0;

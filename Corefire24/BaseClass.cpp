@@ -29,6 +29,22 @@ void cfc_core::CoreComponents::clearScreen() {
 	SetConsoleCursorPosition(console_HWND, topLeft);
 }
 
+void cfc_core::CoreComponents::pause() {
+	setMyTextColor(Gray);
+	std::cout << "Press enter to continue..." << std::endl;
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.get();
+}
+
+void cfc_core::CoreComponents::pause(std::string pauseMessage) {
+	setMyTextColor(Gray);
+	std::cout << pauseMessage << std::endl;
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.get();
+}
+
 void cfc_core::CoreComponents::print(const std::string& data) {
 	std::cout << data;
 	// Base

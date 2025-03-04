@@ -28,6 +28,8 @@ namespace cfc_core {
     public:
         CoreComponents();
         virtual void clearScreen();
+        virtual void pause();
+        virtual void pause(std::string pauseMessage);
         virtual void print(const std::string& data);
         virtual void print(const std::string& data, const int set_text_color);
         virtual void print(const double& data, int numberColor);
