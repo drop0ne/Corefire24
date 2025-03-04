@@ -17,14 +17,14 @@ void Quiz::gameLoop() {
 		question(iteration);
 	} while (iteration < 3);
 
-	CFC_coreComponents::print("\nGAME OVER\n\n", Red);
-	CFC_coreComponents::setMyTextColor(DefaultWhite);
+	CoreComponents::print("\nGAME OVER\n\n", Red);
+	CoreComponents::setMyTextColor(DefaultWhite);
 	system("pause"); // Last Instruction before returning to main menu
 }
 
 void Quiz::setupEnviorment() {
-	CFC_coreComponents::clearScreen();
-	CFC_coreComponents::clearInputStream();
+	CoreComponents::clearScreen();
+	CoreComponents::clearInputStream();
 	if (iteration != 0) { iteration = 0; }
 }
 
@@ -33,27 +33,27 @@ int Quiz::requestInput() {
 	int convertedGuess{};
 	size_t pos{};
 	do {
-		CFC_coreComponents::setMyTextColor(Green);
+		CoreComponents::setMyTextColor(Green);
 		std::getline(std::cin, guess);
 		try
 		{
 			convertedGuess = std::stoi(guess, &pos);
 			if (pos == guess.length()) {
-				if (convertedGuess > 3) { CFC_coreComponents::print("Invalid Number::Out of Range\nTry Again: ", Red); CFC_coreComponents::clearInputStream(); continue; }
+				if (convertedGuess > 3) { CoreComponents::print("Invalid Number::Out of Range\nTry Again: ", Red); CoreComponents::clearInputStream(); continue; }
 				break;
 			}
-			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); CFC_coreComponents::clearInputStream(); }
+			else { throw std::invalid_argument("Invalid Characters after number\nTry Again: "); CoreComponents::clearInputStream(); }
 			break;
 		}
 		catch (const std::invalid_argument& e)
 		{
 			std::cerr << "Invalid Data::Must Enter an integer\nTry Again: ", e;
-			CFC_coreComponents::clearInputStream();
+			CoreComponents::clearInputStream();
 		}
 		catch (const std::out_of_range& e)
 		{
 			std::cerr << "Out of range\nTry Again: ", e;
-			CFC_coreComponents::clearInputStream();
+			CoreComponents::clearInputStream();
 		}
 	} while (true);
 	return convertedGuess;
@@ -69,38 +69,38 @@ inline void Quiz::question(int questionNumber) {
 }
 
 void Quiz::askFirstQuestion() {
-	CFC_coreComponents::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
+	CoreComponents::print("What is the smallest county?\n1. USA\n2. India\n3.Vatican City\nchoose 1-3: ", Cyan);
 	if (requestInput() == 3) {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
+		CoreComponents::setScreenColors("color 08"); // Gray on black
+		CoreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nIncorrect\n\n", Red);
+		CoreComponents::setScreenColors("color 08"); // Gray on black
+		CoreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 void Quiz::askSecondQuestion() {
-	CFC_coreComponents::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
+	CoreComponents::print("What's the biggest animal in the worl?\n1. Elephant\n2. Bue whale\n3.Great white shark\nchoose 1-3: ", Cyan);
 	if (requestInput() == 2) {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
+		CoreComponents::setScreenColors("color 08"); // Gray on black
+		CoreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nIncorrect\n\n", Red);
+		CoreComponents::setScreenColors("color 08"); // Gray on black
+		CoreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
 void Quiz::askThirdQuestion() {
-	CFC_coreComponents::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
+	CoreComponents::print("How many elements are there in the periodic table?\n1. 118\n2. 115\n3. 120\nchoose 1-3: ", Cyan);
 	if (requestInput() == 1) {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nCorrect!\n\n", Magenta);
+		CoreComponents::setScreenColors("color 08"); // Gray on black
+		CoreComponents::print("\nCorrect!\n\n", Magenta);
 	}
 	else {
-		CFC_coreComponents::setScreenColors("color 08"); // Gray on black
-		CFC_coreComponents::print("\nIncorrect\n\n", Red);
+		CoreComponents::setScreenColors("color 08"); // Gray on black
+		CoreComponents::print("\nIncorrect\n\n", Red);
 	}
 }
 
@@ -125,8 +125,8 @@ NumberGuessingGame::NumberGuessingGame() : randomNumber(0), MAX_GUESSES(5), atte
 NumberGuessingGame::~NumberGuessingGame() {}
 
 void NumberGuessingGame::run() {
-	CFC_coreComponents::clearScreen();
-	CFC_coreComponents::clearInputStream();
+	CoreComponents::clearScreen();
+	CoreComponents::clearInputStream();
 	setGameState();
 	gameLoop();
 }
@@ -147,7 +147,7 @@ void NumberGuessingGame::gameLoop() {
 		if (!(std::cin >> attempt)) {
 			std::cout << "Invalid input. Please enter a valid number.\n";
 			// Clear the input stream and reset error flags
-			CFC_coreComponents::clearInputStream();
+			CoreComponents::clearInputStream();
 			continue;
 		}
 		if (attempt < rangeLimit.min || attempt > rangeLimit.max) {

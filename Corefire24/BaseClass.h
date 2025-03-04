@@ -21,12 +21,12 @@ namespace cfc_core {
     };
 
     // CFC_coreComponents
-    class CFC_coreComponents {
+    class CoreComponents {
     protected:
         HANDLE console_HWND;
         COORD topLeft;
     public:
-        CFC_coreComponents();
+        CoreComponents();
         virtual void clearScreen();
         virtual void print(const std::string& data);
         virtual void print(const std::string& data, const int set_text_color);
@@ -48,10 +48,10 @@ namespace cfc_core {
     };
 
     // ESCkeyButton
-    class ESCkeyButton {
+    class ESCkey_ProgramExit {
     public:
-        ESCkeyButton();
-        ~ESCkeyButton();
+        ESCkey_ProgramExit();
+        ~ESCkey_ProgramExit();
 
         std::atomic<bool> exitRequested;
         std::jthread escThread;
@@ -60,10 +60,7 @@ namespace cfc_core {
     };
 
     // CoreFireCode_MainFunction
-    class CoreFireCode_MainFunction
-        : public CFC_coreComponents
-        , public NumberGenerator
-        , public ESCkeyButton
+    class Startscreen : public CoreComponents, public NumberGenerator, public ESCkey_ProgramExit
     {
     private:
         int mainMenu_totalParameters;
@@ -72,7 +69,7 @@ namespace cfc_core {
         std::vector<bool> FLAGS_theme;
 
     public:
-        CoreFireCode_MainFunction();
+        Startscreen();
         void errorMessage();
         int mainMenuLogic();
         void setMainMenuState(const std::vector<int> newState);
@@ -89,6 +86,4 @@ namespace cfc_core {
     };
 
 } // namespace MyNamespace
-
-
 #endif // BASECLASS_H
