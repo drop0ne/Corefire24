@@ -5,7 +5,6 @@
 #include "MyEnum.h"
 #include "My Standard Includes.h"
 
-
 namespace cfc {
 #undef max
     // NumberGenerator

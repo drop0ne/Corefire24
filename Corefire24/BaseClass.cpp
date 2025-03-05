@@ -166,11 +166,11 @@ bool cfc::CoreComponents::check_IF_validCommand(const char* command) {
 /*************************************************************/
 
 cfc::Startscreen::Startscreen() : FLAGS_theme({/*them_default(0)*/true, /*themeRandom(1)*/false, /*themeRainbow(2)*/false }),
-mainMenu_totalParameters(8), mainMenuParameterCurentState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
-	/*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/DefaultWhite, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue })
+mainMenu_totalParameters(8), mainMenu_defaultParameterState({/*options(0)*/Green, /*programID(1)*/Magenta, /*program(2)*/Cyan,
+/*exitID(3)*/Red, /*exit(4)*/Gray, /*objects(5)*/DefaultWhite, /*errorMessages(6)*/Green, /*WAIT(7)*/LightBlue })
 {
 	/* Initializing the main menu's theme state into a vector, set number_of_state_parameters equal to total number of default elements */
-	mainMenu_defaultParameterState = mainMenuParameterCurentState;
+	mainMenuParameterCurentState = mainMenu_defaultParameterState;
 }
 /*************************************************************/
 /*      END OF CONSTRUCTOR FOR MyConsolAPI_Enstension        */
@@ -189,7 +189,7 @@ void cfc::Startscreen::setMainMenuState(const std::vector<int> newState) {
 	{
 		mainMenuParameterCurentState[i] = newState[i];
 	}
-	system("pause");
+	pause();
 }
 
 void cfc::Startscreen::generateMainMenu(const std::vector<int>& stateData) {
@@ -272,7 +272,6 @@ void cfc::Startscreen::menuTheme_Random() {
 }
 
 /* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
-
 void cfc::Startscreen::menuTheme_betterRandom() {
 	using namespace std::chrono_literals;
 
@@ -316,7 +315,6 @@ int cfc::Startscreen::mainMenuLogic() {
 		}
 	} while (true);
 }
-
 
 // ESCkeyButton implementation using the Windows API
 cfc::ESCkey_ProgramExit::ESCkey_ProgramExit() : exitRequested({ false })
