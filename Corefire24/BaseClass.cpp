@@ -327,7 +327,7 @@ cfc::ESCkey_ProgramExit::~ESCkey_ProgramExit() {
 	// std::jthread automatically requests stop and joins on destruction.
 }
 
-void cfc::ESCkey_ProgramExit::isESCkeyPressed(std::stop_token stopToken) {
+void cfc::ESCkey_ProgramExit::isESCkeyPressed( std::stop_token stopToken) const {
 	// Poll for the ESC key using GetAsyncKeyState from the Windows API
 	while (!stopToken.stop_requested() && !exitRequested.load()) {
 		// GetAsyncKeyState returns a SHORT; the high-order bit is set if the key is down.

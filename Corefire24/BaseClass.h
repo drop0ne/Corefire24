@@ -56,7 +56,7 @@ namespace cfc {
         std::atomic<bool> exitRequested;
         std::jthread escThread;
 
-        void isESCkeyPressed(std::stop_token stopToken);
+        void isESCkeyPressed(std::stop_token stopToken) const;
     };
 
     // CoreFireCode_MainFunction
