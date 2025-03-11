@@ -303,15 +303,15 @@ int cfc::Startscreen::mainMenuLogic() {
 		clearScreen(); generateMainMenu(mainMenuParameterCurentState); print("\nSelect option: ", LightGreen); setTextColor(DefaultWhite);
 		
 		std::cin >> returnValue;
-		if (std::cin.fail())
+		if (!std::cin.fail())
+		{
+			return returnValue;
+		}
+		else
 		{
 			errorMessage();
 			system("pause");
 			continue;
-		}
-		else
-		{
-			return returnValue;
 		}
 	} while (true);
 }

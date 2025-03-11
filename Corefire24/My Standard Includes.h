@@ -24,3 +24,4 @@
 #include <iomanip>
 #include <conio.h>
 #include <cstdlib>
+#include <ranges>

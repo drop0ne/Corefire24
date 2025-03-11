@@ -12,11 +12,9 @@ private:
 	std::string word;
 	std::string guessed;
 	int wrongGuesses;
-	const int maxWrongGuesses = 6;
+	const int maxWrongGuesses;
 	std::vector<char> guessedLetters;
 
 	void initializeGame();
 	void playGame();
-
 };
-
