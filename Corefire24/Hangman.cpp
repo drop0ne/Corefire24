@@ -1,6 +1,6 @@
 #include "Hangman.h"
 
-Hangman::Hangman() : word("hangman"), guessed("_______")
+Hangman::Hangman() : word("hangman"), guessed("_______"), wrongGuesses(0), maxWrongGuesses(6), guessedLetters(26, ' ')
 {
 }
 

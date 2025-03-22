@@ -7,10 +7,10 @@
 
 int main() {
 	/* Main Menu & Program Start*/
-	CoreFireCode_MainFunction cf;
+	cfc::Startscreen function;
 
-	while (!cf.exitRequested.load()) {
-		switch (cf.mainMenuLogic())
+	while (!function.exitRequested.load()) {
+		switch (function.mainMenuLogic())
 		{
 		case 1: {
 			auto CannaCalc_OBJ = std::make_unique<CannaCalculator>();
@@ -37,15 +37,17 @@ int main() {
 			hangman_OBJ->run();
 			break;
 		}
-		case 6: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
-		case 7: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
-		case 8: cf.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
+		case 6: function.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
+		case 7: function.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
+		case 8: function.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
 		case 9: {
 			auto solitaire_OBJ = std::make_unique<Solitaire>();
 			solitaire_OBJ->run();
 			break;
 		}
-		default: cf.print("\nCommand must be intager from 1 - 9\n", cf.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage)); system("pause"); break;
+		default: function.print("\nCommand must be intager from 1 - 9\n", function.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
+			function.pause();
+			break;
 		}
 	}
 	return 0;

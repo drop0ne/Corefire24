@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseClass.h"
-class Hangman : public CFC_coreComponents
+class Hangman : public cfc::CoreComponents
 {
 public:
 	Hangman(); // Constructor
@@ -12,11 +12,9 @@ private:
 	std::string word;
 	std::string guessed;
 	int wrongGuesses;
-	const int maxWrongGuesses = 6;
+	const int maxWrongGuesses;
 	std::vector<char> guessedLetters;
 
 	void initializeGame();
 	void playGame();
-
 };
-

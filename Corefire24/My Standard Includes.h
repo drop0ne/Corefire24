@@ -1,20 +1,21 @@
 #pragma once
 
 #include <iostream>
+#include <random>
+#include <windows.h>
+#include <thread>
+#include <stop_token>
+#include <atomic> 
+#include <mutex>
+#include <chrono>
+#include <stdexcept>
 #include <string>
 #include <cctype>
 #include <array>
 #include <vector>
 #include <algorithm>
 #include <limits>
-#include <random>
 #include <any>
-// #define NOMAXMIN // This is a macro that prevents the min and max macros from being defined
-#include <windows.h>
-#include <stdexcept>
-#include <thread>
-#include <mutex>
-#include <chrono>
 #include <memory>
 #include <cstdio>
 #include <functional>
@@ -22,5 +23,5 @@
 #include <cstdint>
 #include <iomanip>
 #include <conio.h>
-#include <atomic> 
 #include <cstdlib>
+#include <ranges>
