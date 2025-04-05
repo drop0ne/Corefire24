@@ -53,15 +53,17 @@ namespace cfc {
         ESCkey_ProgramExit();
         ~ESCkey_ProgramExit();
 
-        std::atomic<bool> exitRequested;
         std::jthread escThread;
 
         void isESCkeyPressed(std::stop_token stopToken) const;
+        protected:
+        std::atomic<bool> exitRequested_var;
     };
 
     // CoreFireCode_MainFunction
     class Startscreen : public CoreComponents, public NumberGenerator, public ESCkey_ProgramExit
     {
+    protected:
     private:
         int mainMenu_totalParameters;
         std::vector<int> mainMenuParameterCurentState;
@@ -78,6 +80,7 @@ namespace cfc {
         void generateMainMenu(const std::vector<int>& stateData);
         void setThemeFlag(const int themeFlag_ID);
         void callTheme_by_Flag_ID(const int& themeFlag_ID);
+        auto exitRequested() const -> bool;
 
     private:
         void menuTheme_Default();

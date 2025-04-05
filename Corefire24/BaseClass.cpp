@@ -288,6 +288,12 @@ void cfc::Startscreen::menuTheme_betterRandom() {
 	}
 }
 
+auto cfc::Startscreen::exitRequested() const -> bool
+{
+	// Check if the exitRequested flag is set
+	return exitRequested_var.load();
+}
+
 const std::vector<int>& cfc::Startscreen::getMainMenuState() const {
 	return mainMenuParameterCurentState;
 }
@@ -317,7 +323,7 @@ int cfc::Startscreen::mainMenuLogic() {
 }
 
 // ESCkeyButton implementation using the Windows API
-cfc::ESCkey_ProgramExit::ESCkey_ProgramExit() : exitRequested({ false })
+cfc::ESCkey_ProgramExit::ESCkey_ProgramExit() : exitRequested_var(false)
 {
 	// Use a lambda wrapper to pass the stop token correctly
 	escThread = std::jthread([this](std::stop_token st) { this->isESCkeyPressed(st); });
@@ -329,7 +335,7 @@ cfc::ESCkey_ProgramExit::~ESCkey_ProgramExit() {
 
 void cfc::ESCkey_ProgramExit::isESCkeyPressed( std::stop_token stopToken) const {
 	// Poll for the ESC key using GetAsyncKeyState from the Windows API
-	while (!stopToken.stop_requested() && !exitRequested.load()) {
+	while (!stopToken.stop_requested() && !exitRequested_var.load()) {
 		// GetAsyncKeyState returns a SHORT; the high-order bit is set if the key is down.
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
 			// Immediately exit the program when ESC is pressed.

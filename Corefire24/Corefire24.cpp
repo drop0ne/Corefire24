@@ -9,7 +9,7 @@ int main() {
 	/* Main Menu & Program Start*/
 	cfc::Startscreen function;
 
-	while (!function.exitRequested.load()) {
+	while (!function.exitRequested()) {
 		switch (function.mainMenuLogic())
 		{
 		case 1: {
