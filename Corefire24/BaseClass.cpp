@@ -45,6 +45,15 @@ void cfc::CoreComponents::pause(std::string pauseMessage) {
 	std::cin.get();
 }
 
+inline void cfc::CoreComponents::pause(const std::string& pauseMessage, const int textColor)
+{
+	setTextColor(textColor);
+	std::cout << pauseMessage << std::endl;
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.get();
+}
+
 void cfc::CoreComponents::print(const std::string& data) {
 	std::cout << data;
 	// Base
@@ -288,7 +297,7 @@ void cfc::Startscreen::menuTheme_betterRandom() {
 	}
 }
 
-auto cfc::Startscreen::exitRequested() const -> bool
+auto cfc::Startscreen::check_if_ExitRequested() const -> bool
 {
 	// Check if the exitRequested flag is set
 	return exitRequested_var.load();

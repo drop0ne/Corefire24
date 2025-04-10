@@ -28,6 +28,7 @@ namespace cfc {
         inline virtual void clearScreen();
         inline virtual void pause();
         inline virtual void pause(std::string pauseMessage);
+		inline virtual void pause(const std::string& pauseMessage, const int textColor);
         inline virtual void print(const std::string& data);
         inline virtual void print(const std::string& data, const int set_text_color);
         inline virtual void print(const double& data, int numberColor);
@@ -80,7 +81,7 @@ namespace cfc {
         void generateMainMenu(const std::vector<int>& stateData);
         void setThemeFlag(const int themeFlag_ID);
         void callTheme_by_Flag_ID(const int& themeFlag_ID);
-        auto exitRequested() const -> bool;
+        auto check_if_ExitRequested() const -> bool;
 
     private:
         void menuTheme_Default();

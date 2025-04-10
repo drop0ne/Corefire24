@@ -9,7 +9,7 @@ int main() {
 	/* Main Menu & Program Start*/
 	cfc::Startscreen function;
 
-	while (!function.exitRequested()) {
+	while (!function.check_if_ExitRequested()) {
 		switch (function.mainMenuLogic())
 		{
 		case 1: {
@@ -45,8 +45,7 @@ int main() {
 			solitaire_OBJ->run();
 			break;
 		}
-		default: function.print("\nCommand must be intager from 1 - 9\n", function.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
-			function.pause();
+		default: function.pause("\a\nCommand must be intager from 1 - 9\n", function.getMainMenuState().at(/*enum eMainMenu_State_ID*/ErrorMessage));
 			break;
 		}
 	}
