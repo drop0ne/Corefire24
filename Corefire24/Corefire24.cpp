@@ -1,4 +1,11 @@
 // Corefire24.cpp : This file contains the 'main' function. Program execution begins and ends there.
+
+/*
+C++ 20 
+Windows 10/11 minimum OS Version
+x64-bit
+*/
+
 /////////////////////////////////////////////////////
 #include "BaseClass.h"
 #include "MyGames.h"
