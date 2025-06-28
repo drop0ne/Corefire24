@@ -12,7 +12,7 @@ cfc::CoreComponents::CoreComponents() : console_HWND(), topLeft({ 0, 0 }) {
 }
 
 // Clear the console screen using Windows API for better performance and security
-void cfc::CoreComponents::clearScreen() {
+inline void cfc::CoreComponents::clearScreen() {
 	COORD topLeft = { 0, 0 };
 	CONSOLE_SCREEN_BUFFER_INFO screen;
 	DWORD written;
@@ -29,32 +29,25 @@ void cfc::CoreComponents::clearScreen() {
 	SetConsoleCursorPosition(console_HWND, topLeft);
 }
 
-void cfc::CoreComponents::pause() {
-	setTextColor(Gray);
-	std::cout << "Press enter to continue..." << std::endl;
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+inline void cfc::CoreComponents::pause() {
+	print("\nPress enter to continue...", Gray, true);
+	clearInputStream();
 	std::cin.get();
 }
 
-void cfc::CoreComponents::pause(std::string& pauseMessage) {
-	setTextColor(Gray);
-	std::cout << pauseMessage << std::endl;
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+inline void cfc::CoreComponents::pause(std::string& pauseMessage) {
+	print(pauseMessage, Gray, true);
+	clearInputStream();
 	std::cin.get();
 }
 
-inline void cfc::CoreComponents::pause(const std::string& pauseMessage, const int textColor)
-{
-	setTextColor(textColor);
-	std::cout << pauseMessage << std::endl;
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+inline void cfc::CoreComponents::pause(const std::string& pauseMessage, const int textColor) {
+	print(pauseMessage, textColor, true);
+	clearInputStream();
 	std::cin.get();
 }
 
-void cfc::CoreComponents::print(const std::string& data) {
+inline void cfc::CoreComponents::print(const std::string& data) {
 	std::cout << data;
 	// Base
 }
@@ -77,42 +70,35 @@ inline void cfc::CoreComponents::print(const std::string& data, const int set_te
 		break;
 	}
 }
-void cfc::CoreComponents::print(const std::string& data, const int textColor) {
+inline void cfc::CoreComponents::print(const std::string& data, const int textColor) {
 	setTextColor(textColor);
 	std::cout << data;
 	// Set text color and print data
 }
 
-void cfc::CoreComponents::print(const double& data, int numberColor) {
+inline void cfc::CoreComponents::print(const double& data, int numberColor) {
 	setTextColor(numberColor);
 	std::cout << data;
 }
 
-void cfc::CoreComponents::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
-	setTextColor(textColor);
-	std::cout << string1;
-	setTextColor(numberColor);
-	std::cout << data1;
-	setTextColor(textColor);
-	std::cout << string2;
+inline void cfc::CoreComponents::print(const std::string& string1, const double& data1, const std::string& string2, int& textColor, int& numberColor) {
+	print(string1, textColor);
+	print(data1, numberColor);
+	print(string2, textColor);
 	// Used by CalculatePowerLoss_Watts_x_Meters
 }
 
 
-void cfc::CoreComponents::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
+inline void cfc::CoreComponents::print(const std::string& string1, const int& textColor1, const std::string& string2, const int& textColor2,
 	const std::string& string3, const int& textColor3, const std::string& string4, const int& textColor4) {
-	setTextColor(textColor1);
-	std::cout << string1;
-	setTextColor(textColor2);
-	std::cout << string2;
-	setTextColor(textColor3);
-	std::cout << string3;
-	setTextColor(textColor4);
-	std::cout << string4;
 	// Used to generate Main Menu
+	print(string1, textColor1);
+	print(string2, textColor2);
+	print(string3, textColor3);
+	print(string4, textColor4);
 }
 
-void cfc::CoreComponents::setScreenColor(const char* data) {
+inline void cfc::CoreComponents::setScreenColor(const char* data) {
 	try {
 		// Validate the input before executing
 		if (!check_IF_validCommand(data)) {
@@ -129,20 +115,20 @@ void cfc::CoreComponents::setScreenColor(const char* data) {
 	}
 }
 
-void cfc::CoreComponents::setTextColor(int data) {
+inline void cfc::CoreComponents::setTextColor(int data) {
 	if (!SetConsoleTextAttribute(console_HWND, data)) {
 		throw std::runtime_error("Failed to set text attributes");
 	}
 }
 
-void cfc::CoreComponents::overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background) {
+inline void cfc::CoreComponents::overrideConsoleColors(eConsoleTextColor foreground, eConsoleTextColor background) {
 	WORD color = (static_cast<WORD>(background) << 4) | static_cast<WORD>(foreground);
 	if (!SetConsoleTextAttribute(console_HWND, color)) {
 		throw std::runtime_error("Failed to set text attributes");
 	}
 }
 
-void cfc::CoreComponents::clearInputStream() {
+inline void cfc::CoreComponents::clearInputStream() {
 	std::cin.clear();
 	if (std::cin.rdbuf()->in_avail() > 0) {
 		// If there are characters in the input buffer, discard them up to the next newline
@@ -150,7 +136,7 @@ void cfc::CoreComponents::clearInputStream() {
 	}
 }
 
-void cfc::CoreComponents::extractInputStream() {
+inline void cfc::CoreComponents::extractInputStream() {
 	std::cout << "Contents of input stream: ";
 	char c;
 	while (std::cin.peek() != EOF) {
@@ -159,11 +145,11 @@ void cfc::CoreComponents::extractInputStream() {
 	}
 }
 
-void cfc::CoreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std::chrono::milliseconds(time)); }
+inline void cfc::CoreComponents::sleepTimer(int time) { std::this_thread::sleep_for(std::chrono::milliseconds(time)); }
 
 // ********** Start Private Functions **********
 
-bool cfc::CoreComponents::check_IF_validCommand(const char* command) {
+inline bool cfc::CoreComponents::check_IF_validCommand(const char* command) {
 	// List of allowed commands for setting screen colors, now including gray, these strings are known to be safe to pass to system()
 	const std::vector<std::string> allowedCommands = {
 		"pause",     // Pause the console

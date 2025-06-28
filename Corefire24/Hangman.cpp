@@ -20,7 +20,7 @@ void Hangman::initializeGame()
 	print("Try to guess the word letter by letter.\n");
 	print("You have " + std::to_string(maxWrongGuesses) + " wrong guesses before you lose.\n");
 
-	pause("Under Construction press enter to exit\n");
+
 
 	return;  // EXIT GAME
 }
