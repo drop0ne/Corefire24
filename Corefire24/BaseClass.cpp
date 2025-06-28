@@ -37,7 +37,7 @@ void cfc::CoreComponents::pause() {
 	std::cin.get();
 }
 
-void cfc::CoreComponents::pause(std::string pauseMessage) {
+void cfc::CoreComponents::pause(std::string& pauseMessage) {
 	setTextColor(Gray);
 	std::cout << pauseMessage << std::endl;
 	std::cin.clear();
@@ -57,6 +57,25 @@ inline void cfc::CoreComponents::pause(const std::string& pauseMessage, const in
 void cfc::CoreComponents::print(const std::string& data) {
 	std::cout << data;
 	// Base
+}
+inline void cfc::CoreComponents::print(const std::string& data, const bool& use_std_endl) {
+	switch (use_std_endl)
+	{
+		case true:	std::cout << data << std::endl;	break;
+		case false:	std::cout << data; break;
+	default:
+		break;
+	}
+}
+inline void cfc::CoreComponents::print(const std::string& data, const int set_text_color, const bool& use_std_endl) {
+	setTextColor(set_text_color);
+	switch (use_std_endl)
+	{
+		case true:	std::cout << data << std::endl;	break;
+		case false:	std::cout << data; break;
+	default:
+		break;
+	}
 }
 void cfc::CoreComponents::print(const std::string& data, const int textColor) {
 	setTextColor(textColor);

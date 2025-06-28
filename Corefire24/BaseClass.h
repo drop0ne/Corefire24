@@ -27,9 +27,11 @@ namespace cfc {
         CoreComponents();
         inline virtual void clearScreen();
         inline virtual void pause();
-        inline virtual void pause(std::string pauseMessage);
+        inline virtual void pause(std::string& pauseMessage);
 		inline virtual void pause(const std::string& pauseMessage, const int textColor);
         inline virtual void print(const std::string& data);
+        inline virtual void print(const std::string& data, const bool& use_std_endl);
+        inline virtual void print(const std::string& data, const int set_text_color, const bool& use_std_endl);
         inline virtual void print(const std::string& data, const int set_text_color);
         inline virtual void print(const double& data, int numberColor);
         inline virtual void print(const std::string& string1, const double& data1,
