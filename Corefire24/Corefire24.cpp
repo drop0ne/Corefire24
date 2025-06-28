@@ -44,9 +44,9 @@ int main() {
 			hangman_OBJ->run();
 			break;
 		}
-		case 6: function.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/defaultTheme); break;
-		case 7: function.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RandomTheme); break;
-		case 8: function.callTheme_by_Flag_ID(/*enum eFLAG_ThemeID*/RainbowTheme); break;
+		case 6: function.menuTheme(/*enum*/defaultTheme); break;
+		case 7: function.menuTheme(/*enum*/RandomTheme); break;
+		case 8: function.menuTheme(/*enum*/RainbowTheme); break;
 		case 9: {
 			auto solitaire_OBJ = std::make_unique<Solitaire>();
 			solitaire_OBJ->run();
