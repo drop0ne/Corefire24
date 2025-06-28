@@ -82,15 +82,11 @@ namespace cfc {
         const std::vector<int>& getMainMenuDefaultState() const;
         void generateMainMenu(const std::vector<int>& stateData);
         void setThemeFlag(const int themeFlag_ID);
-        void callTheme_by_Flag_ID(const int& themeFlag_ID);
         auto check_if_ExitRequested() const -> bool;
 
 		void menuTheme(int eNUM_theme);
 
     private:
-        void menuTheme_Default();
-        void menuTheme_Random();
-        void menuTheme_betterRandom();
     };
 
 } // namespace cfc_core

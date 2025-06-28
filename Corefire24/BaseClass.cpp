@@ -251,16 +251,6 @@ void cfc::Startscreen::setThemeFlag(const int themeFlag_ID) {
 
 }
 
-void cfc::Startscreen::callTheme_by_Flag_ID(const int& themeFlag_ID) {
-	switch (themeFlag_ID)
-	{
-	case defaultTheme:  setThemeFlag(defaultTheme); menuTheme_Default(); break;
-	case RandomTheme:  setThemeFlag(RandomTheme);  menuTheme_Random(); break;
-	case RainbowTheme:  setThemeFlag(RainbowTheme); menuTheme_betterRandom(); break;
-	default: setThemeFlag(defaultTheme); menuTheme_Default(); break;
-	}
-}
-
 auto cfc::Startscreen::check_if_ExitRequested() const -> bool
 {
 	// Check if the exitRequested flag is set
@@ -316,42 +306,6 @@ void cfc::Startscreen::menuTheme(int eNUM_theme) {
 /*                         ****$****                         */
 /*     START OF PRIVATE METHODS FOR ToolSet_MainMenu         */
 /*************************************************************/
-
-void cfc::Startscreen::menuTheme_Default() { /* !! consolidate all three theme methods into one using a switch and passing args */
-	setThemeFlag(defaultTheme);
-
-	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
-	{
-		mainMenuParameterCurentState[i] = mainMenu_defaultParameterState[i];
-	}
-}
-
-void cfc::Startscreen::menuTheme_Random() {
-	/*menuTheme_Random FLAGs_theme(1) set this theme to true and all others to false*/
-
-	for (size_t i = 0; i < mainMenuParameterCurentState.size(); i++)
-	{
-		mainMenuParameterCurentState[i] = getRandomNumber(1, 15);
-	}
-}
-
-/* enum eFLAG_ThemeID -- defaultTheme(0), RandomTheme(1), RainbowTheme(2) */
-void cfc::Startscreen::menuTheme_betterRandom() {
-	using namespace std::chrono_literals;
-
-	for (size_t i = 0; i < 60; i++)
-	{
-		for (size_t j = 0; j < mainMenuParameterCurentState.size(); j++)
-		{
-			mainMenuParameterCurentState[j] = getRandomNumber(1, 15);
-		}
-		clearScreen();
-		generateMainMenu(mainMenuParameterCurentState);
-		print("\nWAIT!", WAIT_);
-		std::this_thread::sleep_for(0.025s);
-	}
-}
-
 
 
 const std::vector<int>& cfc::Startscreen::getMainMenuState() const {
