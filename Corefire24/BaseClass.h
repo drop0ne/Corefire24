@@ -27,8 +27,11 @@ namespace cfc {
         CoreComponents();
         inline virtual void clearScreen();
         inline virtual void pause();
-        inline virtual void pause(std::string pauseMessage);
+        inline virtual void pause(std::string& pauseMessage);
+		inline virtual void pause(const std::string& pauseMessage, const int textColor);
         inline virtual void print(const std::string& data);
+        inline virtual void print(const std::string& data, const bool& use_std_endl);
+        inline virtual void print(const std::string& data, const int set_text_color, const bool& use_std_endl);
         inline virtual void print(const std::string& data, const int set_text_color);
         inline virtual void print(const double& data, int numberColor);
         inline virtual void print(const std::string& string1, const double& data1,
@@ -53,15 +56,17 @@ namespace cfc {
         ESCkey_ProgramExit();
         ~ESCkey_ProgramExit();
 
-        std::atomic<bool> exitRequested;
         std::jthread escThread;
 
         void isESCkeyPressed(std::stop_token stopToken) const;
+        protected:
+        std::atomic<bool> exitRequested_var;
     };
 
     // CoreFireCode_MainFunction
     class Startscreen : public CoreComponents, public NumberGenerator, public ESCkey_ProgramExit
     {
+    protected:
     private:
         int mainMenu_totalParameters;
         std::vector<int> mainMenuParameterCurentState;
@@ -77,12 +82,8 @@ namespace cfc {
         const std::vector<int>& getMainMenuDefaultState() const;
         void generateMainMenu(const std::vector<int>& stateData);
         void setThemeFlag(const int themeFlag_ID);
-        void callTheme_by_Flag_ID(const int& themeFlag_ID);
-
-    private:
-        void menuTheme_Default();
-        void menuTheme_Random();
-        void menuTheme_betterRandom();
+        auto check_if_ExitRequested() const -> bool;
+        void menuTheme(int eNUM_theme);
     };
 
 } // namespace cfc_core
